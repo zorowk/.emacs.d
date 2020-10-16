@@ -34,3 +34,6 @@
 [submodule "site-elisp/aweshell"]
 	path = site-elisp/aweshell
 	url = https://github.com/MatthewZMD/aweshell.git
+[submodule "site-elisp/all-the-icons-dired"]
+	path = site-elisp/all-the-icons-dired
+	url = https://github.com/jtbm37/all-the-icons-dired.git
