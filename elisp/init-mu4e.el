@@ -55,7 +55,7 @@
    (:map mu4e-view-mode-map
          ("e" . mu4e-view-save-attachment)))
   :custom
-  (mu4e-maildir (expand-file-name "~/Maildir"))
+  (mu4e-maildir (expand-file-name "~/Mail"))
   (mu4e-get-mail-command "mbsync -c ~/.emacs.d/mu4e/.mbsyncrc -a")
   (mu4e-view-prefer-html t)
   (mu4e-update-interval 180)
@@ -70,7 +70,7 @@
   (mu4e-confirm-quit nil)
   (mu4e-use-fancy-chars t)
   (mu4e-view-use-gnus t)
-  (gnus-icalendar-org-capture-file "~/org/agenda/meetings.org") ; Prerequisite: set it to meetings org fie
+  (gnus-icalendar-org-capture-file "~/Dropbox/brain/gtd.org") ; Prerequisite: set it to meetings org fie
   (gnus-icalendar-org-capture-headline '("Meetings")) ; Make sure to create Calendar heading first
   :hook
   ((mu4e-view-mode . visual-line-mode)
@@ -101,36 +101,35 @@
   (setq mu4e-contexts
         (list
          (make-mu4e-context
-          :name "gmail"
-          :enter-func (lambda () (mu4e-message "Entering context gmail"))
-          :leave-func (lambda () (mu4e-message "Leaving context gmail"))
+          :name "uniontech"
+          :enter-func (lambda () (mu4e-message "Entering context uniontech"))
+          :leave-func (lambda () (mu4e-message "Leaving context uniontech"))
           :match-func
           (lambda (msg)
             (when msg
-              (string-match "gmail" (mu4e-message-field msg :maildir))))
-          :vars '((mu4e-sent-folder . "/gmail/Sent Mail")
-                  (mu4e-drafts-folder . "/gmail/Drafts")
-                  (mu4e-trash-folder . "/gmail/Trash")
+              (string-match "uniontech" (mu4e-message-field msg :maildir))))
+          :vars '((mu4e-sent-folder . "/uniontech/Sent")
+                  (mu4e-drafts-folder . "/uniontech/Drafts")
+                  (mu4e-trash-folder . "/uniontech/Trash")
                   (mu4e-sent-messages-behavior . sent)
                   (mu4e-compose-signature . user-full-name)
                   (user-mail-address . user-mail-address) ; Prerequisite: Set this to your email
                   (mu4e-compose-format-flowed . t)
-                  (smtpmail-queue-dir . "~/Maildir/gmail/queue/cur")
+                  (smtpmail-queue-dir . "~/Mail/uniontech/queue/cur")
                   (message-send-mail-function . smtpmail-send-it)
-                  (smtpmail-smtp-user . "matthewzmd") ; Set to your username
-                  (smtpmail-starttls-credentials . (("smtp.gmail.com" 587 nil nil)))
+                  (smtpmail-smtp-user . "zorowk") ; Set to your username
+                  (smtpmail-starttls-credentials . (("smtp.263.com" 465 nil nil)))
                   (smtpmail-auth-credentials . (expand-file-name "~/.authinfo.gpg"))
-                  (smtpmail-default-smtp-server . "smtp.gmail.com")
-                  (smtpmail-smtp-server . "smtp.gmail.com")
-                  (smtpmail-smtp-service . 587)
+                  (smtpmail-default-smtp-server . "smtp.263.com")
+                  (smtpmail-smtp-server . "smtp.263.com")
+                  (smtpmail-smtp-service . 465)
                   (smtpmail-debug-info . t)
                   (smtpmail-debug-verbose . t)
-                  (mu4e-maildir-shortcuts . ( ("/gmail/INBOX"            . ?i)
-                                              ("/gmail/Sent Mail" . ?s)
-                                              ("/gmail/Trash"       . ?t)
-                                              ("/gmail/All Mail"  . ?a)
-                                              ("/gmail/Starred"   . ?r)
-                                              ("/gmail/Drafts"    . ?d))))))))
+                  (mu4e-maildir-shortcuts . ( ("/uniontech/INBOX"       . ?i)
+                                              ("/uniontech/Sent"        . ?s)
+                                              ("/uniontech/Trash"       . ?t)
+                                              ("/uniontech/Starred"     . ?r)
+                                              ("/uniontech/Drafts"      . ?d))))))))
 ;; -Mu4ePac
 
 (provide 'init-mu4e)
