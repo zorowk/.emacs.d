@@ -187,6 +187,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-cc)
 
+(require 'init-golang)
+
 (require 'init-python)
 
 (require 'init-haskell)

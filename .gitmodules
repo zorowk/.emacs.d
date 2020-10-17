@@ -37,3 +37,6 @@
 [submodule "site-elisp/all-the-icons-dired"]
 	path = site-elisp/all-the-icons-dired
 	url = https://github.com/jtbm37/all-the-icons-dired.git
+[submodule "site-elisp/lint"]
+	path = site-elisp/lint
+	url = https://github.com/golang/lint.git
