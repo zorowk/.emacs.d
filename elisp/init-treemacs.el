@@ -86,6 +86,11 @@
   (:map treemacs-mode-map ("C-p" . treemacs-previous-line)))
 ;; -TreemacsPac
 
+;; TreeAllIcons
+(use-package treemacs-all-the-icons
+    :hook (treemacs-mode . (lambda () (treemacs-load-theme 'all-the-icons))))
+;; -TreeAllIcons
+
 ;; TreeMagit
 (use-package treemacs-magit
   :defer t
