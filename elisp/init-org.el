@@ -46,20 +46,13 @@
   (:map org-mode-map ("C-c C-p" . org-export-as-pdf-and-open))
   :custom
   (org-log-done 'time)
-  (calendar-latitude 43.65107) ;; Prerequisite: set it to your location, currently default: Toronto, Canada
-  (calendar-longitude -79.347015) ;; Usable for M-x `sunrise-sunset' or in `org-agenda'
   (org-export-backends (quote (ascii html icalendar latex md odt)))
   (org-use-speed-commands t)
   (org-confirm-babel-evaluate 'nil)
   (org-latex-listings-options '(("breaklines" "true")))
   (org-latex-listings t)
   (org-deadline-warning-days 7)
-  (org-todo-keywords
-   '((sequence "TODO" "IN-PROGRESS" "REVIEW" "|" "DONE" "CANCELED")))
   (org-agenda-window-setup 'other-window)
-  (org-latex-pdf-process
-   '("pdflatex -shelnl-escape -interaction nonstopmode -output-directory %o %f"
-     "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
   :config
   (add-to-list 'org-latex-packages-alist '("" "listings"))
   (unless (version< org-version "9.2")
@@ -121,12 +114,6 @@
   ;; Removes clocked tasks with 0:00 duration
   (setq org-clock-out-remove-zero-time-clocks t) ;; Show the clocked-in task - if any - in the header line
   (setq org-tags-match-list-sublevels nil)
-
-  (add-hook 'org-mode-hook '(lambda ()
-                              ;; keybinding for editing source code blocks
-                              ;; keybinding for inserting code blocks
-                              (local-set-key (kbd "C-c i s")
-                                             'zorowk/org-insert-src-block)))
 
   (require 'ox-publish)
   (setq org-latex-listings t)
@@ -298,23 +285,6 @@
   (setq bibtex-completion-bibliography "~/Dropbox/bibliography/references.bib"
         bibtex-completion-library-path "~/Dropbox/bibliography/book"
         bibtex-completion-notes-path "~/Dropbox/bibliography/bibnotes.org")
-
-  (setq org-ref-open-pdf-function
-        (lambda (fpath)
-          (start-process "zathura" "*helm-bibtex-zathura*" "/usr/bin/zathura" fpath)))
-
-  (setq powerline-height 20)
-
-  ;; For Evil users
-  (with-eval-after-load 'evil
-    (evil-set-initial-state 'org-brain-visualize-mode 'emacs))
-  :config
-  (setq org-id-track-globally t)
-  (setq org-id-locations-file "~/.emacs.d/.org-id-locations")
-  (push '("b" "Brain" plain (function org-brain-goto-end)
-          "* %i%?" :empty-lines 1) org-capture-templates)
-  (setq org-brain-visualize-default-choices 'all)
-  (setq org-brain-title-max-length 12)
 
   (defun org-export-toggle-syntax-highlight ()
     "Setup variables to turn on syntax highlighting when calling `org-latex-export-to-pdf'."
