@@ -38,24 +38,26 @@
 ;; org journal
 (use-package org-journal
   :ensure t
-  :defer t
+  :after org
   :init
   ;; Change default prefix key; needs to be set before loading org-journal
   (setq org-journal-prefix-key "C-c j ")
   :config
   (setq org-journal-dir "~/Dropbox/journal/"
         org-journal-date-format "%A, %d %B %Y"
-        org-journal-file-format "%Y-%m-%d")
+        org-journal-file-format "%Y-%m-%d.org"
+        org-journal-file-type 'weekly)
 
   (defun org-journal-file-header-func (time)
     "Custom function to create journal header."
     (concat
-      (pcase org-journal-file-type
-             (`daily "#+TITLE: Daily Journal\n#+STARTUP: showeverything")
-             (`weekly "#+TITLE: Weekly Journal\n#+STARTUP: folded")
-             (`monthly "#+TITLE: Monthly Journal\n#+STARTUP: folded")
-             (`yearly "#+TITLE: Yearly Journal\n#+STARTUP: folded"))))
-  (setq org-journal-file-header 'org-journal-file-header-func))
+     (pcase org-journal-file-type
+       (`daily "#+TITLE: Daily Journal\n#+STARTUP: showeverything \n\n")
+       (`weekly "#+TITLE: Weekly Journal\n#+STARTUP: folded \n\n")
+       (`monthly "#+TITLE: Monthly Journal\n#+STARTUP: folded \n\n")
+       (`yearly "#+TITLE: Yearly Journal\n#+STARTUP: folded \n\n"))))
+  (setq org-journal-file-header 'org-journal-file-header-func)
+)
 ;; -org journal
 
 (provide 'init-orgbrain)
