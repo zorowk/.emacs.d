@@ -205,6 +205,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 ;; Miscellaneous
 (require 'init-org)
 
+(require 'init-orgbrain)
+
 (require 'init-eaf)
 
 (require 'init-erc)

@@ -49,7 +49,7 @@
   :config
   (require 'eaf-org)
   (defalias 'browse-web #'eaf-open-browser)
-  (eaf-setq eaf-browser-default-zoom "1.25")
+  (eaf-setq eaf-browser-default-zoom "1.0")
   (eaf-setq eaf-browser-dark-mode "false")
   (eaf-setq eaf-browser-enable-adblocker "true")
   (eaf-setq eaf-pdf-dark-mode "false")
