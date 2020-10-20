@@ -75,9 +75,7 @@
           "* %i%?" :empty-lines 1)
         org-capture-templates)
   (setq org-brain-visualize-default-choices 'all)
-  (setq org-brain-title-max-length 12)
-  (setq org-brain-include-file-entries nil
-        org-brain-file-entries-use-title nil))
+  (setq org-brain-title-max-length 24))
 ;; -org brain
 
 (provide 'init-orgbrain)
