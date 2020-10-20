@@ -78,6 +78,38 @@
   (setq org-brain-title-max-length 24))
 ;; -org brain
 
+;; org gkroam
+(use-package gkroam
+  :ensure t
+  :init
+  (setq gkroam-root-dir "~/gkroam/org/")
+  (setq gkroam-prettify-p t
+        gkroam-show-brackets-p t
+        gkroam-use-default-filename t
+        gkroam-window-margin 4)
+  :bind
+  (("C-c r I" . gkroam-index)
+   ("C-c r d" . gkroam-daily)
+   ("C-c r f" . gkroam-find)
+   ("C-c r i" . gkroam-insert)
+   ("C-c r c" . gkroam-capture)
+   ("C-c r e" . gkroam-link-edit)
+   ("C-c r n" . gkroam-smart-new)
+   ("C-c r p" . gkroam-toggle-prettify)
+   ("C-c r t" . gkroam-toggle-brackets)
+   ("C-c r D" . gkroam-toggle-dynamic)
+   ("C-c r g" . gkroam-update)))
+;; -org gkroam
+
+;; org bullets
+(use-package org-bullets
+  :init
+  (setq org-bullets-bullet-list '("●" "○" "●" "○" "●" "◉" "○" "◆"))
+  :config
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+;; -org bullets
+
+;;
 (provide 'init-orgmisc)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-orgmisc.el ends here
