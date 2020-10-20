@@ -1,6 +1,6 @@
-;;; init-orgbrain.el --- -*- lexical-binding: t -*-
+;;; init-orgmisc.el --- -*- lexical-binding: t -*-
 ;;
-;; Filename: init-orgbrain.el
+;; Filename: init-orgmisc.el
 ;; Description: Initialize journal and brain
 ;; Author: zorkwk
 ;; Copyright (C) 2019 Mingde (Matthew) Zeng
@@ -78,6 +78,6 @@
   (setq org-brain-title-max-length 24))
 ;; -org brain
 
-(provide 'init-orgbrain)
+(provide 'init-orgmisc)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; init-orgbrain.el ends here
+;;; init-orgmisc.el ends here
