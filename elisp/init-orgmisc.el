@@ -109,6 +109,13 @@
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 ;; -org bullets
 
+;; org valign
+(use-package valign
+  :load-path (lambda () (expand-file-name "site-elisp/valign" user-emacs-directory))
+  :config
+  (add-hook 'org-mode-hook #'valign-mode))
+;; -org valign
+
 ;;
 (provide 'init-orgmisc)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -40,3 +40,6 @@
 [submodule "site-elisp/lint"]
 	path = site-elisp/lint
 	url = https://github.com/golang/lint.git
+[submodule "site-elisp/valign"]
+	path = site-elisp/valign
+	url = https://github.com/casouri/valign.git
