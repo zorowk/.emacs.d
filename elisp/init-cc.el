@@ -75,6 +75,11 @@
   :hook (before-save . gofmt-before-save))
 ;; -GoPac
 
+;; cmake
+(use-package cmake-mode
+  :ensure t
+  :mode (("CMakeLists\\.txt\\'" . cmake-mode) ("\\.cmake\\'" . cmake-mode)))
+;; -cmake
 (provide 'init-cc)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-cc.el ends here
