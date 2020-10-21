@@ -108,9 +108,9 @@
           (lambda (msg)
             (when msg
               (string-match "uniontech" (mu4e-message-field msg :maildir))))
-          :vars '((mu4e-sent-folder . "/uniontech/Sent")
-                  (mu4e-drafts-folder . "/uniontech/Drafts")
-                  (mu4e-trash-folder . "/uniontech/Trash")
+          :vars '((mu4e-sent-folder . "/Sent")
+                  (mu4e-drafts-folder . "/Drafts")
+                  (mu4e-trash-folder . "/Trash")
                   (mu4e-sent-messages-behavior . sent)
                   (mu4e-compose-signature . user-full-name)
                   (user-mail-address . user-mail-address) ; Prerequisite: Set this to your email
