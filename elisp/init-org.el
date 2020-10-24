@@ -58,69 +58,71 @@
   (unless (version< org-version "9.2")
     (require 'org-tempo))
 
-  ;; Allow multiple line Org emphasis markup.
-  ;; http://emacs.stackexchange.com/a/13828/115
-  (setcar (nthcdr 4 org-emphasis-regexp-components) 20) ;Up to 20 lines, default is just
-  ;; Below is needed to apply the modified `org-emphasis-regexp-components'
-  ;; settings from above.
-  (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
+  (with-eval-after-load 'org
+    (progn
+      ;; Allow multiple line Org emphasis markup.
+      ;; http://emacs.stackexchange.com/a/13828/115
+      (setcar (nthcdr 4 org-emphasis-regexp-components) 20) ;Up to 20 lines, default is just
+      ;; Below is needed to apply the modified `org-emphasis-regexp-components'
+      ;; settings from above.
+      (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
 
-  (require 'org-compat)
-  (add-to-list 'org-modules 'org-habit)
-  (require 'org-habit)
+      (require 'org-compat)
+      (add-to-list 'org-modules 'org-habit)
+      (require 'org-habit)
 
-  (setq org-refile-use-outline-path 'file)
-  (setq org-outline-path-complete-in-steps nil)
-  (setq org-refile-targets
-        '((nil :maxlevel . 4)
-          (org-agenda-files :maxlevel . 4)))
+      (setq org-refile-use-outline-path 'file)
+      (setq org-outline-path-complete-in-steps nil)
+      (setq org-refile-targets
+            '((nil :maxlevel . 4)
+              (org-agenda-files :maxlevel . 4)))
 
-  ;; config stuck project
-  (setq org-stuck-projects
-        '("TODO={.+}/-DONE" nil nil "SCHEDULED:\\|DEADLINE:"))
+      ;; config stuck project
+      (setq org-stuck-projects
+            '("TODO={.+}/-DONE" nil nil "SCHEDULED:\\|DEADLINE:"))
 
-  (setq org-agenda-inhibit-startup t) ;; ~50x speedup
-  (setq org-agenda-span 'day)
-  (setq org-agenda-use-tag-inheritance nil) ;; 3-4x speedup
-  (setq org-agenda-window-setup 'current-window)
-  (setq org-log-done t)
-  (setq org-startup-indented t)
-  (setq org-html-validation-link nil)
+      (setq org-agenda-inhibit-startup t) ;; ~50x speedup
+      (setq org-agenda-span 'day)
+      (setq org-agenda-use-tag-inheritance nil) ;; 3-4x speedup
+      (setq org-agenda-window-setup 'current-window)
+      (setq org-log-done t)
+      ;;(setq org-startup-indented t)
+      (setq org-html-validation-link nil)
 
-  (require 'cal-china)
-  ;; diary for chinese birthday
-  ;; https://emacs-china.org/t/topic/2119/14
-  (defun my--diary-chinese-anniversary (lunar-month lunar-day &optional year mark)
-    (if year
-        (let* ((d-date (diary-make-date lunar-month lunar-day year))
-               (a-date (calendar-absolute-from-gregorian d-date))
-               (c-date (calendar-chinese-from-absolute a-date))
-               (date a-date)
-               (cycle (car c-date))
-               (yy (cadr c-date))
-               (y (+ (* 100 cycle) yy)))
-          (diary-chinese-anniversary lunar-month lunar-day y mark))
-      (diary-chinese-anniversary lunar-month lunar-day year mark)))
+      (require 'cal-china)
+      ;; diary for chinese birthday
+      ;; https://emacs-china.org/t/topic/2119/14
+      (defun my--diary-chinese-anniversary (lunar-month lunar-day &optional year mark)
+        (if year
+            (let* ((d-date (diary-make-date lunar-month lunar-day year))
+                   (a-date (calendar-absolute-from-gregorian d-date))
+                   (c-date (calendar-chinese-from-absolute a-date))
+                   (date a-date)
+                   (cycle (car c-date))
+                   (yy (cadr c-date))
+                   (y (+ (* 100 cycle) yy)))
+              (diary-chinese-anniversary lunar-month lunar-day y mark))
+          (diary-chinese-anniversary lunar-month lunar-day year mark)))
 
-  (setq org-todo-keywords
-        (quote ((sequence "TODO(t)" "STARTED(s)" "|" "DONE(d!/!)")
-                (sequence "WAITING(w@/!)" "SOMEDAY(S)" "|" "CANCELLED(c@/!)" "MEETING(m)" "PHONE(p)"))))
+      (setq org-todo-keywords
+            (quote ((sequence "TODO(t)" "STARTED(s)" "|" "DONE(d!/!)")
+                    (sequence "WAITING(w@/!)" "SOMEDAY(S)" "|" "CANCELLED(c@/!)" "MEETING(m)" "PHONE(p)"))))
 
-  ;; Change task state to STARTED when clocking in
-  (setq org-clock-in-switch-to-state "STARTED")
-  ;; Save clock data and notes in the LOGBOOK drawer
-  (setq org-clock-into-drawer t)
-  (setq org-log-into-drawer t)
-  ;; Removes clocked tasks with 0:00 duration
-  (setq org-clock-out-remove-zero-time-clocks t) ;; Show the clocked-in task - if any - in the header line
-  (setq org-tags-match-list-sublevels nil)
+      ;; Change task state to STARTED when clocking in
+      (setq org-clock-in-switch-to-state "STARTED")
+      ;; Save clock data and notes in the LOGBOOK drawer
+      (setq org-clock-into-drawer t)
+      (setq org-log-into-drawer t)
+      ;; Removes clocked tasks with 0:00 duration
+      (setq org-clock-out-remove-zero-time-clocks t) ;; Show the clocked-in task - if any - in the header line
+      (setq org-tags-match-list-sublevels nil)
 
-  (require 'ox-publish)
-  (setq org-latex-listings t)
-  (add-to-list 'org-latex-packages-alist
-               '("AUTO" "inputenc" t))
+      (require 'ox-publish)
+      (setq org-latex-listings t)
+      (add-to-list 'org-latex-packages-alist
+                   '("AUTO" "inputenc" t))
 
-  (add-to-list 'org-latex-classes '("ctexart" "\\documentclass[10pt]{ctexart}
+      (add-to-list 'org-latex-classes '("ctexart" "\\documentclass[10pt]{ctexart}
                                         \\usepackage[slantfont, boldfont]{xeCJK}
                                         [NO-DEFAULT-PACKAGES]
                                         [PACKAGES]
@@ -183,108 +185,108 @@
                                         ("\\paragraph{%s}" . "\\paragraph*{%s}")
                                         ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
-  (setq org-latex-default-class "ctexart")
-  (setq org-latex-pdf-process
+      (setq org-latex-default-class "ctexart")
+      (setq org-latex-pdf-process
             '("xelatex -interaction nonstopmode -shell-escape -output-directory %o %f"
-	            "bibtex %b"
-                "makeindex %b"
-	            "xelatex -interaction nonstopmode --shell-escape -output-directory %o %f"
-	            "xelatex -interaction nonstopmode -shell-escape -output-directory %o %f"
-                "rm -rf %b.out %b.log %b.tex %b.bbl auto"))
-  (setq org-latex-listings t)
+	          "bibtex %b"
+              "makeindex %b"
+	          "xelatex -interaction nonstopmode --shell-escape -output-directory %o %f"
+	          "xelatex -interaction nonstopmode -shell-escape -output-directory %o %f"
+              "rm -rf %b.out %b.log %b.tex %b.bbl auto"))
+      (setq org-latex-listings t)
 
-  ;;reset subtask
-  (setq org-default-properties (cons "RESET_SUBTASKS" org-default-properties))
+      ;;reset subtask
+      (setq org-default-properties (cons "RESET_SUBTASKS" org-default-properties))
 
-  (setq org-startup-with-inline-images t)
-  ;;(add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
+      (setq org-startup-with-inline-images t)
+      ;;(add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
 
-  (setq org-plantuml-jar-path
-        (expand-file-name "/usr/share/java/plantuml/plantuml.jar"))
-  (setq org-ditaa-jar-path "/usr/share/java/ditaa/ditaa-0.11.jar")
+      (setq org-plantuml-jar-path
+            (expand-file-name "/usr/share/java/plantuml/plantuml.jar"))
+      (setq org-ditaa-jar-path "/usr/share/java/ditaa/ditaa-0.11.jar")
 
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((perl . t)
-     (ruby . t)
-     (dot . t)
-     (js . t)
-     (latex .t)
-     (python . t)
-     (emacs-lisp . t)
-     (plantuml . t)
-     (C . t)
-     (ditaa . t)
-     (gnuplot . t)))
+      (org-babel-do-load-languages
+       'org-babel-load-languages
+       '((perl . t)
+         (ruby . t)
+         (dot . t)
+         (js . t)
+         (latex .t)
+         (python . t)
+         (emacs-lisp . t)
+         (plantuml . t)
+         (C . t)
+         (ditaa . t)
+         (gnuplot . t)))
 
-  (setq org-file-apps
-        '((auto-mode . emacs)
-          ("\\.x?html?\\'" . "firefxo %s")
-          ("\\.mp4\\'" . "mpv \"%s\"")
-          ("\\.mkv" . "mpv \"%s\"")))
+      (setq org-file-apps
+            '((auto-mode . emacs)
+              ("\\.x?html?\\'" . "firefxo %s")
+              ("\\.mp4\\'" . "mpv \"%s\"")
+              ("\\.mkv" . "mpv \"%s\"")))
 
-  ;; define the refile targets
-  (setq org-agenda-dir "~/Dropbox/brain/")
-  (setq org-agenda-file-note (expand-file-name "notes.org" org-agenda-dir))
-  (setq org-agenda-file-gtd (expand-file-name "gtd.org" org-agenda-dir))
-  (setq org-agenda-file-code-snippet (expand-file-name "snippet.org" org-agenda-dir))
-  (setq org-default-notes-file (expand-file-name "gtd.org" org-agenda-dir))
-  (setq org-agenda-files (list org-agenda-dir))
+      ;; define the refile targets
+      (setq org-agenda-dir "~/Dropbox/brain/")
+      (setq org-agenda-file-note (expand-file-name "notes.org" org-agenda-dir))
+      (setq org-agenda-file-gtd (expand-file-name "gtd.org" org-agenda-dir))
+      (setq org-agenda-file-code-snippet (expand-file-name "snippet.org" org-agenda-dir))
+      (setq org-default-notes-file (expand-file-name "gtd.org" org-agenda-dir))
+      (setq org-agenda-files (list org-agenda-dir))
 
-  ;; the %i would copy the selected text into the template
-  ;;http://www.howardism.org/Technical/Emacs/journaling-org.html
-  ;;add multi-file journal
-  (setq org-capture-templates
-        '(("t" "Todo" entry (file+headline org-agenda-file-gtd "Personal")
-           "* TODO [#B] %?\n  %i\n"
-           :empty-lines 1)
-          ("n" "notes" entry (file+headline org-agenda-file-note "Quick notes")
-           "* %?\n  %i\n %U"
-           :empty-lines 1)
-          ("l" "Learn" entry (file+headline org-agenda-file-note "Learning")
-           "* TODO [#B] %?\n  %i\n %U"
-           :empty-lines 1)
-          ("s" "Code Snippet" entry (file org-agenda-file-code-snippet)
-           "* %?\t%^g\n#+BEGIN_SRC %^{language}\n\n#+END_SRC")
-          ("w" "work" entry (file+headline org-agenda-file-gtd "Deepin")
-           "* TODO [#A] %?\n  %i\n %U"
-           :empty-lines 1)
-          ("p" "Protocol" entry (file+headline org-agenda-file-note "Chrome Content")
-           "* %^{Title}\nSource: %u, %c\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?"
-           :empty-lines 1)
-          ("L" "Protocol Link" entry (file+headline org-agenda-file-note "Chrome Links")
-           "* %? [[%:link][%:description]] \nCaptured On: %U"
-           :empty-lines 1)))
+      ;; the %i would copy the selected text into the template
+      ;;http://www.howardism.org/Technical/Emacs/journaling-org.html
+      ;;add multi-file journal
+      (setq org-capture-templates
+            '(("t" "Todo" entry (file+headline org-agenda-file-gtd "Personal")
+               "* TODO [#B] %?\n  %i\n"
+               :empty-lines 1)
+              ("n" "notes" entry (file+headline org-agenda-file-note "Quick notes")
+               "* %?\n  %i\n %U"
+               :empty-lines 1)
+              ("l" "Learn" entry (file+headline org-agenda-file-note "Learning")
+               "* TODO [#B] %?\n  %i\n %U"
+               :empty-lines 1)
+              ("s" "Code Snippet" entry (file org-agenda-file-code-snippet)
+               "* %?\t%^g\n#+BEGIN_SRC %^{language}\n\n#+END_SRC")
+              ("w" "work" entry (file+headline org-agenda-file-gtd "Deepin")
+               "* TODO [#A] %?\n  %i\n %U"
+               :empty-lines 1)
+              ("p" "Protocol" entry (file+headline org-agenda-file-note "Chrome Content")
+               "* %^{Title}\nSource: %u, %c\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?"
+               :empty-lines 1)
+              ("L" "Protocol Link" entry (file+headline org-agenda-file-note "Chrome Links")
+               "* %? [[%:link][%:description]] \nCaptured On: %U"
+               :empty-lines 1)))
 
-  ;;An entry without a cookie is treated just like priority ' B '.
-  ;;So when create new task, they are default 重要且紧急
-  (setq org-agenda-custom-commands
-        '(
-          ("w" . "Task Schedule")
-          ("wa" "Important and urgent tasks" tags-todo "+PRIORITY=\"A\"")
-          ("wb" "Important and not urgent tasks" tags-todo "-Weekly-Monthly-Daily+PRIORITY=\"B\"")
-          ("wc" "Not important and urgent tasks" tags-todo "+PRIORITY=\"C\"")
-          ("b" "Blog" tags-todo "BLOG")
-          ("p" . "Project")
-          ("pw" tags-todo "PROJECT+WORK+CATEGORY=\"Deepin\"")
-          ("pl" tags-todo "PROJECT+DREAM+CATEGORY=\"zorowk\"")
-          ("W" "Weekly Review"
-           ((stuck "") ;; review stuck projects as designated by org-stuck-projects
-            (tags-todo "PROJECT") ;; review all projects (assuming you use todo keywords to designate projects)
-            ))))
+      ;;An entry without a cookie is treated just like priority ' B '.
+      ;;So when create new task, they are default 重要且紧急
+      (setq org-agenda-custom-commands
+            '(
+              ("w" . "Task Schedule")
+              ("wa" "Important and urgent tasks" tags-todo "+PRIORITY=\"A\"")
+              ("wb" "Important and not urgent tasks" tags-todo "-Weekly-Monthly-Daily+PRIORITY=\"B\"")
+              ("wc" "Not important and urgent tasks" tags-todo "+PRIORITY=\"C\"")
+              ("b" "Blog" tags-todo "BLOG")
+              ("p" . "Project")
+              ("pw" tags-todo "PROJECT+WORK+CATEGORY=\"Deepin\"")
+              ("pl" tags-todo "PROJECT+DREAM+CATEGORY=\"zorowk\"")
+              ("W" "Weekly Review"
+               ((stuck "") ;; review stuck projects as designated by org-stuck-projects
+                (tags-todo "PROJECT") ;; review all projects (assuming you use todo keywords to designate projects)
+                ))))
 
-  (setq org-confirm-babel-evaluate nil
-        org-src-fontify-natively t
-        org-src-tab-acts-natively t)
+      (setq org-confirm-babel-evaluate nil
+            org-src-fontify-natively t
+            org-src-tab-acts-natively t)
 
-  (setq spaceline-org-clock-p t)
-  (setq org-ref-default-bibliography '("~/Dropbox/bibliography/references.bib")
-        org-ref-pdf-directory "~/Dropbox/bibliography/book"
-        org-ref-bibliography-notes "~/Dropbox/bibliography/books.org")
+      (setq spaceline-org-clock-p t)
+      (setq org-ref-default-bibliography '("~/Dropbox/bibliography/references.bib")
+            org-ref-pdf-directory "~/Dropbox/bibliography/book"
+            org-ref-bibliography-notes "~/Dropbox/bibliography/books.org")
 
-  (setq bibtex-completion-bibliography "~/Dropbox/bibliography/references.bib"
-        bibtex-completion-library-path "~/Dropbox/bibliography/book"
-        bibtex-completion-notes-path "~/Dropbox/bibliography/bibnotes.org")
+      (setq bibtex-completion-bibliography "~/Dropbox/bibliography/references.bib"
+            bibtex-completion-library-path "~/Dropbox/bibliography/book"
+            bibtex-completion-notes-path "~/Dropbox/bibliography/bibnotes.org")))
 
   (defun org-export-toggle-syntax-highlight ()
     "Setup variables to turn on syntax highlighting when calling `org-latex-export-to-pdf'."
