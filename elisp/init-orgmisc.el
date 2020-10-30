@@ -59,30 +59,37 @@
   (setq org-journal-file-header 'org-journal-file-header-func))
 ;; -org journal
 
-;; org brain
-(use-package org-brain :ensure t
+;; org-ref
+(use-package org-ref
+  :after org
   :init
-  (setq org-brain-path "~/Dropbox/brain/")
-  ;; For Evil users
-  (with-eval-after-load 'evil
-    (evil-set-initial-state 'org-brain-visualize-mode 'emacs))
+  (setq reftex-default-bibliography '("~/Dropbox/bibliography/references.bib"))
+  (setq org-ref-bibliography-notes "~/Dropbox/bibliography/books.org"
+        org-ref-default-bibliography '("~/Dropbox/bibliography/references.bib")
+        org-ref-pdf-directory "~/Dropbox/bibliography/book")
+
+  (setq bibtex-completion-bibliography "~/Dropbox/bibliography/references.bib"
+             bibtex-completion-library-path "~/Dropbox/bibliography/book"
+             bibtex-completion-notes-path "~/Dropbox/bibliography/bibnotes.org")
   :config
-  (bind-key "C-c b" 'org-brain-prefix-map org-mode-map)
-  (setq org-id-track-globally t)
-  (setq org-id-locations-file "~/.emacs.d/.org-id-locations")
-  (add-hook 'before-save-hook #'org-brain-ensure-ids-in-buffer)
-  (push '("b" "Brain" plain (function org-brain-goto-end)
-          "* %i%?" :empty-lines 1)
-        org-capture-templates)
-  (setq org-brain-visualize-default-choices 'all)
-  (setq org-brain-title-max-length 24))
-;; -org brain
+  (key-chord-define-global "uu" 'org-ref-cite-hydra/body)
+  ;; variables that control bibtex key format for auto-generation
+  ;; I want firstauthor-year-title-words
+  ;; this usually makes a legitimate filename to store pdfs under.
+  (setq bibtex-autokey-year-length 4
+        bibtex-autokey-name-year-separator "-"
+        bibtex-autokey-year-title-separator "-"
+        bibtex-autokey-titleword-separator "-"
+        bibtex-autokey-titlewords 2
+        bibtex-autokey-titlewords-stretch 1
+        bibtex-autokey-titleword-length 5))
+;; -org-ref
 
 ;; org gkroam
 (use-package gkroam
   :ensure t
   :init
-  (setq gkroam-root-dir "~/gkroam/org/")
+  (setq gkroam-root-dir "~/Dropbox/think/")
   (setq gkroam-prettify-p t
         gkroam-show-brackets-p t
         gkroam-use-default-filename t

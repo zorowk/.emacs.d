@@ -86,7 +86,7 @@
       (setq org-agenda-use-tag-inheritance nil) ;; 3-4x speedup
       (setq org-agenda-window-setup 'current-window)
       (setq org-log-done t)
-      ;;(setq org-startup-indented t)
+      (setq org-startup-indented t)
       (setq org-html-validation-link nil)
 
       (require 'cal-china)
@@ -280,9 +280,6 @@
             org-src-tab-acts-natively t)
 
       (setq spaceline-org-clock-p t)
-      (setq org-ref-default-bibliography '("~/Dropbox/bibliography/references.bib")
-            org-ref-pdf-directory "~/Dropbox/bibliography/book"
-            org-ref-bibliography-notes "~/Dropbox/bibliography/books.org")
 
       (setq bibtex-completion-bibliography "~/Dropbox/bibliography/references.bib"
             bibtex-completion-library-path "~/Dropbox/bibliography/book"

@@ -40,6 +40,18 @@
   (require 'init-global-config)
   (require 'init-func))
 
+(use-package auctex-latexmk
+  :defer t
+  :init
+  (add-hook 'LaTeX-mode-hook 'auctex-latexmk-setup))
+
+;; (use-package cdlatex)
+
+(use-package company-auctex
+  :defer t
+  :init
+  (add-hook 'LaTeX-mode-hook 'company-auctex-init))
+
 ;; AUCTeXPac
 (use-package tex
   :ensure auctex
