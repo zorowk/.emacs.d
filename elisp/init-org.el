@@ -128,8 +128,8 @@
                                         [PACKAGES]
                                         \\setCJKmainfont{Noto Sans CJK SC}
                                         \\parindent 2em
-                                        \\setmainfont{Hack}
-                                        \\setsansfont{Hack}
+                                        \\setmainfont{Input}
+                                        \\setsansfont{Input}
                                         \\setmonofont{Source Code Pro}
                                         \\usepackage[utf8]{inputenc}
                                         \\usepackage[T1]{fontenc}

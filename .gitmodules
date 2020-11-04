@@ -43,3 +43,6 @@
 [submodule "site-elisp/valign"]
 	path = site-elisp/valign
 	url = https://github.com/casouri/valign.git
+[submodule "site-elisp/separedit.el"]
+	path = site-elisp/separedit.el
+	url = https://github.com/twlz0ne/separedit.el.git

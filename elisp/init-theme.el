@@ -48,7 +48,7 @@
   (doom-themes-visual-bell-config)
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config)
-  (load-theme 'doom-acario-light t)
+  (load-theme 'doom-gruvbox t)
   (defun switch-theme ()
     "An interactive funtion to switch themes."
     (interactive)
