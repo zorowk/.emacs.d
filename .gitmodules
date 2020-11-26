@@ -46,3 +46,6 @@
 [submodule "site-elisp/separedit.el"]
 	path = site-elisp/separedit.el
 	url = https://github.com/twlz0ne/separedit.el.git
+[submodule "site-elisp/emacs-webkit"]
+	path = site-elisp/emacs-webkit
+	url = https://github.com/akirakyle/emacs-webkit.git

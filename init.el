@@ -211,6 +211,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-eaf)
 
+;;(require 'init-webkit)
+
 (require 'init-erc)
 
 (require 'init-eww)
