@@ -49,3 +49,6 @@
 [submodule "site-elisp/emacs-webkit"]
 	path = site-elisp/emacs-webkit
 	url = https://github.com/akirakyle/emacs-webkit.git
+[submodule "site-elisp/pyim-greatdict"]
+	path = site-elisp/pyim-greatdict
+	url = https://github.com/tumashu/pyim-greatdict.git

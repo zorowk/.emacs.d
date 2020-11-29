@@ -57,7 +57,8 @@
 ;; -PyimPac
 
 ;; PyimBaseDictPac
-(use-package pyim-basedict
+(use-package pyim-greatdict
+  :load-path (lambda () (expand-file-name "site-elisp/pyim-greatdict" user-emacs-directory))
   :after pyim
   :config (pyim-basedict-enable))
 ;; -PyimBaseDictPac
