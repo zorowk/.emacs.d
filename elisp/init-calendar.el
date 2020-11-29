@@ -48,7 +48,6 @@
 (setq cal-html-directory "~/Dropbox/calendar")
 (setq diary-file "~/Dropbox/calendar/diary")
 (setq diary-mail-addr "near.kingzero@gmail.com")
-(add-hook 'diary-hook 'appt-make-list)
 
 ;;appointment
 (setq appt-issue-message t)
@@ -66,12 +65,12 @@
 (setq view-calendar-holidays-initially nil)   ; 不显示节日列表
 
 ;;除去基督徒的节日、希伯来人的节日和伊斯兰教的节日。
-(setq christian-holidays nil
-      hebrew-holidays nil
-      islamic-holidays nil
-      solar-holidays nil
-      bahai-holidays nil
-      )
+;;(setq christian-holidays nil
+;;      hebrew-holidays nil
+;;      islamic-holidays nil
+;;      solar-holidays nil
+;;      bahai-holidays nil
+;;      )
 
 (setq mark-diary-entries-in-calendar t
       appt-issue-message nil
@@ -82,10 +81,6 @@
       calendar-date-display-form '(year "/" month "/" day)
       calendar-time-display-form
       '(24-hours ":" minutes (if time-zone " (") time-zone (if time-zone ")")))
-
-
-(add-hook 'today-visible-calendar-hook 'calendar-mark-today)
-(autoload 'chinese-year "cal-china" "Chinese year data" t)
 ;; -cal-china-x
 
 (provide 'init-calendar)
