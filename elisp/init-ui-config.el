@@ -39,7 +39,7 @@
   (require 'init-const))
 
 ;; PreSym
-(global-prettify-symbols-mode 1)
+;;(global-prettify-symbols-mode 1)
 (defun add-pretty-lambda ()
   "Make some word or string show as pretty Unicode symbols.  See https://unicodelookup.com for more."
   (setq prettify-symbols-alist

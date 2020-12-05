@@ -221,6 +221,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-calendar)
 
+(require 'init-translate)
+
 (require 'init-tramp)
 
 (require 'init-pdf-tools)
