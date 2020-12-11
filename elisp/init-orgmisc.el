@@ -35,30 +35,6 @@
 ;;
 ;;; Code:
 
-;; org journal
-(use-package org-journal
-  :ensure t
-  :after org
-  :init
-  ;; Change default prefix key; needs to be set before loading org-journal
-  (setq org-journal-prefix-key "C-c j ")
-  :config
-  (setq org-journal-dir "~/Dropbox/journal/"
-        org-journal-date-format "%A, %d %B %Y"
-        org-journal-file-format "%Y-%m-%d.org"
-        org-journal-file-type 'weekly)
-
-  (defun org-journal-file-header-func (time)
-    "Custom function to create journal header."
-    (concat
-     (pcase org-journal-file-type
-       (`daily "#+TITLE: Daily Journal\n#+STARTUP: showeverything \n\n")
-       (`weekly "#+TITLE: Weekly Journal\n#+STARTUP: folded \n\n")
-       (`monthly "#+TITLE: Monthly Journal\n#+STARTUP: folded \n\n")
-       (`yearly "#+TITLE: Yearly Journal\n#+STARTUP: folded \n\n"))))
-  (setq org-journal-file-header 'org-journal-file-header-func))
-;; -org journal
-
 ;; org-ref
 (use-package org-ref
   :after org
@@ -86,26 +62,19 @@
 ;; -org-ref
 
 ;; org gkroam
-(use-package gkroam
-  :ensure t
-  :init
-  (setq gkroam-root-dir "~/Dropbox/think/")
-  (setq gkroam-prettify-p t
-        gkroam-show-brackets-p t
-        gkroam-use-default-filename t
-        gkroam-window-margin 4)
-  :bind
-  (("C-c r I" . gkroam-index)
-   ("C-c r d" . gkroam-daily)
-   ("C-c r f" . gkroam-find)
-   ("C-c r i" . gkroam-insert)
-   ("C-c r c" . gkroam-capture)
-   ("C-c r e" . gkroam-link-edit)
-   ("C-c r n" . gkroam-smart-new)
-   ("C-c r p" . gkroam-toggle-prettify)
-   ("C-c r t" . gkroam-toggle-brackets)
-   ("C-c r D" . gkroam-toggle-dynamic)
-   ("C-c r g" . gkroam-update)))
+(use-package org-roam
+      :ensure t
+      :hook
+      (after-init . org-roam-mode)
+      :custom
+      (org-roam-directory "~/Dropbox/think/")
+      :bind (:map org-roam-mode-map
+              (("C-c n l" . org-roam)
+               ("C-c n f" . org-roam-find-file)
+               ("C-c n g" . org-roam-graph))
+              :map org-mode-map
+              (("C-c n i" . org-roam-insert))
+              (("C-c n I" . org-roam-insert-immediate))))
 ;; -org gkroam
 
 ;; org bullets
