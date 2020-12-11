@@ -59,9 +59,18 @@
         bibtex-autokey-titlewords 2
         bibtex-autokey-titlewords-stretch 1
         bibtex-autokey-titleword-length 5))
+
+(use-package ivy-bibtex
+  :config
+  (setq bibtex-completion-bibliography '("~/Dropbox/bibliography/references.bib")
+        bibtex-completion-library-path '("~/Dropbox/bibliography/book")
+        bibtex-completion-notes-path "~/Dropbox/bibliography/bibnotes.org"
+        bibtex-completion-pdf-open-function
+         (lambda (fpath)
+           (call-process "xdg-open" nil 0 nil fpath))))
 ;; -org-ref
 
-;; org gkroam
+;; org roam
 (use-package org-roam
       :ensure t
       :hook
@@ -75,7 +84,26 @@
               :map org-mode-map
               (("C-c n i" . org-roam-insert))
               (("C-c n I" . org-roam-insert-immediate))))
-;; -org gkroam
+
+(use-package org-roam-server
+  :ensure t
+  :config
+  (setq org-roam-server-host "127.0.0.1"
+        org-roam-server-port 8080
+        org-roam-server-authenticate nil
+        org-roam-server-export-inline-images t
+        org-roam-server-serve-files nil
+        org-roam-server-served-file-extensions '("pdf" "mp4" "ogv")
+        org-roam-server-network-poll t
+        org-roam-server-network-arrows nil
+        org-roam-server-network-label-truncate t
+        org-roam-server-network-label-truncate-length 60
+        org-roam-server-network-label-wrap-length 20))
+
+(use-package org-roam-bibtex
+  :after org-roam
+  :hook (org-roam-mode . org-roam-bibtex-mode))
+;; -org roam
 
 ;; org bullets
 (use-package org-bullets
