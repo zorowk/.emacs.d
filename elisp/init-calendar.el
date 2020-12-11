@@ -46,7 +46,7 @@
                 cal-china-x-general-holidays)))
 
 (setq cal-html-directory "~/Dropbox/calendar")
-(setq diary-file "~/Dropbox/calendar/diary")
+(setq diary-file "~/Dropbox/brain/diary")
 (setq diary-mail-addr "near.kingzero@gmail.com")
 
 ;;appointment
