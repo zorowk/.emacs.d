@@ -31,9 +31,6 @@
 [submodule "site-elisp/epaint"]
     path = site-elisp/epaint
     url = https://github.com/chuntaro/epaint.git
-[submodule "site-elisp/aweshell"]
-	path = site-elisp/aweshell
-	url = https://github.com/MatthewZMD/aweshell.git
 [submodule "site-elisp/all-the-icons-dired"]
 	path = site-elisp/all-the-icons-dired
 	url = https://github.com/jtbm37/all-the-icons-dired.git
@@ -52,3 +49,6 @@
 [submodule "site-elisp/pyim-greatdict"]
 	path = site-elisp/pyim-greatdict
 	url = https://github.com/tumashu/pyim-greatdict.git
+[submodule "site-elisp/snow.el"]
+	path = site-elisp/snow.el
+	url = https://github.com/alphapapa/snow.el.git
