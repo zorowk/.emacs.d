@@ -49,6 +49,9 @@
 [submodule "site-elisp/pyim-greatdict"]
 	path = site-elisp/pyim-greatdict
 	url = https://github.com/tumashu/pyim-greatdict.git
+[submodule "site-elisp/aweshell"]
+	path = site-elisp/aweshell
+	url = https://github.com/MatthewZMD/aweshell.git
 [submodule "site-elisp/snow.el"]
 	path = site-elisp/snow.el
 	url = https://github.com/alphapapa/snow.el.git
