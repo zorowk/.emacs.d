@@ -134,7 +134,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-shell)
 
-;;(require 'init-input-method)
+(require 'init-input-method)
 
 (require 'init-dired)
 
@@ -214,7 +214,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (require 'init-pdf)
 
 ;; Internet
-;;(require 'init-eaf)
+(require 'init-eaf)
 
 ;;(require 'init-webkit)
 
