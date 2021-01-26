@@ -323,18 +323,6 @@
 (use-package ox-gfm :defer t)
 ;; -OXGFMPac
 
-;; PlantUMLPac
-(use-package plantuml-mode
-  :defer t
-  :custom
-  (org-plantuml-jar-path (expand-file-name "~/tools/plantuml/plantuml.jar"))
-  :config
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '(;; other Babel languages
-     (plantuml . t))))
-;; -PlantUMLPac
-
 (provide 'init-org)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-org.el ends here

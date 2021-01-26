@@ -183,8 +183,6 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (require 'init-company)
 
 ;; Programming
-;;(require 'init-java)
-
 (require 'init-cc)
 
 (require 'init-golang)
@@ -209,9 +207,9 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-orgmisc)
 
-(require 'init-eaf)
+;;(require 'init-eaf)
 
-;;(require 'init-webkit)
+(require 'init-webkit)
 
 (require 'init-erc)
 
@@ -229,7 +227,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-leetcode)
 
-(require 'init-input-method)
+;;(require 'init-input-method)
 
 (require 'init-debbugs)
 
