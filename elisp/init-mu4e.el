@@ -68,7 +68,7 @@
   (mu4e-compose-dont-reply-to-self t)
   (mu4e-view-show-addresses t)
   (mu4e-confirm-quit nil)
-  (mu4e-use-fancy-chars t)
+  (mu4e-use-fancy-chars nil)
   (mu4e-view-use-gnus t)
   (gnus-icalendar-org-capture-file "~/Dropbox/brain/gtd.org") ; Prerequisite: set it to meetings org fie
   (gnus-icalendar-org-capture-headline '("Meetings")) ; Make sure to create Calendar heading first
@@ -118,10 +118,10 @@
                   (smtpmail-queue-dir . "~/Mail/uniontech/queue/cur")
                   (message-send-mail-function . smtpmail-send-it)
                   (smtpmail-smtp-user . "zorowk") ; Set to your username
-                  (smtpmail-starttls-credentials . (("smtp.263.com" 465 nil nil)))
+                  (smtpmail-starttls-credentials . (("smtp.263.net" 465 nil nil)))
                   (smtpmail-auth-credentials . (expand-file-name "~/.authinfo.gpg"))
-                  (smtpmail-default-smtp-server . "smtp.263.com")
-                  (smtpmail-smtp-server . "smtp.263.com")
+                  (smtpmail-default-smtp-server . "smtp.263.net")
+                  (smtpmail-smtp-server . "smtp.263.net")
                   (smtpmail-smtp-service . 465)
                   (smtpmail-debug-info . t)
                   (smtpmail-debug-verbose . t)
