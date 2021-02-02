@@ -48,7 +48,9 @@
     (defvar go-translate-target-language "en")
     (defvar go-translate-extra-directions '(("zh-CN" . "ja") ("zh-CN" . "ko")))
     (defvar go-translate-buffer-follow-p t)
-    (setq go-translate-token-current (cons 430675 2721866130)))
+    (setq go-translate-token-current (cons 430675 2721866130))
+    (global-set-key "\C-ct" 'go-translate)
+    (global-set-key "\C-cT" 'go-translate-popup))
 ;; -go-translate
 
 (provide 'init-translate)

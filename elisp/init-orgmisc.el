@@ -76,14 +76,21 @@
       :hook
       (after-init . org-roam-mode)
       :custom
-      (org-roam-directory "~/Dropbox/think/")
+      (org-roam-directory "~/Dropbox/notes/")
       :bind (:map org-roam-mode-map
               (("C-c n l" . org-roam)
                ("C-c n f" . org-roam-find-file)
                ("C-c n g" . org-roam-graph))
               :map org-mode-map
               (("C-c n i" . org-roam-insert))
-              (("C-c n I" . org-roam-insert-immediate))))
+              (("C-c n I" . org-roam-insert-immediate)))
+      :config
+      (setq org-roam-dailies-capture-templates
+            '(("d" "default" entry
+               #'org-roam-capture--get-point
+               "* %?"
+               :file-name "daily/%<%Y-%m-%d>"
+               :head "#+title: %<%Y-%m-%d>\n\n"))))
 
 (use-package org-roam-server
   :ensure t
