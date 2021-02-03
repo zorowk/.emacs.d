@@ -59,13 +59,6 @@
   ("M-j" . pyim-convert-string-at-point)) ; M-j 强制将光标前的拼音字符串转换为中文。
 ;; -PyimPac
 
-;; PyimBaseDictPac
-(use-package pyim-greatdict
-  :load-path (lambda () (expand-file-name "site-elisp/pyim-greatdict" user-emacs-directory))
-  :after pyim
-  :config (pyim-basedict-enable))
-;; -PyimBaseDictPac
-
 ;; YoudaoPac
 (use-package youdao-dictionary
   :commands (youdao-dictionary-search
