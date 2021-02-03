@@ -70,7 +70,7 @@
   (eaf-bind-key zoom_out "C--" eaf-pdf-viewer-keybinding)
   (eaf-bind-key take_photo "p" eaf-camera-keybinding)
   (eaf-bind-key eaf-send-key-sequence "M-]" eaf-terminal-keybinding)
-  (eaf-setq eaf-browser-default-zoom "1.25")
+  (eaf-setq eaf-browser-default-zoom "1.0")
   (eaf-setq eaf-browser-dark-mode "false")
   (eaf-setq eaf-browser-enable-adblocker "true")
   (eaf-setq eaf-pdf-dark-mode "false")
