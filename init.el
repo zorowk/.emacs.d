@@ -214,7 +214,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (require 'init-pdf)
 
 ;; Internet
-(require 'init-eaf)
+;;(require 'init-eaf)
 
 ;;(require 'init-webkit)
 
@@ -232,8 +232,6 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-leetcode)
 
-(require 'init-leetcode)
-
 (require 'init-debbugs)
 
 (require 'init-hackernews)
@@ -246,6 +244,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (require 'init-epaint)
 
 (require 'init-zone)
+
+(require 'init-shrface)
 
 ;; InitPrivate
 ;; Load init-private.el if it exists
