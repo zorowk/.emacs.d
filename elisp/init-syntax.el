@@ -75,24 +75,24 @@
 ;; -FlyCheckPac
 
 ;; FlyspellPac
-(use-package flyspell
-  :ensure nil
-  :diminish
-  :if (executable-find "aspell")
-  :hook (((prog-mode text-mode outline-mode latex-mode) . flyspell-mode))
-  :custom
-  (flyspell-issue-message-flag nil)
-  (ispell-program-name "aspell")
-  (ispell-extra-args
-   '("--sug-mode=ultra" "--lang=en_US" "--camel-case"))
-  :config
-  (use-package flyspell-correct-ivy
-    :after ivy
-    :bind
-    (:map flyspell-mode-map
-          ([remap flyspell-correct-word-before-point] . flyspell-correct-wrapper)
-          ("C-." . flyspell-correct-wrapper))
-    :custom (flyspell-correct-interface #'flyspell-correct-ivy)))
+;;(use-package flyspell
+;;  :ensure nil
+;;  :diminish
+;;  :if (executable-find "aspell")
+;;  :hook (((prog-mode text-mode outline-mode latex-mode) . flyspell-mode))
+;;  :custom
+;;  (flyspell-issue-message-flag nil)
+;;  (ispell-program-name "aspell")
+;;  (ispell-extra-args
+;;   '("--sug-mode=ultra" "--lang=en_US" "--camel-case"))
+;;  :config
+;;  (use-package flyspell-correct-ivy
+;;    :after ivy
+;;    :bind
+;;    (:map flyspell-mode-map
+;;          ([remap flyspell-correct-word-before-point] . flyspell-correct-wrapper)
+;;          ("C-." . flyspell-correct-wrapper))
+;;    :custom (flyspell-correct-interface #'flyspell-correct-ivy)))
 ;; -FlyspellPac
 
 (provide 'init-syntax)
