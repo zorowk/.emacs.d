@@ -47,8 +47,9 @@
   (use-package ctable :defer t)
   (use-package deferred :defer t)
   :custom
-  (browse-url-browser-function 'eaf-open-browser) ;; Make EAF Browser my default browser
+  ;;(browse-url-browser-function 'eaf-open-browser) ;; Make EAF Browser my default browser
   (eaf-browser-continue-where-left-off t)
+  (eaf-pdf-extension-list '("xps" "oxps" "cbz" "fb2" "fbz"))
   :config
   (require 'eaf-org)
   (defalias 'browse-web #'eaf-open-browser)

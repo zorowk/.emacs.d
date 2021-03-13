@@ -85,6 +85,7 @@
               (("C-c n i" . org-roam-insert))
               (("C-c n I" . org-roam-insert-immediate)))
       :config
+      (require 'org-roam-protocol)
       (setq org-roam-dailies-capture-templates
             '(("d" "default" entry
                #'org-roam-capture--get-point
