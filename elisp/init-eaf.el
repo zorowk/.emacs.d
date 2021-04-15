@@ -52,6 +52,8 @@
   (eaf-pdf-extension-list '("xps" "oxps" "cbz" "fb2" "fbz"))
   :config
   (require 'eaf-org)
+  (when (display-graphic-p)
+    (require 'eaf-all-the-icons))
   (defalias 'browse-web #'eaf-open-browser)
   (eaf-bind-key nil "M-q" eaf-browser-keybinding)
   (eaf-bind-key open_link "C-M-s" eaf-browser-keybinding)
