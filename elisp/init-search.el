@@ -45,6 +45,8 @@
   (use-package amx :defer t)
   (use-package counsel :diminish :config (counsel-mode 1))
   (use-package swiper :defer t)
+  (use-package ag :defer t)
+  (use-package rg :defer t)
   (ivy-mode 1)
   :bind
   (("C-s" . swiper-isearch)
