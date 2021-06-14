@@ -222,7 +222,8 @@
          (plantuml . t)
          (C . t)
          (ditaa . t)
-         (gnuplot . t)))
+         (gnuplot . t)
+         (jupyter . t)))
 
       (setq org-file-apps
             '((auto-mode . emacs)

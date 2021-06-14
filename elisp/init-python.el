@@ -57,6 +57,13 @@
           (setq lsp-pyright-python-executable-cmd "python3")))
 ;; -LSPPythonPac
 
+;; JUPYTER
+(use-package jupyter
+  :commands (jupyter-run-server-repl
+             jupyter-run-repl
+             jupyter-server-list-kernels))
+;; -JUPYTER
+
 (provide 'init-python)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-python.el ends here
