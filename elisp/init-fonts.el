@@ -37,14 +37,13 @@
 
 ;; FontsList
 ;; Input Mono, Monaco Style, Line Height 1.3 download from http://input.fontbureau.com/
-(defvar font-list '(("Input" . 11) ("Anonymous Pro" . 12) ("Source Code Pro" . 12) ("Love LetterTW" . 12.5))
-  "List of fonts and sizes.  The first one available will be used."
-  )
+(defvar font-list '(("Input" . 11) ("Hack" . 12) ("Consolas" . 12) ("Love LetterTW" . 12.5))
+  "List of fonts and sizes.  The first one available will be used.")
 ;; -FontsList
 
 ;; FontFun
 (defun change-font ()
-  "Documentation."
+  "Interactively change a font from a list a available fonts."
   (interactive)
   (let* (available-fonts font-name font-size font-setting)
     (dolist (font font-list (setq available-fonts (nreverse available-fonts)))
@@ -58,11 +57,7 @@
         (setq font-name (caar available-fonts) font-size (cdar available-fonts)))
       (setq font-setting (format "%s-%d" font-name font-size))
       (set-frame-font font-setting nil t)
-      (add-to-list 'default-frame-alist (cons 'font font-setting)))
-    ;; Chinese fonts
-    (dolist (charset '(kana han cjk-misc bopomofo))
-      (set-fontset-font (frame-parameter nil 'font) charset
-                        (font-spec :family "Noto Sans CJK SC")))))
+      (add-to-list 'default-frame-alist (cons 'font font-setting)))))
 
 (when (display-graphic-p)
   (change-font))
