@@ -57,7 +57,12 @@
         (setq font-name (caar available-fonts) font-size (cdar available-fonts)))
       (setq font-setting (format "%s-%d" font-name font-size))
       (set-frame-font font-setting nil t)
-      (add-to-list 'default-frame-alist (cons 'font font-setting)))))
+      (add-to-list 'default-frame-alist (cons 'font font-setting)))
+
+    ;; Chinese fonts
+    (dolist (charset '(kana han cjk-misc bopomofo))
+      (set-fontset-font (frame-parameter nil 'font) charset
+                        (font-spec :family "Noto Sans CJK SC")))))
 
 (when (display-graphic-p)
   (change-font))
