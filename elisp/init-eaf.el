@@ -49,18 +49,15 @@
   (eaf-browser-default-zoom 1.25)
   (eaf-browser-dark-mode nil)
   (eaf-browser-enable-adblocker t)
+  (eaf-pdf-dark-mode nil)
   (eaf-browser-enable-autofill t)
-  (eaf-file-manager-show-preview nil)
-  (eaf-pdf-dark-mode "ignore")
-  :demand
-  :bind
-  (("C-x j" . eaf-open-in-file-manager))
   :config
   ;; Require all EAF apps unconditionally, change to apps you're interested in.
   (require 'eaf-file-manager nil t)
   (require 'eaf-music-player nil t)
   (require 'eaf-image-viewer nil t)
   (require 'eaf-camera nil t)
+  (require 'eaf-js-video-player nil t)
   (require 'eaf-demo nil t)
   (require 'eaf-airshare nil t)
   (require 'eaf-terminal nil t)
@@ -74,11 +71,9 @@
   (require 'eaf-jupyter nil t)
   (require 'eaf-org-previewer nil t)
   (require 'eaf-system-monitor nil t)
-  (require 'eaf-rss-reader nil t)
   (require 'eaf-file-browser nil t)
   (require 'eaf-browser nil t)
   (require 'eaf-org)
-  (require 'eaf-mail)
   (when (display-graphic-p)
     (require 'eaf-all-the-icons))
   (defalias 'browse-web #'eaf-open-browser)
@@ -98,13 +93,7 @@
   (eaf-bind-key zoom_in "C-=" eaf-pdf-viewer-keybinding)
   (eaf-bind-key zoom_out "C--" eaf-pdf-viewer-keybinding)
   (eaf-bind-key take_photo "p" eaf-camera-keybinding)
-  (eaf-bind-key eaf-send-key-sequence "M-]" eaf-terminal-keybinding)
-  (eaf-bind-key eaf-send-key-sequence "M-]" eaf-terminal-keybinding)
-  (eaf-bind-key js_select_next_file "n" eaf-file-manager-keybinding)
-  (eaf-bind-key js_select_prev_file "p" eaf-file-manager-keybinding)
-  (eaf-bind-key new_file "F" eaf-file-manager-keybinding)
-  (eaf-bind-key new_directory "D" eaf-file-manager-keybinding)
-  (eaf-bind-key toggle_preview "P" eaf-file-manager-keybinding))
+  (eaf-bind-key eaf-send-key-sequence "M-]" eaf-terminal-keybinding))
 ;; -EAFPac
 
 
