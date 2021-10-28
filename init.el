@@ -132,8 +132,6 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-ace-window)
 
-(require 'init-shell)
-
 (require 'init-dired)
 
 (require 'init-buffer)
@@ -153,8 +151,6 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (require 'init-magit)
 
 (require 'init-projectile)
-
-(require 'init-treemacs)
 
 (require 'init-yasnippet)
 
@@ -183,8 +179,6 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (require 'init-company)
 
 ;; Programming
-(require 'init-java)
-
 (require 'init-cc)
 
 (require 'init-golang)
@@ -195,14 +189,9 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-haskell)
 
-(require 'init-ess)
-
 (require 'init-latex)
 
 (require 'init-buildsystem)
-
-;; Web Development
-(require 'init-webdev)
 
 ;; Office
 (require 'init-org)
@@ -212,36 +201,20 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (require 'init-pdf)
 
 ;; Internet
-(require 'init-eaf)
-
-(require 'init-webkit)
-
 (require 'init-erc)
 
-(require 'init-mu4e)
-
 (require 'init-calendar)
-
-(require 'init-translate)
 
 (require 'init-tramp)
 
 (require 'init-pdf-tools)
 
-(require 'init-leetcode)
-
 (require 'init-debbugs)
-
-(require 'init-hackernews)
 
 (require 'init-eww)
 
 ;; Miscellaneous
 (require 'init-chinese)
-
-(require 'init-games)
-
-(require 'init-epaint)
 
 (require 'init-zone)
 
