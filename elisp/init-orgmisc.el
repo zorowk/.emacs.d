@@ -36,38 +36,54 @@
 ;;; Code:
 
 ;; org-ref
-(use-package org-ref
-  :after org
+(use-package ivy-bibtex
   :init
-  (setq reftex-default-bibliography '("~/Dropbox/bibliography/references.bib"))
-  (setq org-ref-bibliography-notes "~/Dropbox/bibliography/books.org"
-        org-ref-default-bibliography '("~/Dropbox/bibliography/references.bib")
-        org-ref-pdf-directory "~/Dropbox/bibliography/book")
+  (setq bibtex-completion-bibliography '("~/Dropbox/bibliography/references.bib")
+        bibtex-completion-library-path '("~/Dropbox/bibliography/book/")
+	    bibtex-completion-notes-path "~/Dropbox/emacs/bibliography/notes/"
+	    bibtex-completion-notes-template-multiple-files "* ${author-or-editor}, ${title}, ${journal}, (${year}) :${=type=}: \n\nSee [[cite:&${=key=}]]\n"
 
-  (setq bibtex-completion-bibliography "~/Dropbox/bibliography/references.bib"
-             bibtex-completion-library-path "~/Dropbox/bibliography/book"
-             bibtex-completion-notes-path "~/Dropbox/bibliography/bibnotes.org")
-  :config
-  (key-chord-define-global "uu" 'org-ref-cite-hydra/body)
-  ;; variables that control bibtex key format for auto-generation
-  ;; I want firstauthor-year-title-words
-  ;; this usually makes a legitimate filename to store pdfs under.
+        bibtex-completion-additional-search-fields '(keywords)
+        bibtex-completion-display-formats
+        '((article       . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${journal:40}")
+          (inbook        . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} Chapter ${chapter:32}")
+          (incollection  . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${booktitle:40}")
+          (inproceedings . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${booktitle:40}")
+          (t             . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*}"))
+        bibtex-completion-pdf-open-function
+        (lambda (fpath)
+          (call-process "open" nil 0 nil fpath))))
+
+(use-package org-ref
+  :ensure nil
+ ;; :load-path (lambda () (expand-file-name "org-ref" scimax-dir))
+  :init
+;;  (add-to-list 'load-path
+;;               (expand-file-name "org-ref" scimax-dir))
+  (require 'bibtex)
   (setq bibtex-autokey-year-length 4
         bibtex-autokey-name-year-separator "-"
         bibtex-autokey-year-title-separator "-"
         bibtex-autokey-titleword-separator "-"
         bibtex-autokey-titlewords 2
         bibtex-autokey-titlewords-stretch 1
-        bibtex-autokey-titleword-length 5))
+        bibtex-autokey-titleword-length 5)
+  (define-key bibtex-mode-map (kbd "H-b") 'org-ref-bibtex-hydra/body)
+  (define-key org-mode-map (kbd "C-c ]") 'org-ref-insert-link)
+  (define-key org-mode-map (kbd "s-[") 'org-ref-insert-link-hydra/body)
+  (require 'org-ref-ivy)
+  (require 'org-ref-arxiv)
+  (require 'org-ref-scopus)
+  (require 'org-ref-wos))
 
-(use-package ivy-bibtex
-  :config
-  (setq bibtex-completion-bibliography '("~/Dropbox/bibliography/references.bib")
-        bibtex-completion-library-path '("~/Dropbox/bibliography/book")
-        bibtex-completion-notes-path "~/Dropbox/bibliography/bibnotes.org"
-        bibtex-completion-pdf-open-function
-         (lambda (fpath)
-           (call-process "xdg-open" nil 0 nil fpath))))
+(use-package org-ref-ivy
+  :ensure nil
+;;  :load-path (lambda () (expand-file-name "org-ref" scimax-dir))
+  :init (setq org-ref-insert-link-function 'org-ref-insert-link-hydra/body
+              org-ref-insert-cite-function 'org-ref-cite-insert-ivy
+              org-ref-insert-label-function 'org-ref-insert-label-link
+              org-ref-insert-ref-function 'org-ref-insert-ref-link
+              org-ref-cite-onclick-function (lambda (_) (org-ref-citation-hydra/body))))
 ;; -org-ref
 
 ;; org roam
