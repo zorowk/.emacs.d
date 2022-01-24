@@ -150,6 +150,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 ;; General Programming
 (require 'init-magit)
 
+(require 'init-treemacs)
+
 (require 'init-projectile)
 
 (require 'init-yasnippet)
@@ -187,11 +189,12 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-rust)
 
-(require 'init-haskell)
-
 (require 'init-latex)
 
 (require 'init-buildsystem)
+
+;; Web Development
+(require 'init-webdev)
 
 ;; Office
 (require 'init-org)
@@ -208,6 +211,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (require 'init-tramp)
 
 (require 'init-pdf-tools)
+
+(require 'init-leetcode)
 
 (require 'init-debbugs)
 
