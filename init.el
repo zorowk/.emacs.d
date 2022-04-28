@@ -132,6 +132,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-ace-window)
 
+(require 'init-shell)
+
 (require 'init-dired)
 
 (require 'init-buffer)
@@ -185,6 +187,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-golang)
 
+(require 'init-ess)
+
 (require 'init-python)
 
 (require 'init-rust)
@@ -205,6 +209,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 ;; Internet
 (require 'init-erc)
+
+(require 'init-mu4e)
 
 (require 'init-calendar)
 

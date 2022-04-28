@@ -48,7 +48,7 @@
   (doom-themes-visual-bell-config)
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config)
-  (load-theme 'doom-gruvbox t)
+  (load-theme 'doom-one-light t)
   (defun switch-theme ()
     "An interactive funtion to switch themes."
     (interactive)
@@ -64,7 +64,7 @@
   (doom-modeline-minor-modes t)
   (doom-modeline-icon t)
   (doom-modeline-major-mode-color-icon t)
-  (doom-modeline-height 15)
+  (doom-modeline-height 16)
   :config
   (doom-modeline-mode))
 ;; -DoomModeline
