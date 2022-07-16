@@ -222,6 +222,7 @@
          (plantuml . t)
          (C . t)
          (ditaa . t)
+         (jupyter . t)
          (gnuplot . t)))
 
       (setq org-file-apps

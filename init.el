@@ -229,6 +229,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-zone)
 
+(require 'init-hackernews)
+
 (require 'init-shrface)
 
 ;; InitPrivate

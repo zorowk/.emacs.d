@@ -68,10 +68,10 @@
   (mu4e-compose-dont-reply-to-self t)
   (mu4e-view-show-addresses t)
   (mu4e-confirm-quit nil)
-  (mu4e-use-fancy-chars t)
+  (mu4e-use-fancy-chars nil)
   (mu4e-headers-results-limit 1000)
   (mu4e-view-use-gnus t)
-  (mail-user-agent (mu4e-user-agent))
+  (mu4e-headers-precise-alignment t)
   (gnus-icalendar-org-capture-file "~/Dropbox/brain/meetings.org") ; Prerequisite: set it to meetings org fie
   (gnus-icalendar-org-capture-headline '("Meetings")) ; Make sure to create Calendar heading first
   :hook
@@ -119,8 +119,6 @@
   (defalias 'mu4e-add-attachment 'mail-add-attachment
     "I prefer the add-attachment function to begin wih mu4e so I can find it easily.")
 
-  (add-to-list 'mu4e-view-actions
-               '("ViewInBrowser" . mu4e-action-view-in-browser) t)
   (setq mu4e-contexts
         (list
          (make-mu4e-context
@@ -155,7 +153,6 @@
                                               ("/uniontechpms"   . ?p)
                                               ("/uniontechDrafts"    . ?d))))))))
 ;; -Mu4ePac
-
 (provide 'init-mu4e)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-mu4e.el ends here
