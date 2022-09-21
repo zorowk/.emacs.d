@@ -70,13 +70,6 @@
                                  (lambda () (interactive) (find-alternate-file ".."))))))
 ;; -DiredPackage
 
-;; DiredIcons
-(use-package all-the-icons-dired
-  :load-path (lambda() (expand-file-name "site-elisp/all-the-icons-dired" user-emacs-directory))
-  :init
-  (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
-;; -DiredIcons
-
 ;; DiskUsage
 (use-package disk-usage
   :commands (disk-usage))

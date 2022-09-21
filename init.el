@@ -152,8 +152,6 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 ;; General Programming
 (require 'init-magit)
 
-(require 'init-treemacs)
-
 (require 'init-projectile)
 
 (require 'init-yasnippet)
@@ -208,6 +206,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (require 'init-pdf)
 
 ;; Internet
+(require 'init-eaf)
+
 (require 'init-erc)
 
 (require 'init-mu4e)
@@ -220,16 +220,18 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-leetcode)
 
+(require 'init-hackernews)
+
 (require 'init-debbugs)
 
 (require 'init-eww)
 
 ;; Miscellaneous
-(require 'init-chinese)
+(require 'init-games)
+
+(require 'init-epaint)
 
 (require 'init-zone)
-
-(require 'init-hackernews)
 
 (require 'init-shrface)
 
