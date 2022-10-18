@@ -189,6 +189,9 @@ The original function deletes trailing whitespace of the current line."
 ;; Add a newline automatically at the end of the file upon save.
 (setq require-final-newline t)
 
+;; disable warning
+(setq warning-minimum-level :emergency)
+
 ;; Enable `erase-buffer' function
 (put 'erase-buffer 'disabled nil)
 
