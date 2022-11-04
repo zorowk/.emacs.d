@@ -82,6 +82,11 @@
   :mode (("CMakeLists\\.txt\\'" . cmake-mode) ("\\.cmake\\'" . cmake-mode)))
 ;; -cmake
 
+;; meson
+(use-package meson-mode
+  :ensure t
+  :mode ("meson\\.build\\'"))
+
 ;; RustPac
 (use-package rust-mode
   :mode "\\.rs\\'"

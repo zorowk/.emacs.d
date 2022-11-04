@@ -152,6 +152,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 ;; General Programming
 (require 'init-magit)
 
+(require 'init-treemacs)
+
 (require 'init-projectile)
 
 (require 'init-yasnippet)

@@ -37,7 +37,7 @@
 
 ;; FontsList
 ;; Input Mono, Monaco Style, Line Height 1.3 download from http://input.fontbureau.com/
-(defvar font-list '(("Input" . 11) ("Hack" . 12) ("Consolas" . 12) ("Love LetterTW" . 12.5))
+(defvar font-list '(("Input" . 12) ("Hack" . 12) ("Consolas" . 12) ("Love LetterTW" . 12.5))
   "List of fonts and sizes.  The first one available will be used.")
 ;; -FontsList
 
@@ -62,7 +62,7 @@
     ;; Chinese fonts
     (dolist (charset '(kana han cjk-misc bopomofo))
       (set-fontset-font (frame-parameter nil 'font) charset
-                        (font-spec :family "Noto Sans CJK SC")))))
+                        (font-spec :family "Hiragino Sans GB")))))
 
 (when (display-graphic-p)
   (change-font))
