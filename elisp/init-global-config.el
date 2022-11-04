@@ -160,6 +160,9 @@ The original function deletes trailing whitespace of the current line."
 ;; Turn Off Cursor Alarms
 (setq ring-bell-function 'ignore)
 
+;; Turn Off shr use fonts
+(setq shr-use-fonts nil)
+
 ;; Show Keystrokes in Progress Instantly
 (setq echo-keystrokes 0.1)
 
@@ -190,7 +193,7 @@ The original function deletes trailing whitespace of the current line."
 (setq require-final-newline t)
 
 ;; disable warning
-(setq warning-minimum-level :emergency)
+;;(setq warning-minimum-level :emergency)
 
 ;; Enable `erase-buffer' function
 (put 'erase-buffer 'disabled nil)

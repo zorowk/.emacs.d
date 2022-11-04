@@ -233,6 +233,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-shrface)
 
+(require 'init-newsticker)
+
 ;; InitPrivate
 ;; Load init-private.el if it exists
 (when (file-exists-p (expand-file-name "init-private.el" user-emacs-directory))
