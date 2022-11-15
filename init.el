@@ -136,6 +136,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-dired)
 
+(require 'init-treemacs)
+
 (require 'init-buffer)
 
 ;; UI Enhancements
