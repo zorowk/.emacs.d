@@ -59,6 +59,11 @@
 ;; Move up/down paragraph
 (global-set-key (kbd "M-n") #'forward-paragraph)
 (global-set-key (kbd "M-p") #'backward-paragraph)
+;; help
+(global-set-key (kbd "C-h C-f") #'find-function)
+(global-set-key (kbd "C-h C-l") #'find-library)
+(global-set-key (kbd "C-h C-k") #'find-function-on-key)
+(global-set-key (kbd "C-h C-v") #'find-variable)
 ;; -DefBindings
 
 ;; UTF8Coding
