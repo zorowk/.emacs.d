@@ -149,7 +149,9 @@ The original function deletes trailing whitespace of the current line."
 
 ;; SmallConfigs
 ;; Move the backup fies to user-emacs-directory/.backup
-(setq backup-directory-alist `(("." . ,(expand-file-name ".backup" user-emacs-directory))))
+(setq backup-directory-alist `((".*" . ,(expand-file-name ".backup" user-emacs-directory))))
+
+(setq auto-save-file-name-transforms `((".*" ,(expand-file-name ".backup" user-emacs-directory) t)))
 
 ;; Ask before killing emacs
 (setq confirm-kill-emacs 'y-or-n-p)
@@ -193,7 +195,10 @@ The original function deletes trailing whitespace of the current line."
 (setq require-final-newline t)
 
 ;; disable warning
-(setq warning-minimum-level :emergency)
+;;(setq warning-minimum-level :emergency)
+
+;; warn when opening files bigger than 100MB
+(setq large-file-warning-threshold 100000000)
 
 ;; Enable `erase-buffer' function
 (put 'erase-buffer 'disabled nil)
