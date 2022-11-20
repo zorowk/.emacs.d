@@ -37,7 +37,7 @@
 
 ;; FontsList
 ;; Input Mono, Monaco Style, Line Height 1.3 download from http://input.fontbureau.com/
-(defvar font-list '(("Consolas" . 12) ("Hack" . 12) ("Input" . 12) ("Love LetterTW" . 12.5))
+(defvar font-list '(("Iosevka" . 12) ("Hack" . 12) ("Input" . 12) ("Love LetterTW" . 12.5))
   "List of fonts and sizes.  The first one available will be used.")
 ;; -FontsList
 
@@ -53,8 +53,7 @@
         (message "No fonts from the chosen set are available")
       (if (called-interactively-p 'interactive)
           (let* ((chosen (assoc-string (completing-read "What font to use? " available-fonts nil t) available-fonts)))
-            (setq font-name (car chosen) font-
-                  size (read-number "Font size: " (cdr chosen))))
+            (setq font-name (car chosen) font-size (read-number "Font size: " (cdr chosen))))
         (setq font-name (caar available-fonts) font-size (cdar available-fonts)))
       (setq font-setting (format "%s-%d" font-name font-size))
       (set-frame-font font-setting nil t)
@@ -63,7 +62,7 @@
     ;; Chinese fonts
     (dolist (charset '(kana han cjk-misc bopomofo))
       (set-fontset-font (frame-parameter nil 'font) charset
-                        (font-spec :family "Hiragino Sans GB")))))
+                        (font-spec :family "Sarasa Mono SC")))))
 
 (when (display-graphic-p)
   (change-font))
