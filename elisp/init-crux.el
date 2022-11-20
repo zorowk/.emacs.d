@@ -43,7 +43,7 @@
    ("C-c k" . crux-kill-other-buffers)
    ("C-k" . crux-smart-kill-line)
    ("C-c o" . crux-open-with)
-   ("C-c t" . crux-visit-term-bufer)
+   ("C-c t" . crux-visit-term-buffer)
    ("C-c d" . crux-delete-file-and-buffer)
    ("C-x C-r" . crux-sudo-edit)
    ("C-c b" . crux-switch-to-previous-buffer)
