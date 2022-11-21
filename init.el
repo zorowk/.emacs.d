@@ -201,8 +201,6 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 ;; Office
 (require 'init-org)
 
-(require 'init-orgmisc)
-
 (require 'init-pdf)
 
 ;; Internet
