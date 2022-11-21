@@ -150,8 +150,16 @@
   (org-deadline-warning-days 7)
   (org-agenda-window-setup 'other-window)
   (org-latex-pdf-process
-   '("pdflatex -shelnl-escape -interaction nonstopmode -output-directory %o %f"
-     "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+    (let
+      ((cmd (concat "pdflatex -shell-escape -interaction nonstopmode"
+		    " --synctex=1"
+		    " -output-directory %o %f")))
+      (list cmd
+	    "cd %o; if test -r %b.idx; then makeindex %b.idx; fi"
+	    "cd %o; bibtex %b"
+	    cmd
+	    cmd
+	    "rm -rf %b.out %b.log %b.tex %b.bbl auto")))
   :custom-face
   (org-agenda-current-time ((t (:foreground "spring green"))))
   :config
@@ -182,10 +190,8 @@
 
   (org-babel-do-load-languages
    'org-babel-load-languages
-   '((perl . t)
-     (ruby . t)
-     (dot . t)
-     (js . t)
+   '((dot . t)
+     (shell . t)
      (latex .t)
      (python . t)
      (emacs-lisp . t)

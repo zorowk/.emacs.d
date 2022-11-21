@@ -183,8 +183,6 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 ;; Programming
 (require 'init-cc)
 
-(require 'init-golang)
-
 (require 'init-ess)
 
 (require 'init-python)
