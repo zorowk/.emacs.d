@@ -69,13 +69,6 @@
   :init (modern-c++-font-lock-global-mode t))
 ;; -CPPFontLockPac
 
-;; GoPac
-(use-package go-mode
-  :mode "\\.go\\'"
-  :hook (before-save . gofmt-before-save)
-  :custom (gofmt-command "goimports"))
-;; -GoPac
-
 ;; cmake
 (use-package cmake-mode
   :ensure t
