@@ -11,6 +11,7 @@
    '((eval ispell-change-dictionary "en_US")
      (eval org-expiry-deinsinuate)))
  '(mu4e-search-results-limit 1000 nil nil "Customized with use-package mu4e")
+ '(org-agenda-include-diary t)
  '(org-modules
    '(ol-bbdb ol-bibtex ol-docview ol-doi ol-eww ol-gnus org-habit org-id ol-info ol-irc ol-mhe ol-rmail ol-w3m))
  '(package-selected-packages
