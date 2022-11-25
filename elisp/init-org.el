@@ -149,7 +149,7 @@
   (org-agenda-window-setup 'other-window)
   (org-latex-pdf-process
     (let
-      ((cmd (concat "pdflatex -shell-escape -interaction nonstopmode"
+      ((cmd (concat "xelatex -shell-escape -interaction nonstopmode"
 		    " -output-directory %o %f")))
       (list cmd
 	    "cd %o; if test -r %b.idx; then makeindex %b.idx; fi"
