@@ -47,13 +47,10 @@
         ([tab] . smarter-tab-to-complete)
         ("TAB" . smarter-tab-to-complete))
   :custom
-  (company-minimum-prefix-length 1)
   (company-tooltip-align-annotations t)
   (company-require-match 'never)
   ;; Don't use company in the following modes
   (company-global-modes '(not shell-mode eaf-mode))
-  ;; Trigger completion immediately.
-  (company-idle-delay 0.1)
   ;; Number the candidates (use M-1, M-2 etc to select completions).
   (company-show-numbers t)
   :config

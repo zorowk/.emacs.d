@@ -157,6 +157,7 @@
 	    cmd
 	    cmd
 	    "rm -rf %b.out %b.log %b.tex %b.bbl %b.ind auto")))
+  (org-latex-compiler "xelatex")
   :custom-face
   (org-agenda-current-time ((t (:foreground "spring green"))))
   :config
@@ -235,10 +236,6 @@
           ("L" "Protocol Link" entry (file+headline org-agenda-file-note "Chrome Links")
            "* %? [[%:link][%:description]] \nCaptured On: %U"
            :empty-lines 1)))
-
-  (setq bibtex-completion-bibliography "~/Dropbox/bibliography/references.bib"
-        bibtex-completion-library-path "~/Dropbox/bibliography/book"
-        bibtex-completion-notes-path "~/Dropbox/bibliography/bibnotes.org")
 
   (defun org-export-toggle-syntax-highlight ()
     "Setup variables to turn on syntax highlighting when calling `org-latex-export-to-pdf'."
