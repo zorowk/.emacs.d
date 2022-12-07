@@ -193,9 +193,6 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-buildsystem)
 
-;; Web Development
-(require 'init-webdev)
-
 ;; Office
 (require 'init-org)
 

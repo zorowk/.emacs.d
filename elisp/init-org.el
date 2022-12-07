@@ -40,7 +40,7 @@
   :init
   (setq bibtex-completion-bibliography '("~/Dropbox/bibliography/references.bib")
         bibtex-completion-library-path '("~/Dropbox/bibliography/book/")
-	    bibtex-completion-notes-path "~/Dropbox/emacs/bibliography/notes/"
+	    bibtex-completion-notes-path "~/Dropbox/bibliography/notes/"
 	    bibtex-completion-notes-template-multiple-files "* ${author-or-editor}, ${title}, ${journal}, (${year}) :${=type=}: \n\nSee [[cite:&${=key=}]]\n"
 
         bibtex-completion-additional-search-fields '(keywords)
