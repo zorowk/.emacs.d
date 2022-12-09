@@ -16,7 +16,7 @@
  '(org-modules
    '(ol-bbdb ol-bibtex ol-docview ol-doi ol-eww ol-gnus org-habit org-id ol-info ol-irc ol-mhe ol-rmail ol-w3m))
  '(package-selected-packages
-   '(org-tree-slide ebib org-noter ement org-contrib wolfram ob-rust wolfram-mode gnuplot auctex bbdb treemacs wanderlust meson-mode treemacs-projectile treemacs-magit treemacs-all-the-icons yaml-pro toc-org json-mode emmet-mode vue-mode typescript-mode js2-mode web-mode yaml-mode bazel groovy-mode dockerfile-mode docker company-auctex auctex-latexmk cargo lsp-pyright ess company-go go-guru flycheck-rust rust-mode cmake-mode go-mode modern-cpp-font-lock ccls company-box company-tabnine company dap-mode lsp-ui lsp-mode ein iedit evil-nerd-commenter format-all quickrun highlight-indent-guides smartparens dumb-jump flycheck-popup-tip flycheck-posframe flycheck yasnippet-snippets yasnippet projectile magit emojify all-the-icons page-break-lines dashboard 2048-game speed-type nov shrface hackernews debbugs graphql cal-china-x mu4e-overview mu4e-alert erc-image erc-hl-nicks pdf-tools org-bullets org-roam-bibtex org-roam org-ref ivy-bibtex plantuml-mode ox-gfm htmlize doom-modeline term-keys shell-here ace-window discover-my-major undo-tree popup-kill-ring which-key avy crux find-file-in-project rg ag counsel amx ivy sudo-edit diminish auto-package-update use-package))
+   '(maxima org-tree-slide ebib org-noter ement org-contrib wolfram ob-rust wolfram-mode gnuplot auctex bbdb treemacs wanderlust meson-mode treemacs-projectile treemacs-magit treemacs-all-the-icons yaml-pro toc-org json-mode emmet-mode vue-mode typescript-mode js2-mode web-mode yaml-mode bazel groovy-mode dockerfile-mode docker company-auctex auctex-latexmk cargo lsp-pyright ess company-go go-guru flycheck-rust rust-mode cmake-mode go-mode modern-cpp-font-lock ccls company-box company-tabnine company dap-mode lsp-ui lsp-mode ein iedit evil-nerd-commenter format-all quickrun highlight-indent-guides smartparens dumb-jump flycheck-popup-tip flycheck-posframe flycheck yasnippet-snippets yasnippet projectile magit emojify all-the-icons page-break-lines dashboard 2048-game speed-type nov shrface hackernews debbugs graphql cal-china-x mu4e-overview mu4e-alert erc-image erc-hl-nicks pdf-tools org-bullets org-roam-bibtex org-roam org-ref ivy-bibtex plantuml-mode ox-gfm htmlize doom-modeline term-keys shell-here ace-window discover-my-major undo-tree popup-kill-ring which-key avy crux find-file-in-project rg ag counsel amx ivy sudo-edit diminish auto-package-update use-package))
  '(safe-local-variable-values
    '((org-confirm-babel-evaluate)
      (header-auto-update-enabled)))
@@ -36,8 +36,8 @@
  '(dashboard-banner-logo-title ((t (:family "Love LetterTW" :height 123))))
  '(ein:basecell-input-area-face ((t (:extend t :background "#303640"))) t)
  '(erc-notice-face ((t (:foreground "#ababab"))) t)
- '(flycheck-posframe-face ((t (:foreground "#50a14f"))))
- '(flycheck-posframe-info-face ((t (:foreground "#50a14f"))))
+ '(flycheck-posframe-face ((t (:foreground "#50a14f"))) t)
+ '(flycheck-posframe-info-face ((t (:foreground "#50a14f"))) t)
  '(font-lock-comment-face ((t (:foreground "#828282"))))
  '(lsp-ui-doc-background ((t (:background nil))) t)
  '(lsp-ui-doc-header ((t (:inherit (font-lock-string-face italic)))) t)
