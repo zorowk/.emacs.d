@@ -286,10 +286,7 @@
   (advice-add 'bibtex-generate-autokey :around
               (lambda (orig-func &rest args)
                 (replace-regexp-in-string ":" "" (apply orig-func args))))
-  (remove-hook 'ebib-notes-new-note-hook #'org-narrow-to-subtree)
-
-  (map! :map ebib-index-mode-map
-        "D"   #'ebib-download-pdf-from-doi))
+  (remove-hook 'ebib-notes-new-note-hook #'org-narrow-to-subtree))
 
 (defun sci-hub-pdf-url (doi)
   "Get url to the pdf from SCI-HUB using DOI."
