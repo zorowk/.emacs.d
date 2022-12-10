@@ -262,13 +262,19 @@
 ;; Bibtex stuff
 (use-package ebib
   :bind (("M-z b" . ebib))
+  (:map ebib-index-mode-map
+              ("B" . ebib-biblio-import-doi)
+              :map biblio-selection-mode-map
+              ("e" . ebib-biblio-selection-import))
   :init
   (defun zw/ebib-create-identifier (key _) key)
   (setq ebib-preload-bib-files '("~/Dropbox/bibliography/references.bib")
         ebib-notes-default-file "~/Dropbox/bibliography/notes.org"
         ebib-notes-template "* %T\n:PROPERTIES:\n%K\n:NOTER_DOCUMENT: papers/%k.pdf\n:END:\n%%?\n"
         ebib-keywords (expand-file-name "~/Dropbox/bibliography/keywords.txt")
-        ebib-reading-list-file "~/Dropbox/bibliography/reading_list.org"
+        ebib-reading-list-file "~/Dropbox/brain/reading_list.org"
+        ebib-bib-search-dirs  '("~/Dropbox/bibliography/")
+        ebib-bibtex-dialect 'biblatex
         ebib-notes-storage 'multiple-notes-per-file)
   :config
   (add-to-list 'ebib-notes-template-specifiers '(?k . zw/ebib-create-identifier))
@@ -287,6 +293,7 @@
               (lambda (orig-func &rest args)
                 (replace-regexp-in-string ":" "" (apply orig-func args))))
   (remove-hook 'ebib-notes-new-note-hook #'org-narrow-to-subtree))
+
 
 (defun sci-hub-pdf-url (doi)
   "Get url to the pdf from SCI-HUB using DOI."
@@ -386,6 +393,11 @@
     t))
 ;; -Ebib
 
+(use-package org-download
+  :custom
+  (org-download-screenshot-method "spectacle -b -n -r -o %s")
+  (org-download-image-dir "~/Dropbox/notes/fig/"))
+
 ;; TocOrgPac
 (use-package toc-org
   :hook (org-mode . toc-org-mode))
@@ -398,13 +410,6 @@
 ;; OXGFMPac
 (use-package ox-gfm :defer t)
 ;; -OXGFMPac
-
-;; PlantUMLPac
-(use-package plantuml-mode
-  :defer t
-  :custom
-  (org-plantuml-jar-path (expand-file-name "/usr/share/java/plantuml/plantuml.jar")))
-;; -PlantUMLPac
 
 ;; Maxima
 (use-package maxima
