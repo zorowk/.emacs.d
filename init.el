@@ -191,8 +191,6 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-latex)
 
-(require 'init-buildsystem)
-
 ;; Office
 (require 'init-org)
 
@@ -208,8 +206,6 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (require 'init-pdf-tools)
 
 (require 'init-leetcode)
-
-(require 'init-debbugs)
 
 (require 'init-eww)
 
