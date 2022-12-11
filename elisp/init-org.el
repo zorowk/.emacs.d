@@ -148,6 +148,12 @@
   (org-latex-listings t)
   (org-deadline-warning-days 7)
   (org-agenda-window-setup 'other-window)
+  (org-habit-graph-column 80)
+  (org-duration-format 'h:mm) ;; show hours at max, not days
+  (org-agenda-compact-blocks t)
+  (org-agenda-span 'day)
+  (org-agenda-start-day "-0d")
+  (org-agenda-start-on-weekday nil)
   (org-latex-pdf-process
     (let
       ((cmd (concat "xelatex -shell-escape -interaction nonstopmode"
@@ -264,7 +270,7 @@
 ;; Ebib
 ;; Bibtex stuff
 (use-package ebib
-  :bind (("M-z b" . ebib))
+  :bind (("C-z ." . ebib))
   (:map ebib-index-mode-map
               ("B" . ebib-biblio-import-doi)
               :map biblio-selection-mode-map
@@ -275,7 +281,7 @@
         ebib-notes-default-file "~/Dropbox/bibliography/notes.org"
         ebib-notes-template "* %T\n:PROPERTIES:\n%K\n:NOTER_DOCUMENT: papers/%k.pdf\n:END:\n%%?\n"
         ebib-keywords (expand-file-name "~/Dropbox/bibliography/keywords.txt")
-        ebib-reading-list-file "~/Dropbox/brain/reading_list.org"
+        ebib-reading-list-file "~/Dropbox/brain/readlist.org"
         ebib-bib-search-dirs  '("~/Dropbox/bibliography/")
         ebib-bibtex-dialect 'biblatex
         ebib-autogenerate-keys nil
