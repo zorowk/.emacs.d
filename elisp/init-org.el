@@ -203,7 +203,9 @@
         '((auto-mode . emacs)
           ("\\.x?html?\\'" . "google-chrome-stable %s")
           ("\\.mp4\\'" . "mpv \"%s\"")
-          ("\\.mkv" . "mpv \"%s\"")))
+          ("\\.mkv" . "mpv \"%s\"")
+          ("\\.pdf\\'" . "okular %s")
+          ("\\.pdf::\\([0-9]+\\)\\'" . "okular -p %1 %s")))
 
   ;; define the refile targets
   (setq org-agenda-dir "~/Dropbox/brain/")
@@ -276,6 +278,7 @@
         ebib-reading-list-file "~/Dropbox/brain/reading_list.org"
         ebib-bib-search-dirs  '("~/Dropbox/bibliography/")
         ebib-bibtex-dialect 'biblatex
+        ebib-autogenerate-keys nil
         ebib-notes-storage 'multiple-notes-per-file)
   :config
   (add-to-list 'ebib-notes-template-specifiers '(?k . zw/ebib-create-identifier))
@@ -294,7 +297,6 @@
               (lambda (orig-func &rest args)
                 (replace-regexp-in-string ":" "" (apply orig-func args))))
   (remove-hook 'ebib-notes-new-note-hook #'org-narrow-to-subtree))
-
 
 (defun sci-hub-pdf-url (doi)
   "Get url to the pdf from SCI-HUB using DOI."
