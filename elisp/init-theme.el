@@ -62,7 +62,7 @@
   ;; Don't compact font caches during GC. Windows Laggy Issue
   (inhibit-compacting-font-caches t)
   (doom-modeline-minor-modes t)
-  (doom-modeline-icon t)
+  (doom-modeline-icon nil)
   (doom-modeline-major-mode-color-icon t)
   (doom-modeline-height 14)
   :config
