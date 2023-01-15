@@ -404,10 +404,12 @@
     t))
 ;; -Ebib
 
+;; OrgDownload
 (use-package org-download
   :custom
   (org-download-screenshot-method "spectacle -b -n -r -o %s")
   (org-download-image-dir "~/Dropbox/notes/fig/"))
+;; -OrgDownload
 
 ;; TocOrgPac
 (use-package toc-org

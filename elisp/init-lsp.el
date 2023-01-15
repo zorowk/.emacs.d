@@ -68,7 +68,7 @@
   :diminish
   :commands lsp-ui-mode
   :custom-face
-  (lsp-ui-doc-background ((t (:background nil))))
+  (lsp-ui-doc-background ((t (:background unspecified))))
   (lsp-ui-doc-header ((t (:inherit (font-lock-string-face italic)))))
   :bind
   (:map lsp-ui-mode-map
