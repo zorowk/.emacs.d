@@ -39,8 +39,7 @@
 (use-package ein
   :if (executable-find "jupyter")
   :bind
-  (("C-c e" . ein:worksheet-execute-cell)
-   ("C-c C-e" . ein:worksheet-execute-all-cells))
+  (("C-c e" . ein:worksheet-execute-cell))
   :custom-face
   (ein:basecell-input-area-face ((t (:extend t :background "#303640"))))
   :defer t

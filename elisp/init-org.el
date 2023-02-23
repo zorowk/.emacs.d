@@ -211,7 +211,6 @@
           ("\\.x?html?\\'" . "google-chrome-stable %s")
           ("\\.mp4\\'" . "mpv \"%s\"")
           ("\\.mkv" . "mpv \"%s\"")
-          ("\\.epub\\'" . "foliate %s")
           ("\\.pdf\\'" . "okular %s")
           ("\\.pdf::\\([0-9]+\\)\\'" . "okular -p %1 %s")))
 

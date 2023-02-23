@@ -191,6 +191,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-latex)
 
+(require 'init-math)
+
 ;; Office
 (require 'init-org)
 
@@ -215,6 +217,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (require 'init-zone)
 
 (require 'init-shrface)
+
+(require 'init-embark)
 
 (require 'init-newsticker)
 
