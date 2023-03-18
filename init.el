@@ -212,8 +212,6 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (require 'init-eww)
 
 ;; Miscellaneous
-(require 'init-epaint)
-
 (require 'init-zone)
 
 (require 'init-shrface)

@@ -69,10 +69,8 @@
   :custom
   (newsticker-url-list '(
                          ;; ("title" "URL" other options)
-                         ("Sachachua emacs news" "https://sachachua.com/blog/category/emacs-news/feed" nil nil nil)
                          ("Planet Emacs Life" "https://planet.emacslife.com/atom.xml" nil nil nil)
                          ("Karthinks" "https://karthinks.com/index.xml" nil nil nil)
-                         ("ruzkuku" "https://ruzkuku.com/all.atom" nil nil nil)
                          ("lazycat" "https://manateelazycat.github.io/feed.xml" nil nil nil)
                          ("hacker news" "https://hnrss.org/frontpage")
                          ("lobsters" "https://lobste.rs/rss")

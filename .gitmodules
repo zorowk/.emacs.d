@@ -40,9 +40,6 @@
 [submodule "site-elisp/separedit.el"]
 	path = site-elisp/separedit.el
 	url = https://github.com/twlz0ne/separedit.el.git
-[submodule "site-elisp/emacs-webkit"]
-	path = site-elisp/emacs-webkit
-	url = https://github.com/akirakyle/emacs-webkit.git
 [submodule "site-elisp/aweshell"]
 	path = site-elisp/aweshell
 	url = https://github.com/MatthewZMD/aweshell.git
@@ -55,3 +52,6 @@
 [submodule "site-elisp/popweb"]
 	path = site-elisp/popweb
 	url = https://github.com/manateelazycat/popweb.git
+[submodule "site-elisp/mind-wave"]
+	path = site-elisp/mind-wave
+	url = https://github.com/manateelazycat/mind-wave.git
