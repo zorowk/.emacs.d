@@ -211,6 +211,10 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-eww)
 
+(require 'init-eaf)
+
+(require 'init-chatgpt)
+
 ;; Miscellaneous
 (require 'init-zone)
 
