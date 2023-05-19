@@ -48,7 +48,7 @@
   (doom-themes-visual-bell-config)
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config)
-  (load-theme 'modus-operandi t)
+  (load-theme 'tango t)
   (defun switch-theme ()
     "An interactive funtion to switch themes."
     (interactive)
@@ -62,7 +62,7 @@
   ;; Don't compact font caches during GC. Windows Laggy Issue
   (inhibit-compacting-font-caches t)
   (doom-modeline-minor-modes t)
-  (doom-modeline-icon t)
+  (doom-modeline-icon nil)
   (doom-modeline-major-mode-color-icon t)
   (doom-modeline-height 14)
   :config

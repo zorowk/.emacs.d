@@ -53,7 +53,7 @@
           (t             . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*}"))
         bibtex-completion-pdf-open-function
         (lambda (fpath)
-          (call-process "okular" nil 0 nil fpath))))
+          (call-process "open" nil 0 nil fpath))))
 
 (use-package org-ref
   :ensure nil
@@ -210,9 +210,7 @@
         '((auto-mode . emacs)
           ("\\.x?html?\\'" . "google-chrome-stable %s")
           ("\\.mp4\\'" . "mpv \"%s\"")
-          ("\\.mkv" . "mpv \"%s\"")
-          ("\\.pdf\\'" . "okular %s")
-          ("\\.pdf::\\([0-9]+\\)\\'" . "okular -p %1 %s")))
+          ("\\.mkv" . "mpv \"%s\"")))
 
   ;; define the refile targets
   (setq org-agenda-dir "~/Dropbox/brain/")

@@ -154,6 +154,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-projectile)
 
+(require 'init-treemacs)
+
 (require 'init-yasnippet)
 
 (require 'init-syntax)
@@ -207,13 +209,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-pdf-tools)
 
-(require 'init-leetcode)
-
 (require 'init-eww)
-
-(require 'init-eaf)
-
-(require 'init-chatgpt)
 
 ;; Miscellaneous
 (require 'init-zone)
