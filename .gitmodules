@@ -52,6 +52,3 @@
 [submodule "site-elisp/popweb"]
 	path = site-elisp/popweb
 	url = https://github.com/manateelazycat/popweb.git
-[submodule "site-elisp/mind-wave"]
-	path = site-elisp/mind-wave
-	url = https://github.com/manateelazycat/mind-wave.git

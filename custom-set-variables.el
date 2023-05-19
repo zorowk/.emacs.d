@@ -6,12 +6,16 @@
  '(all-the-icons-scale-factor 1.1)
  '(company-show-quick-access t nil nil "Customized with use-package company")
  '(connection-local-criteria-alist
-   '(((:application eshell)
+   '(((:application tramp :protocol "flatpak")
+      tramp-container-connection-local-default-flatpak-profile)
+     ((:application eshell)
       eshell-connection-default-profile)
      ((:application tramp)
       tramp-connection-local-default-system-profile tramp-connection-local-default-shell-profile)))
  '(connection-local-profile-alist
-   '((eshell-connection-default-profile
+   '((tramp-container-connection-local-default-flatpak-profile
+      (tramp-remote-path "/app/bin" tramp-default-remote-path "/bin" "/usr/bin" "/sbin" "/usr/sbin" "/usr/local/bin" "/usr/local/sbin" "/local/bin" "/local/freeware/bin" "/local/gnu/bin" "/usr/freeware/bin" "/usr/pkg/bin" "/usr/contrib/bin" "/opt/bin" "/opt/sbin" "/opt/local/bin"))
+     (eshell-connection-default-profile
       (eshell-path-env-list))
      (tramp-connection-local-darwin-ps-profile
       (tramp-process-attributes-ps-args "-acxww" "-o" "pid,uid,user,gid,comm=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" "-o" "state=abcde" "-o" "ppid,pgid,sess,tty,tpgid,minflt,majflt,time,pri,nice,vsz,rss,etime,pcpu,pmem,args")
@@ -96,7 +100,7 @@
  '(org-modules
    '(ol-bbdb ol-bibtex ol-docview ol-doi ol-eww ol-gnus org-habit org-id ol-info ol-irc ol-mhe ol-rmail ol-w3m))
  '(package-selected-packages
-   '(flycheck-pos-tip djvu doom-themes ibuffer-vc disk-usage exec-path-from-shell org-pomodoro cdlatex embark-consult embark marginalia osm aio org-download maxima org-tree-slide ebib org-noter ement org-contrib wolfram ob-rust wolfram-mode gnuplot auctex bbdb treemacs wanderlust meson-mode treemacs-projectile treemacs-magit treemacs-all-the-icons yaml-pro toc-org json-mode emmet-mode vue-mode typescript-mode js2-mode web-mode yaml-mode bazel groovy-mode dockerfile-mode docker company-auctex auctex-latexmk cargo lsp-pyright ess company-go go-guru flycheck-rust rust-mode cmake-mode go-mode modern-cpp-font-lock ccls company-box company-tabnine company dap-mode lsp-ui lsp-mode ein iedit evil-nerd-commenter format-all quickrun highlight-indent-guides smartparens dumb-jump flycheck-popup-tip flycheck-posframe flycheck yasnippet-snippets yasnippet projectile magit emojify all-the-icons page-break-lines dashboard 2048-game speed-type nov shrface hackernews debbugs graphql cal-china-x mu4e-overview mu4e-alert erc-image erc-hl-nicks pdf-tools org-bullets org-roam-bibtex org-roam org-ref ivy-bibtex plantuml-mode ox-gfm htmlize doom-modeline term-keys shell-here ace-window discover-my-major undo-tree popup-kill-ring which-key avy crux find-file-in-project rg ag counsel amx ivy sudo-edit diminish auto-package-update use-package))
+   '(saveplace-pdf-view flycheck-pos-tip djvu doom-themes ibuffer-vc disk-usage exec-path-from-shell org-pomodoro cdlatex embark-consult embark marginalia osm aio org-download maxima org-tree-slide ebib org-noter ement org-contrib wolfram ob-rust wolfram-mode gnuplot auctex bbdb treemacs wanderlust meson-mode treemacs-projectile treemacs-magit treemacs-all-the-icons yaml-pro toc-org json-mode emmet-mode vue-mode typescript-mode js2-mode web-mode yaml-mode bazel groovy-mode dockerfile-mode docker company-auctex auctex-latexmk cargo lsp-pyright ess company-go go-guru flycheck-rust rust-mode cmake-mode go-mode modern-cpp-font-lock ccls company-box company-tabnine company dap-mode lsp-ui lsp-mode ein iedit evil-nerd-commenter format-all quickrun highlight-indent-guides smartparens dumb-jump flycheck-popup-tip flycheck-posframe flycheck yasnippet-snippets yasnippet projectile magit emojify all-the-icons page-break-lines dashboard 2048-game speed-type nov shrface hackernews debbugs graphql cal-china-x mu4e-overview mu4e-alert erc-image erc-hl-nicks pdf-tools org-bullets org-roam-bibtex org-roam org-ref ivy-bibtex plantuml-mode ox-gfm htmlize doom-modeline term-keys shell-here ace-window discover-my-major undo-tree popup-kill-ring which-key avy crux find-file-in-project rg ag counsel amx ivy sudo-edit diminish auto-package-update use-package))
  '(safe-local-variable-values
    '((org-confirm-babel-evaluate)
      (header-auto-update-enabled)))
