@@ -72,6 +72,7 @@
                          ("Planet Emacs Life" "https://planet.emacslife.com/atom.xml" nil nil nil)
                          ("Karthinks" "https://karthinks.com/index.xml" nil nil nil)
                          ("lazycat" "https://manateelazycat.github.io/feed.xml" nil nil nil)
+                         ("phoronix" "https://www.phoronix.com/rss.php" nil nil nil)
                          ("hacker news" "https://hnrss.org/frontpage")
                          ("lobsters" "https://lobste.rs/rss")
                          ("drew devault" "https://drewdevault.com/blog/index.xml")
