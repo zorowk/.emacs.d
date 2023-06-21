@@ -154,6 +154,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-projectile)
 
+(require 'init-treemacs)
+
 (require 'init-yasnippet)
 
 (require 'init-syntax)
@@ -192,6 +194,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (require 'init-latex)
 
 (require 'init-math)
+
+(require 'init-webdev)
 
 ;; Office
 (require 'init-org)

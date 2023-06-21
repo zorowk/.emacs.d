@@ -123,13 +123,6 @@
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 ;; -org bullets
 
-;; org valign
-(use-package valign
-  :load-path (lambda () (expand-file-name "site-elisp/valign" user-emacs-directory))
-  :config
-  (add-hook 'org-mode-hook #'valign-mode))
-;; -org valign
-
 ;; OrgPac
 (use-package org
   :ensure nil
@@ -210,7 +203,9 @@
         '((auto-mode . emacs)
           ("\\.x?html?\\'" . "google-chrome-stable %s")
           ("\\.mp4\\'" . "mpv \"%s\"")
-          ("\\.mkv" . "mpv \"%s\"")))
+          ("\\.mkv" . "mpv \"%s\"")
+          ("\\.pdf\\'" . "okular %s")
+          ("\\.pdf::\\([0-9]+\\)\\'" . "okular -p %1 %s")))
 
   ;; define the refile targets
   (setq org-agenda-dir "~/Dropbox/brain/")
