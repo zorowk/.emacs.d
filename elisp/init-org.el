@@ -261,6 +261,13 @@
                   org-noter-separate-notes-from-heading t))
 ;; -OrgNoter
 
+;; ox-hugo
+(use-package ox-hugo
+  :ensure t   ;Auto-install the package from Melpa
+  :pin melpa  ;`package-archives' should already have ("melpa" . "https://melpa.org/packages/")
+  :after ox)
+;; -ox-hugo
+
 ;; Ebib
 ;; Bibtex stuff
 (use-package ebib
