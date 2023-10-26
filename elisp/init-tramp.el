@@ -45,6 +45,8 @@
   (add-to-list 'tramp-methods
                '("gssh"
                  (tramp-login-program        "gcloud compute ssh")
+                 (tramp-auto-save-directory  "/tmp/tramp/")
+                 (tramp-chunksize            2000)
                  (tramp-login-args           (("%h")))
                  (tramp-async-args           (("-q")))
                  (tramp-remote-shell         "/bin/bash")

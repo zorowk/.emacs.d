@@ -58,16 +58,16 @@
   (dashboard-navigator-buttons
    (if (featurep 'all-the-icons)
        `(((,(all-the-icons-octicon "mark-github" :height 1.1 :v-adjust -0.05)
-           "M-EMACS" "Browse M-EMACS Homepage"
-           (lambda (&rest _) (browse-url "https://github.com/MatthewZMD/.emacs.d")))
+           "Blog" "Browse Homepage"
+           (lambda (&rest _) (browse-url "https://zorowk.github.io/")))
           (,(all-the-icons-fileicon "elisp" :height 1.0 :v-adjust -0.1)
-           "Configuration" "" (lambda (&rest _) (edit-configs)))
+           "Configuration" "Documents" (lambda (&rest _) (edit-configs)))
           (,(all-the-icons-faicon "cogs" :height 1.0 :v-adjust -0.1)
-           "Update" "" (lambda (&rest _) (auto-package-update-now)))))
-     `((("" "M-EMACS" "Browse M-EMACS Homepage"
-         (lambda (&rest _) (browse-url "https://github.com/MatthewZMD/.emacs.d")))
-        ("" "Configuration" "" (lambda (&rest _) (edit-configs)))
-        ("" "Update" "" (lambda (&rest _) (auto-package-update-now)))))))
+           "Update" "Update" (lambda (&rest _) (auto-package-update-now)))))
+     `((("" "Blog" "Browse Homepage"
+         (lambda (&rest _) (browse-url "https://zorowk.github.io/")))
+        ("" "Configuration" "Documents" (lambda (&rest _) (edit-configs)))
+        ("" "Update" "Update" (lambda (&rest _) (auto-package-update-now)))))))
   :custom-face
   (dashboard-banner-logo-title ((t (:family "Love LetterTW" :height 123))))
   :config

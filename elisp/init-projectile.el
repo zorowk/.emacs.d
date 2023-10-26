@@ -44,6 +44,7 @@
   ("C-c p" . projectile-command-map)
   :custom
   (projectile-completion-system 'ivy)
+  (projectile-enable-caching t)
   :config
   (projectile-mode 1)
   (when (and *sys/win32*
