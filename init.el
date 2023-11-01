@@ -149,8 +149,6 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-scroll)
 
-(require 'init-treemacs)
-
 ;; General Programming
 (require 'init-magit)
 
