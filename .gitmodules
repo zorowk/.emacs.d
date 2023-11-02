@@ -49,3 +49,6 @@
 [submodule "site-elisp/popweb"]
 	path = site-elisp/popweb
 	url = https://github.com/manateelazycat/popweb.git
+[submodule "site-elisp/tufte-org-mode"]
+	path = site-elisp/tufte-org-mode
+	url = https://github.com/tsdye/tufte-org-mode.git
