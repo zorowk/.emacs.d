@@ -268,12 +268,6 @@
   :after ox)
 ;; -ox-hugo
 
-;; tufte-export
-(use-package ox-tufte-latex
-  :load-path (lambda () (expand-file-name "site-elisp/tufte-org-mode" user-emacs-directory))
-  :after ox)
-;; -tufte-export
-
 ;; Ebib
 ;; Bibtex stuff
 (use-package ebib
