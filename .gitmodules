@@ -13,3 +13,6 @@
 [submodule "site-elisp/separedit.el"]
 	path = site-elisp/separedit.el
 	url = https://github.com/twlz0ne/separedit.el.git
+[submodule "site-elisp/indent-bars"]
+	path = site-elisp/indent-bars
+	url = https://github.com/jdtsmith/indent-bars.git
