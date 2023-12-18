@@ -47,6 +47,7 @@
   (use-package swiper :defer t)
   (use-package ag :defer t)
   (use-package rg :defer t)
+  (use-package flx-ido :defer t)
   (ivy-mode 1)
   :bind
   (("C-s" . swiper-isearch)
@@ -65,6 +66,8 @@
   (ivy-magic-slash-non-match-action 'ivy-magic-slash-non-match-create)
   (ivy-count-format "【%d/%d】")
   (ivy-wrap t)
+  (ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
+
   :config
   (defun counsel-goto-local-home ()
       "Go to the $HOME of the local machine."

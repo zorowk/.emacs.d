@@ -182,10 +182,6 @@
   (setq org-clock-out-remove-zero-time-clocks t) ;; Show the clocked-in task - if any - in the header line
   (setq org-tags-match-list-sublevels nil)
 
-  (setq org-plantuml-jar-path
-        (expand-file-name "/usr/share/java/plantuml/plantuml.jar"))
-  (setq org-ditaa-jar-path "/usr/share/java/ditaa/ditaa-0.11.jar")
-
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((dot . t)
@@ -194,9 +190,7 @@
      (python . t)
      (R . t)
      (emacs-lisp . t)
-     (plantuml . t)
      (maxima . t)
-     (ditaa . t)
      (gnuplot . t)))
 
   (setq org-file-apps
@@ -204,8 +198,8 @@
           ("\\.x?html?\\'" . "google-chrome-stable %s")
           ("\\.mp4\\'" . "mpv \"%s\"")
           ("\\.mkv" . "mpv \"%s\"")
-          ("\\.pdf\\'" . "okular %s")
-          ("\\.pdf::\\([0-9]+\\)\\'" . "okular -p %1 %s")))
+          ("\\.pdf\\'" . "llpp %s")
+          ("\\.pdf::\\([0-9]+\\)\\'" . "llpp -page %1 %s")))
 
   ;; define the refile targets
   (setq org-agenda-dir "~/Dropbox/brain/")

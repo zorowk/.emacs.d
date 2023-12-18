@@ -52,6 +52,11 @@
   :init
   (add-hook 'LaTeX-mode-hook 'company-auctex-init))
 
+(use-package xenops
+  :defer t
+  :init
+  (add-hook 'LaTeX-mode-hook #'xenops-mode))
+
 ;; AUCTeXPac
 (use-package tex
   :ensure auctex
