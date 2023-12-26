@@ -120,13 +120,9 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-avy)
 
-(require 'init-winner)
-
 (require 'init-which-key)
 
 (require 'init-undo-tree)
-
-(require 'init-discover-my-major)
 
 (require 'init-ace-window)
 
@@ -162,15 +158,11 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-indent)
 
-(require 'init-quickrun)
-
 (require 'init-format)
 
 (require 'init-comment)
 
 (require 'init-edit)
-
-(require 'init-header)
 
 (require 'init-ein)
 
@@ -210,8 +202,6 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (require 'init-eww)
 
 ;; Miscellaneous
-(require 'init-zone)
-
 (require 'init-shrface)
 
 (require 'init-embark)
