@@ -65,7 +65,7 @@
 (global-set-key (kbd "C-h C-k") #'find-function-on-key)
 (global-set-key (kbd "C-h C-v") #'find-variable)
 ;; Revert buffer
-(global-set-key (kbd "<f5>") (lambda () (interactive) (revert-buffer nil t)))
+(global-set-key (kbd "<f5>") #'revert-buffer-quick)
 ;; -DefBindings
 
 ;; UTF8Coding
