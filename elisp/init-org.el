@@ -198,8 +198,8 @@
           ("\\.x?html?\\'" . "google-chrome-stable %s")
           ("\\.mp4\\'" . "mpv \"%s\"")
           ("\\.mkv" . "mpv \"%s\"")
-          ("\\.pdf\\'" . "zathura %s")
-          ("\\.pdf::\\([0-9]+\\)\\'" . "zathura -P %1 %s")))
+          ("\\.pdf\\'" . "llpp %s")
+          ("\\.pdf::\\([0-9]+\\)\\'" . "llpp -page %1 %s")))
 
   ;; define the refile targets
   (setq org-agenda-dir "~/Dropbox/brain/")
