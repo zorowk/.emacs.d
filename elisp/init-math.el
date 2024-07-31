@@ -42,6 +42,10 @@
   (add-to-list 'interpreter-mode-alist
 		 (cons "maxima" 'maxima-mode)))
 
+(use-package casual-calc
+  :ensure t
+  :bind (:map calc-mode-map ("C-z a" . #'casual-calc-tmenu)))
+
 (provide 'init-math)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-eaf.el ends here
