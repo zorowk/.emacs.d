@@ -35,16 +35,25 @@
 ;;
 ;;; Code:
 
+(eval-when-compile
+  (require 'org))
+
+;; Maxima
 (use-package maxima
   :init
+  (setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0)
+	  maxima-display-maxima-buffer nil)
   (add-to-list 'auto-mode-alist
 		 (cons "\\.mac\\'" 'maxima-mode))
   (add-to-list 'interpreter-mode-alist
 		 (cons "maxima" 'maxima-mode)))
+;; -Maxima
 
+;; Casual-calc
 (use-package casual-calc
   :ensure t
   :bind (:map calc-mode-map ("C-z a" . #'casual-calc-tmenu)))
+;; -Casual-calc
 
 (provide 'init-math)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

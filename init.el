@@ -202,8 +202,6 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 ;; Miscellaneous
 (require 'init-shrface)
 
-(require 'init-embark)
-
 (require 'init-newsticker)
 
 ;; InitPrivate
