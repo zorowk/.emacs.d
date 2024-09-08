@@ -39,21 +39,32 @@
 (eval-when-compile
   (require 'init-const))
 
-;; DoomThemes
-(use-package doom-themes
+;; EfThemes
+(use-package ef-themes
+  :ensure t
+  :demand t
   :config
-  ;; flashing mode-line on errors
-  (doom-themes-visual-bell-config)
-  ;; Corrects (and improves) org-mode's native fontification.
-  (doom-themes-org-config)
-  (load-theme 'modus-operandi t)
-  (defun switch-theme ()
-    "An interactive funtion to switch themes."
-    (interactive)
-    (when custom-enabled-themes
-      (disable-theme (intern (car (mapcar #'symbol-name custom-enabled-themes)))))
-    (call-interactively #'load-theme)))
-;; -DoomThemes
+  (setq ef-themes-variable-pitch-ui t
+        ef-themes-mixed-fonts t
+        ef-themes-headings ; read the manual's entry of the doc string
+        '((0 . (variable-pitch light 1.9))
+          (1 . (variable-pitch light 1.8))
+          (2 . (variable-pitch regular 1.7))
+          (3 . (variable-pitch regular 1.6))
+          (4 . (variable-pitch regular 1.5))
+          (5 . (variable-pitch 1.4)) ; absence of weight means `bold'
+          (6 . (variable-pitch 1.3))
+          (7 . (variable-pitch 1.2))
+          (agenda-date . (semilight 1.5))
+          (agenda-structure . (variable-pitch light 1.9))
+          (t . (variable-pitch 1.1))))
+
+  ;; Disable all other themes to avoid awkward blending:
+  (mapc #'disable-theme custom-enabled-themes)
+
+  ;; Load the theme of choice:
+  (load-theme 'ef-spring :no-confirm))
+;; -EfThemes
 
 ;; DoomModeline
 (use-package doom-modeline
