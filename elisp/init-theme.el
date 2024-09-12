@@ -51,7 +51,7 @@
   (mapc #'disable-theme custom-enabled-themes)
 
   ;; Load the theme of choice:
-  (load-theme 'ef-light :no-confirm))
+  (load-theme 'ef-kassio :no-confirm))
 ;; -EfThemes
 
 ;; DoomModeline

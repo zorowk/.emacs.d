@@ -188,6 +188,7 @@
      (shell . t)
      (latex .t)
      (python . t)
+     (ein . t)
      (R . t)
      (emacs-lisp . t)
      (maxima . t)
@@ -401,7 +402,8 @@
 (use-package org-download
   :custom
   (org-download-screenshot-method "spectacle -b -n -r -o %s")
-  (org-download-image-dir "~/Dropbox/notes/fig/"))
+  (org-download-image-dir "~/Dropbox/notes/fig/")
+  (org-download-heading-lvl nil))
 ;; -OrgDownload
 
 ;; TocOrgPac

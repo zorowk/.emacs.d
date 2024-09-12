@@ -40,8 +40,6 @@
   :if (executable-find "jupyter")
   :bind
   (("C-c e" . ein:worksheet-execute-cell))
-  :custom-face
-  (ein:basecell-input-area-face ((t (:extend t :background "#303640"))))
   :defer t
   :custom
   (ein:worksheet-enable-undo t))
