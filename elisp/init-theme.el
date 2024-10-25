@@ -39,20 +39,7 @@
 (eval-when-compile
   (require 'init-const))
 
-;; EfThemes
-(use-package ef-themes
-  :ensure t
-  :demand t
-  :config
-  (setq ef-themes-variable-pitch-ui t
-        ef-themes-mixed-fonts t)
-
-  ;; Disable all other themes to avoid awkward blending:
-  (mapc #'disable-theme custom-enabled-themes)
-
-  ;; Load the theme of choice:
-  (load-theme 'ef-kassio :no-confirm))
-;; -EfThemes
+(load-theme 'modus-operandi :no-confirm)
 
 ;; DoomModeline
 (use-package doom-modeline

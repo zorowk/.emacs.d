@@ -90,10 +90,6 @@
   ;; Use lsp-ui-doc-webkit only in GUI
   (when (display-graphic-p)
     (setq lsp-ui-doc-use-webkit t))
-  ;; WORKAROUND Hide mode-line of the lsp-ui-imenu buffer
-  ;; https://github.com/emacs-lsp/lsp-ui/issues/243
-  (defadvice lsp-ui-imenu (after hide-lsp-ui-imenu-mode-line activate)
-    (setq mode-line-format nil))
   ;; `C-g'to close doc
   (advice-add #'keyboard-quit :before #'lsp-ui-doc-hide))
 ;; -LSPUI

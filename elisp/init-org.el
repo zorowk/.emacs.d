@@ -100,14 +100,11 @@
              ;; Dailies
              ("C-c n j" . org-roam-dailies-capture-today))
       :config
-      (org-roam-setup)
-      (require 'org-roam-protocol)
-      (setq org-roam-dailies-capture-templates
-            '(("d" "default" entry
-               #'org-roam-capture--get-point
-               "* %?"
-               :file-name "daily/%<%Y-%m-%d>"
-               :head "#+title: %<%Y-%m-%d>\n\n"))))
+      ;; If you're using a vertical completion framework, you might want a more informative completion interface
+      (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
+      (org-roam-db-autosync-mode)
+      ;; If using org-roam-protocol
+      (require 'org-roam-protocol))
 
 (use-package org-roam-bibtex
   :after org-roam
@@ -199,8 +196,8 @@
           ("\\.x?html?\\'" . "google-chrome-stable %s")
           ("\\.mp4\\'" . "mpv \"%s\"")
           ("\\.mkv" . "mpv \"%s\"")
-          ("\\.pdf\\'" . "zathura %s")
-          ("\\.pdf::\\([0-9]+\\)\\'" . "zathura -P %1 %s")))
+          ("\\.pdf\\'" . "llpp %s")
+          ("\\.pdf::\\([0-9]+\\)\\'" . "llpp -page %1 %s")))
 
   ;; define the refile targets
   (setq org-agenda-dir "~/Dropbox/brain/")
