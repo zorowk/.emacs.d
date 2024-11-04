@@ -49,12 +49,6 @@
 		 (cons "maxima" 'maxima-mode)))
 ;; -Maxima
 
-;; Casual-calc
-(use-package casual-calc
-  :ensure t
-  :bind (:map calc-mode-map ("C-z a" . #'casual-calc-tmenu)))
-;; -Casual-calc
-
 (provide 'init-math)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-eaf.el ends here
