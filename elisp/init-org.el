@@ -79,7 +79,6 @@
 
 (use-package org-ref-ivy
   :ensure nil
-;;  :load-path (lambda () (expand-file-name "org-ref" scimax-dir))
   :init (setq org-ref-insert-link-function 'org-ref-insert-link-hydra/body
               org-ref-insert-cite-function 'org-ref-cite-insert-ivy
               org-ref-insert-label-function 'org-ref-insert-label-link
@@ -91,6 +90,7 @@
 (use-package org-roam
       :ensure t
       :custom
+      (org-roam-database-connector 'sqlite-builtin)
       (org-roam-directory "~/Dropbox/notes/")
       :bind (("C-c n l" . org-roam-buffer-toggle)
              ("C-c n f" . org-roam-node-find)

@@ -37,7 +37,7 @@
 
 ;; FontsList
 ;; Input Mono, Monaco Style, Line Height 1.3 download from http://input.fontbureau.com/
-(defvar font-list '(("Monego" . 12) ("Hack" . 12) ("Input" . 12) ("Love LetterTW" . 12.5))
+(defvar font-list '(("Monaco" . 14) ("Menlo" . 14) ("Arial" . 14))
   "List of fonts and sizes.  The first one available will be used.")
 ;; -FontsList
 
@@ -59,9 +59,9 @@
       (set-frame-font font-setting nil t)
       (add-to-list 'default-frame-alist (cons 'font font-setting)))
 
-    (set-fontset-font t 'emoji (font-spec :family "Twemoji"))
+    (set-fontset-font t 'emoji (font-spec :family "Apple Color Emoji"))
     (set-fontset-font t 'symbol (font-spec :family "STIX Two Math"))
-    (set-fontset-font t 'greek (font-spec :family "Symbola"))
+    (set-fontset-font t 'greek (font-spec :family "Symbol"))
 
     (set-fontset-font t 'hangul (font-spec :family "Apple SD Gothic Neo"))
     (set-fontset-font t 'kana (font-spec :family "Hiragino Maru Gothic ProN"))
