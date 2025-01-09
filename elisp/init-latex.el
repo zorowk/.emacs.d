@@ -58,8 +58,7 @@
   (add-hook 'LaTeX-mode-hook #'xenops-mode))
 
 ;; AUCTeXPac
-(use-package tex
-  :ensure auctex
+(use-package auctex
   :defer t
   :custom
   (TeX-auto-save t)
