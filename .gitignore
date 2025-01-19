@@ -29,3 +29,5 @@
 /org-roam.db
 /lsp-bridge/
 /straight/
+/org-persist/
+.aider*
