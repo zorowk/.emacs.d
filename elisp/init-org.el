@@ -425,6 +425,9 @@
 (use-package ox-gfm :defer t)
 ;; -OXGFMPac
 
+;; PolymodePac
+(use-package polymode)
+
 (provide 'init-org)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-org.el ends here
