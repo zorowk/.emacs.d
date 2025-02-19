@@ -53,7 +53,8 @@
           ("->" . 8594)
           ("<=" . 8804)
           (">=" . 8805)))
-  (prettify-symbols-mode 1))
+  ;;(prettify-symbols-mode 1)
+  )
 
 ;;(global-prettify-symbols-mode 1)
 (add-hook 'prog-mode-hook #'setup-prettify-symbols)

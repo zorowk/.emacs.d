@@ -233,15 +233,6 @@
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 ;; -org bullets
 
-;; OrgNoter
-(use-package org-noter
-    :after org
-    :ensure t
-    :config (setq org-noter-default-notes-file-names '("notes.org")
-                  org-noter-notes-search-path '("~/Dropbox/bibliography/notes")
-                  org-noter-separate-notes-from-heading t))
-;; -OrgNoter
-
 ;; ox-hugo
 (use-package ox-hugo
   :ensure t   ;Auto-install the package from Melpa
