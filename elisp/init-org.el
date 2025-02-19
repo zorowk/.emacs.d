@@ -35,91 +35,6 @@
 ;;
 ;;; Code:
 
-;; org-ref
-(use-package ivy-bibtex
-  :init
-  (setq bibtex-completion-bibliography '("~/Dropbox/bibliography/references.bib")
-        bibtex-completion-library-path '("~/Documents/papers/")
-	    bibtex-completion-notes-path "~/Dropbox/bibliography/notes/"
-        bibtex-completion-pdf-field "File"
-	    bibtex-completion-notes-template-multiple-files "* ${author-or-editor}, ${title}, ${journal}, (${year}) :${=type=}: \n\nSee [[cite:&${=key=}]]\n"
-
-        bibtex-completion-additional-search-fields '(keywords)
-        bibtex-completion-display-formats
-        '((article       . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${journal:40}")
-          (inbook        . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} Chapter ${chapter:32}")
-          (incollection  . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${booktitle:40}")
-          (inproceedings . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${booktitle:40}")
-          (t             . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*}"))
-        bibtex-completion-pdf-open-function
-        (lambda (fpath)
-          (call-process "open" nil 0 nil fpath))))
-
-(use-package org-ref
-  :ensure nil
- ;; :load-path (lambda () (expand-file-name "org-ref" scimax-dir))
-  :init
-;;  (add-to-list 'load-path
-;;               (expand-file-name "org-ref" scimax-dir))
-  (require 'bibtex)
-  (setq bibtex-autokey-year-length 4
-        bibtex-autokey-name-year-separator "-"
-        bibtex-autokey-year-title-separator "-"
-        bibtex-autokey-titleword-separator "-"
-        bibtex-autokey-titlewords 2
-        bibtex-autokey-titlewords-stretch 1
-        bibtex-autokey-titleword-length 5)
-  (define-key bibtex-mode-map (kbd "H-b") 'org-ref-bibtex-hydra/body)
-  (define-key org-mode-map (kbd "C-c ]") 'org-ref-insert-link)
-  (define-key org-mode-map (kbd "s-[") 'org-ref-insert-link-hydra/body)
-  (require 'org-ref-ivy)
-  (require 'org-ref-arxiv)
-  (require 'org-ref-scopus)
-  (require 'org-ref-wos))
-
-(use-package org-ref-ivy
-  :ensure nil
-  :init (setq org-ref-insert-link-function 'org-ref-insert-link-hydra/body
-              org-ref-insert-cite-function 'org-ref-cite-insert-ivy
-              org-ref-insert-label-function 'org-ref-insert-label-link
-              org-ref-insert-ref-function 'org-ref-insert-ref-link
-              org-ref-cite-onclick-function (lambda (_) (org-ref-citation-hydra/body))))
-;; -org-ref
-
-;; org roam
-(use-package org-roam
-      :ensure t
-      :custom
-      (org-roam-database-connector 'sqlite-builtin)
-      (org-roam-directory "~/Dropbox/notes/")
-      :bind (("C-c n l" . org-roam-buffer-toggle)
-             ("C-c n f" . org-roam-node-find)
-             ("C-c n g" . org-roam-graph)
-             ("C-c n i" . org-roam-node-insert)
-             ("C-c n c" . org-roam-capture)
-             ;; Dailies
-             ("C-c n j" . org-roam-dailies-capture-today))
-      :config
-      ;; If you're using a vertical completion framework, you might want a more informative completion interface
-      (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
-      (org-roam-db-autosync-mode)
-      ;; If using org-roam-protocol
-      (require 'org-roam-protocol))
-
-(use-package org-roam-bibtex
-  :after org-roam
-  :config
-  (require 'org-ref))
-;; -org roam
-
-;; org bullets
-(use-package org-bullets
-  :init
-  (setq org-bullets-bullet-list '("●" "○" "●" "○" "●" "◉" "○" "◆"))
-  :config
-  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
-;; -org bullets
-
 ;; OrgPac
 (use-package org
   :straight (:type built-in)
@@ -244,6 +159,80 @@
     (insert "#+attr_latex: :align |c|c|c|")))
 ;; -OrgPac
 
+;; org-ref
+(use-package ivy-bibtex
+  :init
+  (setq bibtex-completion-bibliography '("~/Dropbox/bibliography/references.bib")
+        bibtex-completion-library-path '("~/Documents/papers/")
+	    bibtex-completion-notes-path "~/Dropbox/bibliography/notes/"
+        bibtex-completion-pdf-field "File"
+	    bibtex-completion-notes-template-multiple-files "* ${author-or-editor}, ${title}, ${journal}, (${year}) :${=type=}: \n\nSee [[cite:&${=key=}]]\n"
+
+        bibtex-completion-additional-search-fields '(keywords)
+        bibtex-completion-display-formats
+        '((article       . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${journal:40}")
+          (inbook        . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} Chapter ${chapter:32}")
+          (incollection  . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${booktitle:40}")
+          (inproceedings . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${booktitle:40}")
+          (t             . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*}"))
+        bibtex-completion-pdf-open-function
+        (lambda (fpath)
+          (call-process "open" nil 0 nil fpath))))
+
+(use-package org-ref
+  :ensure nil
+  :init
+  (require 'bibtex)
+  (setq bibtex-autokey-year-length 4
+        bibtex-autokey-name-year-separator "-"
+        bibtex-autokey-year-title-separator "-"
+        bibtex-autokey-titleword-separator "-"
+        bibtex-autokey-titlewords 2
+        bibtex-autokey-titlewords-stretch 1
+        bibtex-autokey-titleword-length 5)
+  (define-key bibtex-mode-map (kbd "H-b") 'org-ref-bibtex-hydra/body)
+  (define-key org-mode-map (kbd "C-c ]") 'org-ref-insert-link)
+  (define-key org-mode-map (kbd "s-[") 'org-ref-insert-link-hydra/body)
+  (require 'org-ref-ivy)
+  (require 'org-ref-arxiv)
+  (require 'org-ref-scopus)
+  (require 'org-ref-wos))
+;; -org-ref
+
+;; org roam
+(use-package org-roam
+      :after org
+      :custom
+      (org-roam-database-connector 'sqlite-builtin)
+      (org-roam-directory "~/Dropbox/notes/")
+      :bind (("C-c n l" . org-roam-buffer-toggle)
+             ("C-c n f" . org-roam-node-find)
+             ("C-c n g" . org-roam-graph)
+             ("C-c n i" . org-roam-node-insert)
+             ("C-c n c" . org-roam-capture)
+             ;; Dailies
+             ("C-c n j" . org-roam-dailies-capture-today))
+      :config
+      ;; If you're using a vertical completion framework, you might want a more informative completion interface
+      (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
+      (org-roam-db-autosync-mode)
+      ;; If using org-roam-protocol
+      (require 'org-roam-protocol))
+
+(use-package org-roam-bibtex
+  :after org-roam
+  :config
+  (require 'org-ref))
+;; -org roam
+
+;; org bullets
+(use-package org-bullets
+  :init
+  (setq org-bullets-bullet-list '("●" "○" "●" "○" "●" "◉" "○" "◆"))
+  :config
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+;; -org bullets
+
 ;; OrgNoter
 (use-package org-noter
     :after org
@@ -256,7 +245,6 @@
 ;; ox-hugo
 (use-package ox-hugo
   :ensure t   ;Auto-install the package from Melpa
-  :pin melpa  ;`package-archives' should already have ("melpa" . "https://melpa.org/packages/")
   :after ox)
 ;; -ox-hugo
 
