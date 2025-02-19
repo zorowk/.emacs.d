@@ -1,20 +1,20 @@
-;;; init-python.el --- -*- lexical-binding: t -*-
+;;; init-tree-sitter.el --- -*- lexical-binding: t -*-
 ;;
-;; Filename: init-python.el
-;; Description: Initialize Python
+;; Filename: init-tree-sitter.el
+;; Description: Initialize Parenthesis
 ;; Author: Mingde (Matthew) Zeng
 ;; Copyright (C) 2019 Mingde (Matthew) Zeng
-;; Created: Mon Jun 10 18:58:02 2019 (-0400)
+;; Created: Fri Mar 15 10:17:13 2019 (-0400)
 ;; Version: 3.0
 ;; URL: https://github.com/MatthewZMD/.emacs.d
-;; Keywords: lsp python pyright
+;; Keywords: M-EMACS .emacs.d parenthesis smartparens delete-block
 ;; Compatibility: emacs-version >= 26.1
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;; Commentary:
 ;;
-;;
+;; This initializes tree-sitter
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -36,18 +36,16 @@
 ;;; Code:
 
 (eval-when-compile
-  (require 'init-const))
+  (require 'init-global-config))
 
-;; PythonConfig
-(use-package python-mode
-  :ensure nil
-  :mode "\\.py\\'"
-  :custom
-  (python-indent-offset 4)
-  (flycheck-python-pycompile-executable "python3")
-  (python-shell-interpreter "python3"))
-;; -PythonConfig
+(use-package tree-sitter-langs)
 
-(provide 'init-python)
+(use-package tree-sitter
+  :after tree-sitter-langs
+  :config
+  (global-tree-sitter-mode)
+  :hook (tree-sitter-after-on . tree-sitter-hl-mode))
+
+(provide 'init-tree-sitter)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; init-python.el ends here
+;;; init-tree-sitter.el ends here
