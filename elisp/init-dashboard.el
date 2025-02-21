@@ -70,7 +70,7 @@
         ("" "Configuration" "Documents" (lambda (&rest _) (edit-configs)))
         ("" "Update" "Update" (lambda (&rest _) (auto-package-update-now)))))))
   :custom-face
-  (dashboard-banner-logo-title ((t (:family "Love LetterTW" :height 123))))
+  (dashboard-banner-logo-title ((t (:family "Love LetterTW" :height 160))))
   :config
   (dashboard-setup-startup-hook)
   ;; Open Dashboard function
