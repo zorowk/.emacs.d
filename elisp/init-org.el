@@ -106,14 +106,6 @@
      (maxima . t)
      (gnuplot . t)))
 
-  (setq org-file-apps
-        '((auto-mode . emacs)
-          ("\\.x?html?\\'" . "google-chrome-stable %s")
-          ("\\.mp4\\'" . "mpv \"%s\"")
-          ("\\.mkv" . "mpv \"%s\"")
-          ("\\.pdf\\'" . "llpp %s")
-          ("\\.pdf::\\([0-9]+\\)\\'" . "llpp -page %1 %s")))
-
   ;; define the refile targets
   (setq org-agenda-dir "~/Dropbox/brain/")
   (setq org-agenda-file-note (expand-file-name "notes.org" org-agenda-dir))
@@ -197,6 +189,15 @@
   (require 'org-ref-arxiv)
   (require 'org-ref-scopus)
   (require 'org-ref-wos))
+
+(use-package org-ref-ivy
+  :ensure nil
+  :straight (:type built-in)
+  :init (setq org-ref-insert-link-function 'org-ref-insert-link-hydra/body
+	      org-ref-insert-cite-function 'org-ref-cite-insert-ivy
+	      org-ref-insert-label-function 'org-ref-insert-label-link
+	      org-ref-insert-ref-function 'org-ref-insert-ref-link
+	      org-ref-cite-onclick-function (lambda (_) (org-ref-citation-hydra/body))))
 ;; -org-ref
 
 ;; org roam
@@ -377,7 +378,6 @@
 ;; OrgDownload
 (use-package org-download
   :custom
-  (org-download-screenshot-method "spectacle -b -n -r -o %s")
   (org-download-image-dir "~/Dropbox/notes/fig/")
   (org-download-heading-lvl nil))
 ;; -OrgDownload
@@ -406,6 +406,9 @@
 
 ;; PolymodePac
 (use-package polymode)
+
+(use-package org-contrib
+  :ensure t)
 
 (provide 'init-org)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

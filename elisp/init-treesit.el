@@ -44,7 +44,7 @@
   :custom
   (treesit-auto-install 'prompt)
   :config
-  (when (version<= "30" emacs-version)
+  (when (version<= "31" emacs-version)
     (error "The treesit-auto package maybe obsolete!"))
   (treesit-auto-add-to-auto-mode-alist 'all)
   (global-treesit-auto-mode)
