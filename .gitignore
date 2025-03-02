@@ -32,3 +32,4 @@
 /org-persist/
 .aider*
 /tree-sitter/
+*.DS_Store
