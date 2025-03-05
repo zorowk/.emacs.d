@@ -40,6 +40,7 @@
   :straight (indent-bars :type git :host github :repo "jdtsmith/indent-bars")
   :custom
   (indent-bars-treesit-support t)
+  (indent-bars-prefer-character t)
   (indent-bars-no-descend-string t)
   (indent-bars-treesit-ignore-blank-lines-types '("module"))
   (indent-bars-treesit-wrap '((python argument_list parameters
