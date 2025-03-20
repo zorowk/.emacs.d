@@ -56,6 +56,7 @@
   (lsp-bridge-python-lsp-server "pyright")
   :bind (("M-." . lsp-bridge-find-def)
          ("M-," . lsp-bridge-find-def-return)
+         ("M-/" . lsp-bridge-find-references)
          ("M-i" . lsp-bridge-popup-documentation)
          ("C-M-." . lsp-bridge-peek)
          :map lsp-bridge-ref-mode-map
