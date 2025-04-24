@@ -38,46 +38,97 @@
 (eval-when-compile
   (require 'init-const))
 
-;; LSPPac
-(use-package lsp-bridge
-  :straight (lsp-bridge
-             :type git
-             :host github
-             :repo "manateelazycat/lsp-bridge"
-             :files ("*"))
-  :defer 1
-  :commands (global-lsp-bridge-mode lsp-bridge-mode)
+;; Enable Eglot for LSP support
+(use-package eglot
+  :straight (:type built-in)
+  :defer t
+  :commands (eglot eglot-ensure)
   :custom
-  (acm-enable-codeium nil)
-  (acm-enable-tabnine nil)
-  (acm-enable-yas nil)
-  (acm-enable-quick-access t)
-  (lsp-bridge-enable-hover-diagnostic t)
-  (lsp-bridge-python-lsp-server "pyright")
-  (lsp-bridge-c-lsp-server "ccls")
-  :bind (("M-." . lsp-bridge-find-def)
-         ("M-," . lsp-bridge-find-def-return)
-         ("M-/" . lsp-bridge-find-references)
-         ("M-i" . lsp-bridge-popup-documentation)
-         ("C-M-." . lsp-bridge-peek)
-         :map lsp-bridge-ref-mode-map
-         ("n" . lsp-bridge-ref-jump-next-keyword)
-         ("p" . lsp-bridge-ref-jump-prev-keyword)
-         ("M-n" . lsp-bridge-ref-jump-next-file)
-         ("M-p" . lsp-bridge-ref-jump-prev-file)
-         ("C-x C-q" . lsp-bridge-ref-switch-to-edit-mode)
-         :map lsp-bridge-ref-mode-edit-map
-         ("C-x C-q" . lsp-bridge-ref-apply-changed)
-         ("C-x C-s" . lsp-bridge-ref-apply-changed)
-         ("C-c C-k" . lsp-bridge-ref-quit)
-         ("M-n" . lsp-bridge-ref-jump-next-file)
-         ("M-p" . lsp-bridge-ref-jump-prev-file)
-         :map acm-mode-map
-         ([remap next-line] . nil)
-         ([remap previous-line] . nil))
+  (eglot-autoshutdown t) ;; 自动关闭 LSP 服务器
+  (eglot-sync-connect 0) ;; 异步连接，提高启动速度
   :config
-  (global-lsp-bridge-mode))
-;; -LSPPac
+  ;; 配置 LSP 服务器
+  (add-to-list 'eglot-server-programs
+               '((c-mode c++-mode) . ("clangd" "--background-index" "--clang-tidy")))
+  (add-to-list 'eglot-server-programs
+               '(python-mode . ("pyright-langserver" "--stdio")))
+  (add-to-list 'eglot-server-programs
+               '(rust-mode . ("rust-analyzer")))
+  (add-to-list 'eglot-server-programs
+               '(latex-mode . ("texlab")))
+  (add-to-list 'eglot-server-programs
+               '((web-mode js-mode js-ts-mode typescript-mode tsx-mode) .
+                 ("typescript-language-server" "--stdio")))
+  ;; 绑定跳转和诊断快捷键
+  :bind (:map eglot-mode-map
+              ("M-." . xref-find-definitions)
+              ("M-," . xref-pop-marker-stack)
+              ("M-/" . eglot-find-implementation)
+              ("M-i" . eglot-find-declaration)
+              ("C-M-." . consult-eglot-symbols)
+              ("C-c l r" . xref-find-references)
+              ("C-c l a" . eglot-code-actions)
+              ("C-c l f" . eglot-format-buffer))
+  :hook
+  ;; 自动启用 eglot
+  ((c-mode c++-mode python-mode rust-mode latex-mode
+           web-mode js-mode js-ts-mode typescript-mode tsx-mode) . eglot-ensure))
+
+;; Enable Corfu completion UI
+;; See the Corfu README for more configuration tips.
+(use-package corfu
+  :straight t
+  :custom
+  (corfu-auto t)          ;; 启用自动补全
+  (corfu-auto-prefix 3)   ;; 触发补全的最小字符数
+  (corfu-auto-delay 0.1)  ;; 补全延迟
+  (corfu-popupinfo-delay '(0.5 . 0.2)) ;; 补全信息延迟
+  :init
+  (global-corfu-mode)
+  (corfu-popupinfo-mode 1) ;; 显示补全详细信息
+  :bind (:map corfu-map
+              ("TAB" . corfu-next)
+              ([tab] . corfu-next)
+              ("S-TAB" . corfu-previous)
+              ([backtab] . corfu-previous)))
+
+;; Add extensions
+(use-package cape
+  ;; Bind prefix keymap providing all Cape commands under a mnemonic key.
+  ;; Press C-c p ? to for help.
+  :bind ("C-c p" . cape-prefix-map) ;; Alternative key: M-<tab>, M-p, M-+
+  ;; Alternatively bind Cape commands individually.
+  ;; :bind (("C-c p d" . cape-dabbrev)
+  ;;        ("C-c p h" . cape-history)
+  ;;        ("C-c p f" . cape-file)
+  ;;        ...)
+  :init
+  ;; Add to the global default value of `completion-at-point-functions' which is
+  ;; used by `completion-at-point'.  The order of the functions matters, the
+  ;; first function returning a result wins.  Note that the list of buffer-local
+  ;; completion functions takes precedence over the global list.
+  (add-hook 'completion-at-point-functions #'cape-dabbrev)
+  (add-hook 'completion-at-point-functions #'cape-file)
+  (add-hook 'completion-at-point-functions #'cape-elisp-block)
+  (add-hook 'completion-at-point-functions #'cape-keyword) ;; 关键字补全
+  )
+
+;; Enable Vertico.
+(use-package vertico
+  :custom
+  (vertico-scroll-margin 0) ;; Different scroll margin
+  (vertico-count 20) ;; Show more candidates
+  (vertico-resize t) ;; Grow and shrink the Vertico minibuffer
+  (vertico-cycle t) ;; Enable cycling for `vertico-next/previous'
+  :init
+  (vertico-mode))
+
+;; Persist history over Emacs restarts. Vertico sorts by history position.
+(use-package savehist
+  :straight (:type built-in)
+  :defer t
+  :init
+  (savehist-mode))
 
 (use-package orderless
   :init
@@ -98,14 +149,43 @@
 
   ;; The :init section is always executed.
   :init
-
   ;; Marginalia must be activated in the :init section of use-package such that
   ;; the mode gets enabled right away. Note that this forces loading the
   ;; package.
   (marginalia-mode))
 
+(use-package embark
+  :straight t
+  :bind
+  (("C-." . embark-act)         ;; pick some comfortable binding
+   ("C-;" . embark-dwim)        ;; good alternative: M-.
+   ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
+  :init
+  ;; Optionally replace the key help with a completing-read interface
+  (setq prefix-help-command #'embark-prefix-help-command)
+  ;; Show the Embark target at point via Eldoc. You may adjust the
+  ;; Eldoc strategy, if you want to see the documentation from
+  ;; multiple providers. Beware that using this can be a little
+  ;; jarring since the message shown in the minibuffer can be more
+  ;; than one line, causing the modeline to move up and down:
+
+  ;; (add-hook 'eldoc-documentation-functions #'embark-eldoc-first-target)
+  ;; (setq eldoc-documentation-strategy #'eldoc-documentation-compose-eagerly)
+  :config
+  ;; Hide the mode line of the Embark live/completions buffers
+  (add-to-list 'display-buffer-alist
+               '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+                 nil
+                 (window-parameters (mode-line-format . none)))))
+
+;; Consult users will also want the embark-consult package.
+(use-package embark-consult
+  :straight t ; only need to install it, embark loads it after consult if found
+  :hook
+  (embark-collect-mode . consult-preview-at-point-mode))
+
 (use-package consult
-  :defer t
+  :straight t
   :bind (;; C-c bindings in `mode-specific-map'
          ("C-c M-x" . consult-mode-command)
          ("C-c h" . consult-history)
@@ -160,11 +240,10 @@
 
   ;; Enable automatic preview at point in the *Completions* buffer. This is
   ;; relevant when you use the default completion UI.
-  :hook (completion-list-mode . consult-preview-at-point-mode)
-
+  :hook
+  (completion-list-mode . consult-preview-at-point-mode)
   ;; The :init configuration is always executed (Not lazy)
   :init
-
   ;; Tweak the register preview for `consult-register-load',
   ;; `consult-register-store' and the built-in commands.  This improves the
   ;; register formatting, adds thin separator lines, register sorting and hides
@@ -179,7 +258,6 @@
   ;; Configure other variables and modes in the :config section,
   ;; after lazily loading the package.
   :config
-
   ;; Optionally configure preview. The default value
   ;; is 'any, such that any key triggers the preview.
   ;; (setq consult-preview-key 'any)
@@ -199,6 +277,9 @@
   ;; Optionally configure the narrowing key.
   ;; Both < and C-+ work reasonably well.
   (setq consult-narrow-key "<"))
+
+;; Enable Corfu completion UI
+;; See the Corfu README for more configuration tips.
 
 (provide 'init-complete)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
