@@ -92,6 +92,12 @@
               ("S-TAB" . corfu-previous)
               ([backtab] . corfu-previous)))
 
+(use-package corfu-terminal
+  :straight (corfu-terminal :type git :repo "https://codeberg.org/akib/emacs-corfu-terminal.git")
+  :init
+  (unless (display-graphic-p)
+  (corfu-terminal-mode +1)))
+
 ;; Add extensions
 (use-package cape
   ;; Bind prefix keymap providing all Cape commands under a mnemonic key.
