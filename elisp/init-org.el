@@ -191,9 +191,7 @@
 (use-package ebib
   :bind (("C-z ." . ebib))
   (:map ebib-index-mode-map
-              ("B" . ebib-biblio-import-doi)
-              :map biblio-selection-mode-map
-              ("e" . ebib-biblio-selection-import))
+              ("B" . ebib-biblio-import-doi))
   :init
   (defun zw/ebib-create-identifier (key _) key)
   (setq ebib-preload-bib-files '("~/Dropbox/bibliography/references.bib")
