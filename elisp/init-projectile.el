@@ -43,7 +43,6 @@
   :bind
   ("C-x p" . projectile-command-map)
   :custom
-  (projectile-completion-system 'ivy)
   (projectile-enable-caching t)
   :config
   (projectile-mode 1)
