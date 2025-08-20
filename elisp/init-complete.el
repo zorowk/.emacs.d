@@ -62,7 +62,7 @@
   ;; 绑定跳转和诊断快捷键
   :bind (:map eglot-mode-map
               ("M-." . xref-find-definitions)
-              ("M-," . xref-pop-marker-stack)
+              ("M-," . xref-go-back)
               ("M-/" . eglot-find-implementation)
               ("M-i" . eglot-find-declaration)
               ("C-M-." . consult-eglot-symbols)

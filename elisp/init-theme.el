@@ -39,14 +39,14 @@
 (eval-when-compile
   (require 'init-const))
 
-(load-theme 'modus-operandi :no-confirm)
+(load-theme 'modus-vivendi :no-confirm)
 
 ;; DoomModeline
 (use-package doom-modeline
   :custom
   ;; Don't compact font caches during GC. Windows Laggy Issue
   (inhibit-compacting-font-caches t)
-  (doom-modeline-minor-modes t)
+  (doom-modeline-minor-modes nil)
   (doom-modeline-icon nil)
   (doom-modeline-major-mode-color-icon t)
   (doom-modeline-height 14)
