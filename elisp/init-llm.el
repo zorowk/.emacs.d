@@ -43,35 +43,10 @@
 ;;
 ;;; Code:
 
-;; AidermacsPac
-(use-package aidermacs
-  :if (executable-find "aider")
-  :straight (:host github :repo "MatthewZMD/aidermacs" :files ("*.el"))
-  :custom
-  (aidermacs-backend 'comint)
-  (aidermacs-auto-commits nil)
-  (aidermacs-default-model "openrouter/google/gemini-2.5-pro-exp-03-25:free")
-  (aidermacs-weak-model "openrouter/deepseek/deepseek-chat")
-  :config
-  (add-to-list 'display-buffer-alist
-               `("\\*aidermacs.*\\*"
-                 (display-buffer-pop-up-window)))
-  :bind
-  (("C-z a" . aidermacs-transient-menu)))
-;; -AidermacsPac
-
-;; EmigoPac
-(use-package emigo
-  :straight (:host github :repo "MatthewZMD/emigo" :files ("*"))
-  :config
-  (setq emigo-model "openrouter/deepseek/deepseek-chat-v3-0324")
-  (setq emigo-base-url "https://openrouter.ai/api/v1")
-  (setq emigo-api-key (getenv "OPENROUTER_API_KEY"))
-  (emigo-start-process))
-;; -EmigoPac
-
-(use-package gptel)
-
+;; eca
+(use-package eca
+  :straight (:host github :repo "editor-code-assistant/eca-emacs" :files ("*.el")))
+;; -eca
 (provide 'init-llm)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-llm.el ends here

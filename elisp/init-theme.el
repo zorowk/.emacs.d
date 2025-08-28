@@ -39,7 +39,7 @@
 (eval-when-compile
   (require 'init-const))
 
-(load-theme 'modus-vivendi :no-confirm)
+(load-theme 'modus-operandi :no-confirm)
 
 ;; DoomModeline
 (use-package doom-modeline
