@@ -45,25 +45,6 @@
    "\\.erb\\'" "\\.mustache\\'" "\\.djhtml\\'" "\\.[t]?html?\\'"))
 ;; -WebModePac
 
-;; Js2Pac
-(use-package js2-mode
-  :mode "\\.js\\'"
-  :interpreter "node"
-  :bind (:map js-mode-map ("M-." . nil)))
-;; -Js2Pac
-
-;; TypeScriptPac
-(use-package typescript-mode
-  :mode "\\.ts\\'"
-  :commands (typescript-mode))
-;; -TypeScriptPac
-
-;; VuePac
-(use-package vue-mode
-  :mode "\\.vue\\'"
-  :commands (vue-mode))
-;; -VuePac
-
 ;; EmmetPac
 (use-package emmet-mode
   :hook ((web-mode . emmet-mode)

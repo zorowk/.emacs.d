@@ -35,26 +35,6 @@
 ;;
 ;;; Code:
 
-;; DockerPac
-(use-package docker :defer t)
-;; -DockerPac
-
-;; DockerfilePac
-(use-package dockerfile-mode :defer t)
-;; -DockerfilePac
-
-;; GroovyPac
-(use-package groovy-mode :defer t)
-;; -GroovyPac
-
-;; CMakePac
-(use-package cmake-mode :defer t)
-;; -CMakePac
-
-;; BazelPac
-(use-package bazel :defer t)
-;; -BazelPac
-
 ;; YamlPac
 (use-package yaml-mode
   :defer t

@@ -43,10 +43,22 @@
 ;;
 ;;; Code:
 
-;; eca
-(use-package eca
-  :straight (:host github :repo "editor-code-assistant/eca-emacs" :files ("*.el")))
-;; -eca
+;; AidermacsPac
+(use-package aidermacs
+  :if (executable-find "aider")
+  :straight (:host github :repo "MatthewZMD/aidermacs" :files ("*.el"))
+  :custom
+  (aidermacs-backend 'comint)
+  (aidermacs-auto-commits nil)
+  (aidermacs-config-file "/home/zoro/.aider.conf.yml")
+  :config
+  (add-to-list 'display-buffer-alist
+               `("\\*aidermacs.*\\*"
+                 (display-buffer-pop-up-window)))
+  (add-to-list 'aidermacs-extra-args "--no-show-model-warnings")
+  :bind
+  (("C-z a" . aidermacs-transient-menu)))
+
 (provide 'init-llm)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-llm.el ends here
