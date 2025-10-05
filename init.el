@@ -148,6 +148,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-yasnippet)
 
+(require 'init-dumb-jump)
+
 (require 'init-treesit)
 
 (require 'init-indent)
