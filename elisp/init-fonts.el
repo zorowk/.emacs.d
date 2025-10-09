@@ -62,7 +62,18 @@
         (setq font-name (caar available-fonts) font-size (cdar available-fonts)))
       (setq font-setting (format "%s-%d" font-name font-size))
       (set-frame-font font-setting nil t)
-      (add-to-list 'default-frame-alist (cons 'font font-setting)))))
+      (add-to-list 'default-frame-alist (cons 'font font-setting)))
+
+    (set-fontset-font t 'emoji (font-spec :family "Apple Color Emoji"))
+    (set-fontset-font t 'symbol (font-spec :family "STIX Two Math"))
+    (set-fontset-font t 'greek (font-spec :family "Symbol"))
+
+    (set-fontset-font t 'hangul (font-spec :family "Apple SD Gothic Neo"))
+    (set-fontset-font t 'kana (font-spec :family "Hiragino Maru Gothic ProN"))
+
+    (set-fontset-font t 'cjk-misc (font-spec :family "PingFang SC"))
+    (set-fontset-font t 'bopomofo (font-spec :family "PingFang SC"))
+    (set-fontset-font t 'han (font-spec :family "PingFang SC"))))
 
 (when (display-graphic-p)
   (change-font))
