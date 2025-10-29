@@ -354,6 +354,10 @@
 (use-package org-contrib
   :ensure t)
 
+(use-package cdlatex
+  :ensure t
+  :hook (org-mode . org-cdlatex-mode))
+
 (provide 'init-org)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-org.el ends here

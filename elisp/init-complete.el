@@ -74,6 +74,12 @@
   ((c-mode c++-mode python-mode rust-mode latex-mode
            web-mode js-mode js-ts-mode typescript-mode tsx-mode) . eglot-ensure))
 
+(use-package consult-eglot
+  :after eglot
+  :bind
+  (:map eglot-mode-map
+	("C-c f" . consult-eglot-symbols)))
+
 ;; Enable Corfu completion UI
 ;; See the Corfu README for more configuration tips.
 (use-package corfu
