@@ -42,7 +42,7 @@
         (("C-c C-o" . dumb-jump-go-other-window)
          ("C-c C-j" . dumb-jump-go)
          ("C-c C-i" . dumb-jump-go-prompt)))
-  :custom (dumb-jump-selector 'ivy))
+  :custom (dumb-jump-selector 'default))
 ;; -DumbJump
 
 (provide 'init-dumb-jump)
