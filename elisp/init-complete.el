@@ -46,6 +46,7 @@
   :custom
   (eglot-autoshutdown t) ;; 自动关闭 LSP 服务器
   (eglot-sync-connect 0) ;; 异步连接，提高启动速度
+  (eglot-ignored-server-capabilities '(:inlayHintProvider))
   :config
   ;; 配置 LSP 服务器
   (add-to-list 'eglot-server-programs
