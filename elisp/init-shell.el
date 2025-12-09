@@ -38,47 +38,6 @@
 (eval-when-compile
   (require 'init-const))
 
-;; ShellHerePac
-(use-package shell-here
-  :bind ("M-~" . shell-here)
-  :config
-  (when *sys/linux*
-    (setq explicit-shell-file-name "/bin/bash")))
-;; -ShellHerePac
-
-;; MultiTermPac
-(use-package multi-term
-  :straight (multi-term :type git :host github :repo "manateelazycat/multi-term")
-  :commands (multi-term)
-  :bind
-  (("M-$" . multi-term)
-   (:map dired-mode-map ("M-$" . multi-term)))
-  :custom
-  (multi-term-program (executable-find "bash"))
-  (term-bind-key-alist
-   '(("C-c C-c" . term-interrupt-subjob)
-     ("C-c C-e" . term-send-esc)
-     ("C-p" . previous-line)
-     ("C-n" . next-line)
-     ("C-m" . term-send-return)
-     ("C-y" . term-paste)
-     ("C-v" . scroll-up-command)
-     ("M-v" . scroll-down-command)
-     ("M-f" . term-send-forward-word)
-     ("M-b" . term-send-backward-word)
-     ("M-o" . term-send-backspace)
-     ("M-p" . term-send-up)
-     ("M-n" . term-send-down)
-     ("M-M" . term-send-forward-kill-word)
-     ("M-N" . term-send-backward-kill-word)
-     ("<C-backspace>" . term-send-backward-kill-word)
-     ("<M-backspace>" . term-send-backward-kill-word)
-     ("M-r" . term-send-reverse-search-history)
-     ("M-d" . term-send-delete-word)
-     ("M-," . term-send-raw)
-     ("M-." . comint-dynamic-complete))))
-;; -MultiTermPac
-
 ;; TermKeysPac
 (use-package term-keys
   :straight (term-keys :type git :host github :repo "CyberShadow/term-keys")
@@ -100,19 +59,6 @@
   (vterm-max-scrollback 10000)
   (vterm-buffer-name-string "vterm %s"))
 ;; -VTermPac
-
-;; ExecPathFromShellPac
-(use-package exec-path-from-shell
-  :if (memq window-system '(mac ns x))
-  :custom
-  (exec-path-from-shell-variables
-   '("PATH" "MANPATH"
-     "OPENAI_API_KEY" "ANTHROPIC_API_KEY"
-     "XAI_API_KEY" "DEEPSEEK_API_KEY"
-     "OPENROUTER_API_KEY" "GEMINI_API_KEY"))
-  :config
-  (exec-path-from-shell-initialize))
-;; -ExecPathFromShellPac
 
 (provide 'init-shell)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
