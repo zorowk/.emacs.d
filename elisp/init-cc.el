@@ -44,12 +44,6 @@
   :config (modern-c++-font-lock-global-mode t))
 ;; -CPPFontLockPac
 
-;; cmake
-(use-package cmake-mode
-  :ensure t
-  :mode (("CMakeLists\\.txt\\'" . cmake-mode) ("\\.cmake\\'" . cmake-mode)))
-;; -cmake
-
 ;; meson
 (use-package meson-mode
   :ensure t

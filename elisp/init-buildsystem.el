@@ -35,6 +35,10 @@
 ;;
 ;;; Code:
 
+;; CMakePac
+(use-package cmake-mode :defer t)
+;; -CMakePac
+
 ;; YamlPac
 (use-package yaml-mode
   :defer t
