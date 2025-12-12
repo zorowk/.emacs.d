@@ -340,12 +340,13 @@
 (use-package htmlize :defer t)
 ;; -HTMLIZEPac
 
+;; MarkdownModePac
+(use-package markdown-mode :defer t)
+;; -MarkdownModePac
+
 ;; OXGFMPac
 (use-package ox-gfm :defer t)
 ;; -OXGFMPac
-
-(use-package org-contrib
-  :ensure t)
 
 (provide 'init-org)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
