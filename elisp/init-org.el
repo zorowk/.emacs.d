@@ -340,23 +340,12 @@
 (use-package htmlize :defer t)
 ;; -HTMLIZEPac
 
-;; MarkdownModePac
-(use-package markdown-mode :defer t)
-;; -MarkdownModePac
-
 ;; OXGFMPac
 (use-package ox-gfm :defer t)
 ;; -OXGFMPac
 
-;; PolymodePac
-(use-package polymode)
-
 (use-package org-contrib
   :ensure t)
-
-(use-package cdlatex
-  :ensure t
-  :hook (org-mode . org-cdlatex-mode))
 
 (provide 'init-org)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

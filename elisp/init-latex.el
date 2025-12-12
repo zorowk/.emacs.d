@@ -82,6 +82,12 @@
     (add-hook LaTeX-mode-hook #'display-line-numbers-mode)))
 ;; -AUCTeXPac
 
+;; Cdlatex
+(use-package cdlatex
+  :ensure t
+  :hook (org-mode . org-cdlatex-mode))
+;; -Cdlatex
+
 (provide 'init-latex)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-latex.el ends here
