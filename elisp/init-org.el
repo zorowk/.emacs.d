@@ -319,13 +319,6 @@
     t))
 ;; -Ebib
 
-;; OrgDownload
-(use-package org-download
-  :custom
-  (org-download-image-dir "~/Dropbox/notes/fig/")
-  (org-download-heading-lvl nil))
-;; -OrgDownload
-
 ;; TocOrgPac
 (use-package toc-org
   :hook (org-mode . toc-org-mode))
