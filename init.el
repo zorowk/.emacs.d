@@ -184,6 +184,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 ;; Office
 (require 'init-org)
 
+(require 'init-reader)
+
 ;; Internet
 (require 'init-erc)
 

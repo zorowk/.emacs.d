@@ -1,20 +1,20 @@
-;;; init-pdf.el --- -*- lexical-binding: t -*-
+;;; init-reader.el --- -*- lexical-binding: t -*-
 ;;
-;; Filename: init-pdf.el
-;; Description: Initialize pdf-tools
+;; Filename: init-reader.el
+;; Description: emacs reader
 ;; Author: Mingde (Matthew) Zeng
 ;; Copyright (C) 2019 Mingde (Matthew) Zeng
 ;; Created: Tue Jun  4 00:26:09 2019 (-0400)
 ;; Version: 3.0
 ;; URL: https://github.com/MatthewZMD/.emacs.d
-;; Keywords: M-EMACS .emacs.d pdf-tools
+;; Keywords: M-EMACS .emacs.d reader
 ;; Compatibility: emacs-version >= 26.1
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;; Commentary:
 ;;
-;; This initializes pdf-tools
+;; This initializes emacs reader
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -38,21 +38,13 @@
 (eval-when-compile
   (require 'init-const))
 
-;; PDFToolsPac
-(use-package pdf-tools-install
-  :ensure pdf-tools
-  :if (and (display-graphic-p) (not *sys/win32*) (not eaf-env-p))
-  :mode "\\.pdf\\'"
-  :commands (pdf-loader-install)
-  :custom
-  (TeX-view-program-selection '((output-pdf "pdf-tools")))
-  (TeX-view-program-list '(("pdf-tools" "TeX-pdf-tools-sync-view")))
-  :hook
-  (pdf-view-mode . (lambda () (display-line-numbers-mode -1)))
-  :config
-  (pdf-loader-install))
-;; -PDFToolsPac
+;; ReaderPac
+(use-package reader
+	     :straight '(reader :type git :host codeberg :repo "divyaranjan/emacs-reader"
+				:files ("*.el" "render-core.so")
+				:pre-build ("make" "all")))
+;; -ReaderPac
 
-(provide 'init-pdf)
+(provide 'init-reader)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-pdf.el ends here
