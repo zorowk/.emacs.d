@@ -319,11 +319,6 @@
     t))
 ;; -Ebib
 
-;; TocOrgPac
-(use-package toc-org
-  :hook (org-mode . toc-org-mode))
-;; -TocOrgPac
-
 ;; org-transclusion
 (use-package org-transclusion
   :hook (org-mode . org-transclusion-mode))
