@@ -319,14 +319,17 @@
     t))
 ;; -Ebib
 
-;; org-transclusion
-(use-package org-transclusion
-  :hook (org-mode . org-transclusion-mode))
-;; -org-transclusion
-
 ;; HTMLIZEPac
 (use-package htmlize :defer t)
 ;; -HTMLIZEPac
+
+;; Hyperbole
+(use-package hyperbole
+  :ensure t
+  :config
+  (hyperbole-mode 1)
+  )
+;; -Hyperbole
 
 ;; MarkdownModePac
 (use-package markdown-mode :defer t)
