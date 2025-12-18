@@ -102,6 +102,7 @@
      (python . t)
      (ein . t)
      (R . t)
+     (julia-vterm . t)
      (emacs-lisp . t)
      (maxima . t)
      (gnuplot . t)))
@@ -338,6 +339,10 @@
 ;; OXGFMPac
 (use-package ox-gfm :defer t)
 ;; -OXGFMPac
+
+;; Olivetti
+(use-package olivetti :defer t)
+;; -Olivetti
 
 (provide 'init-org)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
