@@ -201,7 +201,7 @@ The original function deletes trailing whitespace of the current line."
 (setq require-final-newline t)
 
 ;; disable warning
-;;(setq warning-minimum-level :emergency)
+(setq warning-minimum-level :emergency)
 
 ;; warn when opening files bigger than 100MB
 (setq large-file-warning-threshold 100000000)
