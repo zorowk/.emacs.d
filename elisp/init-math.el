@@ -35,9 +35,6 @@
 ;;
 ;;; Code:
 
-(eval-when-compile
-  (require 'org))
-
 ;; Maxima
 (use-package maxima
   :init
