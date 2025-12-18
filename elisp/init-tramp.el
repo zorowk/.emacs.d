@@ -37,7 +37,7 @@
 
 ;; TrampPac
 (use-package tramp
-  :straight (:type built-in)
+;;  :straight (:type built-in)
   :defer 1
   :config
   (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
@@ -66,6 +66,10 @@
 
   (tramp-set-completion-function "ghcs" '((my/tramp-parse-codespaces ""))))
 ;; -TrampPac
+
+;; TrampHlo
+(use-package tramp-hlo :ensure t)
+;; -TrampHlo
 
 (provide 'init-tramp)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
