@@ -37,7 +37,7 @@
 
 ;; UserInfo
 (setq user-full-name "zorowk")
-(setq user-mail-address "near.kingzero@gmail.com")
+(setq user-mail-address "nearkingzero@outlook.com")
 ;; -UserInfo
 
 ;; Consts

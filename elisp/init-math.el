@@ -61,4 +61,4 @@
 
 (provide 'init-math)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; init-eaf.el ends here
+;;; init-math.el ends here
