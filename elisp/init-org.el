@@ -329,6 +329,8 @@
   :ensure t
   :config
   (hyperbole-mode 1)
+  (setq hywiki-directory "~/Dropbox/notes/")
+  (setq hywiki-org-publishing-directory "~/Dropbox/hywiki")
   )
 ;; -Hyperbole
 
