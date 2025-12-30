@@ -69,7 +69,6 @@
   (doom-modeline-minor-modes t)
   (doom-modeline-icon t)
   (doom-modeline-major-mode-color-icon t)
-  (doom-modeline-height 14)
   :config
   (doom-modeline-mode))
 ;; -DoomModeline
