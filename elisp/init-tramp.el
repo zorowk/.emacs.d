@@ -67,10 +67,6 @@
   (tramp-set-completion-function "ghcs" '((my/tramp-parse-codespaces ""))))
 ;; -TrampPac
 
-;; TrampHlo
-(use-package tramp-hlo :ensure t)
-;; -TrampHlo
-
 (provide 'init-tramp)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-tramp.el ends here
