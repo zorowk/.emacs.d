@@ -99,6 +99,24 @@
   (pixel-scroll-precision-mode 1))
 ;; -PixelScrollPrecMode
 
+;; Alpha
+(set-frame-parameter nil 'ns-alpha-elements '(ns-alpha-all))
+
+;; Choose elements:
+;; - Full list: ns-alpha-default (default face/background)
+;;              ns-alpha-fringe (fringes + internal border clears)
+;;              ns-alpha-box (boxed face outlines)
+;;              ns-alpha-stipple (stipple mask background clears)
+;;              ns-alpha-relief (3D relief/shadow lines)
+;;              ns-alpha-glyphs (glyph background fills like hl-line/region)
+(set-frame-parameter nil 'ns-alpha-elements
+                     '(ns-alpha-default ns-alpha-fringe ns-alpha-glyphs)) ;; e.g.
+
+(set-frame-parameter nil 'alpha-background 0.95)
+(set-frame-parameter nil 'ns-background-blur 80)
+(setq mode-line-collapse-minor-modes '(not))
+;; -Alpha
+
 (provide 'init-ui-config)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-ui-config.el ends here
