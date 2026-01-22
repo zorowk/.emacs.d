@@ -83,20 +83,30 @@
   (dolist (face '(mode-line
                   mode-line-inactive
                   doom-modeline
+                  doom-modeline-buffer-name
+                  doom-modeline-buffer-file-name
+                  doom-modeline-buffer-path
+                  doom-modeline-buffer-file
                   doom-modeline-buffer-modified
                   doom-modeline-buffer-modified-inactive
+                  doom-modeline-project-dir
+                  doom-modeline-project-root
                   doom-modeline-bar
+                  doom-modeline-info
+                  doom-modeline-buffer-file-true-name
                   doom-modeline-bar-inactive
                   doom-modeline-emphasis
+                  doom-modeline-time
                   doom-modeline-highlight))
     (when (facep face)
       (set-face-attribute face nil
-                          :box nil               ; 去掉任何 box（包括阴影）
-                          :underline nil         ; 去掉下划线
-                          :overline "#3a3a3a"    ; ← 保留上边线（颜色可自定义）
+                          :box nil
+                          :underline nil
+                          :overline "#3a3a3a"
                           :height 1.0
                           :background (face-background 'default)
                           :foreground (face-foreground 'default))))
+
 
   (force-mode-line-update t))
 (provide 'init-theme)
