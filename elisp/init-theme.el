@@ -74,40 +74,8 @@
 ;; -DoomModeline
 
 (with-eval-after-load 'doom-modeline
-  (set-face-background 'mode-line (face-background 'default))
-  (set-face-background 'mode-line-inactive (face-background 'default))
-
   (setq doom-modeline-bar-width 0
         doom-modeline-hud nil)
-
-  (dolist (face '(mode-line
-                  mode-line-inactive
-                  doom-modeline
-                  doom-modeline-buffer-name
-                  doom-modeline-buffer-file-name
-                  doom-modeline-buffer-path
-                  doom-modeline-buffer-file
-                  doom-modeline-buffer-modified
-                  doom-modeline-buffer-modified-inactive
-                  doom-modeline-project-dir
-                  doom-modeline-project-root
-                  doom-modeline-bar
-                  doom-modeline-info
-                  doom-modeline-buffer-file-true-name
-                  doom-modeline-bar-inactive
-                  doom-modeline-emphasis
-                  doom-modeline-time
-                  doom-modeline-highlight))
-    (when (facep face)
-      (set-face-attribute face nil
-                          :box nil
-                          :underline nil
-                          :overline "#3a3a3a"
-                          :height 1.0
-                          :background (face-background 'default)
-                          :foreground (face-foreground 'default))))
-
-
   (force-mode-line-update t))
 (provide 'init-theme)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
