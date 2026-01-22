@@ -73,6 +73,32 @@
   (doom-modeline-mode))
 ;; -DoomModeline
 
+(with-eval-after-load 'doom-modeline
+  (set-face-background 'mode-line (face-background 'default))
+  (set-face-background 'mode-line-inactive (face-background 'default))
+
+  (setq doom-modeline-bar-width 0
+        doom-modeline-hud nil)
+
+  (dolist (face '(mode-line
+                  mode-line-inactive
+                  doom-modeline
+                  doom-modeline-buffer-modified
+                  doom-modeline-buffer-modified-inactive
+                  doom-modeline-bar
+                  doom-modeline-bar-inactive
+                  doom-modeline-emphasis
+                  doom-modeline-highlight))
+    (when (facep face)
+      (set-face-attribute face nil
+                          :box nil               ; 去掉任何 box（包括阴影）
+                          :underline nil         ; 去掉下划线
+                          :overline "#3a3a3a"    ; ← 保留上边线（颜色可自定义）
+                          :height 1.0
+                          :background (face-background 'default)
+                          :foreground (face-foreground 'default))))
+
+  (force-mode-line-update t))
 (provide 'init-theme)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-theme.el ends here
