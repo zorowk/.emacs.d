@@ -48,9 +48,8 @@
   :if (executable-find "aider")
   :straight (:host github :repo "MatthewZMD/aidermacs" :files ("*.el"))
   :custom
-  (aidermacs-backend 'comint)
+  (aidermacs-backend 'vterm)
   (aidermacs-auto-commits nil)
-  (aidermacs-config-file (expand-file-name "~/.aider.conf.yml"))
   :config
   (add-to-list 'display-buffer-alist
                `("\\*aidermacs.*\\*"
