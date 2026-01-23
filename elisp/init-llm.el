@@ -50,7 +50,7 @@
   :custom
   (aidermacs-backend 'comint)
   (aidermacs-auto-commits nil)
-  (aidermacs-config-file "/home/zoro/.aider.conf.yml")
+  (aidermacs-config-file (expand-file-name "~/.aider.conf.yml"))
   :config
   (add-to-list 'display-buffer-alist
                `("\\*aidermacs.*\\*"
