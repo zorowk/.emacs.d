@@ -346,6 +346,21 @@
 (use-package olivetti :defer t)
 ;; -Olivetti
 
+;; OrgRemark
+(use-package org-remark
+  :bind (;; :bind keyword also implicitly defers org-remark itself.
+         ;; Keybindings before :map is set for global-map. Adjust the keybinds
+         ;; as you see fit.
+         ("C-c n m" . org-remark-mark)
+         ("C-c n l" . org-remark-mark-line)
+         :map org-remark-mode-map
+         ("C-c n o" . org-remark-open)
+         ("C-c n ]" . org-remark-view-next)
+         ("C-c n [" . org-remark-view-prev)
+         ("C-c n r" . org-remark-remove)
+         ("C-c n d" . org-remark-delete)))
+;; -OrgRemark
+
 (provide 'init-org)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-org.el ends here
