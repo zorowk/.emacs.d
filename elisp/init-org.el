@@ -74,8 +74,6 @@
   (org-agenda-current-time ((t (:foreground "spring green"))))
   :config
   (add-to-list 'org-latex-packages-alist '("" "listings"))
-  (unless (version< org-version "9.2")
-    (require 'org-tempo))
 
   ;; config stuck project
   (setq org-stuck-projects
