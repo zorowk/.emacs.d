@@ -167,8 +167,6 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 ;; Programming
 (require 'init-ess)
 
-(require 'init-python)
-
 (require 'init-latex)
 
 (require 'init-math)
