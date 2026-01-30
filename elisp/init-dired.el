@@ -70,17 +70,6 @@
                                  (lambda () (interactive) (find-alternate-file ".."))))))
 ;; -DiredPackage
 
-;; Dirvish
-(use-package dirvish
-  :straight t
-  :init (dirvish-override-dired-mode)
-  :custom
-  (dirvish-attributes '(file-size all-the-icons vc-state))
-  (dirvish-use-mode-line nil)  ; 如果你想用自己的 modeline
-  :bind
-  ("C-x d" . dirvish))  ; 替换默认 dired
-;; -Dirvish
-
 (provide 'init-dired)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-dired.el ends here
