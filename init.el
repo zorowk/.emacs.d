@@ -169,8 +169,6 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (require 'init-llm)
 
 ;; Programming
-(require 'init-cc)
-
 (require 'init-ess)
 
 (require 'init-python)
@@ -180,8 +178,6 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (require 'init-latex)
 
 (require 'init-math)
-
-(require 'init-webdev)
 
 ;; Office
 (require 'init-org)

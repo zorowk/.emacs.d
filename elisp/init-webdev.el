@@ -51,11 +51,6 @@
          (css-mode . emmet-mode)))
 ;; -EmmetPac
 
-;; JsonPac
-(use-package json-mode
-  :mode "\\.json\\'")
-;; -JsonPac
-
 (provide 'init-webdev)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-webdev.el ends here

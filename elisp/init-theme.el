@@ -66,7 +66,7 @@
   :config
   (setopt spacious-padding-widths
           '( :internal-border-width 16
-             :header-line-width 4
+             :header-line-width 1
              :mode-line-width 1
              :tab-width 4
              :right-divider-width 8
