@@ -38,8 +38,13 @@
 (eval-when-compile
   (require 'init-global-config))
 
-;; Enable Vertico.
+;; Vertico.
 (use-package vertico
+  :ensure t
+  :bind (:map vertico-map
+              ("?"     . minibuffer-completion-help)
+              ("M-RET" . minibuffer-force-complete-and-exit)
+              ("M-TAB" . minibuffer-complete))
   :custom
   (vertico-scroll-margin 0) ;; Different scroll margin
   (vertico-count 20) ;; Show more candidates
@@ -71,14 +76,18 @@
   (minibuffer-prompt-properties
    '(read-only t cursor-intangible t face minibuffer-prompt)))
 
+;; Optionally use the `orderless' completion style.
 (use-package orderless
-  :init
+  :custom
   ;; Configure a custom style dispatcher (see the Consult wiki)
-  ;; (setq orderless-style-dispatchers '(+orderless-dispatch)
-  ;;       orderless-component-separator #'orderless-escapable-split-on-space)
-  (setq completion-styles '(orderless basic)
-        completion-category-defaults nil
-        completion-category-overrides '((file (styles . (partial-completion))))))
+  ;; (orderless-style-dispatchers '(+orderless-consult-dispatch orderless-affix-dispatch))
+  ;; (orderless-component-separator #'orderless-escapable-split-on-space)
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles partial-completion))))
+  (completion-category-defaults nil) ;; Disable defaults, use our settings
+  (completion-pcm-leading-wildcard t)) ;; Emacs 31: partial-completion behaves like substring
+
+;; -Vertico
 
 ;; ColorRGPac
 (use-package color-rg
@@ -96,6 +105,24 @@
   :bind (("C-z o" . ffap)
          ("C-z p" . ffip)))
 ;; -FFIPPac
+
+;; Prescient
+(use-package prescient
+  :config
+  (setopt completion-category-overrides '((eglot (styles prescient basic))
+                                          (eglot-capf (styles prescient basic))))
+  (prescient-persist-mode))
+
+(use-package vertico-prescient
+  :after (vertico prescient)
+  :config
+  (vertico-prescient-mode))
+
+(use-package corfu-prescient
+  :after (corfu prescient)
+  :config
+  (corfu-prescient-mode))
+;; -Prescient
 
 (provide 'init-search)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

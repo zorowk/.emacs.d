@@ -127,6 +127,18 @@
   ;; commands are hidden, since they are not used via M-x. This setting is
   ;; useful beyond Corfu.
   (read-extended-command-predicate #'command-completion-default-include-p))
+
+(with-eval-after-load 'corfu
+  (defun my-corfu-combined-sort (candidates)
+    (let ((candidates
+           (let ((display-sort-func (corfu--metadata-get 'display-sort-function)))
+             (if display-sort-func
+                 (funcall display-sort-func candidates)
+               candidates))))
+      (if corfu-sort-function
+          (funcall corfu-sort-function candidates)
+        candidates)))
+  (setopt corfu-sort-override-function #'my-corfu-combined-sort))
 ;; -CorFu
 
 ;; Add extensions
