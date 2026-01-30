@@ -51,12 +51,6 @@
          (css-mode . emmet-mode)))
 ;; -EmmetPac
 
-;; InstantRenameTagPac
-(use-package instant-rename-tag
-  :straight (instant-rename-tag :type git :host github :repo "manateelazycat/instant-rename-tag")
-  :bind ("C-z <" . instant-rename-tag))
-;; -InstantRenameTagPac
-
 ;; JsonPac
 (use-package json-mode
   :mode "\\.json\\'")
