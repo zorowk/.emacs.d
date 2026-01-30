@@ -39,6 +39,11 @@
 (use-package cmake-mode :defer t)
 ;; -CMakePac
 
+;; meson
+(use-package meson-mode
+  :ensure t
+  :mode ("meson\\.build\\'"))
+
 ;; YamlPac
 (use-package yaml-mode
   :defer t
