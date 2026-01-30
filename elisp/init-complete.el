@@ -127,12 +127,6 @@
   ;; commands are hidden, since they are not used via M-x. This setting is
   ;; useful beyond Corfu.
   (read-extended-command-predicate #'command-completion-default-include-p))
-
-(use-package corfu-terminal
-  :straight (corfu-terminal :type git :repo "https://codeberg.org/akib/emacs-corfu-terminal.git")
-  :init
-  (unless (display-graphic-p)
-    (corfu-terminal-mode +1)))
 ;; -CorFu
 
 ;; Add extensions
