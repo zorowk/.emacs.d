@@ -158,8 +158,6 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-format)
 
-(require 'init-comment)
-
 (require 'init-edit)
 
 (require 'init-ein)
