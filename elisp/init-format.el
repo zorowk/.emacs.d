@@ -47,11 +47,6 @@
   (ediff-window-setup-function #'ediff-setup-windows-plain))
 ;; -EdiffPac
 
-;; PackageLintPac
-(use-package package-lint
-  :commands (package-lint-current-buffer package-lint-buffer))
-;; -PackageLintPac
-
 (provide 'init-format)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-format.el ends here

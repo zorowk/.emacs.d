@@ -67,10 +67,6 @@
   (require 'bind-key))
 ;; -StraightUsePackage
 
-;; DimPac
-(use-package diminish)
-;; -DimPac
-
 (provide 'init-package)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-package.el ends here

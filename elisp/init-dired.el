@@ -70,19 +70,16 @@
                                  (lambda () (interactive) (find-alternate-file ".."))))))
 ;; -DiredPackage
 
-;; DiskUsage
-(use-package disk-usage
-  :commands (disk-usage))
-;; -DiskUsage
-
-;; SaveAllBuffers
-(defun save-all-buffers ()
-  "Instead of `save-buffer', save all opened buffers by calling `save-some-buffers' with ARG t."
-  (interactive)
-  (save-some-buffers t))
-(global-set-key (kbd "C-x C-s") nil)
-(global-set-key (kbd "C-x C-s") #'save-all-buffers)
-;; -SaveAllBuffers
+;; Dirvish
+(use-package dirvish
+  :straight t
+  :init (dirvish-override-dired-mode)
+  :custom
+  (dirvish-attributes '(file-size all-the-icons vc-state))
+  (dirvish-use-mode-line nil)  ; 如果你想用自己的 modeline
+  :bind
+  ("C-x d" . dirvish))  ; 替换默认 dired
+;; -Dirvish
 
 (provide 'init-dired)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
