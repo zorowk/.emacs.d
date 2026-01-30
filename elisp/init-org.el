@@ -340,6 +340,10 @@
 (use-package ox-gfm :defer t)
 ;; -OXGFMPac
 
+;; Olivetti
+(use-package olivetti :defer t)
+;; -Olivetti
+
 (provide 'init-org)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-org.el ends here
