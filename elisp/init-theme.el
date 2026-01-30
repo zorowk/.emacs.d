@@ -69,7 +69,7 @@
              :header-line-width 4
              :mode-line-width 1
              :tab-width 4
-             :right-divider-width 16
+             :right-divider-width 8
              :scroll-bar-width 0))
 
   ;; Read the doc string of `spacious-padding-subtle-mode-line' as it
