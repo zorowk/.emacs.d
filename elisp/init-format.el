@@ -35,11 +35,6 @@
 ;;
 ;;; Code:
 
-;; FormatAllPac
-(use-package format-all
-  :bind ("C-c C-f" . format-all-buffer))
-;; -FormatAllPac
-
 ;; EdiffPac
 (use-package ediff
   :custom

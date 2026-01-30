@@ -43,16 +43,6 @@
   :diminish)
 ;; -IEditPac
 
-;; DeleteBlockPac
-(use-package delete-block
-  :straight (delete-block :type git :host github :repo "manateelazycat/delete-block")
-  :bind
-  (("M-d" . delete-block-forward)
-   ("C-<backspace>" . delete-block-backward)
-   ("M-<backspace>" . delete-block-backward)
-   ("M-DEL" . delete-block-backward)))
-;; -DeleteBlockPac
-
 ;; SmartParensPac
 (use-package smartparens
   :hook (prog-mode . smartparens-mode)

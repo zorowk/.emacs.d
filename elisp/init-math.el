@@ -50,15 +50,6 @@
 (use-package gnuplot)
 ;; -Gnuplot
 
-;; Graphviz
-(use-package graphviz-dot-mode
-  :ensure t
-  :config
-  (setq graphviz-dot-indent-width 4)
-  :hook
-  (graphviz-dot-mode . flycheck-mode))
-;; -Graphviz
-
 (provide 'init-math)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-math.el ends here

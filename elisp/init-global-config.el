@@ -216,12 +216,6 @@ The original function deletes trailing whitespace of the current line."
 (add-to-list 'auto-mode-alist '("\\.bb\\'" . shell-script-mode))
 (add-to-list 'auto-mode-alist '("\\.bbclass\\'" . shell-script-mode))
 (add-to-list 'auto-mode-alist '("\\.Rmd\\'" . markdown-mode))
-
-;; Url proxy services
-(setq url-proxy-services
-      '(("no_proxy"   . "^\\(localhost\\|10.*\\|192\\.168\\..*\\)")
-        ("http"       . "127.0.0.1:7890")
-        ("https"      . "127.0.0.1:7890")))
 ;; -SmallConfigs
 
 (provide 'init-global-config)

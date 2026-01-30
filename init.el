@@ -169,8 +169,6 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-python)
 
-(require 'init-rust)
-
 (require 'init-latex)
 
 (require 'init-math)
