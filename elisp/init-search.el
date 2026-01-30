@@ -89,23 +89,6 @@
 
 ;; -Vertico
 
-;; ColorRGPac
-(use-package color-rg
-  :straight (color-rg :type git :host github :repo "manateelazycat/color-rg")
-  :if (executable-find "rg")
-  :bind ("C-M-s" . color-rg-search-input))
-;; -ColorRGPac
-
-;; FFIPPac
-(use-package find-file-in-project
-  :if (executable-find "find")
-  :init
-  (when (executable-find "fd")
-    (setq ffip-use-rust-fd t))
-  :bind (("C-z o" . ffap)
-         ("C-z p" . ffip)))
-;; -FFIPPac
-
 ;; Prescient
 (use-package prescient
   :config

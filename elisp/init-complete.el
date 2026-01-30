@@ -126,19 +126,19 @@
   ;; Hide commands in M-x which do not apply to the current mode.  Corfu
   ;; commands are hidden, since they are not used via M-x. This setting is
   ;; useful beyond Corfu.
-  (read-extended-command-predicate #'command-completion-default-include-p))
+  (read-extended-command-predicate #'command-completion-default-include-p)
 
-(with-eval-after-load 'corfu
-  (defun my-corfu-combined-sort (candidates)
-    (let ((candidates
-           (let ((display-sort-func (corfu--metadata-get 'display-sort-function)))
-             (if display-sort-func
-                 (funcall display-sort-func candidates)
-               candidates))))
-      (if corfu-sort-function
-          (funcall corfu-sort-function candidates)
-        candidates)))
-  (setopt corfu-sort-override-function #'my-corfu-combined-sort))
+  (when (>= emacs-major-version 31)
+    (setq completions-format 'oncole-umn
+          completions-detailed t
+          completions-group t
+          completions-sort 'historical
+          minibuffer-visible-completions 'up-down
+          completion-eager-update t
+          completion-eager-display t
+          completion-auto-help 'always
+          completion-show-help nil)
+    (keymap-unset minibuffer-local-completion-map "SPC")))
 ;; -CorFu
 
 ;; Add extensions
@@ -194,9 +194,13 @@
   ;; multiple providers. Beware that using this can be a little
   ;; jarring since the message shown in the minibuffer can be more
   ;; than one line, causing the modeline to move up and down:
-
   ;; (add-hook 'eldoc-documentation-functions #'embark-eldoc-first-target)
   ;; (setq eldoc-documentation-strategy #'eldoc-documentation-compose-eagerly)
+
+  ;; Add Embark to the mouse context menu. Also enable `context-menu-mode'.
+  ;; (context-menu-mode 1)
+  ;; (add-hook 'context-menu-functions #'embark-context-menu 100)
+
   :config
   ;; Hide the mode line of the Embark live/completions buffers
   (add-to-list 'display-buffer-alist
