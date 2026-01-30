@@ -61,22 +61,26 @@
   ;; `modus-themes-load-random-light').
   (modus-themes-load-theme 'ef-elea-light))
 
-;; DoomModeline
-(use-package doom-modeline
-  :custom
-  ;; Don't compact font caches during GC. Windows Laggy Issue
-  (inhibit-compacting-font-caches t)
-  (doom-modeline-minor-modes nil)
-  (doom-modeline-icon nil)
-  (doom-modeline-major-mode-color-icon nil)
+;; SpaciousPadding
+(use-package spacious-padding
   :config
-  (doom-modeline-mode))
-;; -DoomModeline
+  (setopt spacious-padding-widths
+          '( :internal-border-width 16
+             :header-line-width 4
+             :mode-line-width 4
+             :tab-width 4
+             :right-divider-width 16
+             :scroll-bar-width 0))
 
-(with-eval-after-load 'doom-modeline
-  (setq doom-modeline-bar-width 0
-        doom-modeline-hud nil)
-  (force-mode-line-update t))
+  ;; Read the doc string of `spacious-padding-subtle-mode-line' as it
+  ;; is very flexible and provides several examples.
+  (setopt spacious-padding-subtle-frame-lines
+          `( :mode-line-active error
+             :mode-line-inactive shadow))
+
+  (spacious-padding-mode))
+;; -SpaciousPadding
+
 (provide 'init-theme)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-theme.el ends here
