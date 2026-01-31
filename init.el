@@ -146,7 +146,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-projectile)
 
-(require 'init-yasnippet)
+(require 'init-tempel)
 
 (require 'init-treesit)
 

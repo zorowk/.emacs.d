@@ -40,18 +40,6 @@
   (require 'init-global-config)
   (require 'init-func))
 
-(use-package auctex-latexmk
-  :defer t
-  :init
-  (add-hook 'LaTeX-mode-hook 'auctex-latexmk-setup))
-
-;; (use-package cdlatex)
-
-(use-package company-auctex
-  :defer t
-  :init
-  (add-hook 'LaTeX-mode-hook 'company-auctex-init))
-
 (use-package xenops
   :defer t
   :init
@@ -81,12 +69,6 @@
   (when (version< emacs-version "26")
     (add-hook LaTeX-mode-hook #'display-line-numbers-mode)))
 ;; -AUCTeXPac
-
-;; Cdlatex
-(use-package cdlatex
-  :ensure t
-  :hook (org-mode . org-cdlatex-mode))
-;; -Cdlatex
 
 (provide 'init-latex)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
