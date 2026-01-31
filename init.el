@@ -181,8 +181,6 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-tramp)
 
-(require 'init-eww)
-
 ;; Miscellaneous
 (require 'init-shrface)
 

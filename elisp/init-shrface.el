@@ -47,11 +47,29 @@
 
 ;; eww
 (use-package eww
+  :ensure nil
   :defer t
-  :init
-  (add-hook 'eww-after-render-hook #'shrface-mode)
-  :config
-  (require 'shrface))
+  :custom
+  (eww-buffer-name-prefix "*eww-")      ; buffer 名变成 *eww-xxx*
+  (eww-search-prefix "https://duckduckgo.com/?q=")
+
+  (shr-use-fonts t)                     ; 允许使用字体大小变化
+  (shr-use-colors t)                    ; 启用颜色（配合主题
+  (browse-url-browser-function
+   '(("youtube.com\\|youtu.be" . browse-url-default-browser)  ; YouTube 用外部
+     ("." . eww-browse-url)))                                 ; 其他用 eww
+
+  :bind
+  (("C-c w w" . eww)
+   ("C-c w o" . eww-open-in-new-buffer)
+   ("C-c w s" . eww-search)
+   ("C-c w u" . eww-up-url)
+   ("C-c w r" . eww-reload))
+
+  :hook
+  (eww-after-render . (lambda ()
+                        (when (featurep 'shrface)
+                          (shrface-mode 1)))))
 ;; -eww
 
 ;; nov
