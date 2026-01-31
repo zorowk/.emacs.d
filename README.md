@@ -1,4 +1,4 @@
-# My Emacs Configuration
+# Emacs Configuration
 
 轻量、高效、现代化的 Emacs 配置，专注 C++ 开发 + Org-mode 笔记 + 阅读写作。
 
