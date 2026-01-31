@@ -80,6 +80,12 @@
   (spacious-padding-mode))
 ;; -SpaciousPadding
 
+;; Pulsar
+(use-package pulsar
+  :config
+  (pulsar-global-mode))
+;; -Pulsar
+
 (provide 'init-theme)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-theme.el ends here
