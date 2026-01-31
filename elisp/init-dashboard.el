@@ -38,7 +38,7 @@
 ;; DashboardPac
 (use-package dashboard
   :demand
-  :diminish (dashboard-mode page-break-lines-mode)
+  :diminish (dashboard-mode)
   :bind
   (("C-z d" . open-dashboard)
    :map dashboard-mode-map
@@ -82,12 +82,6 @@
     (goto-char (point-min))
     (delete-other-windows)))
 ;; -DashboardPac
-
-;; PBLPac
-(use-package page-break-lines
-  :diminish
-  :init (global-page-break-lines-mode))
-;; -PBLPac
 
 (provide 'init-dashboard)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
