@@ -41,7 +41,7 @@
 ;; ReaderPac
 (use-package reader
 	     :straight '(reader :type git :host codeberg :repo "divyaranjan/emacs-reader"
-				:files ("*.el" "render-core.so")
+				:files ("*.el" "render-core.dylib")
 				:pre-build ("make" "all")))
 ;; -ReaderPac
 
