@@ -320,7 +320,7 @@
 
 ;; Hyperbole
 (use-package hyperbole
-  :ensure t
+  :defer t
   :config
   (hyperbole-mode 1)
   (setq hywiki-directory "~/Dropbox/notes/")
