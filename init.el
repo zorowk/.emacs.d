@@ -116,6 +116,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-search)
 
+(require 'init-crux)
+
 (require 'init-avy)
 
 (require 'init-which-key)
