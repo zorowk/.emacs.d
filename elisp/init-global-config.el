@@ -38,11 +38,6 @@
 (eval-when-compile
   (require 'init-const))
 
-;; SudoEditPac
-(use-package sudo-edit
-  :commands (sudo-edit))
-;; -SudoEditPac
-
 ;; DefBindings
 ;; Unbind unneeded keys
 (global-set-key (kbd "C-z") nil)
