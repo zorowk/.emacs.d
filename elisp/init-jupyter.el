@@ -35,16 +35,13 @@
 ;;
 ;;; Code:
 
-;; EINPac
-(use-package ein
-  :if (executable-find "jupyter")
-  :bind
-  (("C-c e" . ein:worksheet-execute-cell))
-  :defer t
-  :custom
-  (ein:worksheet-enable-undo t))
-;; -EINPac
+;; Jupyter
+(use-package jupyter
+  :straight t
+  :config
+  (setq jupyter-repl-echo-eval-p t))
+;; -Jupyter
 
-(provide 'init-ein)
+(provide 'init-jupyter)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-ein.el ends here

@@ -156,8 +156,6 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-edit)
 
-(require 'init-ein)
-
 (require 'init-complete)
 
 (require 'init-llm)
@@ -168,6 +166,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (require 'init-latex)
 
 (require 'init-math)
+
+(require 'init-jupyter)
 
 (require 'init-webdev)
 
