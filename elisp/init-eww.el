@@ -51,13 +51,6 @@
     (setq browse-url-browser-function 'eww-browse-url))) ; Hit & to browse url with system browser
 ;; -EWWPac
 
-;; ReadyPlayer
-(use-package ready-player
-  :ensure t
-  :config
-  (ready-player-mode +1))
-;; -ReadyPlayer
-
 (provide 'init-eww)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-eww.el ends here
