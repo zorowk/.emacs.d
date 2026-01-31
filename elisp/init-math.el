@@ -38,12 +38,15 @@
 ;; Maxima
 (use-package maxima
   :init
-  (setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0)
-	  maxima-display-maxima-buffer nil)
   (add-to-list 'auto-mode-alist
-		 (cons "\\.mac\\'" 'maxima-mode))
+		       (cons "\\.mac\\'" 'maxima-mode))
   (add-to-list 'interpreter-mode-alist
-		 (cons "maxima" 'maxima-mode)))
+		       (cons "maxima" 'maxima-mode))
+  :config
+  (with-eval-after-load 'org
+    (setq org-format-latex-options
+          (plist-put org-format-latex-options :scale 2.0))
+    (setq maxima-display-maxima-buffer nil)))
 ;; -Maxima
 
 ;; Gnuplot

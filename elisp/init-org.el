@@ -100,7 +100,7 @@
      (python . t)
      (ein . t)
      (R . t)
-     (julia-vterm . t)
+     (julia . t)
      (emacs-lisp . t)
      (maxima . t)
      (gnuplot . t)))
@@ -318,10 +318,6 @@
     t))
 ;; -Ebib
 
-;; HTMLIZEPac
-(use-package htmlize :defer t)
-;; -HTMLIZEPac
-
 ;; Hyperbole
 (use-package hyperbole
   :ensure t
@@ -335,10 +331,6 @@
 ;; MarkdownModePac
 (use-package markdown-mode :defer t)
 ;; -MarkdownModePac
-
-;; OXGFMPac
-(use-package ox-gfm :defer t)
-;; -OXGFMPac
 
 ;; Olivetti
 (use-package olivetti :defer t)

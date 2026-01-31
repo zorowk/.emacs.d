@@ -48,19 +48,6 @@
   :ensure t)
 ;; -JuliaMode
 
-;; JuliaVterm
-(use-package julia-vterm
-  :defer t
-  :hook (julia-mode . julia-vterm-mode)
-  )
-;; -JuliaVterm
-
-(use-package ob-julia-vterm
-  :ensure t
-  :config
-  (defalias 'org-babel-execute:julia 'org-babel-execute:julia-vterm)
-  (defalias 'org-babel-variable-assignments:julia 'org-babel-variable-assignments:julia-vterm))
-
 (provide 'init-ess)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-ess.el ends here
