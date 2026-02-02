@@ -72,7 +72,7 @@
 
 ;; Cdlatex
 (use-package cdlatex
-  :ensure t
+  :defer t
   :hook (org-mode . org-cdlatex-mode))
 ;; -Cdlatex
 

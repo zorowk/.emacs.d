@@ -37,7 +37,7 @@
 ;; NewstickerPac
 
 (use-package newsticker
-  :ensure nil
+  :straight (:type built-in)
   :defer t
   :init
   (setq newsticker-retrieval-interval 0

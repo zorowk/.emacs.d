@@ -45,7 +45,7 @@
 
 ;; JuliaMode
 (use-package julia-mode
-  :ensure t)
+  :defer t)
 ;; -JuliaMode
 
 (provide 'init-ess)

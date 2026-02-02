@@ -169,12 +169,12 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-math)
 
-(require 'init-jupyter)
-
 (require 'init-webdev)
 
 ;; Office
 (require 'init-org)
+
+(require 'init-jupyter)
 
 (require 'init-reader)
 

@@ -152,7 +152,7 @@
 
 ;; Denote
 (use-package denote
-  :ensure t
+  :defer t
   :hook
   (;; If you use plain text files (.txt), then you want to make the
    ;; Denote links clickable (Org mode and Markdown mode render links
@@ -210,7 +210,7 @@
   (denote-rename-buffer-mode 1))
 
 (use-package consult-denote
-  :ensure t
+  :defer t
   :bind
   (("C-c n f" . consult-denote-find)
    ("C-c n g" . consult-denote-grep))
@@ -218,7 +218,7 @@
   (consult-denote-mode 1))
 
 (use-package denote-org
-  :ensure t
+  :defer t
   :commands
   ;; I list the commands here so that you can discover them more
   ;; easily.  You might want to bind the most frequently used ones to
@@ -245,7 +245,7 @@
 
 ;; ox-hugo
 (use-package ox-hugo
-  :ensure t   ;Auto-install the package from Melpa
+  :defer t   ;Auto-install the package from Melpa
   :after ox)
 ;; -ox-hugo
 

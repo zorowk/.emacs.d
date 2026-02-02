@@ -47,7 +47,7 @@
 
 ;; eww
 (use-package eww
-  :ensure nil
+  :straight (:type built-in)
   :defer t
   :custom
   (eww-buffer-name-prefix "*eww-")      ; buffer 名变成 *eww-xxx*
