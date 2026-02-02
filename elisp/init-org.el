@@ -98,7 +98,6 @@
      (shell . t)
      (latex .t)
      (python . t)
-     (jupyter . t)
      (R . t)
      (julia . t)
      (emacs-lisp . t)

@@ -39,7 +39,13 @@
 (use-package jupyter
   :straight t
   :config
-  (setq jupyter-repl-echo-eval-p t))
+  (setq jupyter-repl-echo-eval-p t)
+
+  (with-eval-after-load 'org
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     (append '((jupyter . t))
+             org-babel-load-languages))))
 ;; -Jupyter
 
 (provide 'init-jupyter)
