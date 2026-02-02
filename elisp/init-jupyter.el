@@ -37,7 +37,7 @@
 
 ;; Jupyter
 (use-package jupyter
-  :straight t
+  :defer t
   :config
   (setq jupyter-repl-echo-eval-p t)
 

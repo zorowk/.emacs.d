@@ -40,7 +40,6 @@
 
 ;; Vertico.
 (use-package vertico
-  :ensure t
   :bind (:map vertico-map
               ("?"     . minibuffer-completion-help)
               ("M-RET" . minibuffer-force-complete-and-exit)
@@ -55,8 +54,6 @@
 
 ;; Persist history over Emacs restarts. Vertico sorts by history position.
 (use-package savehist
-  :straight (:type built-in)
-  :defer t
   :init
   (savehist-mode))
 

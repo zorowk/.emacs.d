@@ -37,7 +37,6 @@
 
 ;; shrface
 (use-package shrface
-  :defer t
   :config
   (shrface-basic)
   (shrface-trial)

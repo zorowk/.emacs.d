@@ -39,7 +39,6 @@
 
 ;; MultipleCursors
 (use-package multiple-cursors
-  :straight t
   :bind
   (("C->"     . mc/mark-next-like-this)         ; 下一个相同词
    ("C-<"     . mc/mark-previous-like-this)      ; 上一个

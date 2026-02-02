@@ -41,12 +41,14 @@
 ;; TermKeysPac
 (use-package term-keys
   :straight (term-keys :type git :host github :repo "CyberShadow/term-keys")
+  :after vertm
   :if (not (display-graphic-p))
   :config (term-keys-mode t))
 ;; -TermKeysPac
 
 ;; VTermPac
 (use-package vterm
+  :defer t
   :commands vterm
   :bind ((:map vterm-mode-map
                ("C-y" . vterm-yank)

@@ -37,6 +37,7 @@
 
 ;; MagitPac
 (use-package magit
+  :defer t
   :if (executable-find "git")
   :bind
   (("C-x g" . magit-status)

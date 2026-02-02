@@ -37,6 +37,7 @@
 
 ;; Maxima
 (use-package maxima
+  :defer t
   :init
   (add-to-list 'auto-mode-alist
 		       (cons "\\.mac\\'" 'maxima-mode))
@@ -50,7 +51,8 @@
 ;; -Maxima
 
 ;; Gnuplot
-(use-package gnuplot)
+(use-package gnuplot
+  :defer t)
 ;; -Gnuplot
 
 (provide 'init-math)

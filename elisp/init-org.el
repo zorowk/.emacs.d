@@ -236,6 +236,7 @@
 
 ;; org bullets
 (use-package org-bullets
+  :after org
   :init
   (setq org-bullets-bullet-list '("●" "○" "●" "○" "●" "◉" "○" "◆"))
   :config
@@ -251,6 +252,7 @@
 ;; Ebib
 ;; Bibtex stuff
 (use-package ebib
+  :defer t
   :bind (("C-z ." . ebib))
   (:map ebib-index-mode-map
               ("B" . ebib-biblio-import-doi))

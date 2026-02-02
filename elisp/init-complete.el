@@ -41,7 +41,6 @@
 ;; Enable Eglot for LSP support
 (use-package eglot
   :straight (:type built-in)
-  :defer t
   :commands (eglot eglot-ensure)
   :custom
   (eglot-autoshutdown t) ;; 自动关闭 LSP 服务器
@@ -83,7 +82,6 @@
 
 ;; Corfu
 (use-package corfu
-  :straight t
   :custom
   (corfu-auto t)
   (corfu-auto-prefix 3)
@@ -126,19 +124,19 @@
   ;; Hide commands in M-x which do not apply to the current mode.  Corfu
   ;; commands are hidden, since they are not used via M-x. This setting is
   ;; useful beyond Corfu.
-  (read-extended-command-predicate #'command-completion-default-include-p)
+  (read-extended-command-predicate #'command-completion-default-include-p))
 
-  (when (>= emacs-major-version 31)
-    (setq completions-format 'oncole-umn
-          completions-detailed t
-          completions-group t
-          completions-sort 'historical
-          minibuffer-visible-completions 'up-down
-          completion-eager-update t
-          completion-eager-display t
-          completion-auto-help 'always
-          completion-show-help nil)
-    (keymap-unset minibuffer-local-completion-map "SPC")))
+;; Use Dabbrev with Corfu!
+(use-package dabbrev
+  ;; Swap M-/ and C-M-/
+  :bind (("M-/" . dabbrev-completion)
+         ("C-M-/" . dabbrev-expand))
+  :config
+  (add-to-list 'dabbrev-ignored-buffer-regexps "\\` ")
+  (add-to-list 'dabbrev-ignored-buffer-modes 'authinfo-mode)
+  (add-to-list 'dabbrev-ignored-buffer-modes 'doc-view-mode)
+  (add-to-list 'dabbrev-ignored-buffer-modes 'pdf-view-mode)
+  (add-to-list 'dabbrev-ignored-buffer-modes 'tags-table-mode))
 ;; -CorFu
 
 ;; Add extensions
@@ -181,7 +179,6 @@
   (marginalia-mode))
 
 (use-package embark
-  :straight t
   :bind
   (("C-." . embark-act)         ;; pick some comfortable binding
    ("C-;" . embark-dwim)        ;; good alternative: M-.
@@ -215,7 +212,6 @@
   (embark-collect-mode . consult-preview-at-point-mode))
 
 (use-package consult
-  :straight t
   :bind (;; C-c bindings in `mode-specific-map'
          ("C-c M-x" . consult-mode-command)
          ("C-c h" . consult-history)

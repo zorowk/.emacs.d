@@ -47,6 +47,7 @@
 (use-package aidermacs
   :if (executable-find "aider")
   :straight (:host github :repo "MatthewZMD/aidermacs" :files ("*.el"))
+  :defer t
   :custom
   (aidermacs-backend 'comint)
   (aidermacs-auto-commits nil)

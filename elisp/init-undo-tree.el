@@ -36,8 +36,7 @@
 ;;; Code:
 
 ;; UndoTreePac
-(use-package vundo
-  :defer t)
+(use-package vundo)
 ;; -UndoTreePac
 
 (provide 'init-undo-tree)
