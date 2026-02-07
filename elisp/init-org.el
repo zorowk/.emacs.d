@@ -207,31 +207,6 @@
 
   ;; Automatically rename Denote buffers using the `denote-rename-buffer-format'.
   (denote-rename-buffer-mode 1))
-
-(use-package consult-denote
-  :defer t
-  :bind
-  (("C-c n f" . consult-denote-find)
-   ("C-c n g" . consult-denote-grep))
-  :config
-  (consult-denote-mode 1))
-
-(use-package denote-org
-  :defer t
-  :commands
-  ;; I list the commands here so that you can discover them more
-  ;; easily.  You might want to bind the most frequently used ones to
-  ;; the `org-mode-map'.
-  (denote-org-link-to-heading
-    denote-org-backlinks-for-heading
-    denote-org-extract-org-subtree
-    denote-org-convert-links-to-file-type
-    denote-org-convert-links-to-denote-type
-    denote-org-dblock-insert-files
-    denote-org-dblock-insert-links
-    denote-org-dblock-insert-backlinks
-    denote-org-dblock-insert-missing-links
-    denote-org-dblock-insert-files-as-headings))
 ;; -Denote
 
 ;; org bullets
