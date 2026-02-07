@@ -383,16 +383,6 @@
     t))
 ;; -Ebib
 
-;; Hyperbole
-(use-package hyperbole
-  :defer t
-  :config
-  (hyperbole-mode 1)
-  (setq hywiki-directory "~/Dropbox/notes/")
-  (setq hywiki-org-publishing-directory "~/Dropbox/hywiki")
-  )
-;; -Hyperbole
-
 ;; MarkdownModePac
 (use-package markdown-mode :defer t)
 ;; -MarkdownModePac
