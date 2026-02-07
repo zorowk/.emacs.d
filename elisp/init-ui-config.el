@@ -112,8 +112,8 @@
 (set-frame-parameter nil 'ns-alpha-elements
                      '(ns-alpha-default ns-alpha-fringe ns-alpha-glyphs)) ;; e.g.
 
-(set-frame-parameter nil 'alpha-background 0.95)
-(set-frame-parameter nil 'ns-background-blur 80)
+(set-frame-parameter nil 'alpha-background 0.75)
+(set-frame-parameter nil 'ns-background-blur 50)
 (setq mode-line-collapse-minor-modes '(not))
 ;; -Alpha
 

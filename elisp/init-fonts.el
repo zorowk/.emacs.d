@@ -37,7 +37,7 @@
 
 ;; FontsList
 ;; Input Mono, Monaco Style, Line Height 1.3 download from http://input.fontbureau.com/
-(defvar font-list '(("SF Mono" . 14) ("Menlo" . 14) ("Arial" . 14))
+(defvar font-list '(("Menlo" . 14) ("Menlo" . 14) ("Arial" . 14))
   "List of fonts and sizes.  The first one available will be used.")
 ;; -FontsList
 

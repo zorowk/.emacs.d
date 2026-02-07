@@ -358,10 +358,6 @@
     t))
 ;; -Ebib
 
-;; MarkdownModePac
-(use-package markdown-mode :defer t)
-;; -MarkdownModePac
-
 ;; Olivetti
 (use-package olivetti :defer t)
 ;; -Olivetti
