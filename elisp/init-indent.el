@@ -61,6 +61,7 @@
 (setq-default indent-line-function 'insert-tab)
 (setq-default tab-width 4)
 (setq-default c-basic-offset 4)
+(setq-default c-ts-mode-indent-offset 4)
 (setq-default js-switch-indent-offset 4)
 (setq-default cmake-ts-mode-indent-offset 4)
 (c-set-offset 'comment-intro 0)
