@@ -35,16 +35,6 @@
 ;;
 ;;; Code:
 
-;; eldoc-box
-(use-package eldoc-box
-  :straight t
-  :defer t
-  :custom
-  (eldoc-box-max-pixel-width 600)   ; 最大宽度（可调，防止太宽）
-  (eldoc-box-max-pixel-height 400)  ; 最大高度
-  (eldoc-box-frame-position 'at-point)  ; 显示在光标位置附近
-  (eldoc-box-only-multi-line t))
-
 (use-package shr-tag-pre-highlight
   :ensure t
   :after shr
@@ -117,7 +107,6 @@
   (advice-add 'eww-display-html :around #'shrface-render-advice)
   (add-hook 'eww-after-render-hook #'olivetti-mode)
   (add-hook 'eww-after-render-hook #'eldoc-mode)
-  (add-hook 'eww-after-render-hook #'eldoc-box-hover-mode)
   (add-hook 'eww-after-render-hook #'shrface-eww-setup))
 
 (use-package nov
@@ -125,7 +114,6 @@
   :config
   (add-hook 'nov-mode-hook #'eldoc-mode)
   (add-hook 'nov-mode-hook #'olivetti-mode)
-  (add-hook 'nov-mode-hook #'eldoc-box-hover-mode)
   (add-hook 'nov-mode-hook #'shrface-nov-setup)
   (require 'shrface)
   (advice-add 'shr--remove-blank-lines-at-the-end :override #'shrface-remove-blank-lines-at-the-end))
@@ -192,8 +180,6 @@
   (let ((shrface-org nil)
         (shr-bullet (concat (char-to-string shrface-item-bullet) " "))
         (shr-table-vertical-line "|")
-        (shr-width 65)
-        (shr-indentation 0)
         (shr-external-rendering-functions shrface-general-rendering-functions)
         (shrface-toggle-bullets nil)
         (shrface-href-versatile t)
