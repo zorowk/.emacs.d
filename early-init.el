@@ -38,6 +38,7 @@
 
 ;; DeferGC
 (setq gc-cons-threshold 100000000)
+(setq gc-cons-percentage 0.6)
 ;; -DeferGC
 
 ;; UnsetPES
