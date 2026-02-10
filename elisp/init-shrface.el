@@ -44,10 +44,18 @@
   (setq shrface-href-versatile t))
 ;; -shrface
 
+;; Olivetti
+(use-package olivetti :defer t)
+;; -Olivetti
+
 ;; eww
 (use-package eww
   :straight (:type built-in)
   :defer t
+  :init
+  (add-hook 'eww-after-render-hook (lambda ()
+                                     (shrface-mode 1)
+                                     (olivetti-mode 1)))
   :custom
   (eww-buffer-name-prefix "*eww-")      ; buffer 名变成 *eww-xxx*
   (eww-search-prefix "https://duckduckgo.com/?q=")
@@ -59,17 +67,17 @@
    ("C-c w s" . eww-search)
    ("C-c w u" . eww-up-url)
    ("C-c w r" . eww-reload))
-  :hook
-  (eww-after-render . (lambda ()
-                        (when (featurep 'shrface)
-                          (shrface-mode 1)))))
+  :config
+  (require 'shrface))
 ;; -eww
 
 ;; nov
 (use-package nov
   :defer t
   :init
-  (add-hook 'nov-mode-hook #'shrface-mode)
+  (add-hook 'nov-mode-hook (lambda ()
+                             (shrface-mode 1)
+                             (olivetti-mode 1)))
   (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
   :config
   (require 'shrface)
