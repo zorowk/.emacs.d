@@ -40,11 +40,6 @@
   (require 'init-global-config)
   (require 'init-func))
 
-(use-package xenops
-  :defer t
-  :init
-  (add-hook 'LaTeX-mode-hook #'xenops-mode))
-
 ;; AUCTeXPac
 (use-package auctex
   :defer t
