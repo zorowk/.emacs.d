@@ -43,11 +43,6 @@
   (load "ess-autoloads"))
 ;; -ESSPac
 
-;; JuliaMode
-(use-package julia-mode
-  :defer t)
-;; -JuliaMode
-
 (provide 'init-ess)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-ess.el ends here
