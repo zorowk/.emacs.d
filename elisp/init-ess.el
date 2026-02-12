@@ -43,6 +43,11 @@
   (load "ess-autoloads"))
 ;; -ESSPac
 
+;; Gnuplot
+(use-package gnuplot
+  :defer t)
+;; -Gnuplot
+
 (provide 'init-ess)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-ess.el ends here

@@ -99,7 +99,6 @@
      (latex .t)
      (python . t)
      (R . t)
-     (julia . t)
      (emacs-lisp . t)
      (maxima . t)
      (gnuplot . t)))
