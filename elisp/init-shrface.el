@@ -47,7 +47,20 @@
                   'eww-display-html--override-shr-external-rendering-functions))))
 
 ;; Olivetti
-(use-package olivetti :defer t)
+(use-package olivetti
+  :defer t)
+(add-hook 'eww-after-render-hook
+          (lambda ()
+            (olivetti-mode 1)
+            (setq-local olivetti-body-width 120)))
+(add-hook 'nov-mode-hook
+          (lambda ()
+            (olivetti-mode 1)
+            (setq-local olivetti-body-width 120)))
+(add-hook 'Info-mode-hook
+          (lambda ()
+            (olivetti-mode 1)
+            (setq-local olivetti-body-width 80)))
 ;; -Olivetti
 
 (use-package shrface
@@ -105,7 +118,6 @@
   :config
   (require 'shrface)
   (advice-add 'eww-display-html :around #'shrface-render-advice)
-  (add-hook 'eww-after-render-hook #'olivetti-mode)
   (add-hook 'eww-after-render-hook #'eldoc-mode)
   (add-hook 'eww-after-render-hook #'shrface-eww-setup))
 
@@ -113,7 +125,6 @@
   :defer t
   :config
   (add-hook 'nov-mode-hook #'eldoc-mode)
-  (add-hook 'nov-mode-hook #'olivetti-mode)
   (add-hook 'nov-mode-hook #'shrface-nov-setup)
   (require 'shrface)
   (advice-add 'shr--remove-blank-lines-at-the-end :override #'shrface-remove-blank-lines-at-the-end))
