@@ -165,8 +165,6 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-latex)
 
-(require 'init-math)
-
 (require 'init-webdev)
 
 ;; Office
