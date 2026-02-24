@@ -42,6 +42,14 @@
   (ediff-window-setup-function #'ediff-setup-windows-plain))
 ;; -EdiffPac
 
+;; Apheleia
+(use-package apheleia
+  :ensure t
+  :commands (apheleia-mode
+             apheleia-global-mode)
+  :hook
+  (prog-mode . apheleia-mode))
+;; -Apheleia
 (provide 'init-format)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-format.el ends here
