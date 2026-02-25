@@ -64,6 +64,12 @@
 ;;
 ;;; Code:
 
+;; auth2
+(use-package auth-source-xoauth2-plugin
+  :custom
+  (auth-source-xoauth2-plugin-mode t))
+;; -auth2
+
 ;;; Gnus configuration
 ;; (info "(gnus) Don't Panic")
 (keymap-global-set "C-z g" #'gnus)

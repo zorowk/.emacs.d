@@ -42,8 +42,11 @@
 (use-package reader
   :defer t
   :straight '(reader :type git :host codeberg :repo "divyaranjan/emacs-reader"
-				     :files ("*.el" "render-core.dylib")
-				     :pre-build ("make" "all")))
+				     :files ("*.el" "render-core.so")
+				     :pre-build ("make" "all"))
+  :config
+  (setq reader-supported-formats
+        (delete "epub" reader-supported-formats)))
 ;; -ReaderPac
 
 (provide 'init-reader)
