@@ -129,6 +129,25 @@
   (require 'shrface)
   (advice-add 'shr--remove-blank-lines-at-the-end :override #'shrface-remove-blank-lines-at-the-end))
 
+(use-package elfeed
+  :defer t
+  :custom
+  (elfeed-feeds '(
+                  ("https://planet.emacslife.com/atom.xml" emacs planet)
+                  ("https://karthinks.com/index.xml" emacs karthinks)
+                  ("https://www.phoronix.com/rss.php" linux phoronix)
+                  ("https://hnrss.org/frontpage" hacker-news)
+                  ("https://lobste.rs/rss" lobsters)
+                  ("https://drewdevault.com/blog/index.xml" drew-devault)
+                  ("https://emersion.fr/blog/atom.xml" emersion)
+                  ))
+  (elfeed-db-directory (expand-file-name "elfeed" user-emacs-directory))
+  :config
+  (add-hook 'elfeed-show-mode-hook #'eldoc-mode)
+  (add-hook 'elfeed-show-mode-hook #'shrface-elfeed-setup)
+  (advice-add 'elfeed-insert-html :around #'shrface-elfeed-advice)
+  (require 'shrface))
+
 (defun shrface-eww-setup ()
   (unless shrface-toggle-bullets
     (shrface-regexp)
@@ -186,6 +205,13 @@
     (shrface-regexp))
   (set-visited-file-name nil t))
 
+(defun shrface-elfeed-setup ()
+  (unless shrface-toggle-bullets
+    (shrface-regexp)
+    (setq-local imenu-create-index-function #'shrface-imenu-get-tree))
+  (if (string-equal system-type "android")
+      (setq-local touch-screen-enable-hscroll nil)))
+
 (defun shrface-render-advice (orig-fun &rest args)
   (require 'eww)
   (let ((shrface-org nil)
@@ -198,6 +224,22 @@
     ;; workaround, need a delay to update the header line
     (run-with-timer 0.01 nil 'shrface-update-header-line)
     (apply orig-fun args)))
+
+(defun shrface-elfeed-advice (orig-fun &rest args)
+  (require 'eww)
+  (let ((shrface-org nil)
+        (shr-bullet (concat (char-to-string shrface-item-bullet) " "))
+        (shr-indentation 0)
+        (shr-table-vertical-line "|")
+        (shr-external-rendering-functions shrface-general-rendering-functions)
+        (shrface-toggle-bullets nil)
+        (shrface-href-versatile t)
+        (shr-use-fonts nil))
+    (if (fboundp 'elfeed-goodies/show-mode-setup)
+        (elfeed-goodies/show-mode-setup))
+    (apply orig-fun args)
+    (with-current-buffer "*elfeed-entry*"
+      (shrface-show-all-annotations))))
 
 (defun shrface-show-all-annotations()
   (when (bound-and-true-p paw-annotation-mode)
