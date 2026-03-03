@@ -41,7 +41,7 @@
 ;; ReaderPac
 (use-package reader
   :defer t
-  :straight '(reader :type git :host codeberg :repo "divyaranjan/emacs-reader"
+  :straight '(reader :type git :host codeberg :repo "MonadicSheep/emacs-reader"
 				     :files ("*.el" "render-core.so")
 				     :pre-build ("make" "all"))
   :config

@@ -140,7 +140,8 @@
                   ("https://lobste.rs/rss" lobsters)
                   ("https://drewdevault.com/blog/index.xml" drew-devault)
                   ("https://emersion.fr/blog/atom.xml" emersion)
-                  ))
+                  ("https://joarvarndt.se/rss.xml" Joar von Ardnt)
+                  ("https://emacsredux.com/atom.xml" Emacs Redux)))
   (elfeed-db-directory (expand-file-name "elfeed" user-emacs-directory))
   :config
   (add-hook 'elfeed-show-mode-hook #'eldoc-mode)
