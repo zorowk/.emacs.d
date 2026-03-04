@@ -232,6 +232,14 @@
   :after ox)
 ;; -ox-hugo
 
+;; dslide
+(use-package dslide
+  :defer t
+  :straight (dslide :type git :host github
+                    :repo "positron-solutions/dslide"))
+
+;; -dslide
+
 ;; Ebib
 ;; Bibtex stuff
 (use-package ebib
