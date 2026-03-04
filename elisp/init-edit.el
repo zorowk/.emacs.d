@@ -123,7 +123,6 @@
           (blink-matching-open))))))
 ;; -MatchParens
 
-
 (provide 'init-edit)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-edit.el ends here

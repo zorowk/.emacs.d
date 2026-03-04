@@ -49,6 +49,20 @@
         (delete "epub" reader-supported-formats)))
 ;; -ReaderPac
 
+;; logview
+(use-package logview
+  :ensure t
+  :mode "\\.log\\'"
+  :config
+  (setq logview-infer-submodes t))
+;; -logview
+
+;; ready player
+(use-package ready-player
+  :ensure t
+  :config
+  (ready-player-mode +1))
+;; -ready player
 (provide 'init-reader)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-pdf.el ends here
