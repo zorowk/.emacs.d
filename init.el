@@ -175,6 +175,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 ;; Internet
 (require 'init-erc)
 
+(require 'init-llm)
+
 ;; Miscellaneous
 (require 'init-shrface)
 
