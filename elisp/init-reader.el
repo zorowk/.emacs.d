@@ -51,7 +51,7 @@
 
 ;; logview
 (use-package logview
-  :ensure t
+  :defer t
   :mode "\\.log\\'"
   :config
   (setq logview-infer-submodes t))
@@ -59,7 +59,7 @@
 
 ;; ready player
 (use-package ready-player
-  :ensure t
+  :defer t
   :config
   (ready-player-mode +1))
 ;; -ready player
