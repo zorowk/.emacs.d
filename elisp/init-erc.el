@@ -49,12 +49,8 @@
     :type 'string)
   (use-package erc-hl-nicks :defer t)
   (use-package erc-image :defer t)
-  (use-package erc-sasl
-    ;; Since my account name is the same as my nick, free me from having
-    ;; to hit C-u before M-x erc to trigger a username prompt.
-    :custom (erc-sasl-user :nick))
   :custom-face
-  (erc-notice-face ((t (:slant italic :weight unspecified)))))
+  (erc-notice-face ((t (:slant italic :weight unspecified))))
   :custom
   (erc-autojoin-channels-alist '(("irc.libera.chat" "#emacs")))
   (erc-user-full-name user-full-name)
