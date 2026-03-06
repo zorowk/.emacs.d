@@ -44,7 +44,7 @@
   :straight (:type built-in)
   :init
   ;; Prerequisite: Configure this to your IRC nickname
-  (defcustom my-irc-nick ""
+  (defcustom my-irc-nick "zorowk"
     "The nickname used to login into ERC"
     :type 'string)
   (use-package erc-hl-nicks :defer t)
