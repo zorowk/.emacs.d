@@ -43,11 +43,11 @@
 (use-package erc
   :straight (:type built-in)
   :init
+  (require 'erc-sasl)
   ;; Prerequisite: Configure this to your IRC nickname
   (defcustom my-irc-nick "zorowk"
     "The nickname used to login into ERC"
     :type 'string)
-  (use-package erc-hl-nicks :defer t)
   (use-package erc-image :defer t)
   :custom-face
   (erc-notice-face ((t (:slant italic :weight unspecified))))
@@ -61,27 +61,47 @@
   (erc-kill-queries-on-quit t)
   (erc-kill-server-buffer-on-quit t)
   (erc-autojoin-timing 'ident)
-  (erc-fill-function 'erc-fill-static)
-  (erc-fill-static-center 15)
+  (erc-fill-function 'erc-fill-wrap)
+  (erc-fill-static-center 18)
   (erc-lurker-threshold-time 43200)
-  (erc-server-reconnect-attempts 5)
-  (erc-server-reconnect-timeout 3)
   (erc-prompt-for-password nil)
   (erc-prompt-for-nickserv-password nil)
   (erc-fill-column 100)
   (erc-save-buffer-on-part t)
   (erc-nick-uniquifier "_")
   (erc-log-channels-directory (expand-file-name ".erc-logs" user-emacs-directory))
-  :bind
-  ((:map erc-mode-map
-         ("M-RET" . newline)))
-  :hook
+  ;; Protect me from accidentally sending excess lines.
+  (erc-inhibit-multiline-input t)
+  (erc-send-whitespace-lines t)
+  (erc-ask-about-multiline-input t)
+  ;; Scroll all windows to prompt when submitting input.
+  (erc-scrolltobottom-all t)
+  ;; Reconnect automatically using a fancy strategy.
+  (erc-server-reconnect-function #'erc-server-delayed-check-reconnect)
+  (erc-server-reconnect-timeout 30)
+  ;; Show new buffers in the current window instead of a split.
+  (erc-interactive-display 'buffer)
+  (erc-sasl-user :nick)
+  (erc-track-priority-faces-only 'all)
+  ;; Insert a newline when I hit <RET> at the prompt, and prefer
+  ;; something more deliberate for actually sending messages.
+  :bind (:map erc-mode-map
+              ("RET" . nil)
+              ("C-c C-c" . #'erc-send-current-line))
   (ercn-notify . erc-notify)
   :config
+  ;; Prefer SASL to NickServ, colorize nicknames, and show side panels
+  ;; with joined channels and members
+  (setopt erc-modules
+          (seq-union '(sasl nicks scrolltobottom)
+                     erc-modules))
+  (setopt erc-track-faces-priority-list
+          (remq 'erc-notice-face erc-track-faces-priority-list))
   (make-directory (expand-file-name ".erc-logs" user-emacs-directory) t)
   (add-to-list 'erc-modules 'notifications)
   (erc-track-mode t)
   (erc-services-mode 1)
+  (erc-keep-place-indicator-mode 1)
 
   (defun erc-notify (nickname message)
     "Displays a notification message for ERC."
