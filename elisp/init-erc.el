@@ -49,8 +49,12 @@
     :type 'string)
   (use-package erc-hl-nicks :defer t)
   (use-package erc-image :defer t)
+  (use-package erc-sasl
+    ;; Since my account name is the same as my nick, free me from having
+    ;; to hit C-u before M-x erc to trigger a username prompt.
+    :custom (erc-sasl-user :nick))
   :custom-face
-  (erc-notice-face ((t (:foreground "#ababab"))))
+  (erc-notice-face ((t (:slant italic :weight unspecified)))))
   :custom
   (erc-autojoin-channels-alist '(("irc.libera.chat" "#emacs")))
   (erc-user-full-name user-full-name)
@@ -73,10 +77,7 @@
   (erc-nick-uniquifier "_")
   (erc-log-channels-directory (expand-file-name ".erc-logs" user-emacs-directory))
   :bind
-  (("M-z i" . erc-start-or-switch)
-   ("M-m i" . erc-start-or-switch)
-   ("C-c C-b" . erc-switch-to-buffer)
-   (:map erc-mode-map
+  ((:map erc-mode-map
          ("M-RET" . newline)))
   :hook
   (ercn-notify . erc-notify)
@@ -85,12 +86,6 @@
   (add-to-list 'erc-modules 'notifications)
   (erc-track-mode t)
   (erc-services-mode 1)
-  (defun erc-start-or-switch ()
-    "Start ERC or switch to ERC buffer if it has started already."
-    (interactive)
-    (if (get-buffer "irc.libera.chat:6697")
-        (erc-track-switch-buffer 1)
-      (erc-tls :server "irc.libera.chat" :port 6697 :nick my-irc-nick :full-name user-full-name)))
 
   (defun erc-notify (nickname message)
     "Displays a notification message for ERC."
