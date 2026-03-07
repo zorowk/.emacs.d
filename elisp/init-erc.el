@@ -88,6 +88,7 @@
   :bind (:map erc-mode-map
               ("RET" . nil)
               ("C-c C-c" . #'erc-send-current-line))
+  :hook
   (ercn-notify . erc-notify)
   :config
   ;; Prefer SASL to NickServ, colorize nicknames, and show side panels
