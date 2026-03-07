@@ -37,7 +37,7 @@
 
 ;; FontsList
 ;; Input Mono, Monaco Style, Line Height 1.3 download from http://input.fontbureau.com/
-(defvar font-list '(("Menlo" . 14) ("Menlo" . 14) ("Arial" . 14))
+(defvar font-list '(("Adwaita Mono" . 11) ("Menlo" . 14) ("Arial" . 14))
   "List of fonts and sizes.  The first one available will be used.")
 ;; -FontsList
 
@@ -71,9 +71,9 @@
     (set-fontset-font t 'hangul (font-spec :family "Apple SD Gothic Neo"))
     (set-fontset-font t 'kana (font-spec :family "Hiragino Maru Gothic ProN"))
 
-    (set-fontset-font t 'cjk-misc (font-spec :family "PingFang SC"))
-    (set-fontset-font t 'bopomofo (font-spec :family "PingFang SC"))
-    (set-fontset-font t 'han (font-spec :family "PingFang SC"))))
+    (set-fontset-font t 'cjk-misc (font-spec :family "Noto Sans CJK SC"))
+    (set-fontset-font t 'bopomofo (font-spec :family "Noto Sans CJK SC"))
+    (set-fontset-font t 'han (font-spec :family "Noto Sans CJK SC"))))
 
 (when (display-graphic-p)
   (change-font))
