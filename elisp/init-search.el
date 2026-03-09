@@ -80,29 +80,13 @@
   ;; (orderless-style-dispatchers '(+orderless-consult-dispatch orderless-affix-dispatch))
   ;; (orderless-component-separator #'orderless-escapable-split-on-space)
   (completion-styles '(orderless basic))
-  (completion-category-overrides '((file (styles partial-completion))))
+  (completion-category-overrides '((file (styles partial-completion))
+                                   (eglot (styles orderless basic))
+                                   (eglot-capf (styles orderless basic))))
   (completion-category-defaults nil) ;; Disable defaults, use our settings
   (completion-pcm-leading-wildcard t)) ;; Emacs 31: partial-completion behaves like substring
 
 ;; -Vertico
-
-;; Prescient
-(use-package prescient
-  :config
-  (setopt completion-category-overrides '((eglot (styles prescient basic))
-                                          (eglot-capf (styles prescient basic))))
-  (prescient-persist-mode))
-
-(use-package vertico-prescient
-  :after (vertico prescient)
-  :config
-  (vertico-prescient-mode))
-
-(use-package corfu-prescient
-  :after (corfu prescient)
-  :config
-  (corfu-prescient-mode))
-;; -Prescient
 
 (provide 'init-search)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

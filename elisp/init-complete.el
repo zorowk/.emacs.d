@@ -155,7 +155,7 @@
   ;; first function returning a result wins.  Note that the list of buffer-local
   ;; completion functions takes precedence over the global list.
   (add-hook 'completion-at-point-functions #'cape-dabbrev)
-  ;;(add-hook 'completion-at-point-functions #'cape-file)
+  (add-hook 'completion-at-point-functions #'cape-file)
   (add-hook 'completion-at-point-functions #'cape-elisp-block)
   (add-hook 'completion-at-point-functions #'cape-keyword)
   (add-hook 'completion-at-point-functions #'tempel-complete)
@@ -265,10 +265,6 @@
          ("M-s" . consult-history)                 ;; orig. next-matching-history-element
          ("M-r" . consult-history))                ;; orig. previous-matching-history-element
 
-  ;; Enable automatic preview at point in the *Completions* buffer. This is
-  ;; relevant when you use the default completion UI.
-  :hook
-  (completion-list-mode . consult-preview-at-point-mode)
   ;; The :init configuration is always executed (Not lazy)
   :init
   ;; Tweak the register preview for `consult-register-load',
