@@ -49,14 +49,6 @@
         (delete "epub" reader-supported-formats)))
 ;; -ReaderPac
 
-;; logview
-(use-package logview
-  :defer t
-  :mode "\\.log\\'"
-  :config
-  (setq logview-infer-submodes t))
-;; -logview
-
 ;; ready player
 (use-package ready-player
   :defer t
