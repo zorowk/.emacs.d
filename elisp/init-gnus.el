@@ -100,19 +100,15 @@
  gnus-select-method '(nnnil "")
  gnus-secondary-select-methods
  '((nnimap
-    "ec25gnus"
-    (nnimap-stream tls)
-    (nnimap-address  "mail.kelar.org")
-    ;; (nnimap-server-port 993) ; imaps
+    "gmail"
+    (nnimap-stream ssl)
+    (nnimap-address "near.kingzero@gmail.com")
+    (nnimap-server-port 993) ; imaps
     (nnimap-authenticator plain)
-    (nnimap-user "ec25gnus@kelar.org"))
-   (nnimap
-    "ec25work"
-    (nnimap-stream tls)
-    (nnimap-address "mail.kelar.org")
-    ;; (nnimap-server-port 993) ; imaps
-    (nnimap-authenticator plain)
-    (nnimap-user "ec25work@kelar.org")
+    (nnimap-user "zorowk")
+    (nnimap-expunge immediately)
+    (nnimap-authenticator xoauth2)
+    (nnimap-expunge-on-delete t)
     ;; Archive messages into yearly Archive folders upon pressing
     ;; 'E' (for Expire) in the summary buffer.
     (nnmail-expiry-wait immediate)
