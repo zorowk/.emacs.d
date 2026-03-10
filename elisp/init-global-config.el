@@ -198,6 +198,9 @@ The original function deletes trailing whitespace of the current line."
 ;; disable warning
 (setq warning-minimum-level :emergency)
 
+;; enable pinentry loopback
+(setq epg-pinentry-mode 'loopback)
+
 ;; warn when opening files bigger than 100MB
 (setq large-file-warning-threshold 100000000)
 
