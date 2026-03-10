@@ -204,9 +204,6 @@
 (add-hook 'message-mode-hook #'display-fill-column-indicator-mode)
 ;; Enable Flyspell for on-the-fly spell checking.
 (add-hook 'message-mode-hook #'flyspell-mode)
-
-(setq auth-source-debug t)
-(setq auth-source-debug 'trivia)
 (provide 'init-gnus)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-gnus.el ends here
