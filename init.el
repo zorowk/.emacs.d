@@ -179,6 +179,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-llm)
 
+(require 'init-gnus)
+
 ;; Miscellaneous
 (require 'init-shrface)
 
