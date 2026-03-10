@@ -63,6 +63,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;; Code:
+(eval-when-compile
+  (require 'init-global-config))
 
 ;; auth2
 (use-package auth-source-xoauth2-plugin
@@ -83,10 +85,10 @@
 ;; Consolidate various Gnus files inside a gnus directory in the
 ;; `user-emacs-directory'.
 (setopt
- gnus-home-directory (+user-emacs-directory "gnus/")
- gnus-directory      (+user-emacs-directory "gnus/news/")
- message-directory   (+user-emacs-directory "gnus/mail/")
- nndraft-directory   (+user-emacs-directory "gnus/drafts/"))
+ gnus-home-directory (expand-file-name "gnus/" user-emacs-directory)
+ gnus-directory      (expand-file-name "gnus/news/" user-emacs-directory)
+ message-directory   (expand-file-name "gnus/mail/" user-emacs-directory)
+ nndraft-directory   (expand-file-name "gnus/drafts/" user-emacs-directory))
 
 (setopt ; don't bother with .newsrc, use .newsrc.eld instead
  gnus-save-newsrc-file nil
@@ -100,27 +102,26 @@
  gnus-select-method '(nnnil "")
  gnus-secondary-select-methods
  '((nnimap
-    "gmail"
+    "Gmail"
     (nnimap-stream ssl)
-    (nnimap-address "near.kingzero@gmail.com")
+    (nnimap-address "imap.gmail.com")
     (nnimap-server-port 993) ; imaps
-    (nnimap-authenticator plain)
-    (nnimap-user "zorowk")
-    (nnimap-expunge immediately)
     (nnimap-authenticator xoauth2)
+    (nnimap-user "near.kingzero@gmail.com")
+    (nnimap-mailbox-list ("INBOX" "[Gmail]/Sent Mail" "[Gmail]/All Mail" "[Gmail]/Trash" "[Gmail]/Spam"))
     (nnimap-expunge-on-delete t)
     ;; Archive messages into yearly Archive folders upon pressing
     ;; 'E' (for Expire) in the summary buffer.
     (nnmail-expiry-wait immediate)
     (nnmail-expiry-target nnmail-fancy-expiry-target)
     (nnmail-fancy-expiry-targets
-     (("from" ".*" "nnimap+ec25work:Archive.%Y"))))))
+     (("from" ".*" "nnimap+Gmail:Archive.%Y"))))))
 
 ;; `init-file-debug' corresponds to launching emacs with --debug-init
 (setq nnimap-record-commands init-file-debug)
 
 ;; The "Sent" folder
-(setopt gnus-message-archive-group "nnimap+ec25gnus:INBOX")
+(setopt gnus-message-archive-group "nnimap+Gmail:INBOX")
 
 ;;;; Group buffer
 
@@ -183,14 +184,10 @@
  ;; server for sending mail.  See: (info "(gnus) Posting Styles")
  ;; Also see sample .authinfo file provided below.
  gnus-posting-styles
- '(("nnimap\\+ec25gnus:.*"
-    (address "ec25gnus@kelar.org")
-    ("X-Message-SMTP-Method" "smtp mail.kelar.org 587")
-    (gcc "nnimap+ec25gnus:INBOX"))
-   ("nnimap\\+ec25work:.*"
-    (address "ec25work@kelar.org")
-    ("X-Message-SMTP-Method" "smtp dasht.kelar.org 587")
-    (gcc "nnimap+ec25work:INBOX"))))
+ '(("nnimap\\+Gmail:.*"
+    (address "near.kingzero@gmail.com")
+    ("X-Message-SMTP-Method" "smtp smtp.gmail.com 587")
+    (gcc "nnimap+Gmail:INBOX"))))
 
 (setopt
  ;; Ask for confirmation when sending a message.
@@ -201,19 +198,15 @@
  ;; Forward messages (C-c C-f) as a proper MIME part.
  message-forward-as-mime t
  ;; Send mail using Emacs's built-in smtpmail library.
- message-send-mail-function #'smtpmail-send-it
- ;; Omit our own email address(es) when composing replies.
- message-dont-reply-to-names "ec25\\(gnus\\|work\\)@kelar\\.org"
- gnus-ignored-from-addresses message-dont-reply-to-names)
+ message-send-mail-function #'smtpmail-send-it)
 
-;; Unbind C-c C-s for sending mail; too easy to accidentally hit
-;; instead of C-c C-d (save draft for later)
-(keymap-set message-mode-map "C-c C-s" nil)
 ;; Display a `fill-column' indicator in Message mode.
 (add-hook 'message-mode-hook #'display-fill-column-indicator-mode)
 ;; Enable Flyspell for on-the-fly spell checking.
 (add-hook 'message-mode-hook #'flyspell-mode)
 
+(setq auth-source-debug t)
+(setq auth-source-debug 'trivia)
 (provide 'init-gnus)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-gnus.el ends here
