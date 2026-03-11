@@ -41,20 +41,14 @@
 ;; ReaderPac
 (use-package reader
   :defer t
-  :straight '(reader :type git :host codeberg :repo "MonadicSheep/emacs-reader"
-				     :files ("*.el" "render-core.so")
+  :straight '(reader :type git :host codeberg :repo "divyaranjan/emacs-reader"
+				     :files ("*.el" "render-core.dylib")
 				     :pre-build ("make" "all"))
   :config
   (setq reader-supported-formats
         (delete "epub" reader-supported-formats)))
 ;; -ReaderPac
 
-;; ready player
-(use-package ready-player
-  :defer t
-  :config
-  (ready-player-mode +1))
-;; -ready player
 (provide 'init-reader)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-pdf.el ends here

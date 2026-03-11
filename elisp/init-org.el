@@ -374,6 +374,13 @@
     t))
 ;; -Ebib
 
+;; valign
+(use-package valign
+  :ensure t
+  :hook ((org-mode . valign-mode)
+         (markdown-mode . valign-mode)))
+;; -valign
+
 (provide 'init-org)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-org.el ends here
