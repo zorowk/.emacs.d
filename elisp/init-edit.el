@@ -123,6 +123,12 @@
           (blink-matching-open))))))
 ;; -MatchParens
 
+;; vlf
+(use-package vlf
+  :ensure t
+  :commands (vlf vlfi))
+;; -vlf
+
 (provide 'init-edit)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-edit.el ends here

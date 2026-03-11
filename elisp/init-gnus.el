@@ -42,6 +42,13 @@
   ;; Gnus configuration
   ;; (info "(gnus) Don't Panic")
   :bind (("C-z g" . gnus))
+  :hook
+  (;; Enable topic mode in the group buffer, for classifying groups.
+   (gnus-group-mode-hook . #'gnus-topic-mode)
+   ;; Display a `fill-column' indicator in Message mode.
+   (message-mode-hook . #'display-fill-column-indicator-mode)
+   ;; Enable Flyspell for on-the-fly spell checking.
+   (message-mode-hook . #'flyspell-mode))
   :custom
   ;; Tell Emacs we'd like to use Gnus and its Message integration
   ;; for reading and writing mail.
@@ -141,13 +148,7 @@
   ;; Send mail using Emacs's built-in smtpmail library.
   (message-send-mail-function #'smtpmail-send-it)
   :config
-  (auth-source-xoauth2-plugin-mode t)
-  ;; Enable topic mode in the group buffer, for classifying groups.
-  (add-hook 'gnus-group-mode-hook #'gnus-topic-mode)
-  ;; Display a `fill-column' indicator in Message mode.
-  (add-hook 'message-mode-hook #'display-fill-column-indicator-mode)
-  ;; Enable Flyspell for on-the-fly spell checking.
-  (add-hook 'message-mode-hook #'flyspell-mode))
+  (auth-source-xoauth2-plugin-mode t))
 ;; -gnus
 
 (provide 'init-gnus)
