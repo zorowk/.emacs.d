@@ -33,15 +33,11 @@
 (eval-when-compile
   (require 'init-global-config))
 
-;; auth2
-(use-package auth-source-xoauth2-plugin
-  :custom
-  (auth-source-xoauth2-plugin-mode t))
-;; -auth2
-
 ;; gnus
 (use-package gnus
   :straight (:type built-in)
+  :init
+  (use-package auth-source-xoauth2-plugin :defer t)
   :defer t
   ;; Gnus configuration
   ;; (info "(gnus) Don't Panic")
@@ -145,6 +141,7 @@
   ;; Send mail using Emacs's built-in smtpmail library.
   (message-send-mail-function #'smtpmail-send-it)
   :config
+  (auth-source-xoauth2-plugin-mode t)
   ;; Enable topic mode in the group buffer, for classifying groups.
   (add-hook 'gnus-group-mode-hook #'gnus-topic-mode)
   ;; Display a `fill-column' indicator in Message mode.
