@@ -97,15 +97,6 @@
 (global-set-key (kbd "M-Q M-_") #'window-height-decrease)
 ;; -ResizeWidthheight
 
-;; EditConfig
-(defun edit-configs ()
-  "Opens the README.org file."
-  (interactive)
-  (find-file "~/.emacs.d/init.org"))
-
-(global-set-key (kbd "C-z e") #'edit-configs)
-;; -EditConfig
-
 ;; OrgIncludeAuto
 (defun save-and-update-includes ()
   "Update the line numbers of #+INCLUDE:s in current buffer.
@@ -194,6 +185,23 @@ FACE defaults to inheriting from default and highlight."
   (interactive)
   (message (kill-new (if (buffer-file-name) (buffer-file-name) (buffer-name)))))
 ;; -WhereAmI
+
+;; Copy region filename and line number
+(defun copy-github-link-for-region ()
+  "Copy the filename and region line numbers to the clipboard in GitHub format."
+  (interactive)
+  (when (use-region-p)
+    (let* ((file (buffer-file-name))
+           (start-line (line-number-at-pos (region-beginning)))
+           (end-line (line-number-at-pos (region-end)))
+           ;; Format: filename:start-end
+           (result (format "%s:%d-%d" file start-line end-line)))
+      (kill-new result)
+      (message "Copied: %s" result))))
+
+;; Bind to a global key, e.g., C-c g
+(global-set-key (kbd "C-c g") 'copy-github-link-for-region)
+;; -Copy region filename and line number
 
 (provide 'init-func)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -131,6 +131,7 @@
 
 (use-package elfeed
   :defer t
+  :bind (("C-z e" . elfeed))
   :custom
   (elfeed-feeds '(
                   ("https://planet.emacslife.com/atom.xml" emacs planet)
