@@ -40,7 +40,7 @@
          ("C-c T" . google-translate-query-translate))
   :custom
   (google-translate-default-source-language "en")
-  (google-translate-default-target-language "zh")
+  (google-translate-default-target-language "zh-CN")
   (google-translate-enable-ido-completion t)
   (google-translate-output-destination 'echo-area))
 ;; -google-translate
