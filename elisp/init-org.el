@@ -244,7 +244,7 @@
 ;; Bibtex stuff
 (use-package ebib
   :defer t
-  :bind (("C-z ." . ebib))
+  :bind (("C-z b" . ebib))
   (:map ebib-index-mode-map
               ("B" . ebib-biblio-import-doi))
   :init
