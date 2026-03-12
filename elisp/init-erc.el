@@ -54,7 +54,8 @@
   :custom
   (erc-autojoin-channels-alist '(("irc.libera.chat" "#emacs")))
   (erc-user-full-name user-full-name)
-  (erc-track-exclude-types '("NICK" "PART" "MODE" "PING" "PONG" "324" "329" "332" "333" "353" "477"))
+  (erc-hide-list '("JOIN" "NICK" "PART" "QUIT" "MODE" "324" "331" "333" "353"))
+  (erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE" "324" "331" "333" "353"))
   (erc-server-coding-system '(utf-8 . utf-8))
   (erc-interpret-mirc-color t)
   (erc-kill-buffer-on-part t)
