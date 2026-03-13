@@ -37,7 +37,7 @@
 
 ;; FontsList
 ;; Input Mono, Monaco Style, Line Height 1.3 download from http://input.fontbureau.com/
-(defvar font-list '(("Menlo" . 14) ("Menlo" . 14) ("Arial" . 14))
+(defvar font-list '(("Adwaita Mono" . 12) ("Menlo" . 12) ("Arial" . 12))
   "List of fonts and sizes.  The first one available will be used.")
 ;; -FontsList
 
@@ -64,19 +64,24 @@
       (set-frame-font font-setting nil t)
       (add-to-list 'default-frame-alist (cons 'font font-setting)))
 
-    (set-fontset-font t 'emoji (font-spec :family "Apple Color Emoji"))
+    (set-fontset-font t 'emoji (font-spec :family "Twitter Color Emoji"))
     (set-fontset-font t 'symbol (font-spec :family "STIX Two Math"))
     (set-fontset-font t 'greek (font-spec :family "Symbol"))
 
-    (set-fontset-font t 'hangul (font-spec :family "Apple SD Gothic Neo"))
-    (set-fontset-font t 'kana (font-spec :family "Hiragino Maru Gothic ProN"))
+    (set-fontset-font t 'hangul (font-spec :family "Noto Sans CJK JP"))
+    (set-fontset-font t 'kana (font-spec :family "Noto Sans CJK KR"))
 
-    (set-fontset-font t 'cjk-misc (font-spec :family "PingFang SC"))
-    (set-fontset-font t 'bopomofo (font-spec :family "PingFang SC"))
-    (set-fontset-font t 'han (font-spec :family "PingFang SC"))))
+    (set-fontset-font t 'cjk-misc (font-spec :family "Noto Sans CJK SC"))
+    (set-fontset-font t 'bopomofo (font-spec :family "Noto Sans CJK SC"))
+    (set-fontset-font t 'han (font-spec :family "Noto Sans CJK SC")))
+  (remove-hook 'after-make-frame-functions #'change-font))
 
 (when (display-graphic-p)
   (change-font))
+
+;; Use server-after-make-frame-hook for daemon mode clients
+(if (daemonp)
+    (add-hook 'server-after-make-frame-hook #'change-font))
 ;; -FontFun
 
 ;; ATIPac

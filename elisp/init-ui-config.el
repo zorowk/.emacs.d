@@ -100,20 +100,24 @@
 ;; -PixelScrollPrecMode
 
 ;; Alpha
-(set-frame-parameter nil 'ns-alpha-elements '(ns-alpha-all))
+(defun setup-frame-alpha (&optional frame)
+  "Apply alpha transparency, blur, and mode-line tweaks to the given frame."
+  (with-selected-frame (or frame (selected-frame))
+      (when (display-graphic-p)
+        (set-frame-parameter nil 'ns-alpha-elements
+                             '(ns-alpha-default
+                               ns-alpha-fringe
+                               ns-alpha-glyphs))
+        (set-frame-parameter nil 'alpha-background 0.95)
+        (set-frame-parameter nil 'ns-background-blur 50))))
 
-;; Choose elements:
-;; - Full list: ns-alpha-default (default face/background)
-;;              ns-alpha-fringe (fringes + internal border clears)
-;;              ns-alpha-box (boxed face outlines)
-;;              ns-alpha-stipple (stipple mask background clears)
-;;              ns-alpha-relief (3D relief/shadow lines)
-;;              ns-alpha-glyphs (glyph background fills like hl-line/region)
-(set-frame-parameter nil 'ns-alpha-elements
-                     '(ns-alpha-default ns-alpha-fringe ns-alpha-glyphs)) ;; e.g.
+(when (and (display-graphic-p)
+           (not (daemonp)))
+  (setup-frame-alpha))
 
-(set-frame-parameter nil 'alpha-background 0.75)
-(set-frame-parameter nil 'ns-background-blur 50)
+(when (daemonp)
+  (add-hook 'after-make-frame-functions #'setup-frame-alpha))
+
 (setq mode-line-collapse-minor-modes '(not))
 ;; -Alpha
 
