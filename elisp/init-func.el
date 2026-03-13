@@ -186,23 +186,6 @@ FACE defaults to inheriting from default and highlight."
   (message (kill-new (if (buffer-file-name) (buffer-file-name) (buffer-name)))))
 ;; -WhereAmI
 
-;; Copy region filename and line number
-(defun copy-github-link-for-region ()
-  "Copy the filename and region line numbers to the clipboard in GitHub format."
-  (interactive)
-  (when (use-region-p)
-    (let* ((file (buffer-file-name))
-           (start-line (line-number-at-pos (region-beginning)))
-           (end-line (line-number-at-pos (region-end)))
-           ;; Format: filename:start-end
-           (result (format "%s:%d-%d" file start-line end-line)))
-      (kill-new result)
-      (message "Copied: %s" result))))
-
-;; Bind to a global key, e.g., C-c g
-(global-set-key (kbd "C-c g") 'copy-github-link-for-region)
-;; -Copy region filename and line number
-
 (provide 'init-func)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-func.el ends here
