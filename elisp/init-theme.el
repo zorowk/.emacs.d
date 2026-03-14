@@ -64,11 +64,11 @@
 (use-package spacious-padding
   :config
   (setopt spacious-padding-widths
-          '( :internal-border-width 16
+          '( :internal-border-width 8
              :header-line-width 1
              :mode-line-width 1
              :tab-width 4
-             :right-divider-width 8
+             :right-divider-width 4
              :scroll-bar-width 0))
 
   ;; Read the doc string of `spacious-padding-subtle-mode-line' as it
