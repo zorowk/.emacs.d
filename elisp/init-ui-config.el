@@ -109,7 +109,7 @@
                                ns-alpha-fringe
                                ns-alpha-glyphs))
         (set-frame-parameter nil 'alpha-background 0.95)
-        (set-frame-parameter nil 'ns-background-blur 50))))
+        (set-frame-parameter nil 'ns-background-blur 25))))
 
 (when (and (display-graphic-p)
            (not (daemonp)))
