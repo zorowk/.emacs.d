@@ -78,42 +78,9 @@
 ;; -UTF8Coding
 
 ;; EditExp
-;; Remove useless whitespace before saving a file
-(defun delete-trailing-whitespace-except-current-line ()
-  "An alternative to `delete-trailing-whitespace'.
-
-The original function deletes trailing whitespace of the current line."
-  (interactive)
-  (let ((begin (line-beginning-position))
-        (end (line-end-position)))
-    (save-excursion
-      (when (< (point-min) (1- begin))
-        (save-restriction
-          (narrow-to-region (point-min) (1- begin))
-          (delete-trailing-whitespace)
-          (widen)))
-      (when (> (point-max) (+ end 2))
-        (save-restriction
-          (narrow-to-region (+ end 2) (point-max))
-          (delete-trailing-whitespace)
-          (widen))))))
-
-(defun smart-delete-trailing-whitespace ()
-  "Invoke `delete-trailing-whitespace-except-current-line' on selected major modes only."
-  (unless (member major-mode '(diff-mode))
-    (delete-trailing-whitespace-except-current-line)))
-
-(defun toggle-auto-trailing-ws-removal ()
-  "Toggle trailing whitespace removal."
-  (interactive)
-  (if (member #'smart-delete-trailing-whitespace before-save-hook)
-      (progn
-        (remove-hook 'before-save-hook #'smart-delete-trailing-whitespace)
-        (message "Disabled auto remove trailing whitespace."))
-    (add-hook 'before-save-hook #'smart-delete-trailing-whitespace)
-    (message "Enabled auto remove trailing whitespace.")))
 ;; Add to hook during startup
-(add-hook 'before-save-hook #'smart-delete-trailing-whitespace)
+(add-hook 'before-save-hook 'whitespace-cleanup)
+(add-hook 'makefile-mode-hook 'indent-tabs-mode)
 
 ;; Replace selection on insert
 (delete-selection-mode 1)
