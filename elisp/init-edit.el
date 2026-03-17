@@ -51,6 +51,11 @@
   (global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click))
 ;; -MultipleCursors
 
+;; expand-region
+(use-package expand-region
+  :bind ("C-=" . er/expand-region))
+;; -expand-region
+
 ;; SmartParensPac
 (use-package smartparens
   :hook (prog-mode . smartparens-mode)
