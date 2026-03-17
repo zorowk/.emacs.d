@@ -33,3 +33,4 @@
 .aider*
 /tree-sitter/
 *.DS_Store
+/.agent-shell/
