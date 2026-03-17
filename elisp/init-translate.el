@@ -36,10 +36,9 @@
 ;; google-translate
 (use-package google-translate
   :defer t
-  :bind (("C-c t" . google-translate-at-point)
-         ("C-c T" . google-translate-query-translate))
+  :bind ("C-c t" . google-translate-at-point)
   :custom
-  (google-translate-default-source-language "en")
+  (google-translate-default-source-language "auto")
   (google-translate-default-target-language "zh-CN")
   (google-translate-enable-ido-completion t)
   (google-translate-output-destination 'echo-area))
