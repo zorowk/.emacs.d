@@ -1,20 +1,20 @@
-;;; init-reader.el --- -*- lexical-binding: t -*-
+;;; init-present.el --- -*- lexical-binding: t -*-
 ;;
-;; Filename: init-reader.el
-;; Description: emacs reader
+;; Filename: init-present.el
+;; Description: emacs present
 ;; Author: Mingde (Matthew) Zeng
 ;; Copyright (C) 2019 Mingde (Matthew) Zeng
 ;; Created: Tue Jun  4 00:26:09 2019 (-0400)
 ;; Version: 3.0
 ;; URL: https://github.com/MatthewZMD/.emacs.d
-;; Keywords: M-EMACS .emacs.d reader
+;; Keywords: M-EMACS .emacs.d present
 ;; Compatibility: emacs-version >= 26.1
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;; Commentary:
 ;;
-;; This initializes emacs reader
+;; This initializes emacs present
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -35,17 +35,14 @@
 ;;
 ;;; Code:
 
-;; ReaderPac
-(use-package reader
+;; dslide
+(use-package dslide
   :defer t
-  :straight '(reader :type git :host codeberg :repo "divyaranjan/emacs-reader"
-                     :files ("*.el" "render-core.so")
-                     :pre-build ("make" "all"))
-  :config
-  (setq reader-supported-formats
-        (delete "epub" reader-supported-formats)))
-;; -ReaderPac
+  :straight (dslide :type git :host github
+                    :repo "positron-solutions/dslide"))
 
-(provide 'init-reader)
+;; -dslide
+
+(provide 'init-present)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; init-reader.el ends here
+;;; init-present.el ends here
