@@ -56,6 +56,14 @@
   :bind ("C-=" . er/expand-region))
 ;; -expand-region
 
+;; easy-kill
+(use-package easy-kill
+  :ensure t
+  :config
+  (global-set-key [remap kill-ring-save] #'easy-kill)
+  (global-set-key [remap mark-sexp] #'easy-mark))
+;; -easy-kill
+
 ;; SmartParensPac
 (use-package smartparens
   :hook (prog-mode . smartparens-mode)
@@ -121,20 +129,6 @@
                                  (window-start) msg))))))
           (blink-matching-open))))))
 ;; -MatchParens
-
-;; vlf
-(use-package vlf
-  :ensure t
-  :commands (vlf vlfi))
-;; -vlf
-
-;; easy-kill
-(use-package easy-kill
-  :ensure t
-  :config
-  (global-set-key [remap kill-ring-save] #'easy-kill)
-  (global-set-key [remap mark-sexp] #'easy-mark))
-;; -easy-kill
 
 (provide 'init-edit)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
