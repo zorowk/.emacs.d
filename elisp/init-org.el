@@ -39,7 +39,8 @@
 (use-package org
   :straight (:type built-in)
   :defer t
-  :bind (("C-c l" . org-store-link)
+  :bind (("C-c C-l" . org-store-link)
+         ("C-c C-i" . org-insert-link)
          ("C-c a" . org-agenda)
          ("C-c c" . org-capture))
   :custom
@@ -62,13 +63,13 @@
   (org-latex-pdf-process
     (let
       ((cmd (concat "xelatex -shell-escape -interaction nonstopmode"
-		    " -output-directory %o %f")))
+            " -output-directory %o %f")))
       (list cmd
-	    "cd %o; if test -r %b.idx; then makeindex %b.idx; fi"
-	    "cd %o; bibtex %b"
-	    cmd
-	    cmd
-	    "rm -rf %b.out %b.log %b.tex %b.bbl %b.ind auto")))
+        "cd %o; if test -r %b.idx; then makeindex %b.idx; fi"
+        "cd %o; bibtex %b"
+        cmd
+        cmd
+        "rm -rf %b.out %b.log %b.tex %b.bbl %b.ind auto")))
   (org-latex-compiler "xelatex")
   :custom-face
   (org-agenda-current-time ((t (:foreground "spring green"))))
@@ -231,14 +232,6 @@
   :defer t   ;Auto-install the package from Melpa
   :after ox)
 ;; -ox-hugo
-
-;; dslide
-(use-package dslide
-  :defer t
-  :straight (dslide :type git :host github
-                    :repo "positron-solutions/dslide"))
-
-;; -dslide
 
 ;; Ebib
 ;; Bibtex stuff

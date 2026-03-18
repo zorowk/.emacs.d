@@ -37,7 +37,13 @@
 ;;; Code:
 
 ;; DeferGC
-(setq gc-cons-threshold 100000000)
+;; Temporarily increase GC threshold during startup
+(setq gc-cons-threshold most-positive-fixnum)
+
+;; Restore to normal value after startup (e.g. 50MB)
+(add-hook 'emacs-startup-hook
+          (lambda () (setq gc-cons-threshold (* 100 1024 1024))))
+
 (setq gc-cons-percentage 0.6)
 ;; -DeferGC
 
@@ -55,8 +61,9 @@
 ;; -UnsetSRF
 
 ;; DisableUnnecessaryInterface
-(push '(tool-bar-lines . 0) default-frame-alist)
-(push '(vertical-scroll-bars) default-frame-alist)
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
 ;; -DisableUnnecessaryInterface
 
 (provide 'early-init)
