@@ -51,10 +51,12 @@
   (global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click))
 ;; -MultipleCursors
 
-;; expand-region
-(use-package expand-region
-  :bind ("C-=" . er/expand-region))
-;; -expand-region
+;; expreg
+(use-package expreg
+  :ensure t
+  :bind (("C-=" . expreg-expand)
+         ("C--" . expreg-contract)))
+;; -expreg
 
 ;; easy-kill
 (use-package easy-kill

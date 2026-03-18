@@ -50,9 +50,6 @@
 (global-set-key (kbd "C-c l") #'dictionary-lookup-definition)
 ;; Truncate lines
 (global-set-key (kbd "C-x C-l") #'toggle-truncate-lines)
-;; Adjust font size like web browsers
-(global-set-key (kbd "C-+") #'text-scale-increase)
-(global-set-key (kbd "C--") #'text-scale-decrease)
 ;; Move up/down paragraph
 (global-set-key (kbd "M-n") #'forward-paragraph)
 (global-set-key (kbd "M-p") #'backward-paragraph)
@@ -90,6 +87,9 @@
 ;; Map Alt key to Meta
 (setq x-alt-keysym 'meta)
 ;; -EditExp
+
+;; isearch
+(setopt isearch-lazy-count t)
 
 ;; History
 (use-package recentf
