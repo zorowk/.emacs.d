@@ -52,15 +52,15 @@
 (add-hook 'eww-after-render-hook
           (lambda ()
             (olivetti-mode 1)
-            (setq-local olivetti-body-width 120)))
+            (setq-local olivetti-body-width 108)))
 (add-hook 'nov-mode-hook
           (lambda ()
             (olivetti-mode 1)
-            (setq-local olivetti-body-width 120)))
+            (setq-local olivetti-body-width 108)))
 (add-hook 'Info-mode-hook
           (lambda ()
             (olivetti-mode 1)
-            (setq-local olivetti-body-width 80)))
+            (setq-local olivetti-body-width 96)))
 ;; -Olivetti
 
 (use-package shrface
@@ -135,14 +135,9 @@
   :custom
   (elfeed-feeds '(
                   ("https://planet.emacslife.com/atom.xml" emacs planet)
-                  ("https://karthinks.com/index.xml" emacs karthinks)
                   ("https://www.phoronix.com/rss.php" linux phoronix)
                   ("https://hnrss.org/frontpage" hacker-news)
-                  ("https://lobste.rs/rss" lobsters)
-                  ("https://drewdevault.com/blog/index.xml" drew-devault)
-                  ("https://emersion.fr/blog/atom.xml" emersion)
-                  ("https://joarvarndt.se/rss.xml" Joar von Ardnt)
-                  ("https://emacsredux.com/atom.xml" Emacs Redux)))
+                  ("https://lobste.rs/rss" lobsters)))
   (elfeed-db-directory (expand-file-name "elfeed" user-emacs-directory))
   :config
   (add-hook 'elfeed-show-mode-hook #'eldoc-mode)
