@@ -181,8 +181,14 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-gnus)
 
+;;(require 'init-translate)
+
 ;; Miscellaneous
 (require 'init-shrface)
+
+;;(require 'init-vlf)
+
+;;(require 'init-present)
 
 ;; InitPrivate
 ;; Load init-private.el if it exists
