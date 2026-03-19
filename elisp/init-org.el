@@ -39,7 +39,7 @@
 (use-package org
   :straight (:type built-in)
   :defer t
-  :bind (("C-c C-l" . org-store-link)
+  :bind (("C-c C-s" . org-store-link)
          ("C-c C-i" . org-insert-link)
          ("C-c a" . org-agenda)
          ("C-c c" . org-capture))

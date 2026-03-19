@@ -47,7 +47,7 @@
 (global-set-key (kbd "M-/") nil)
 ;; dictionary
 (setq dictionary-use-single-buffer t)
-(global-set-key (kbd "C-c l") #'dictionary-lookup-definition)
+(global-set-key (kbd "C-c C-l") #'dictionary-lookup-definition)
 ;; Truncate lines
 (global-set-key (kbd "C-x C-l") #'toggle-truncate-lines)
 ;; Move up/down paragraph
