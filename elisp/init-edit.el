@@ -135,20 +135,20 @@
 ;; kde wayland copy pase
 (when (and (eq system-type 'gnu/linux)
            (getenv "WAYLAND_DISPLAY"))
-  ;; 启用 clipboard 和 primary selection
-  (setq select-enable-clipboard t)
-  (setq select-enable-primary t)
-
-  ;; 用 wl-copy / wl-paste 桥接
-  (setq interprogram-cut-function
-        (lambda (text)
-          (start-process "wl-copy" "*Messages*" "wl-copy" "--trim-newline")
-          (process-send-string "wl-copy" text)
-          (process-send-eof "wl-copy")))
-
-  (setq interprogram-paste-function
-        (lambda ()
-          (shell-command-to-string "wl-paste -n --no-newline"))))
+  (setq wl-copy-process nil)
+  (defun wl-copy (text)
+    (setq wl-copy-process (make-process :name "wl-copy"
+                                        :buffer nil
+                                        :command '("wl-copy" "-f" "-n")
+                                        :connection-type 'pipe))
+    (process-send-string wl-copy-process text)
+    (process-send-eof wl-copy-process))
+  (defun wl-paste ()
+    (if (and wl-copy-process (process-live-p wl-copy-process))
+        nil ; should return nil if we're the current paste owner
+      (shell-command-to-string "wl-paste -n | tr -d \r")))
+  (setq interprogram-cut-function 'wl-copy)
+  (setq interprogram-paste-function 'wl-paste))
 ;; -kde wayland copy pase
 
 (provide 'init-edit)
