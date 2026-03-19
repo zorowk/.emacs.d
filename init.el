@@ -172,7 +172,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-jupyter)
 
-;;(require 'init-reader)
+(require 'init-reader)
 
 ;; Internet
 (require 'init-erc)
