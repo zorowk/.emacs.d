@@ -132,6 +132,25 @@
           (blink-matching-open))))))
 ;; -MatchParens
 
+;; kde wayland copy pase
+(when (and (eq system-type 'gnu/linux)
+           (getenv "WAYLAND_DISPLAY"))
+  ;; 启用 clipboard 和 primary selection
+  (setq select-enable-clipboard t)
+  (setq select-enable-primary t)
+
+  ;; 用 wl-copy / wl-paste 桥接
+  (setq interprogram-cut-function
+        (lambda (text)
+          (start-process "wl-copy" "*Messages*" "wl-copy" "--trim-newline")
+          (process-send-string "wl-copy" text)
+          (process-send-eof "wl-copy")))
+
+  (setq interprogram-paste-function
+        (lambda ()
+          (shell-command-to-string "wl-paste -n --no-newline"))))
+;; -kde wayland copy pase
+
 (provide 'init-edit)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-edit.el ends here
