@@ -36,15 +36,27 @@
 ;;; Code:
 
 ;; ReaderPac
-(use-package reader
-  :defer t
-  :straight '(reader :type git :host codeberg :repo "divyaranjan/emacs-reader"
-                     :files ("*.el" "render-core.so")
-                     :pre-build ("make" "all"))
-  :config
-  (setq reader-supported-formats
-        (delete "epub" reader-supported-formats)))
+(when (eq system-type 'gnu/linux)
+  (use-package reader
+    :defer t
+    :straight '(reader :type git :host codeberg :repo "divyaranjan/emacs-reader"
+                       :files ("*.el" "render-core.so")
+                       :pre-build ("make" "all"))
+    :config
+    (setq reader-supported-formats
+          (delete "epub" reader-supported-formats))))
 ;; -ReaderPac
+
+;; dictionary
+(setq dictionary-use-single-buffer t)
+(global-set-key (kbd "C-c C-l") #'dictionary-lookup-definition)
+
+(when (eq system-type 'darwin)
+  (use-package osx-dictionary
+    :if (eq system-type 'darwin)
+    :defer t
+    :bind ("C-c C-l" . osx-dictionary-search-pointer)))
+;; -dictionary
 
 (provide 'init-reader)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
