@@ -61,6 +61,10 @@
           (lambda ()
             (olivetti-mode 1)
             (setq-local olivetti-body-width 96)))
+(add-hook 'elpher-mode-hook
+          (lambda ()
+            (olivetti-mode 1)
+            (setq-local olivetti-body-width 96)))
 ;; -Olivetti
 
 (use-package shrface
