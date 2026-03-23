@@ -35,7 +35,8 @@
 
 ;; elpher
 (use-package elpher
-  :ensure t)
+  :ensure t
+  :bind ("C-z b" . elpher))
 ;; -elpher
 
 (provide 'init-elpher)
