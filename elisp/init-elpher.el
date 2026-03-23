@@ -1,20 +1,18 @@
-;;; init-shell.el --- -*- lexical-binding: t -*-
+;;; init-elpher.el --- -*- lexical-binding: t -*-
 ;;
-;; Filename: init-shell.el
-;; Description: Initialize Shell
+;; Filename: init-elpher.el
+;; Description: Initialize Elpher
 ;; Author: Mingde (Matthew) Zeng
 ;; Copyright (C) 2019 Mingde (Matthew) Zeng
 ;; Created: Tue Mar 19 09:20:19 2019 (-0400)
 ;; Version: 3.0
 ;; URL: https://github.com/MatthewZMD/.emacs.d
-;; Keywords: M-EMACS .emacs.d shell shell-here
+;; Keywords: M-EMACS .emacs.d elpher elpher-here
 ;; Compatibility: emacs-version >= 26.1
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;; Commentary:
-;;
-;; This initializes shell-here, term-keys, multi-term, aweshell
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -35,33 +33,11 @@
 ;;
 ;;; Code:
 
-(eval-when-compile
-  (require 'init-const))
+;; elpher
+(use-package elpher
+  :ensure t)
+;; -elpher
 
-;; TermKeysPac
-(use-package term-keys
-  :straight (term-keys :type git :host github :repo "CyberShadow/term-keys")
-  :after vertm
-  :if (not (display-graphic-p))
-  :config (term-keys-mode t))
-;; -TermKeysPac
-
-;; VTermPac
-(use-package vterm
-  :defer t
-  :commands vterm
-  :bind ((:map vterm-mode-map
-               ("C-y" . vterm-yank)
-               ("M-y" . vterm-yank-pop)
-               ("C-q" . vterm-send-next-key)
-               ("C-z" . nil)
-               ("M-:" . nil)))
-  :custom
-  (vterm-kill-buffer-on-exit t)
-  (vterm-max-scrollback 10000)
-  (vterm-buffer-name-string "vterm %s"))
-;; -VTermPac
-
-(provide 'init-shell)
+(provide 'init-elpher)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; init-shell.el ends here
+;;; init-elpher.el ends here

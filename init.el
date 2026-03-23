@@ -170,6 +170,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-jupyter)
 
+;;(require 'init-ebib)
+
 (require 'init-reader)
 
 ;; Internet
@@ -178,6 +180,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (require 'init-llm)
 
 (require 'init-gnus)
+
+(require 'init-elpher)
 
 ;; Miscellaneous
 (require 'init-shrface)
