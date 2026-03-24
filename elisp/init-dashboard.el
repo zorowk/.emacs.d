@@ -49,7 +49,7 @@
   :custom
   (dashboard-icon-type 'all-the-icons)
   (dashboard-banner-logo-title "Close the world. Open the nExt.")
-  (dashboard-startup-banner (expand-file-name "images/KEC_Light_BK_Small.png" user-emacs-directory))
+  (dashboard-startup-banner (expand-file-name "images/KEC_Dark_BK_Small.png" user-emacs-directory))
   (dashboard-items '((recents  . 7)
                      (bookmarks . 7)
                      (agenda . 5)))
