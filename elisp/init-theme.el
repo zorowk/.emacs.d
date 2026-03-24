@@ -39,17 +39,17 @@
 (eval-when-compile
   (require 'init-const))
 
-(load-theme 'modus-vivendi-tinted :no-confirm)
+(load-theme 'modus-operandi :no-confirm)
 
 ;; SpaciousPadding
 (use-package spacious-padding
   :config
   (setopt spacious-padding-widths
           '( :internal-border-width 16
-             :header-line-width 4
+             :header-line-width 1
              :mode-line-width 1
              :tab-width 4
-             :right-divider-width 8
+             :right-divider-width 4
              :scroll-bar-width 0))
 
   ;; Read the doc string of `spacious-padding-subtle-mode-line' as it
