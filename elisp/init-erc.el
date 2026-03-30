@@ -42,6 +42,7 @@
 ;; ERCPac
 (use-package erc
   :straight (:type built-in)
+  :defer t
   :init
   (require 'erc-sasl)
   ;; Prerequisite: Configure this to your IRC nickname

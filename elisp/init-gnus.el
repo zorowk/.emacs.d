@@ -36,6 +36,7 @@
 ;; gnus
 (use-package gnus
   :straight (:type built-in)
+  :defer t
   :init
   (use-package auth-source-xoauth2-plugin :defer t)
   :defer t
