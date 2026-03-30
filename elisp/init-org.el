@@ -38,6 +38,8 @@
 ;; OrgPac
 (use-package org
   :straight (:type built-in)
+  :init
+  (require 'org-tempo)
   :defer t
   :bind (("C-c C-s" . org-store-link)
          ("C-c C-i" . org-insert-link)
