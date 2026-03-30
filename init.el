@@ -184,8 +184,6 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (require 'init-elpher)
 
 ;; Miscellaneous
-(require 'init-shrface)
-
 ;;(require 'init-vlf)
 
 ;;(require 'init-present)
