@@ -58,6 +58,27 @@
     :bind ("C-c C-l" . osx-dictionary-search-pointer)))
 ;; -dictionary
 
+;; nov
+(use-package nov
+  :defer t
+  :init
+  (add-hook 'nov-mode-hook #'shrface-mode)
+  (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode)))
+;; -nov
+
+;; elfeed
+(use-package elfeed
+  :defer t
+  :bind (("C-z e" . elfeed))
+  :custom
+  (elfeed-feeds '(
+                  ("https://planet.emacslife.com/atom.xml" emacs planet)
+                  ("https://www.phoronix.com/rss.php" linux phoronix)
+                  ("https://hnrss.org/frontpage" hacker-news)
+                  ("https://lobste.rs/rss" lobsters)))
+  (elfeed-db-directory (expand-file-name "elfeed" user-emacs-directory)))
+;; -elfeed
+
 (provide 'init-reader)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-reader.el ends here
