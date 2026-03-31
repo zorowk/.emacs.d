@@ -62,8 +62,15 @@
 
 ;; Pulsar
 (use-package pulsar
+  :ensure t
+  :init
+  (pulsar-global-mode 1)
   :config
-  (pulsar-global-mode))
+  (setq pulsar-delay 0.055)
+  (setq pulsar-iterations 5)
+  (setq pulsar-face 'pulsar-green)
+  (setq pulsar-region-face 'pulsar-yellow)
+  (setq pulsar-highlight-face 'pulsar-magenta))
 ;; -Pulsar
 
 (provide 'init-theme)
