@@ -37,13 +37,13 @@
 
 ;; EINPac
 (use-package ein
+  :defer t
   :if (executable-find "jupyter")
   :bind
   (("C-c e" . ein:worksheet-execute-cell)
    ("C-c C-e" . ein:worksheet-execute-all-cells))
   :custom-face
   (ein:basecell-input-area-face ((t (:extend t :background "#303640"))))
-  :defer t
   :custom
   (ein:worksheet-enable-undo t))
 ;; -EINPac
