@@ -39,7 +39,6 @@
 (use-package ace-window
   :ensure t
   :bind ("C-x C-o" . ace-window)
-  :init (ace-window-display-mode 1)
   :custom-face (aw-mode-line-face ((t (:inherit (bold mode-line-emphasis)))))
   :config
   (setq aw-swap-invert t)
@@ -57,8 +56,8 @@
           (?o aw-flip-window)
           (?b aw-switch-buffer-other-window "Switch Buffer Other Window")
           (?c aw-split-window-fair "Split Fair Window")
-          (?s aw-split-window-vert "Split Vert Window")
-          (?v aw-split-window-horz "Split Horz Window")
+          (?v aw-split-window-vert "Split Vert Window")
+          (?h aw-split-window-horz "Split Horz Window")
           (?o delete-other-windows "Delete Other Windows")
           (?? aw-show-dispatch-help))))
 ;; -AceWindowPac
