@@ -68,6 +68,10 @@
   ;; (add-hook 'prog-mode-hook #'tempel-abbrev-mode)
   ;; (global-tempel-abbrev-mode)
   )
+
+(use-package tempel-collection
+  :ensure t
+  :after tempel)
 ;; -Tempel
 
 (provide 'init-tempel)
