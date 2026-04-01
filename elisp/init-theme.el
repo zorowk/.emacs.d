@@ -81,12 +81,30 @@
      ("C-M-`" . popper-toggle-type))
   :init
   (setq popper-reference-buffers
-    '("\\*Messages\\*"
-      "Output\\*$"
+    '(("^\\*Warnings\\*$" . hide)
+      ("^\\*Compile-Log\\*$" . hide)
+      ;; "^\\*Matlab Help.*\\*$"
+      ;; "^\\*Messages\\*$"
+      "^\\*Backtrace\\*"
+      "^\\*evil-registers\\*"
+      "^\\*Apropos"
+      "^Calc:"
+      "^\\*eldoc\\*"
+      "^\\*TeX errors\\*"
+      "^\\*ielm\\*"
+      "^\\*TeX Help\\*"
+      "^\\*gptel-ask\\*"
+      "\\*Shell Command Output\\*"
       "\\*Async Shell Command\\*"
+      ("\\*Detached Shell Command\\*" . hide)
+      "\\*Completions\\*"
+      "^\\*Org QL View:notmuch-links\\*$"
+      "[Oo]utput\\*"
+      helpful-mode
       help-mode
-      eshell-mode
-      shell-mode
+      pydoc-mode
+      TeX-special-mode
+      messages-buffer-mode
       dictionary-mode
       compilation-mode))
   (setq popper-group-function #'popper-group-by-directory)
