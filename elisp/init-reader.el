@@ -37,13 +37,7 @@
 
 ;; dictionary
 (setq dictionary-use-single-buffer t)
-(global-set-key (kbd "C-c C-l") #'dictionary-lookup-definition)
-
-(when (eq system-type 'darwin)
-  (use-package osx-dictionary
-    :if (eq system-type 'darwin)
-    :defer t
-    :bind ("C-c l" . osx-dictionary-search-pointer)))
+(global-set-key (kbd "C-c l") #'dictionary-lookup-definition)
 ;; -dictionary
 
 ;; nov
