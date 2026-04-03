@@ -43,7 +43,7 @@
   (use-package osx-dictionary
     :if (eq system-type 'darwin)
     :defer t
-    :bind ("C-c C-l" . osx-dictionary-search-pointer)))
+    :bind ("C-c l" . osx-dictionary-search-pointer)))
 ;; -dictionary
 
 ;; nov
