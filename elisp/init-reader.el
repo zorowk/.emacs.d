@@ -37,7 +37,7 @@
 
 ;; dictionary
 (setq dictionary-use-single-buffer t)
-(global-set-key (kbd "C-c l") #'dictionary-lookup-definition)
+(global-set-key (kbd "C-c C-l") #'dictionary-lookup-definition)
 ;; -dictionary
 
 ;; nov
