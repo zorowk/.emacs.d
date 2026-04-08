@@ -126,6 +126,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-ace-window)
 
+(require 'init-shell)
+
 (require 'init-dired)
 
 (require 'init-buffer)
@@ -184,7 +186,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (require 'init-elpher)
 
 ;; Miscellaneous
-(require 'init-vlf)
+;;(require 'init-vlf)
 
 ;;(require 'init-present)
 
