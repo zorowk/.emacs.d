@@ -111,6 +111,10 @@
 ;; When buffer is closed, saves the cursor location
 (save-place-mode 1)
 
+
+;; lets you drop the prefix after the first invocation
+(repeat-mode 1)
+
 ;; Set history-length longer
 (setq-default history-length 500)
 ;; -History
@@ -183,6 +187,47 @@
 (add-to-list 'auto-mode-alist '("\\.bbclass\\'" . shell-script-mode))
 (add-to-list 'auto-mode-alist '("\\.Rmd\\'" . markdown-mode))
 ;; -SmallConfigs
+
+;; Disable Bidirectional Text Scanning
+(setq-default bidi-paragraph-direction 'left-to-right)
+(setq bidi-inhibit-bpa t)
+
+;; Skip Fontification During Input
+(setq redisplay-skip-fontification-on-input t)
+
+;; Increase Process Output Buffer for LSP
+(setq read-process-output-max (* 4 1024 1024)) ; 4MB
+
+;; Don’t Render Cursors in Non-Focused Windows
+(setq-default cursor-in-non-selected-windows nil)
+(setq highlight-nonselected-windows nil)
+
+;; Save the Clipboard Before Killing
+(setq save-interprogram-paste-before-kill t)
+
+;; No Duplicates in the Kill Ring
+(setq kill-do-not-save-duplicates t)
+
+;; Auto-Chmod Scripts on Save
+(add-hook 'after-save-hook
+          #'executable-make-buffer-file-executable-if-script-p)
+
+;; Sane Syntax in re-builder
+(setq reb-re-syntax 'string)
+
+;; Proportional Window Resizing
+(setq window-combination-resize t)
+
+;; Faster Mark Popping
+(setq set-mark-command-repeat-pop t)
+
+;; Recenter After save-place Restores Position
+(advice-add 'save-place-find-file-hook :after
+            (lambda (&rest _)
+              (when buffer-file-name (ignore-errors (recenter)))))
+
+;; Auto-Select Help Windows
+(setq help-window-select t)
 
 (provide 'init-global-config)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
