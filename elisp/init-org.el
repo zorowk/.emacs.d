@@ -102,7 +102,6 @@
      (latex .t)
      (python . t)
      (R . t)
-     (ein . t)
      (emacs-lisp . t)
      (maxima . t)
      (gnuplot . t)))

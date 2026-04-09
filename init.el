@@ -170,7 +170,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 ;; Office
 (require 'init-org)
 
-(require 'init-ein)
+;;(require 'init-ein)
 
 ;;(require 'init-ebib)
 
