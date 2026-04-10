@@ -39,7 +39,7 @@
 (eval-when-compile
   (require 'init-const))
 
-(load-theme 'modus-operandi-deuteranopia :no-confirm)
+(load-theme 'modus-operandi-tinted :no-confirm)
 
 ;; SpaciousPadding
 (use-package spacious-padding
