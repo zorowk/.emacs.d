@@ -35,19 +35,18 @@
 ;;
 ;;; Code:
 
-;; EINPac
-(use-package ein
+;; Jupyter
+(use-package jupyter
   :defer t
-  :if (executable-find "jupyter")
-  :bind
-  (("C-c e" . ein:worksheet-execute-cell)
-   ("C-c C-e" . ein:worksheet-execute-all-cells))
-  :custom-face
-  (ein:basecell-input-area-face ((t (:extend t :background "#303640"))))
-  :custom
-  (ein:worksheet-enable-undo t))
-;; -EINPac
+  :config
+  (setq jupyter-repl-echo-eval-p t)
+  (with-eval-after-load 'org
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     (append '((jupyter . t))
+             org-babel-load-languages))))
+;; -Jupyter
 
-(provide 'init-ein)
+(provide 'init-jupyter)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-ein.el ends here
