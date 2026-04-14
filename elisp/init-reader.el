@@ -44,7 +44,6 @@
 (use-package nov
   :defer t
   :init
-  (add-hook 'nov-mode-hook #'shrface-mode)
   (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode)))
 ;; -nov
 
