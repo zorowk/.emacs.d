@@ -37,9 +37,19 @@
 
 ;; FontsList
 ;; Input Mono, Monaco Style, Line Height 1.3 download from http://input.fontbureau.com/
-(defvar font-list '(("SF Mono" . 15) ("Menlo" . 15) ("Arial" . 15))
+(defvar font-list '(("JetBrains Mono" . 11) ("Anonymous Pro" . 11) ("Adwaita Mono" . 11))
   "List of fonts and sizes.  The first one available will be used.")
 ;; -FontsList
+
+;; --- Mixed-Pitch Configuration ---
+;; This is the core plugin that creates the "Safari/Web" look by using
+;; proportional fonts for text and monospaced for code blocks.
+(use-package mixed-pitch
+  :ensure t
+  :hook (text-mode . mixed-pitch-mode)
+  :config
+  ;; Keep font sizes consistent between faces
+  (setq mixed-pitch-set-height t))
 
 ;; FontFun
 (defun get-available-fonts ()
@@ -56,6 +66,7 @@
          font-name font-size font-setting)
     (if (not available-fonts)
         (message "No fonts from the chosen set are available")
+      ;; 1. Setup Default Face (Monospaced/Coding)
       (if (called-interactively-p 'interactive)
           (let* ((chosen (assoc-string (completing-read "What font to use? " available-fonts nil t) available-fonts)))
             (setq font-name (car chosen) font-size (read-number "Font size: " (cdr chosen))))
@@ -64,24 +75,31 @@
       (set-frame-font font-setting nil t)
       (add-to-list 'default-frame-alist (cons 'font font-setting)))
 
-    (set-fontset-font t 'emoji (font-spec :family "Apple Color Emoji"))
+    ;; 2. Setup Variable-Pitch Face (Prose/Safari Style)
+      ;; We manually set this since we are not using fontaine.
+      (set-face-attribute 'variable-pitch nil
+                          :family "Anonymous Pro")
+
+    ;; 3. Symbol and Emoji Configuration
+    (set-fontset-font t 'emoji (font-spec :family "Noto Color Emoji"))
     (set-fontset-font t 'symbol (font-spec :family "STIX Two Math"))
     (set-fontset-font t 'greek (font-spec :family "Symbol"))
 
-    (set-fontset-font t 'hangul (font-spec :family "Apple SD Gothic Neo"))
-    (set-fontset-font t 'kana (font-spec :family "Hiragino Maru Gothic ProN"))
-
-    (set-fontset-font t 'cjk-misc (font-spec :family "PingFang SC"))
-    (set-fontset-font t 'bopomofo (font-spec :family "PingFang SC"))
-    (set-fontset-font t 'han (font-spec :family "PingFang SC")))
-  (remove-hook 'after-make-frame-functions #'change-font))
+    ;; 4. CJK Character Configuration (Linux optimized)
+    (set-fontset-font t 'hangul (font-spec :family "Noto Sans CJK KR"))
+    (set-fontset-font t 'kana (font-spec :family "Noto Sans CJK JP"))
+    (set-fontset-font t 'cjk-misc (font-spec :family "Noto Sans CJK SC"))
+    (set-fontset-font t 'bopomofo (font-spec :family "Noto Sans CJK SC"))
+    (set-fontset-font t 'han (font-spec :family "Noto Sans CJK SC"))))
 
 (when (display-graphic-p)
   (change-font))
 
-;; Use server-after-make-frame-hook for daemon mode clients
-(if (daemonp)
-    (add-hook 'server-after-make-frame-hook #'change-font))
+;; Re-apply when creating new frames (for emacsclient)
+(add-hook 'after-make-frame-functions
+          (lambda (frame)
+            (with-selected-frame frame
+              (when (display-graphic-p) (change-font)))))
 ;; -FontFun
 
 ;; ATIPac
