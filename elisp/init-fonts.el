@@ -41,16 +41,6 @@
   "List of fonts and sizes.  The first one available will be used.")
 ;; -FontsList
 
-;; --- Mixed-Pitch Configuration ---
-;; This is the core plugin that creates the "Safari/Web" look by using
-;; proportional fonts for text and monospaced for code blocks.
-(use-package mixed-pitch
-  :ensure t
-  :hook (text-mode . mixed-pitch-mode)
-  :config
-  ;; Keep font sizes consistent between faces
-  (setq mixed-pitch-set-height t))
-
 ;; FontFun
 (defun get-available-fonts ()
   "Get list of available fonts from font-list."
@@ -76,9 +66,9 @@
       (add-to-list 'default-frame-alist (cons 'font font-setting)))
 
     ;; 2. Setup Variable-Pitch Face (Prose/Safari Style)
-      ;; We manually set this since we are not using fontaine.
-      (set-face-attribute 'variable-pitch nil
-                          :family "Menlo")
+    ;; We manually set this since we are not using fontaine.
+    (set-face-attribute 'variable-pitch nil
+                        :family "Menlo")
 
     ;; 3. Symbol and Emoji Configuration
     (set-fontset-font t 'emoji (font-spec :family "Apple Color Emoji"))
