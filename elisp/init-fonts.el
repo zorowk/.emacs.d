@@ -35,52 +35,29 @@
 ;;
 ;;; Code:
 
-;; FontsList
-;; Input Mono, Monaco Style, Line Height 1.3 download from http://input.fontbureau.com/
-(defvar font-list '(("JetBrains Mono" . 15) ("Menlo" . 15) ("Georgia" . 15))
-  "List of fonts and sizes.  The first one available will be used.")
-;; -FontsList
-
 ;; FontFun
-(defun get-available-fonts ()
-  "Get list of available fonts from font-list."
-  (let (available-fonts)
-    (dolist (font font-list (nreverse available-fonts))
-      (when (member (car font) (font-family-list))
-        (push font available-fonts)))))
-
 (defun change-font ()
-  "Interactively change a font from a list a available fonts."
-  (interactive)
-  (let* ((available-fonts (get-available-fonts))
-         font-name font-size font-setting)
-    (if (not available-fonts)
-        (message "No fonts from the chosen set are available")
-      ;; 1. Setup Default Face (Monospaced/Coding)
-      (if (called-interactively-p 'interactive)
-          (let* ((chosen (assoc-string (completing-read "What font to use? " available-fonts nil t) available-fonts)))
-            (setq font-name (car chosen) font-size (read-number "Font size: " (cdr chosen))))
-        (setq font-name (caar available-fonts) font-size (cdar available-fonts)))
-      (setq font-setting (format "%s-%d" font-name font-size))
-      (set-frame-font font-setting nil t)
-      (add-to-list 'default-frame-alist (cons 'font font-setting)))
+  ;; 1. Setup Default Face (Monospaced/Coding)
+  (set-face-attribute 'default nil
+                      :family "JetBrains Mono"
+                      :height 150)
 
-    ;; 2. Setup Variable-Pitch Face (Prose/Safari Style)
-    ;; We manually set this since we are not using fontaine.
-    (set-face-attribute 'variable-pitch nil
-                        :family "Menlo")
+  ;; 2. Setup Variable-Pitch Face (Prose/Safari Style)
+  ;; We manually set this since we are not using fontaine.
+  (set-face-attribute 'fixed-pitch nil :family "JetBrains Mono" :height 1.0)
+  (set-face-attribute 'variable-pitch nil :family "Georgia" :height 1.0)
 
-    ;; 3. Symbol and Emoji Configuration
-    (set-fontset-font t 'emoji (font-spec :family "Apple Color Emoji"))
-    (set-fontset-font t 'symbol (font-spec :family "STIX Two Math"))
-    (set-fontset-font t 'greek (font-spec :family "Apple Symbols"))
+  ;; 3. Symbol and Emoji Configuration
+  (set-fontset-font t 'emoji (font-spec :family "Apple Color Emoji"))
+  (set-fontset-font t 'symbol (font-spec :family "STIX Two Math"))
+  (set-fontset-font t 'greek (font-spec :family "Apple Symbols"))
 
-    ;; 4. CJK Character Configuration (Linux optimized)
-    (set-fontset-font t 'hangul (font-spec :family "Apple SD Gothic Neo"))
-    (set-fontset-font t 'kana (font-spec :family "Hiragino Maru Gothic ProN"))
-    (set-fontset-font t 'cjk-misc (font-spec :family "PingFang SC"))
-    (set-fontset-font t 'bopomofo (font-spec :family "PingFang SC"))
-    (set-fontset-font t 'han (font-spec :family "PingFang SC"))))
+  ;; 4. CJK Character Configuration (Linux optimized)
+  (set-fontset-font t 'hangul (font-spec :family "Apple SD Gothic Neo"))
+  (set-fontset-font t 'kana (font-spec :family "Hiragino Maru Gothic ProN"))
+  (set-fontset-font t 'cjk-misc (font-spec :family "PingFang SC"))
+  (set-fontset-font t 'bopomofo (font-spec :family "PingFang SC"))
+  (set-fontset-font t 'han (font-spec :family "PingFang SC")))
 
 (when (display-graphic-p)
   (change-font))
