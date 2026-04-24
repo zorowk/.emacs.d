@@ -37,7 +37,7 @@
 
 ;; FontsList
 ;; Input Mono, Monaco Style, Line Height 1.3 download from http://input.fontbureau.com/
-(defvar font-list '(("JetBrains Mono" . 11) ("Adwaita Mono" . 11) ("Anonymous Pro" . 11))
+(defvar font-list '(("JetBrains Mono" . 15) ("Menlo" . 15) ("Georgia" . 15))
   "List of fonts and sizes.  The first one available will be used.")
 ;; -FontsList
 
@@ -78,19 +78,19 @@
     ;; 2. Setup Variable-Pitch Face (Prose/Safari Style)
       ;; We manually set this since we are not using fontaine.
       (set-face-attribute 'variable-pitch nil
-                          :family "Adwaita Mono")
+                          :family "Menlo")
 
     ;; 3. Symbol and Emoji Configuration
-    (set-fontset-font t 'emoji (font-spec :family "Noto Color Emoji"))
+    (set-fontset-font t 'emoji (font-spec :family "Apple Color Emoji"))
     (set-fontset-font t 'symbol (font-spec :family "STIX Two Math"))
-    (set-fontset-font t 'greek (font-spec :family "Symbol"))
+    (set-fontset-font t 'greek (font-spec :family "Apple Symbols"))
 
     ;; 4. CJK Character Configuration (Linux optimized)
-    (set-fontset-font t 'hangul (font-spec :family "Noto Sans CJK KR"))
-    (set-fontset-font t 'kana (font-spec :family "Noto Sans CJK JP"))
-    (set-fontset-font t 'cjk-misc (font-spec :family "Noto Sans CJK SC"))
-    (set-fontset-font t 'bopomofo (font-spec :family "Noto Sans CJK SC"))
-    (set-fontset-font t 'han (font-spec :family "Noto Sans CJK SC"))))
+    (set-fontset-font t 'hangul (font-spec :family "Apple SD Gothic Neo"))
+    (set-fontset-font t 'kana (font-spec :family "Hiragino Maru Gothic ProN"))
+    (set-fontset-font t 'cjk-misc (font-spec :family "PingFang SC"))
+    (set-fontset-font t 'bopomofo (font-spec :family "PingFang SC"))
+    (set-fontset-font t 'han (font-spec :family "PingFang SC"))))
 
 (when (display-graphic-p)
   (change-font))
