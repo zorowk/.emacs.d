@@ -37,7 +37,7 @@
 
 ;; FontsList
 ;; Input Mono, Monaco Style, Line Height 1.3 download from http://input.fontbureau.com/
-(defvar font-list '(("JetBrains Mono" . 11) ("Anonymous Pro" . 11) ("Adwaita Mono" . 11))
+(defvar font-list '(("JetBrains Mono" . 11) ("Adwaita Mono" . 11) ("Anonymous Pro" . 11))
   "List of fonts and sizes.  The first one available will be used.")
 ;; -FontsList
 
@@ -78,7 +78,7 @@
     ;; 2. Setup Variable-Pitch Face (Prose/Safari Style)
       ;; We manually set this since we are not using fontaine.
       (set-face-attribute 'variable-pitch nil
-                          :family "Anonymous Pro")
+                          :family "Adwaita Mono")
 
     ;; 3. Symbol and Emoji Configuration
     (set-fontset-font t 'emoji (font-spec :family "Noto Color Emoji"))
