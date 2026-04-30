@@ -186,9 +186,9 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (require 'init-elpher)
 
 ;; Miscellaneous
-(require 'init-vlf)
+;;(require 'init-vlf)
 
-(require 'init-present)
+;;(require 'init-present)
 
 ;; InitPrivate
 ;; Load init-private.el if it exists
