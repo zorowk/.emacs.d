@@ -120,8 +120,6 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-avy)
 
-(require 'init-which-key)
-
 (require 'init-undo-tree)
 
 (require 'init-ace-window)

@@ -235,6 +235,9 @@
 ;; Horizontal splitting really ought to be the default, honestly.
 (setq ediff-split-window-function 'split-window-horizontally)
 
+;; Display the keyboard shortcuts that you can continue with
+(setopt which-key-mode t)
+
 (provide 'init-global-config)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-global-config.el ends here
