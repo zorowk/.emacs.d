@@ -80,44 +80,8 @@
 
 ;; MatchParens
 ;; Show matching parenthesis
-(show-paren-mode 1)
-;; we will call `blink-matching-open` ourselves...
-(remove-hook 'post-self-insert-hook
-             #'blink-paren-post-self-insert-function)
-
-;; this still needs to be set for `blink-matching-open` to work
-(setq blink-matching-paren 'show)
-(let ((ov nil)) ; keep track of the overlay
-  (advice-add
-   #'show-paren-function
-   :after
-    (defun show-paren--off-screen+ (&rest _args)
-      "Display matching line for off-screen paren."
-      (when (overlayp ov)
-        (delete-overlay ov))
-      ;; check if it's appropriate to show match info,
-      ;; see `blink-paren-post-self-insert-function'
-      (when (and (overlay-buffer show-paren--overlay)
-                 (not (or cursor-in-echo-area
-                          executing-kbd-macro
-                          noninteractive
-                          (minibufferp)
-                          this-command))
-                 (and (not (bobp))
-                      (memq (char-syntax (char-before)) '(?\) ?\$)))
-                 (= 1 (logand 1 (- (point)
-                                   (save-excursion
-                                     (forward-char -1)
-                                     (skip-syntax-backward "/\\")
-                                     (point))))))
-        ;; rebind `minibuffer-message' called by
-        ;; `blink-matching-open' to handle the overlay display
-        (cl-letf (((symbol-function #'minibuffer-message)
-                   (lambda (msg &rest args)
-                     (let ((msg (apply #'format-message msg args)))
-                       (setq ov (display-line-overlay+
-                                 (window-start) msg))))))
-          (blink-matching-open))))))
+(setopt show-paren-mode 1)
+(setopt show-paren-context-when-offscreen 'overlay)
 ;; -MatchParens
 
 (provide 'init-edit)
