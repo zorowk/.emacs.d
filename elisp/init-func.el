@@ -38,65 +38,6 @@
 (eval-when-compile
   (require 'init-global-config))
 
-;; ResizeWidthHeight
-;; Resizes the window width based on the input
-(defun resize-window-dimension (dimension)
-  "Resize window by DIMENSION (width or height) with percentage input."
-  (lambda (percent)
-    (interactive (list (if (> (count-windows) 1)
-                          (read-number (format "Set current window %s in [1~9]x10%%: " dimension))
-                        (error "You need more than 1 window to execute this function!"))))
-    (message "%s" percent)
-    (let ((is-width (eq dimension 'width)))
-      (window-resize nil
-                    (- (truncate (* (/ percent 10.0)
-                                   (if is-width (frame-width) (frame-height))))
-                       (if is-width (window-total-width) (window-total-height)))
-                    is-width))))
-
-(defalias 'resize-window-width (resize-window-dimension 'width)
-  "Resizes the window width based on percentage input.")
-(defalias 'resize-window-height (resize-window-dimension 'height)
-  "Resizes the window height based on percentage input.")
-
-;; Setup shorcuts for window resize width and height
-(global-set-key (kbd "C-z w") #'resize-window-width)
-(global-set-key (kbd "C-z h") #'resize-window-height)
-
-(defun resize-window (width delta)
-  "Resize the current window's size.  If WIDTH is non-nil, resize width by some DELTA."
-  (if (> (count-windows) 1)
-      (window-resize nil delta width)
-    (error "You need more than 1 window to execute this function!")))
-
-;; Setup shorcuts for window resize width and height
-(defun window-width-increase ()
-  (interactive)
-  (resize-window t 5))
-
-(defun window-width-decrease ()
-  (interactive)
-  (resize-window t -5))
-
-(defun window-height-increase ()
-  (interactive)
-  (resize-window nil 5))
-
-(defun window-height-decrease ()
-  (interactive)
-  (resize-window nil -5))
-
-(global-set-key (kbd "M-W =") #'window-width-increase)
-(global-set-key (kbd "M-W M-+") #'window-width-increase)
-(global-set-key (kbd "M-W -") #'window-width-decrease)
-(global-set-key (kbd "M-W M-_") #'window-width-decrease)
-
-(global-set-key (kbd "M-Q =") #'window-height-increase)
-(global-set-key (kbd "M-Q M-+") #'window-height-increase)
-(global-set-key (kbd "M-Q -") #'window-height-decrease)
-(global-set-key (kbd "M-Q M-_") #'window-height-decrease)
-;; -ResizeWidthheight
-
 ;; OrgIncludeAuto
 (defun save-and-update-includes ()
   "Update the line numbers of #+INCLUDE:s in current buffer.
