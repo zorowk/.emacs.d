@@ -1,13 +1,13 @@
-;;; init-yasnippet.el --- -*- lexical-binding: t -*-
+;;; init-tempel.el --- -*- lexical-binding: t -*-
 ;;
-;; Filename: init-yasnippet.el
-;; Description: Initialize YASnippet
+;; Filename: init-tempel.el
+;; Description: Initialize Tempel
 ;; Author: Mingde (Matthew) Zeng
 ;; Copyright (C) 2019 Mingde (Matthew) Zeng
 ;; Created: Tue Apr 23 23:08:17 2019 (-0400)
 ;; Version: 3.0
 ;; URL: https://github.com/MatthewZMD/.emacs.d
-;; Keywords: M-EMACS .emacs.d yasnippet
+;; Keywords: M-EMACS .emacs.d tempel templates
 ;; Compatibility: emacs-version >= 26.1
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -72,4 +72,4 @@
 
 (provide 'init-tempel)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; init-yasnippet.el ends here
+;;; init-tempel.el ends here

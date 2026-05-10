@@ -1,20 +1,20 @@
 ;;; init-search.el --- -*- lexical-binding: t -*-
 ;;
 ;; Filename: init-search.el
-;; Description: Initialize Packages for Searching
+;; Description: Initialize minibuffer completion and search
 ;; Author: Mingde (Matthew) Zeng
 ;; Copyright (C) 2019 Mingde (Matthew) Zeng
 ;; Created: Thu Mar 14 11:01:43 2019 (-0400)
 ;; Version: 3.0
 ;; URL: https://github.com/MatthewZMD/.emacs.d
-;; Keywords: M-EMACS .emacs.d color-rg rg
+;; Keywords: M-EMACS .emacs.d vertico orderless consult
 ;; Compatibility: emacs-version >= 26.1
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;; Commentary:
 ;;
-;; This initializes ivy swiper counsel color-rg
+;; This initializes Vertico, Savehist, and Orderless.
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -84,7 +84,7 @@
                                    (eglot (styles orderless basic))
                                    (eglot-capf (styles orderless basic))))
   (completion-category-defaults nil) ;; Disable defaults, use our settings
-  (completion-pcm-leading-wildcard t)) ;; Emacs 31: partial-completion behaves like substring
+  (completion-pcm-leading-wildcard t)) ;; Modern Emacs: partial-completion behaves like substring
 
 ;; -Vertico
 

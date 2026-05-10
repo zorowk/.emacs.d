@@ -1,20 +1,20 @@
 ;;; init-complete.el --- -*- lexical-binding: t -*-
 ;;
 ;; Filename: init-complete.el
-;; Description: Initialize Company
+;; Description: Initialize completion and LSP
 ;; Author: Mingde (Matthew) Zeng
 ;; Copyright (C) 2019 Mingde (Matthew) Zeng
 ;; Created: Fri Mar 15 10:02:00 2019 (-0400)
 ;; Version: 3.0
 ;; URL: https://github.com/MatthewZMD/.emacs.d
-;; Keywords: M-EMACS .emacs.d company company-tabnine
+;; Keywords: M-EMACS .emacs.d corfu cape eglot consult embark
 ;; Compatibility: emacs-version >= 26.1
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;; Commentary:
 ;;
-;; This initializes completion frameworks
+;; This initializes Eglot, Corfu, Cape, Consult, Embark, and Marginalia.
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
