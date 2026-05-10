@@ -78,11 +78,9 @@
 ;; -StartupScreen
 
 ;; DisLineNum
-;; Hook line numbers to only when files are opened, also use linum-mode for emacs-version< 26
-(if (version< emacs-version "26")
-    (global-linum-mode)
-  (add-hook 'text-mode-hook #'display-line-numbers-mode)
-  (add-hook 'prog-mode-hook #'display-line-numbers-mode))
+;; Hook line numbers only when files are opened.
+(add-hook 'text-mode-hook #'display-line-numbers-mode)
+(add-hook 'prog-mode-hook #'display-line-numbers-mode)
 ;; Display column numbers in modeline
 (column-number-mode 1)
 ;; -DisLineNum
@@ -95,8 +93,7 @@
 ;; -DisTimeBat
 
 ;; PixelScrollPrecMode
-(when (version<= "29.1" emacs-version)
-  (pixel-scroll-precision-mode 1))
+(pixel-scroll-precision-mode 1)
 ;; -PixelScrollPrecMode
 
 ;; Alpha

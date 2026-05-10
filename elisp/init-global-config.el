@@ -104,7 +104,6 @@
                      "ido.*"
                      "persp-confs"
                      "recentf"
-                     "undo-tree-hist"
                      "url"
                      "COMMIT_EDITMSG\\'")))
 
@@ -160,9 +159,7 @@
 (load custom-file 'noerror)
 
 ;; So Long mitigates slowness due to extremely long lines.
-;; Currently available in Emacs master branch *only*!
-(when (fboundp 'global-so-long-mode)
-  (global-so-long-mode))
+(global-so-long-mode)
 
 ;; Add a newline automatically at the end of the file upon save.
 (setq require-final-newline t)

@@ -105,7 +105,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-avy)
 
-(require 'init-undo-tree)
+(require 'init-vundo)
 
 (require 'init-ace-window)
 
@@ -129,17 +129,11 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 ;; General Programming
 (require 'init-magit)
 
-(require 'init-projectile)
-
 (require 'init-tempel)
-
-(require 'init-dumb-jump)
 
 (require 'init-treesit)
 
 (require 'init-indent)
-
-(require 'init-format)
 
 (require 'init-edit)
 
