@@ -65,13 +65,10 @@
            "Blog" "Browse Homepage"
            (lambda (&rest _) (browse-url "https://zorowk.github.io/")))
           (,(all-the-icons-fileicon "elisp" :height 1.0 :v-adjust -0.1)
-           "Configuration" "Documents" (lambda (&rest _) (edit-configs)))
-          (,(all-the-icons-faicon "cogs" :height 1.0 :v-adjust -0.1)
-           "Update" "Update" (lambda (&rest _) (auto-package-update-now)))))
+           "Configuration" "Documents" (lambda (&rest _) (edit-configs)))))
      `((("" "Blog" "Browse Homepage"
          (lambda (&rest _) (browse-url "https://zorowk.github.io/")))
-        ("" "Configuration" "Documents" (lambda (&rest _) (edit-configs)))
-        ("" "Update" "Update" (lambda (&rest _) (auto-package-update-now)))))))
+        ("" "Configuration" "Documents" (lambda (&rest _) (edit-configs)))))))
   :custom-face
   (dashboard-banner-logo-title ((t (:family "Apple Chancery" :height 200))))
   :config

@@ -40,10 +40,6 @@
 ;; Temporarily increase GC threshold during startup
 (setq gc-cons-threshold most-positive-fixnum)
 
-;; Restore to normal value after startup (e.g. 50MB)
-(add-hook 'emacs-startup-hook
-          (lambda () (setq gc-cons-threshold (* 100 1024 1024))))
-
 (setq gc-cons-percentage 0.6)
 ;; -DeferGC
 

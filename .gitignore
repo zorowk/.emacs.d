@@ -8,9 +8,16 @@
 /early-init-do-not-edit/
 /mu4e/
 /places
+/places.eld
 /projectile-bookmarks.eld
+/projects.eld
 /recentf
+/recentf.eld
 /tramp
+/history
+/custom-set-variables.el
+/oauth2.plstore
+/gnus/
 /transient/history.el
 /network-security.data
 /.lsp-session-v1
