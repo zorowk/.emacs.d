@@ -58,7 +58,7 @@
   ;; Finally, load your theme of choice (or a random one with
   ;; `modus-themes-load-random', `modus-themes-load-random-dark',
   ;; `modus-themes-load-random-light').
-  (modus-themes-load-theme 'ef-light))
+  (modus-themes-load-theme 'ef-duo-light))
 
 ;; SpaciousPadding
 (use-package spacious-padding
