@@ -45,7 +45,11 @@
 
 (use-package agent-shell
   :defer t
-  :bind (("C-z a" . agent-shell)))
+  :bind (:map agent-shell-mode-map
+              ("C-z a" . agent-shell)
+              ("RET" . newline)
+              ("C-c C-c" . shell-maker-submit)
+              ("C-c C-k" . agent-shell-interrupt)))
 
 (provide 'init-llm)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
