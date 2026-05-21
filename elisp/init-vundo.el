@@ -8,7 +8,9 @@
 ;;; Code:
 
 ;; VundoPac
-(use-package vundo)
+(use-package vundo
+  :ensure t
+  :bind ("C-z u" . vundo))
 ;; -VundoPac
 
 (provide 'init-vundo)
