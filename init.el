@@ -149,7 +149,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-jupyter)
 
-;;(require 'init-ebib)
+(require 'init-ebib)
 
 (require 'init-reader)
 
