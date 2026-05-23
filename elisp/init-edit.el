@@ -37,20 +37,6 @@
 (eval-when-compile
   (require 'init-global-config))
 
-;; MultipleCursors
-(use-package multiple-cursors
-  :bind
-  (("C->"     . mc/mark-next-like-this)         ; 下一个相同词
-   ("C-<"     . mc/mark-previous-like-this)      ; 上一个
-   ("C-c C->" . mc/mark-all-like-this)           ; 全部相同词
-   ("C-S-c C-S-c" . mc/edit-lines)               ; 每行一个光标（经典）
-   ("C-c C-<" . mc/mark-all-like-this-in-region) ; 区域内全部
-   ("<C-return>" . mc/mark-more-like-this-extended))  ; 扩展选择
-  :config
-  ;; 可选：让多光标更像 VS Code
-  (global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click))
-;; -MultipleCursors
-
 ;; expreg
 (use-package expreg
   :ensure t
