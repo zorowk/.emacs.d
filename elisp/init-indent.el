@@ -35,27 +35,6 @@
 ;;
 ;;; Code:
 
-;; IndentBarsPac
-(use-package indent-bars
-  :straight (indent-bars :type git :host github :repo "jdtsmith/indent-bars")
-  :custom
-  (indent-bars-treesit-support t)
-  (indent-bars-prefer-character t)
-  (indent-bars-no-descend-string t)
-  (indent-bars-treesit-ignore-blank-lines-types '("module"))
-  (indent-bars-treesit-wrap '((python argument_list parameters
-				      list list_comprehension
-				      dictionary dictionary_comprehension
-				      parenthesized_expression subscript)))
-  (indent-bars-pattern ". . . . ")
-  (indent-bars-width-frac 0.25)
-  (indent-bars-pad-frac 0.2)
-  (indent-bars-zigzag 0.1)
-  (indent-bars-color-by-depth '(:regexp "outline-\\([0-9]+\\)" :blend 1))
-  (indent-bars-highlight-current-depth '(:pattern "." :pad 0.1 :width 0.45))
-  :hook ((prog-mode yaml-mode) . indent-bars-mode))
-;; -IndentBarsPac
-
 ;; IndentConfig
 (setq-default indent-tabs-mode nil)
 (setq-default indent-line-function 'insert-tab)
@@ -64,18 +43,9 @@
 (setq-default c-ts-mode-indent-offset 4)
 (setq-default js-switch-indent-offset 4)
 (setq-default cmake-ts-mode-indent-offset 4)
-(c-set-offset 'comment-intro 0)
-(c-set-offset 'innamespace 0)
-(c-set-offset 'case-label '+)
-(c-set-offset 'access-label 0)
-(c-set-offset (quote cpp-macro) 0 nil)
-(defun smart-electric-indent-mode ()
-  "Disable 'electric-indent-mode in certain buffers and enable otherwise."
-  (cond ((and (eq electric-indent-mode t)
-              (member major-mode '(erc-mode text-mode)))
-         (electric-indent-mode 0))
-        ((eq electric-indent-mode nil) (electric-indent-mode 1))))
-(add-hook 'post-command-hook #'smart-electric-indent-mode)
+;; Disable electric indent in modes where it's unwanted
+(add-hook 'erc-mode-hook (lambda () (electric-indent-local-mode -1)))
+(add-hook 'text-mode-hook (lambda () (electric-indent-local-mode -1)))
 ;; -IndentConfig
 
 (provide 'init-indent)
