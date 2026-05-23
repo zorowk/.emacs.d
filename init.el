@@ -143,7 +143,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (require 'init-latex)
 
 ;; Office
-;;(require 'init-org)
+(require 'init-org)
 
 (require 'init-reader)
 
