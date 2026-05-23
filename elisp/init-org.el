@@ -244,8 +244,10 @@
 ;; MarkdownModePac
 (use-package markdown-mode
   :defer t
-  :mode (("\\.md\\..*\\'" . markdown-mode)
-         ("\\.mdc\\'"      . markdown-mode)))
+  :mode ("README\\.md\\'" . gfm-mode)
+  :init (setq markdown-command "multimarkdown")
+  :bind (:map markdown-mode-map
+              ("C-c C-e" . markdown-do)))
 ;; -MarkdownModePac
 
 (provide 'init-org)
