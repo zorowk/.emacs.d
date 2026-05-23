@@ -71,6 +71,12 @@
   :hook (org-mode . org-cdlatex-mode))
 ;; -Cdlatex
 
+;; BufferToPDF
+(use-package buffer-to-pdf
+  :straight (buffer-to-pdf :type git :host github :repo "protesilaos/buffer-to-pdf")
+  :config
+  (setq buffer-to-pdf-directory (expand-file-name "~/Downloads/")))
+;; -BufferToPDF
 (provide 'init-latex)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-latex.el ends here
