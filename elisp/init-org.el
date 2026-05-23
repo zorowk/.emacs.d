@@ -241,6 +241,13 @@
          (markdown-mode . valign-mode)))
 ;; -valign
 
+;; MarkdownModePac
+(use-package markdown-mode
+  :defer t
+  :mode (("\\.md\\..*\\'" . markdown-mode)
+         ("\\.mdc\\'"      . markdown-mode)))
+;; -MarkdownModePac
+
 (provide 'init-org)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-org.el ends here
