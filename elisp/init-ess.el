@@ -48,12 +48,6 @@
   :defer t)
 ;; -Gnuplot
 
-;; SCI-Wolfram
-(use-package sci-wolfram
-  :straight (sci-wolfram :type git :host github :repo "TurbulenceChaos/sci-wolfram")
-  :mode ("\\.wl\\'" . wolfram-mode)
-  :config
-  (add-hook 'wolfram-mode-hook #'eglot-ensure))
 ;; -SCI-Wolfram
 
 (provide 'init-ess)
