@@ -38,24 +38,26 @@
 (eval-when-compile
   (require 'init-global-config))
 
-;; TreesitAutoPac
-(use-package treesit-auto
-  :if (version<= "29" emacs-version)
-  :custom
-  (treesit-auto-install 'prompt)
-  :config
-  (when (version<= "31" emacs-version)
-    (warn "The treesit-auto package maybe obsolete!"))
-  (treesit-auto-add-to-auto-mode-alist 'all)
-  (global-treesit-auto-mode)
-  (defun treesit-show-parser-used-at-point ()
-    "Shows treesit parser used at point."
-    (interactive)
-    (if (and (fboundp 'treesit-available-p)
-             (treesit-available-p))
-        (message (format "%s" (treesit-language-at (point))))
-      (message "treesit is not available"))))
-;; -TreesitAutoPac
+(when (fboundp 'treesit-available-p)
+  ;; Emacs 31 already ships the core treesit machinery, so keep the setup
+  ;; minimal and rely on native mode remapping instead of treesit-auto.
+  (when (treesit-available-p)
+    (setq major-mode-remap-alist
+          '((c-mode . c-ts-mode)
+            (c++-mode . c++-ts-mode)
+            (css-mode . css-ts-mode)
+            (java-mode . java-ts-mode)
+            (js-mode . js-ts-mode)
+            (python-mode . python-ts-mode)
+            (rust-mode . rust-ts-mode)
+            (typescript-mode . typescript-ts-mode))))
+
+    (defun treesit-show-parser-used-at-point ()
+      "Show the Tree-sitter parser used at point."
+      (interactive)
+      (if-let ((lang (treesit-language-at (point))))
+          (message "%s" lang)
+        (message "treesit is not available")))))
 
 (provide 'init-treesit)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
