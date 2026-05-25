@@ -43,8 +43,6 @@
   :straight (:type built-in)
   :commands (eglot eglot-ensure)
   :custom
-  (eglot-autoshutdown t) ;; 自动关闭 LSP 服务器
-  (eglot-sync-connect 0) ;; 异步连接，提高启动速度
   (eglot-ignored-server-capabilities '(:inlayHintProvider))
   :config
   ;; 配置 LSP 服务器
@@ -128,6 +126,7 @@
 
 ;; Use Dabbrev with Corfu!
 (use-package dabbrev
+  :straight (:type built-in)
   ;; Swap M-/ and C-M-/
   :bind (("M-/" . dabbrev-completion)
          ("C-M-/" . dabbrev-expand))
