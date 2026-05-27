@@ -70,6 +70,29 @@
 (setopt show-paren-context-when-offscreen 'overlay)
 ;; -MatchParens
 
+;; patch linux wayland
+(when (eq system-type 'gnu/linux)
+  (setq select-enable-clipboard t
+        select-enable-primary t)  ; 开启鼠标中键选区(Primary selection)同步
+
+  (when (and (string= (getenv "XDG_SESSION_TYPE") "wayland")
+             (executable-find "wl-copy")
+             (executable-find "wl-paste"))
+    (setq interprogram-cut-function
+          (lambda (text)
+            (let ((process (make-process :name "wl-copy"
+                                         :buffer nil
+                                         :command '("wl-copy")
+                                         :connection-type 'pipe)))
+              (process-send-string process text)
+              (process-send-eof process))))
+    (setq interprogram-paste-function
+          (lambda ()
+            (with-output-to-string
+              (with-current-buffer standard-output
+                (call-process "wl-paste" nil t nil "-n")))))))
+;; -patch linux wayland
+
 (provide 'init-edit)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-edit.el ends here
