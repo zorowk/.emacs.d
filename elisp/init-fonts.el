@@ -38,7 +38,7 @@
 ;; FontFun
 (defun change-font ()
   ;; 1. Setup Default Face (Monospaced/Coding)
-  (let ((font-height (if (eq system-type 'darwin) 140 110)))
+  (let ((font-height (if (eq system-type 'darwin) 150 110)))
     (set-face-attribute 'default nil
                         :family "JetBrains Mono"
                         :height font-height))
