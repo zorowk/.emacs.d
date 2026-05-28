@@ -43,21 +43,21 @@
   ;; minimal and rely on native mode remapping instead of treesit-auto.
   (when (treesit-available-p)
     (setq major-mode-remap-alist
-	  '((c-mode . c-ts-mode)
-	    (c++-mode . c++-ts-mode)
-	    (css-mode . css-ts-mode)
-	    (java-mode . java-ts-mode)
-	    (js-mode . js-ts-mode)
-	    (python-mode . python-ts-mode)
-	    (rust-mode . rust-ts-mode)
-	    (typescript-mode . typescript-ts-mode))))
+      '((c-mode . c-ts-mode)
+        (c++-mode . c++-ts-mode)
+        (css-mode . css-ts-mode)
+        (java-mode . java-ts-mode)
+        (js-mode . js-ts-mode)
+        (python-mode . python-ts-mode)
+        (rust-mode . rust-ts-mode)
+        (typescript-mode . typescript-ts-mode))))
 
     (defun treesit-show-parser-used-at-point ()
       "Show the Tree-sitter parser used at point."
       (interactive)
-      (if-let ((lang (treesit-language-at (point))))
-	  (message "%s" lang)
-	(message "treesit is not available"))))
+      (if-let* ((lang (treesit-language-at (point))))
+      (message "%s" lang)
+    (message "treesit is not available"))))
 
 (provide 'init-treesit)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
