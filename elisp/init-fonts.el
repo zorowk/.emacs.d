@@ -83,10 +83,6 @@
               (when (display-graphic-p) (change-font)))))
 ;; -FontFun
 
-;; ATIPac
-(use-package all-the-icons :if (display-graphic-p))
-;; -ATIPac
-
 (provide 'init-fonts)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-fonts.el ends here
