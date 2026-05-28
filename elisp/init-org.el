@@ -219,26 +219,14 @@
   (consult-denote-mode 1))
 ;; -Denote
 
-;; org modern
-(use-package org-modern
-  :ensure t
-  :hook
-  (org-mode . org-modern-mode)
-  (org-agenda-finalize . org-modern-agenda)
-
+;; org bullets
+(use-package org-bullets
+  :after org
+  :init
+  (setq org-bullets-bullet-list '(("◉" "○" "✸" "✿" "✤" "✜" "◆" "●"))
   :config
-  (setq org-modern-star '("◉" "○" "✸" "✿" "✤" "✜" "◆" "●"))
-  (setq org-modern-list '((?+ . "➤") (?- . "–") (?* . "•")))
-  (setq org-modern-table nil)
-  (setq org-modern-block t)
-  (setq org-modern-keyword nil)
-  (setq org-modern-todo nil)
-  (setq org-modern-timestamp nil)
-  (setq org-modern-tag nil)
-
-  (setq org-modern-priority nil)
-  (setq org-modern-progress nil))
-;; -org modern
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+;; -org bullets
 
 ;; ox-hugo
 (use-package ox-hugo
