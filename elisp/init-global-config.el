@@ -110,9 +110,8 @@
 ;; When buffer is closed, saves the cursor location
 (save-place-mode 1)
 
-
 ;; lets you drop the prefix after the first invocation
-(repeat-mode 1)
+;;(repeat-mode 1)
 
 ;; Set history-length longer
 (setq-default history-length 500)
