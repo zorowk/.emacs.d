@@ -118,8 +118,6 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-theme)
 
-(require 'init-dashboard)
-
 (require 'init-fonts)
 
 (require 'init-scroll)
