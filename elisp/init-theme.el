@@ -96,8 +96,8 @@
 (use-package popper
   :ensure t ; or :straight t
   :bind (("C-`"   . popper-toggle)
-     ("M-`"   . popper-cycle)
-     ("C-M-`" . popper-toggle-type))
+         ("M-`"   . popper-cycle)
+         ("C-M-`" . popper-toggle-type))
   :init
   (setq popper-reference-buffers
     '(("^\\*Warnings\\*$" . hide)
@@ -113,6 +113,7 @@
       "^\\*ielm\\*"
       "^\\*TeX Help\\*"
       "^\\*gptel-ask\\*"
+      "\\*Dictionary\\*"
       "\\*Shell Command Output\\*"
       "\\*Async Shell Command\\*"
       ("\\*Detached Shell Command\\*" . hide)
