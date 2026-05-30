@@ -66,17 +66,6 @@
                 elfeed-search-title-min-width 45))
 ;; -elfeed
 
-;; google-translate
-(use-package google-translate
-  :defer t
-  :bind ("C-c t" . google-translate-at-point)
-  :custom
-  (google-translate-default-source-language "auto")
-  (google-translate-default-target-language "zh-CN")
-  (google-translate-translation-to-kill-ring t)
-  (google-translate-enable-ido-completion t))
-;; -google-translate
-
 (provide 'init-reader)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-reader.el ends here

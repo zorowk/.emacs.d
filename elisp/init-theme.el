@@ -96,8 +96,8 @@
 (use-package popper
   :ensure t ; or :straight t
   :bind (("C-`"   . popper-toggle)
-         ("M-`"   . popper-cycle)
-         ("C-M-`" . popper-toggle-type))
+     ("M-`"   . popper-cycle)
+     ("C-M-`" . popper-toggle-type))
   :init
   (setq popper-reference-buffers
     '(("^\\*Warnings\\*$" . hide)
@@ -118,8 +118,6 @@
       ("\\*Detached Shell Command\\*" . hide)
       "\\*Completions\\*"
       "^\\*Org QL View:notmuch-links\\*$"
-      "\\*Google Translate\\*"
-      "\\*Google Translate Torg\\*"
       "[Oo]utput\\*"
       helpful-mode
       help-mode
