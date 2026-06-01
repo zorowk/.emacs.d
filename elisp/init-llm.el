@@ -45,7 +45,10 @@
 
 (use-package agent-shell
   :defer t
-  :bind (("C-z a" . agent-shell)))
+  :bind (("C-z a" . agent-shell))
+  :config
+  (setq agent-shell-markdown-render-function #'agent-shell-markdown-replace-markup)
+  (setq agent-shell-highlight-blocks t))
 
 (provide 'init-llm)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
