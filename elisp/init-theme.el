@@ -46,7 +46,7 @@
 (use-package spacious-padding
   :config
   (setopt spacious-padding-widths
-          '( :internal-border-width 12
+          '( :internal-border-width 16
              :header-line-width 1
              :mode-line-width 3
              :tab-width 4
