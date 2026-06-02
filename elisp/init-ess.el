@@ -48,13 +48,7 @@
   :defer t)
 ;; -Gnuplot
 
-;; csv
-(use-package csv-mode
-  :defer t
-  :mode "\\.[ch]sv\\'"
-  :config
-  (setq csv-align-max-lines 10000))
-;; -csv
+;; -SCI-Wolfram
 
 (provide 'init-ess)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
