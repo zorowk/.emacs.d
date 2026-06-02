@@ -46,11 +46,11 @@
 (use-package spacious-padding
   :config
   (setopt spacious-padding-widths
-          '( :internal-border-width 16
+          '( :internal-border-width 12
              :header-line-width 1
-             :mode-line-width 1
+             :mode-line-width 3
              :tab-width 4
-             :right-divider-width 4
+             :right-divider-width 8
              :scroll-bar-width 0))
 
   ;; Read the doc string of `spacious-padding-subtle-mode-line' as it
@@ -59,6 +59,8 @@
           `( :mode-line-active error
              :mode-line-inactive shadow))
   (spacious-padding-mode))
+
+(setq-default line-spacing 0.15)
 ;; -SpaciousPadding
 
 ;; Pulsar
