@@ -141,7 +141,7 @@
 (add-hook 'eww-after-render-hook
           (lambda ()
             (olivetti-mode 1)
-            (setq-local olivetti-body-width 108)))
+            (setq-local olivetti-body-width 96)))
 (add-hook 'nov-mode-hook
           (lambda ()
             (olivetti-mode 1)
