@@ -117,6 +117,27 @@
   (popper-echo-mode +1))
 ;; -popper
 
+;; olivetti
+(use-package olivetti
+  :defer t)
+(add-hook 'eww-after-render-hook
+          (lambda ()
+            (olivetti-mode 1)
+            (setq-local olivetti-body-width 108)))
+(add-hook 'nov-mode-hook
+          (lambda ()
+            (olivetti-mode 1)
+            (setq-local olivetti-body-width 108)))
+(add-hook 'Info-mode-hook
+          (lambda ()
+            (olivetti-mode 1)
+            (setq-local olivetti-body-width 80)))
+(add-hook 'elpher-mode-hook
+          (lambda ()
+            (olivetti-mode 1)
+            (setq-local olivetti-body-width 80)))
+;; -olivetti
+
 (provide 'init-theme)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-theme.el ends here
