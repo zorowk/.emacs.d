@@ -43,15 +43,24 @@
 ;;
 ;;; Code:
 
-;; claude code ide
-(use-package claude-code-ide
-  :straight (:type git :host github :repo "manzaltu/claude-code-ide.el")
-  :bind ("C-z a" . claude-code-ide-menu) ; Set your favorite keybinding
+;; agent shell
+(use-package agent-shell
+  :defer t
+  :bind (("C-z a" . agent-shell))
   :config
-  (setq claude-code-ide-terminal-backend 'eat)
-  (setq claude-code-ide-use-ide-diff nil)
-  (claude-code-ide-emacs-tools-setup))
-;; claude code ide
+  (setq agent-shell-markdown-render-function #'agent-shell-markdown-replace-markup)
+  (setq agent-shell-highlight-blocks t))
+;; -agent shell
+
+;; agent recall
+(use-package agent-recall
+  :ensure t
+  :hook (agent-shell-mode . agent-recall-track-sessions)
+  :config
+  (setq agent-recall-search-paths '("~/Documents/code" "~/Downloads/work")
+        agent-recall-search-function 'consult-ripgrep
+        agent-recall-browse-sort 'modified-desc))
+;; -agent recall
 
 (provide 'init-llm)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

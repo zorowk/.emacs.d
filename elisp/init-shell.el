@@ -48,14 +48,6 @@
   (exec-path-from-shell-initialize))
 ;; -ExecPathFromShellPac
 
-;; eat
-(use-package eat
-  :ensure t
-  :config
-  (add-hook 'eshell-load-hook #'eat-eshell-mode)
-  (add-hook 'eshell-load-hook #'eat-eshell-visual-command-mode))
-;; -eat
-
 (provide 'init-shell)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-shell.el ends here
