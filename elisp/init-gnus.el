@@ -59,17 +59,36 @@
   ;; `user-emacs-directory'.
   (gnus-home-directory (expand-file-name "gnus/" user-emacs-directory))
   (gnus-directory (expand-file-name "gnus/news/" user-emacs-directory))
-  (gnus-directory (expand-file-name "gnus/news/" user-emacs-directory))
-  (gnus-directory (expand-file-name "gnus/news/" user-emacs-directory))
   ;; don't bother with .newsrc, use .newsrc.eld instead
   (gnus-save-newsrc-file nil)
   (gnus-read-newsrc-file nil)
   ;; Don't prompt for confirmation when exiting Gnus.
   (gnus-interactive-exit nil)
   (gnus-select-method '(nnnil ""))
+
+  ;; gnus theme
+  (gnus-sum-thread-tree-root "■ ")
+  (gnus-sum-thread-tree-false-root "□ ")
+  (gnus-sum-thread-tree-single-indent "  ")
+  (gnus-sum-thread-tree-vertical "│ ")
+  (gnus-sum-thread-tree-indent "  ")
+  (gnus-sum-thread-tree-leaf-with-other "├─► ")
+  (gnus-sum-thread-tree-single-leaf "└─► ")
+  (gnus-summary-line-format "%U%R │ %X │ %O │ %-15,15F │ %B%s\n")
+  (gnus-user-date-format-alist '((t . "%Y-%m-%d %H:%M")))
+  (gnus-summary-selected-face 'gnus-summary-high-ancient)
+  (setq gnus-visible-headers
+        (mapconcat 'identity
+                   '("^From:" "^Subject:" "^Date:" "^Newsgroups:" "^To:" "^Cc:")
+                   "\\|"))
+  (add-hook 'gnus-article-prepare-hook #'gnus-article-buttonize)
+  (add-hook 'gnus-article-prepare-hook #'gnus-article-highlight-code)
+  (setq gnus-article-margin 2)
+
   ;; Configure two IMAP mail accounts.
   (gnus-secondary-select-methods
-   '((nnimap
+   '((nntp "news.gmane.io")
+     (nnimap
       "Gmail"
       (nnimap-stream ssl)
       (nnimap-address "imap.gmail.com")
@@ -86,8 +105,6 @@
        (("from" ".*" "nnimap+Gmail:Archive.%Y"))))))
   ;; `init-file-debug' corresponds to launching emacs with --debug-init
   (nnimap-record-commands init-file-debug)
-  ;; The "Sent" folder
-  (gnus-message-archive-group "nnimap+Gmail:INBOX")
   ;; The "Sent" folder
   (gnus-message-archive-group "nnimap+Gmail:INBOX")
   ;; Display the following message headers in Article buffers,
