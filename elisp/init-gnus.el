@@ -88,6 +88,7 @@
   ;; Configure two IMAP mail accounts.
   (gnus-secondary-select-methods
    '((nntp "news.gmane.io")
+     (nnrss "")
      (nnimap
       "Gmail"
       (nnimap-stream ssl)
