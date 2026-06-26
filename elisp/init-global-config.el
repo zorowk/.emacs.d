@@ -38,6 +38,12 @@
 (eval-when-compile
   (require 'init-const))
 
+;; Server
+(require 'server)
+(unless (server-running-p)
+  (server-start))
+;; -Server
+
 ;; DefBindings
 ;; Unbind unneeded keys
 (global-set-key (kbd "C-z") nil)
