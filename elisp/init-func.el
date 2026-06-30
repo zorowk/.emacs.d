@@ -35,9 +35,6 @@
 ;;
 ;;; Code:
 
-(eval-when-compile
-  (require 'init-global-config))
-
 ;; OrgIncludeAuto
 (defun save-and-update-includes ()
   "Update the line numbers of #+INCLUDE:s in current buffer.

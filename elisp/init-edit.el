@@ -34,8 +34,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;; Code:
-(eval-when-compile
-  (require 'init-global-config))
 
 ;; expreg
 (use-package expreg
@@ -66,7 +64,7 @@
 
 ;; MatchParens
 ;; Show matching parenthesis
-(setopt show-paren-mode 1)
+(setopt show-paren-mode t)
 (setopt show-paren-context-when-offscreen 'overlay)
 ;; -MatchParens
 

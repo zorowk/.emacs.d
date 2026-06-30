@@ -35,9 +35,6 @@
 ;;
 ;;; Code:
 
-(eval-when-compile
-  (require 'init-global-config))
-
 (when (fboundp 'treesit-available-p)
   ;; Emacs 31 already ships the core treesit machinery, so keep the setup
   ;; minimal and rely on native mode remapping instead of treesit-auto.

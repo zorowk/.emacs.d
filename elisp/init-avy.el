@@ -35,9 +35,6 @@
 ;;
 ;;; Code:
 
-(eval-when-compile
-  (require 'init-global-config))
-
 ;; AvyPac
 (use-package avy
   :defer t

@@ -36,9 +36,7 @@
 ;;; Code:
 
 (eval-when-compile
-  (require 'init-const)
-  (require 'init-global-config)
-  (require 'init-func))
+  (require 'init-const))
 
 ;; AUCTeXPac
 (use-package auctex

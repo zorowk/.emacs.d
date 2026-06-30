@@ -35,9 +35,6 @@
 ;;
 ;;; Code:
 
-(eval-when-compile
-  (require 'init-global-config))
-
 ;; Vertico.
 (use-package vertico
   :bind (:map vertico-map

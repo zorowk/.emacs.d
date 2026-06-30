@@ -40,7 +40,8 @@
 
 ;; Server
 (require 'server)
-(unless (server-running-p)
+(when (and (not noninteractive)
+           (not (server-running-p)))
   (server-start))
 ;; -Server
 
@@ -80,8 +81,13 @@
 ;; -UTF8Coding
 
 ;; EditExp
-;; Add to hook during startup
-(add-hook 'before-save-hook 'whitespace-cleanup)
+(defun m-emacs-trim-on-save ()
+  "Delete trailing whitespace in ordinary editing buffers."
+  (add-hook 'before-save-hook #'delete-trailing-whitespace nil t))
+
+(add-hook 'prog-mode-hook #'m-emacs-trim-on-save)
+(add-hook 'text-mode-hook #'m-emacs-trim-on-save)
+(add-hook 'conf-mode-hook #'m-emacs-trim-on-save)
 (add-hook 'makefile-mode-hook 'indent-tabs-mode)
 
 ;; Replace selection on insert
@@ -183,8 +189,8 @@
 ;; Add a newline automatically at the end of the file upon save.
 (setq require-final-newline t)
 
-;; disable warning
-(setq warning-minimum-level :emergency)
+;; Keep warnings visible enough for package and configuration debugging.
+(setq warning-minimum-level :warning)
 
 ;; enable pinentry loopback
 (setq epg-pinentry-mode 'loopback)

@@ -1,3 +1,5 @@
+;;; init-gnus.el --- -*- lexical-binding: t -*-
+;;
 ;; Description: Initialize GNUS
 ;; Author: WenHao Peng
 ;; Copyright (C) 2026
@@ -30,8 +32,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;; Code:
-(eval-when-compile
-  (require 'init-global-config))
 
 ;; gnus
 (use-package gnus

@@ -1,4 +1,4 @@
-;;; init-llm.el ---
+;;; init-llm.el --- -*- lexical-binding: t -*-
 ;;
 ;; Filename: init-llm.el
 ;; Description:

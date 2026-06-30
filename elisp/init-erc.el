@@ -35,10 +35,6 @@
 ;;
 ;;; Code:
 
-(eval-when-compile
-  (require 'init-global-config)
-  (require 'init-func))
-
 ;; ERCPac
 (use-package erc
   :straight (:type built-in)
