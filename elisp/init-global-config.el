@@ -129,6 +129,7 @@
       `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
+(setq backup-by-copying t)
 
 ;; Ask before killing emacs
 (setq confirm-kill-emacs 'y-or-n-p)
@@ -141,6 +142,19 @@
 
 ;; Turn Off shr use fonts
 (setq shr-use-fonts nil)
+
+;; More forgiving completion and lookup defaults.
+(setq read-file-name-completion-ignore-case t
+      read-buffer-completion-ignore-case t
+      completion-ignore-case t
+      mouse-yank-at-point t
+      apropos-do-all t
+      search-default-mode t
+      frame-inhibit-implied-resize t)
+
+;; Make same-name buffers easier to distinguish.
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'forward)
 
 ;; Show Keystrokes in Progress Instantly
 (setq echo-keystrokes 0.1)
