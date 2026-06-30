@@ -77,13 +77,6 @@
   (gnus-summary-line-format "%U%R │ %X │ %O │ %-15,15F │ %B%s\n")
   (gnus-user-date-format-alist '((t . "%Y-%m-%d %H:%M")))
   (gnus-summary-selected-face 'gnus-summary-high-ancient)
-  (setq gnus-visible-headers
-        (mapconcat 'identity
-                   '("^From:" "^Subject:" "^Date:" "^Newsgroups:" "^To:" "^Cc:")
-                   "\\|"))
-  (add-hook 'gnus-article-prepare-hook #'gnus-article-buttonize)
-  (add-hook 'gnus-article-prepare-hook #'gnus-article-highlight-code)
-  (setq gnus-article-margin 2)
 
   ;; Configure two IMAP mail accounts.
   (gnus-secondary-select-methods
@@ -167,6 +160,13 @@
   ;; Send mail using Emacs's built-in smtpmail library.
   (message-send-mail-function #'smtpmail-send-it)
   :config
+  (setq gnus-visible-headers
+        (mapconcat #'identity
+                   '("^From:" "^Subject:" "^Date:" "^Newsgroups:" "^To:" "^Cc:")
+                   "\\|"))
+  (add-hook 'gnus-article-prepare-hook #'gnus-article-buttonize)
+  (add-hook 'gnus-article-prepare-hook #'gnus-article-highlight-code)
+  (setq gnus-article-margin 2)
   (auth-source-xoauth2-plugin-mode t))
 ;; -gnus
 

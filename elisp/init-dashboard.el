@@ -56,7 +56,7 @@
   (dashboard-items '((recents  . 7)
                      (bookmarks . 7)
                      (agenda . 5)))
-  (initial-buffer-choice (lambda () (get-buffer dashboard-buffer-name)))
+  (initial-buffer-choice (lambda () (get-buffer-create dashboard-buffer-name)))
   (dashboard-set-heading-icons t)
   (dashboard-set-navigator t)
   (dashboard-navigator-buttons

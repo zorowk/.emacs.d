@@ -8,7 +8,7 @@
 ;; Version: 3.0
 ;; URL: https://github.com/MatthewZMD/.emacs.d
 ;; Keywords: M-EMACS .emacs.d vertico orderless consult
-;; Compatibility: emacs-version >= 26.1
+;; Compatibility: emacs-version >= 31
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -62,6 +62,11 @@
   (context-menu-mode t)
   ;; Support opening new minibuffers from inside existing minibuffers.
   (enable-recursive-minibuffers t)
+  ;; Keep *Completions* responsive when it is shown, without forcing it to
+  ;; appear over Vertico for every minibuffer.
+  (completion-eager-display nil)
+  (completion-eager-update t)
+  (minibuffer-visible-completions 'up-down)
   ;; Hide commands in M-x which do not work in the current mode.  Vertico
   ;; commands are hidden in normal buffers. This setting is useful beyond
   ;; Vertico.

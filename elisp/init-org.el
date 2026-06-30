@@ -99,7 +99,7 @@
    'org-babel-load-languages
    '((dot . t)
      (shell . t)
-     (latex .t)
+     (latex . t)
      (python . t)
      (R . t)
      (emacs-lisp . t)

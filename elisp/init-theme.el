@@ -8,7 +8,7 @@
 ;; Version: 3.0
 ;; URL: https://github.com/MatthewZMD/.emacs.d
 ;; Keywords: M-EMACS .emacs.d doom-themes doom-modeline
-;; Compatibility: emacs-version >= 26.1
+;; Compatibility: emacs-version >= 31
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -78,7 +78,7 @@
              :mode-line-inactive shadow))
   (spacious-padding-mode))
 
-(setq-default line-spacing 0.15)
+(setq-default line-spacing '(0.05 . 0.10))
 ;; -SpaciousPadding
 
 ;; Pulsar
@@ -104,11 +104,16 @@
   (setq popper-reference-buffers
     '(("^\\*Warnings\\*$" . hide)
       ("^\\*Compile-Log\\*$" . hide)
+      ("^\\*Async-native-compile-log\\*$" . hide)
+      ("^\\*Messages\\*$" . hide)
       ;; "^\\*Matlab Help.*\\*$"
-      ;; "^\\*Messages\\*$"
       "^\\*Backtrace\\*"
       "^\\*evil-registers\\*"
       "^\\*Apropos"
+      "^\\*Occur\\*"
+      "^\\*xref\\*"
+      "^\\*Flymake diagnostics"
+      "^\\*Embark Collect \\(Live\\|Completions\\)\\*"
       "^Calc:"
       "^\\*eldoc\\*"
       "^\\*TeX errors\\*"
@@ -125,6 +130,8 @@
       helpful-mode
       help-mode
       pydoc-mode
+      inferior-python-mode
+      inferior-ess-mode
       TeX-special-mode
       messages-buffer-mode
       dictionary-mode

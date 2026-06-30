@@ -8,7 +8,7 @@
 ;; Version: 3.0
 ;; URL: https://github.com/MatthewZMD/.emacs.d
 ;; Keywords: M-EMACS .emacs.d
-;; Compatibility: emacs-version >= 26.1
+;; Compatibility: emacs-version >= 31
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -45,6 +45,8 @@
     :custom
     (ibuffer-vc-skip-if-remote 'nil))
   :custom
+  (ibuffer-human-readable-size t)
+  (ibuffer-use-header-line 'title)
   (ibuffer-formats
    '((mark modified read-only locked " "
            (name 35 35 :left :elide)

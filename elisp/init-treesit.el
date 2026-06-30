@@ -8,7 +8,7 @@
 ;; Version: 3.0
 ;; URL: https://github.com/MatthewZMD/.emacs.d
 ;; Keywords: M-EMACS .emacs.d parenthesis smartparens delete-block
-;; Compatibility: emacs-version >= 26.1
+;; Compatibility: emacs-version >= 31
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -35,26 +35,35 @@
 ;;
 ;;; Code:
 
-(when (fboundp 'treesit-available-p)
-  ;; Emacs 31 already ships the core treesit machinery, so keep the setup
-  ;; minimal and rely on native mode remapping instead of treesit-auto.
-  (when (treesit-available-p)
-    (setq major-mode-remap-alist
-      '((c-mode . c-ts-mode)
-        (c++-mode . c++-ts-mode)
-        (css-mode . css-ts-mode)
-        (java-mode . java-ts-mode)
-        (js-mode . js-ts-mode)
-        (python-mode . python-ts-mode)
-        (rust-mode . rust-ts-mode)
-        (typescript-mode . typescript-ts-mode))))
+(when (treesit-available-p)
+  (setopt treesit-enabled-modes
+          '(c-ts-mode
+            c++-ts-mode
+            css-ts-mode
+            java-ts-mode
+            js-ts-mode
+            json-ts-mode
+            python-ts-mode
+            rust-ts-mode
+            typescript-ts-mode
+            yaml-ts-mode))
+  (setopt treesit-auto-install-grammar 'ask)
+  (setopt treesit-extra-load-path
+          (list (expand-file-name "tree-sitter" user-emacs-directory)))
 
-    (defun treesit-show-parser-used-at-point ()
-      "Show the Tree-sitter parser used at point."
-      (interactive)
-      (if-let* ((lang (treesit-language-at (point))))
-      (message "%s" lang)
-    (message "treesit is not available"))))
+  (defun treesit-show-parser-used-at-point ()
+    "Show the Tree-sitter parser used at point."
+    (interactive)
+    (if-let* ((lang (treesit-language-at (point))))
+        (message "%s" lang)
+      (message "treesit is not available"))))
+
+(let ((qml-ts-dir (expand-file-name "straight/repos/qml-ts-mode"
+                                    user-emacs-directory)))
+  (when (file-directory-p qml-ts-dir)
+    (add-to-list 'load-path qml-ts-dir)))
+(when (locate-library "qml-ts-mode")
+  (require 'qml-ts-mode))
 
 (provide 'init-treesit)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

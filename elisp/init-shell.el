@@ -40,10 +40,10 @@
 
 ;; ExecPathFromShellPac
 (use-package exec-path-from-shell
-  :if (memq window-system '(mac ns x))
+  :if (memq window-system '(mac ns pgtk x))
   :custom
   (exec-path-from-shell-variables
-   '("PATH" "MANPATH"))
+   '("PATH" "MANPATH" "LANG" "LC_ALL"))
   :config
   (exec-path-from-shell-initialize))
 ;; -ExecPathFromShellPac

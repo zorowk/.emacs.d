@@ -106,8 +106,12 @@
   :hook (after-init . recentf-mode)
   :custom
   (recentf-auto-cleanup "05:00am")
+  (recentf-autosave-interval 300)
+  (recentf-show-messages nil)
   (recentf-max-saved-items 200)
-  (recentf-exclude '((expand-file-name package-user-dir)
+  (recentf-exclude `(,(regexp-quote
+                       (file-name-as-directory
+                        (expand-file-name package-user-dir)))
                      ".cache"
                      ".cask"
                      ".elfeed"
@@ -120,6 +124,7 @@
                      "COMMIT_EDITMSG\\'")))
 
 ;; When buffer is closed, saves the cursor location
+(setopt save-place-autosave-interval 300)
 (save-place-mode 1)
 
 ;; lets you drop the prefix after the first invocation
@@ -158,6 +163,11 @@
       search-default-mode t
       frame-inhibit-implied-resize t)
 
+;; Emacs 31 may leak cursor update escape sequences as "q" in some TTYs.
+(setopt xterm-update-cursor nil)
+(setopt native-comp-async-on-battery-power nil)
+(setopt eldoc-help-at-pt t)
+
 ;; Make same-name buffers easier to distinguish.
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
@@ -167,6 +177,8 @@
 
 ;; Don't Lock Files
 (setq-default create-lockfiles nil)
+(setopt remote-file-name-inhibit-locks t)
+(setopt remote-file-name-inhibit-auto-save-visited t)
 
 ;; Better Compilation
 (setq-default compilation-always-kill t) ; kill compilation process before starting another
@@ -239,6 +251,8 @@
 
 ;; Proportional Window Resizing
 (setq window-combination-resize t)
+(setopt split-window-preferred-direction 'horizontal)
+(setopt project-mode-line 'non-remote)
 
 ;; Faster Mark Popping
 (setq set-mark-command-repeat-pop t)

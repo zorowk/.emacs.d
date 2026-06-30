@@ -66,6 +66,7 @@
 ;; Show matching parenthesis
 (setopt show-paren-mode t)
 (setopt show-paren-context-when-offscreen 'overlay)
+(setopt show-paren-not-in-comments-or-strings 'on-mismatch)
 ;; -MatchParens
 
 ;; patch linux wayland
