@@ -47,15 +47,16 @@
   :config
   ;; 配置 LSP 服务器
   (add-to-list 'eglot-server-programs
-               '((c-mode c++-mode) . ("clangd" "--background-index" "--clang-tidy")))
+               '((c-mode c-ts-mode c++-mode c++-ts-mode) .
+                 ("clangd" "--background-index" "--clang-tidy")))
   (add-to-list 'eglot-server-programs
-               '(python-mode . ("pyright-langserver" "--stdio")))
+               '((python-mode python-ts-mode) . ("pyright-langserver" "--stdio")))
   (add-to-list 'eglot-server-programs
-               '(rust-mode . ("rust-analyzer")))
+               '((rust-mode rust-ts-mode) . ("rust-analyzer")))
   (add-to-list 'eglot-server-programs
-               '(latex-mode . ("texlab")))
+               '((latex-mode LaTeX-mode) . ("texlab")))
   (add-to-list 'eglot-server-programs
-               '((web-mode js-mode js-ts-mode typescript-mode tsx-mode) .
+               '((web-mode js-mode js-ts-mode typescript-mode typescript-ts-mode tsx-mode) .
                  ("typescript-language-server" "--stdio")))
   ;; 绑定跳转和诊断快捷键
   :bind (:map eglot-mode-map
@@ -69,8 +70,11 @@
               ("C-c l f" . eglot-format-buffer))
   :hook
   ;; 自动启用 eglot
-  ((c-mode c++-mode python-mode rust-mode latex-mode
-           web-mode js-mode js-ts-mode typescript-mode tsx-mode) . eglot-ensure))
+  ((c-mode c-ts-mode c++-mode c++-ts-mode
+           python-mode python-ts-mode
+           rust-mode rust-ts-mode
+           latex-mode LaTeX-mode
+           web-mode js-mode js-ts-mode typescript-mode typescript-ts-mode tsx-mode) . eglot-ensure))
 
 (use-package consult-eglot
   :after eglot
@@ -117,12 +121,7 @@
 
   ;; Emacs 30 and newer: Disable Ispell completion function.
   ;; Try `cape-dict' as an alternative.
-  (text-mode-ispell-word-completion nil)
-
-  ;; Hide commands in M-x which do not apply to the current mode.  Corfu
-  ;; commands are hidden, since they are not used via M-x. This setting is
-  ;; useful beyond Corfu.
-  (read-extended-command-predicate #'command-completion-default-include-p))
+  (text-mode-ispell-word-completion nil))
 
 ;; Use Dabbrev with Corfu!
 (use-package dabbrev
