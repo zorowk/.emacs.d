@@ -53,19 +53,14 @@
 (setq package-check-signature nil)
 ;; -StraightBootstrap
 
-;; StraightUsePackage
-(straight-use-package 'use-package)
-
 (eval-and-compile
+  (require 'use-package)
+  (require 'bind-key)
   (setq use-package-verbose t
         use-package-expand-minimally t
         use-package-compute-statistics t
         use-package-enable-imenu-support t))
-
-(eval-when-compile
-  (require 'use-package)
-  (require 'bind-key))
-;; -StraightUsePackage
+;; -UsePackage
 
 (provide 'init-package)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

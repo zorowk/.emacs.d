@@ -241,15 +241,6 @@
          (markdown-mode . valign-mode)))
 ;; -valign
 
-;; MarkdownModePac
-(use-package markdown-mode
-  :defer t
-  :mode ("README\\.md\\'" . gfm-mode)
-  :init (setq markdown-command "multimarkdown")
-  :bind (:map markdown-mode-map
-              ("C-c C-e" . markdown-do)))
-;; -MarkdownModePac
-
 (provide 'init-org)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-org.el ends here
