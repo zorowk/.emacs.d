@@ -228,12 +228,6 @@
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 ;; -org bullets
 
-;; ox-hugo
-(use-package ox-hugo
-  :defer t   ;Auto-install the package from Melpa
-  :after ox)
-;; -ox-hugo
-
 ;; valign
 (use-package valign
   :ensure t
