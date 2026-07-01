@@ -252,7 +252,6 @@
 ;; Proportional Window Resizing
 (setq window-combination-resize t)
 (setopt split-window-preferred-direction 'horizontal)
-(setopt project-mode-line 'non-remote)
 
 ;; Faster Mark Popping
 (setq set-mark-command-repeat-pop t)
