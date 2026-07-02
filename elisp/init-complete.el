@@ -271,7 +271,8 @@
   (setq register-preview-delay 0.5)
 
   ;; Use Consult to select xref locations with preview
-  (setq xref-show-xrefs-function #'consult-xref
+  (setq xref-search-program 'ripgrep
+        xref-show-xrefs-function #'consult-xref
         xref-show-definitions-function #'consult-xref)
 
   ;; Configure other variables and modes in the :config section,
