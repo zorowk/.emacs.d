@@ -91,6 +91,10 @@
 (add-hook 'conf-mode-hook #'emacs-trim-on-save)
 (add-hook 'makefile-mode-hook 'indent-tabs-mode)
 
+;; editor config
+(add-hook 'prog-mode-hook #'editorconfig-mode)
+(setopt indent-tabs-mode nil)
+
 ;; Replace selection on insert
 (delete-selection-mode 1)
 

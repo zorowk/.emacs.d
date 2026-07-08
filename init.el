@@ -132,8 +132,6 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-treesit)
 
-(require 'init-indent)
-
 (require 'init-edit)
 
 (require 'init-complete)
