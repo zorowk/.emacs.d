@@ -66,17 +66,22 @@
   (gnus-interactive-exit nil)
   (gnus-select-method '(nnnil ""))
 
-  ;; gnus theme
-  (gnus-sum-thread-tree-root "■ ")
-  (gnus-sum-thread-tree-false-root "□ ")
+  ;; Gnus summary theme: compact status marks, age-aware dates, and
+  ;; low-noise thread glyphs that stay readable with proportional fonts.
+  (gnus-sum-thread-tree-root "● ")
+  (gnus-sum-thread-tree-false-root "○ ")
   (gnus-sum-thread-tree-single-indent "  ")
   (gnus-sum-thread-tree-vertical "│ ")
   (gnus-sum-thread-tree-indent "  ")
-  (gnus-sum-thread-tree-leaf-with-other "├─► ")
-  (gnus-sum-thread-tree-single-leaf "└─► ")
-  (gnus-summary-line-format "%U%R │ %X │ %O │ %-15,15F │ %B%s\n")
-  (gnus-user-date-format-alist '((t . "%Y-%m-%d %H:%M")))
-  (gnus-summary-selected-face 'gnus-summary-high-ancient)
+  (gnus-sum-thread-tree-leaf-with-other "├─ ")
+  (gnus-sum-thread-tree-single-leaf "└─ ")
+  (gnus-summary-line-format "%U%R%O%z │ %&user-date; │ %-22,22f │ %B%s\n")
+  (gnus-user-date-format-alist
+   '((gnus-seconds-today . "Today %H:%M")
+     ((+ 86400 (gnus-seconds-today)) . "Yday  %H:%M")
+     (gnus-seconds-year . "%b %d %H:%M")
+     (t . "%Y-%m-%d")))
+  (gnus-summary-selected-face 'gnus-summary-selected)
 
   ;; Configure two IMAP mail accounts.
   (gnus-secondary-select-methods
@@ -159,6 +164,25 @@
   (message-forward-as-mime t)
   ;; Send mail using Emacs's built-in smtpmail library.
   (message-send-mail-function #'smtpmail-send-it)
+  :custom-face
+  (gnus-summary-selected ((t (:inherit highlight :extend t))))
+  (gnus-summary-normal-unread ((t (:inherit default :weight bold))))
+  (gnus-summary-normal-read ((t (:inherit shadow))))
+  (gnus-summary-normal-ancient ((t (:inherit shadow))))
+  (gnus-summary-low-unread ((t (:inherit font-lock-comment-face :weight bold))))
+  (gnus-summary-low-read ((t (:inherit shadow))))
+  (gnus-summary-high-unread ((t (:inherit font-lock-keyword-face :weight bold))))
+  (gnus-summary-high-read ((t (:inherit font-lock-keyword-face))))
+  (gnus-summary-normal-ticked ((t (:inherit warning :weight bold))))
+  (gnus-summary-high-ticked ((t (:inherit warning :weight bold))))
+  (gnus-summary-low-ticked ((t (:inherit warning))))
+  (gnus-summary-cancelled ((t (:inherit error :strike-through t))))
+  (gnus-header-name ((t (:inherit font-lock-keyword-face :weight bold))))
+  (gnus-header-content ((t (:inherit default))))
+  (gnus-header-from ((t (:inherit font-lock-variable-name-face :weight bold))))
+  (gnus-header-subject ((t (:inherit font-lock-function-name-face :weight bold))))
+  (gnus-header-newsgroups ((t (:inherit font-lock-string-face))))
+  (gnus-signature ((t (:inherit shadow))))
   :config
   (setq gnus-visible-headers
         (mapconcat #'identity
