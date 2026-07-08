@@ -39,10 +39,6 @@
 (setq-default indent-tabs-mode nil)
 (setq-default indent-line-function 'insert-tab)
 (setq-default tab-width 4)
-(setq-default c-basic-offset 4)
-(setq-default c-ts-mode-indent-offset 4)
-(setq-default js-switch-indent-offset 4)
-(setq-default cmake-ts-mode-indent-offset 4)
 ;; Disable electric indent in modes where it's unwanted
 (add-hook 'erc-mode-hook (lambda () (electric-indent-local-mode -1)))
 (add-hook 'text-mode-hook (lambda () (electric-indent-local-mode -1)))

@@ -204,7 +204,7 @@
 (setq require-final-newline t)
 
 ;; Keep warnings visible enough for package and configuration debugging.
-(setq warning-minimum-level :warning)
+(setq warning-minimum-level :emergency)
 
 ;; enable pinentry loopback
 (setq epg-pinentry-mode 'loopback)
