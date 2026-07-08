@@ -81,13 +81,14 @@
 ;; -UTF8Coding
 
 ;; EditExp
-(defun m-emacs-trim-on-save ()
+(defun emacs-trim-on-save ()
   "Delete trailing whitespace in ordinary editing buffers."
-  (add-hook 'before-save-hook #'delete-trailing-whitespace nil t))
+  (unless (derived-mode-p 'org-mode 'markdown-mode)
+    (add-hook 'before-save-hook #'delete-trailing-whitespace nil t)))
 
-(add-hook 'prog-mode-hook #'m-emacs-trim-on-save)
-(add-hook 'text-mode-hook #'m-emacs-trim-on-save)
-(add-hook 'conf-mode-hook #'m-emacs-trim-on-save)
+(add-hook 'prog-mode-hook #'emacs-trim-on-save)
+(add-hook 'text-mode-hook #'emacs-trim-on-save)
+(add-hook 'conf-mode-hook #'emacs-trim-on-save)
 (add-hook 'makefile-mode-hook 'indent-tabs-mode)
 
 ;; Replace selection on insert
@@ -146,7 +147,7 @@
 (setq confirm-kill-emacs 'y-or-n-p)
 
 ;; Automatically kill all active processes when closing Emacs
-(setq confirm-kill-processes nil)
+(setq confirm-kill-processes t)
 
 ;; Turn Off Cursor Alarms
 (setq ring-bell-function 'ignore)
@@ -164,8 +165,10 @@
       frame-inhibit-implied-resize t)
 
 ;; Emacs 31 may leak cursor update escape sequences as "q" in some TTYs.
-(setopt xterm-update-cursor nil)
-(setopt native-comp-async-on-battery-power nil)
+(when (boundp 'xterm-update-cursor)
+  (setopt xterm-update-cursor nil))
+(when (boundp 'native-comp-async-on-battery-power)
+  (setopt native-comp-async-on-battery-power nil))
 (setopt eldoc-help-at-pt t)
 
 ;; Make same-name buffers easier to distinguish.

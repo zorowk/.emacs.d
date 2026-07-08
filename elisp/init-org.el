@@ -51,7 +51,10 @@
   (org-use-speed-commands t)
   (org-confirm-babel-evaluate 'nil)
   (org-latex-listings-options '(("breaklines" "true")))
-  (org-latex-listings t)
+  (org-latex-src-block-backend 'listings)
+  (org-hide-leading-stars t)
+  (org-fontify-whole-heading-line t)
+  (org-fontify-done-headline t)
   (org-deadline-warning-days 7)
   (org-agenda-window-setup 'other-window)
   (org-habit-graph-column 80)
@@ -142,7 +145,7 @@
   (defun org-export-toggle-syntax-highlight ()
     "Setup variables to turn on syntax highlighting when calling `org-latex-export-to-pdf'."
     (interactive)
-    (setq-local org-latex-listings 'minted)
+    (setq-local org-latex-src-block-backend 'minted)
     (add-to-list 'org-latex-packages-alist '("newfloat" "minted")))
 
   (defun org-table-insert-vertical-hline ()

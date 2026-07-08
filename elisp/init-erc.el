@@ -35,6 +35,8 @@
 ;;
 ;;; Code:
 
+(require 'subr-x)
+
 ;; ERCPac
 (use-package erc
   :straight (:type built-in)
@@ -44,7 +46,8 @@
   ;; Prerequisite: Configure this to your IRC nickname
   (defcustom my-irc-nick "zorowk"
     "The nickname used to login into ERC"
-    :type 'string)
+    :type 'string
+    :group 'erc)
   :custom-face
   (erc-notice-face ((t (:slant italic :weight unspecified))))
   :custom
@@ -88,8 +91,7 @@
   :hook
   (ercn-notify . erc-notify)
   :config
-  ;; Prefer SASL to NickServ, colorize nicknames, and show side panels
-  ;; with joined channels and members
+  ;; Prefer SASL to NickServ and keep tracking focused on real mentions.
   (setopt erc-modules
           (seq-union '(sasl nicks scrolltobottom)
                      erc-modules))
@@ -104,12 +106,15 @@
   (defun erc-notify (nickname message)
     "Displays a notification message for ERC."
     (let* ((channel (buffer-name))
-           (nick (erc-hl-nicks-trim-irc-nick nickname))
+           (nick nickname)
            (title (if (string-match-p (concat "^" nickname) channel)
                       nick
                     (concat nick " (" channel ")")))
-           (msg (s-trim (s-collapse-whitespace message))))
-      (alert (concat nick ": " msg) :title title))))
+           (msg (string-trim
+                 (replace-regexp-in-string "[[:space:]\n]+" " " message))))
+      (if (fboundp 'notifications-notify)
+          (notifications-notify :title title :body (concat nick ": " msg))
+        (message "%s: %s" title msg)))))
 ;; -ERCPac
 
 (provide 'init-erc)

@@ -7,7 +7,7 @@
 ## 核心特点
 
 - **补全体系**：Corfu + Cape + Vertico + Orderless + Consult + Embark + Marginalia（极致补全体验）
-- **LSP & 高亮**：Eglot + clangd + treesit-auto（C++23/内核代码高亮 & 语义跳转）
+- **LSP & 高亮**：Eglot + clangd + 内置 Tree-sitter（C++23/内核代码高亮 & 语义跳转）
 - **项目管理**：内置 project.el + Consult（快速搜索、打开项目文件）
 - **Org & 写作**：Org + Denote + Tempel（知识管理 & 模板）
 - **美化 & 留白**：Spacious-padding + Ef-themes / Modus-themes（呼吸感界面）
@@ -18,7 +18,7 @@
 | 分类           | 包名                              | 作用简述                              |
 |----------------|-----------------------------------|---------------------------------------|
 | 补全           | corfu / cape / vertico / orderless / consult / embark / marginalia | 现代补全栈（buffer / minibuffer）     |
-| LSP & 高亮     | eglot / treesit-auto / clangd     | C++ 语义补全 & Tree-sitter 高亮       |
+| LSP & 高亮     | eglot / treesit / clangd          | C++ 语义补全 & Tree-sitter 高亮       |
 | 项目管理       | project.el / consult              | 项目文件搜索 & 切换                   |
 | 笔记 / 知识管理| org / denote                      | 原子化笔记 / 知识网络                 |
 | 模板           | tempel                            | 轻量代码/文本模板                     |

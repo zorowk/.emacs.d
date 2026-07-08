@@ -50,7 +50,6 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 (setq straight-use-package-by-default t)
-(setq package-check-signature nil)
 ;; -StraightBootstrap
 
 (eval-and-compile

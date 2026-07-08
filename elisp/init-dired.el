@@ -43,7 +43,7 @@
   :custom
   ;; Always delete and copy recursively
   (dired-listing-switches "-lah")
-  (dired-recursive-deletes 'always)
+  (dired-recursive-deletes 'top)
   (dired-recursive-copies 'always)
   ;; Auto refresh Dired, but be quiet about it
   (global-auto-revert-non-file-buffers t)
@@ -54,8 +54,6 @@
   (delete-by-moving-to-trash t)
   ;; Load the newest version of a file
   (load-prefer-newer t)
-  ;; Detect external file changes and auto refresh file
-  (auto-revert-use-notify nil)
   (auto-revert-interval 3) ; Auto revert every 3 sec
   :config
   ;; Enable global auto-revert

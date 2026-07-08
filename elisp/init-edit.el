@@ -53,8 +53,7 @@
 ;; ElectricPair
 (use-package elec-pair
   :straight (:type built-in)
-  :ensure t
-  :hook (prog-mode . electric-pair-mode)
+  :hook (prog-mode . electric-pair-local-mode)
   :custom
   (electric-pair-preserve-balance t)
   (electric-pair-delete-adjacent-pairs t)
@@ -64,7 +63,6 @@
 ;; MatchParens
 (use-package paren
   :straight (:type built-in)
-  :ensure t
   :custom
   (show-paren-when-point-inside-paren t)
   (show-paren-when-point-in-periphery t)

@@ -130,8 +130,6 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 ;; General Programming
 (require 'init-magit)
 
-(require 'init-tempel)
-
 (require 'init-treesit)
 
 (require 'init-indent)

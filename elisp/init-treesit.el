@@ -1,13 +1,13 @@
 ;;; init-treesit.el --- -*- lexical-binding: t -*-
 ;;
 ;; Filename: init-treesit.el
-;; Description: Initialize Parenthesis
+;; Description: Initialize Tree-sitter
 ;; Author: Mingde (Matthew) Zeng
 ;; Copyright (C) 2019 Mingde (Matthew) Zeng
 ;; Created: Fri Mar 15 10:17:13 2019 (-0400)
 ;; Version: 3.0
 ;; URL: https://github.com/MatthewZMD/.emacs.d
-;; Keywords: M-EMACS .emacs.d parenthesis smartparens delete-block
+;; Keywords: M-EMACS .emacs.d tree-sitter treesit
 ;; Compatibility: emacs-version >= 31
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -58,12 +58,10 @@
         (message "%s" lang)
       (message "treesit is not available"))))
 
-(let ((qml-ts-dir (expand-file-name "straight/repos/qml-ts-mode"
-                                    user-emacs-directory)))
-  (when (file-directory-p qml-ts-dir)
-    (add-to-list 'load-path qml-ts-dir)))
-(when (locate-library "qml-ts-mode")
-  (require 'qml-ts-mode))
+(when (and (treesit-available-p)
+           (locate-library "qml-ts-mode"))
+  (autoload 'qml-ts-mode "qml-ts-mode" nil t)
+  (add-to-list 'auto-mode-alist '("\\.qml\\'" . qml-ts-mode)))
 
 (provide 'init-treesit)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

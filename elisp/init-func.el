@@ -91,8 +91,6 @@ BEGIN and END are regexps which define the line range to use."
 
 (add-hook 'mouse-leave-buffer-hook 'abort-minibuffer-using-mouse)
 
-;; keep the point out of the minibuffer
-(setq-default minibuffer-prompt-properties '(read-only t point-entered minibuffer-avoid-prompt face minibuffer-prompt))
 ;; -BetterMiniBuffer
 
 ;; DisplayLineOverlay

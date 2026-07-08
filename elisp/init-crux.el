@@ -54,7 +54,6 @@
    ("C-c x" . crux-eval-and-replace)
    ("C-c S" . crux-find-shell-init-file)
    ("C-c I" . crux-find-user-init-file)
-   ("C-c k" . crux-kill-other-buffers)
    ("C-c e" . crux-eval-and-replace))
   :config
   (crux-with-region-or-buffer indent-region)
