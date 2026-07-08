@@ -14,7 +14,7 @@
 ;;
 ;;; Commentary:
 ;;
-;; This initializes iedit, awesome-pair, delete-block
+;; This initializes iedit, electric-pair, delete-block
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -50,23 +50,28 @@
   (global-set-key [remap mark-sexp] #'easy-mark))
 ;; -easy-kill
 
-;; SmartParensPac
-(use-package smartparens
-  :hook (prog-mode . smartparens-mode)
-  :diminish smartparens-mode
+;; ElectricPair
+(use-package elec-pair
+  :straight (:type built-in)
+  :ensure t
+  :hook (prog-mode . electric-pair-mode)
   :custom
-  (sp-escape-quotes-after-insert nil)
-  :config
-  ;; Stop pairing single quotes in elisp
-  (sp-local-pair 'emacs-lisp-mode "'" nil :actions nil)
-  (sp-local-pair 'org-mode "[" nil :actions nil))
-;; -SmartParensPac
+  (electric-pair-preserve-balance t)
+  (electric-pair-delete-adjacent-pairs t)
+  (electric-pair-skip-self t))
+;; -ElectricPair
 
 ;; MatchParens
-;; Show matching parenthesis
-(setopt show-paren-mode t)
-(setopt show-paren-context-when-offscreen 'overlay)
-(setopt show-paren-not-in-comments-or-strings 'on-mismatch)
+(use-package paren
+  :straight (:type built-in)
+  :ensure t
+  :custom
+  (show-paren-when-point-inside-paren t)
+  (show-paren-when-point-in-periphery t)
+  (show-paren-context-when-offscreen 'overlay)
+  (show-paren-not-in-comments-or-strings 'on-mismatch)
+  :config
+  (show-paren-mode 1))
 ;; -MatchParens
 
 ;; patch linux wayland
