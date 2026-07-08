@@ -58,11 +58,6 @@
         (message "%s" lang)
       (message "treesit is not available"))))
 
-(when (and (treesit-available-p)
-           (locate-library "qml-ts-mode"))
-  (autoload 'qml-ts-mode "qml-ts-mode" nil t)
-  (add-to-list 'auto-mode-alist '("\\.qml\\'" . qml-ts-mode)))
-
 (provide 'init-treesit)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-treesit.el ends here

@@ -127,9 +127,8 @@
 ;; When buffer is closed, saves the cursor location
 (setopt save-place-autosave-interval 300)
 (save-place-mode 1)
-
-;; lets you drop the prefix after the first invocation
-;;(repeat-mode 1)
+;; Let commands with repeat maps reuse their suffix keys.
+(repeat-mode 1)
 
 ;; Set history-length longer
 (setq-default history-length 500)

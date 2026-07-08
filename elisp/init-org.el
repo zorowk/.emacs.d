@@ -74,6 +74,7 @@
         cmd
         "rm -rf %b.out %b.log %b.tex %b.bbl %b.ind auto")))
   (org-latex-compiler "xelatex")
+  (org-preview-latex-default-process 'xelatex)
   :custom-face
   (org-agenda-current-time ((t (:foreground "spring green"))))
   :config

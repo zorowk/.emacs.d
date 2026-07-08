@@ -47,20 +47,21 @@
         aw-scope 'global
         aw-background nil
         aw-display-mode-overlay nil
+        ;; Keep window selection keys disjoint from `aw-dispatch-alist';
+        ;; dispatch keys are ignored when they also name candidate windows.
         aw-keys '(?q ?w ?e ?r ?t ?y ?u ?i ?p))
   (setq aw-dispatch-alist
         '((?k aw-delete-window "Delete Window")
           (?x aw-swap-window "Swap Windows")
-          (?m my/aw-take-over-window "Move Window")
           (?c aw-copy-window "Copy Window")
           (?j aw-switch-buffer-in-window "Select Buffer")
-          (?o aw-flip-window)
+          (?o aw-flip-window "Flip Window")
           (?b aw-switch-buffer-other-window "Switch Buffer Other Window")
-          (?c aw-split-window-fair "Split Fair Window")
+          (?f aw-split-window-fair "Split Fair Window")
           (?v aw-split-window-vert "Split Vert Window")
           (?h aw-split-window-horz "Split Horz Window")
-          (?o delete-other-windows "Delete Other Windows")
-          (?? aw-show-dispatch-help))))
+          (?d delete-other-windows "Delete Other Windows")
+          (?? aw-show-dispatch-help "Help"))))
 ;; -AceWindowPac
 
 (provide 'init-ace-window)
