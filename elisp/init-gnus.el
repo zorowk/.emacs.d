@@ -85,7 +85,12 @@
 
   ;; Configure two IMAP mail accounts.
   (gnus-secondary-select-methods
-   '((nntp "news.gmane.io")
+   '((nntp "news.gmane.io"
+         (nntp-open-connection-function nntp-open-network-stream)
+         (nntp-port-number 119))
+     (nntp "news.eternal-september.org"
+           (nntp-open-connection-function nntp-open-tls-stream)
+           (nntp-port-number 563))
      (nnrss "")
      (nnimap
       "Gmail"

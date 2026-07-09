@@ -61,7 +61,7 @@
           (?v aw-split-window-vert "Split Vert Window")
           (?h aw-split-window-horz "Split Horz Window")
           (?d delete-other-windows "Delete Other Windows")
-          (?? aw-show-dispatch-help "Help"))))
+          (?? aw-show-dispatch-help))))
 ;; -AceWindowPac
 
 (provide 'init-ace-window)
