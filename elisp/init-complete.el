@@ -43,12 +43,21 @@
   :straight (:type built-in)
   :commands (eglot eglot-ensure)
   :custom
-  (eglot-ignored-server-capabilities '(:inlayHintProvider))
+  (eglot-autoshutdown t)
+  (eglot-events-buffer-config '(:size 0 :format short))
+  (eglot-ignored-server-capabilities
+   '(:inlayHintProvider
+     :documentHighlightProvider
+     :foldingRangeProvider))
   :config
-  ;; 配置 LSP 服务器
   (add-to-list 'eglot-server-programs
                '((c-mode c-ts-mode c++-mode c++-ts-mode) .
-                 ("clangd" "--background-index" "--clang-tidy")))
+                 ("clangd"
+                  "--background-index"
+                  "--clang-tidy"
+                  "--header-insertion=never"
+                  "--limit-results=15"
+                  "--pch-storage=memory")))
   (add-to-list 'eglot-server-programs
                '((python-mode python-ts-mode) . ("pyright-langserver" "--stdio")))
   (add-to-list 'eglot-server-programs
