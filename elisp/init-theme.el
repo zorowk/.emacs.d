@@ -148,19 +148,19 @@
 (add-hook 'eww-after-render-hook
           (lambda ()
             (olivetti-mode 1)
-            (setq-local olivetti-body-width 118)))
+            (setq-local olivetti-body-width 120)))
 (add-hook 'nov-mode-hook
           (lambda ()
             (olivetti-mode 1)
-            (setq-local olivetti-body-width 118)))
+            (setq-local olivetti-body-width 120)))
 (add-hook 'Info-mode-hook
           (lambda ()
             (olivetti-mode 1)
-            (setq-local olivetti-body-width 96)))
+            (setq-local olivetti-body-width 72)))
 (add-hook 'elpher-mode-hook
           (lambda ()
             (olivetti-mode 1)
-            (setq-local olivetti-body-width 96)))
+            (setq-local olivetti-body-width 72)))
 ;; -olivetti
 
 (provide 'init-theme)
