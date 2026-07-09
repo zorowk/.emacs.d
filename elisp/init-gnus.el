@@ -66,8 +66,12 @@
   (gnus-interactive-exit nil)
   (gnus-select-method '(nnnil ""))
 
-  ;; Gnus summary theme: compact status marks, age-aware dates, and
-  ;; low-noise thread glyphs that stay readable with proportional fonts.
+  ;; Gnus summary theme: visible status marks, aligned dates, and
+  ;; low-noise Unicode thread glyphs.
+  ;; Status columns: %U read mark, %R reply/secondary mark,
+  ;; %O download mark, %z score mark.
+  (gnus-unread-mark ?U)
+  (gnus-dormant-mark ?D)
   (gnus-sum-thread-tree-root "● ")
   (gnus-sum-thread-tree-false-root "○ ")
   (gnus-sum-thread-tree-single-indent "  ")
@@ -75,11 +79,11 @@
   (gnus-sum-thread-tree-indent "  ")
   (gnus-sum-thread-tree-leaf-with-other "├─ ")
   (gnus-sum-thread-tree-single-leaf "└─ ")
-  (gnus-summary-line-format "%U%R%O%z │ %&user-date; │ %-22,22f │ %B%s\n")
+  (gnus-summary-line-format "%U%R%O%z │ %-12&user-date; │ %-24,24f │ %B%S\n")
   (gnus-user-date-format-alist
-   '((gnus-seconds-today . "Today %H:%M")
+   '(((gnus-seconds-today) . "Today %H:%M")
      ((+ 86400 (gnus-seconds-today)) . "Yday  %H:%M")
-     (gnus-seconds-year . "%b %d %H:%M")
+     ((gnus-seconds-year) . "%m-%d %H:%M")
      (t . "%Y-%m-%d")))
   (gnus-summary-selected-face 'gnus-summary-selected)
 
