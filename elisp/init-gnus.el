@@ -208,7 +208,7 @@
         (mapconcat #'identity
                    '("^From:" "^Subject:" "^Date:" "^Newsgroups:" "^To:" "^Cc:")
                    "\\|"))
-  (add-hook 'gnus-article-prepare-hook #'gnus-article-buttonize)
+  (add-hook 'gnus-article-prepare-hook #'gnus-article-add-buttons)
   (setq gnus-article-margin 2)
   (auth-source-xoauth2-plugin-mode t))
 ;; -gnus
