@@ -91,10 +91,18 @@
   (gnus-secondary-select-methods
    '((nntp "news.gmane.io"
          (nntp-open-connection-function nntp-open-network-stream)
+         (nntp-stream ssl)
          (nntp-port-number 119))
      (nntp "news.eternal-september.org"
            (nntp-open-connection-function nntp-open-tls-stream)
-           (nntp-port-number 563))
+           (nntp-stream ssl)
+           (nntp-port-number 563)
+           ;; required because news.eternal-september.org also accepts
+           ;; connections without authentication but will then just show
+           ;; 'internal' groups
+           (nntp-authinfo-force t)
+           ;; for debugging puposes
+           (nntp-record-commands nil))
      (nnrss "")
      (nnimap
       "Gmail"
