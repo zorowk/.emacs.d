@@ -145,12 +145,15 @@
      ;; "^References:"
      "^List-Id:"
      "^Gnus-Warning:"))
-  ;; Fine-tune sorting of threads in the summary buffer.
+  ;; Fine-tune sorting of summaries: newest threads/articles first.
   ;; See: (info "(gnus) Sorting the Summary Buffer")
   (gnus-thread-sort-functions
    '(gnus-thread-sort-by-number
      gnus-thread-sort-by-subject
-     gnus-thread-sort-by-date))
+     gnus-thread-sort-by-most-recent-date))
+  (gnus-article-sort-functions
+   '(gnus-article-sort-by-number
+     (not gnus-article-sort-by-date)))
   ;;;; Message and sending mail
 
   ;; Automatically mark Gcc (sent) messages as read.
