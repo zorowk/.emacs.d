@@ -49,6 +49,7 @@
   :config
   (setopt agent-shell-markdown-render-function #'agent-shell-markdown-replace-markup)
   (setopt agent-shell-highlight-blocks t)
+  (setopt agent-shell-session-restore-verbosity 'full)
   (setopt agent-shell-inhibit-system-sleep nil))
 
 (provide 'init-llm)
