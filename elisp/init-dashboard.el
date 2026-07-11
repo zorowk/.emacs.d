@@ -47,31 +47,47 @@
     ("N" . dashboard-next-section)
     ("F" . dashboard-previous-section)))
   :custom
-  (dashboard-icon-type 'all-the-icons)
   (dashboard-banner-logo-title "Close the world. Open the nExt.")
-  (dashboard-startup-banner (expand-file-name
-                             (if (eq frame-background-mode 'dark)
-                                 "images/KEC_Dark_BK_Small.png"
-                               "images/KEC_Light_BK_Small.png") user-emacs-directory))
   (dashboard-items '((recents  . 7)
                      (bookmarks . 7)
                      (agenda . 5)))
   (initial-buffer-choice (lambda () (get-buffer-create dashboard-buffer-name)))
-  (dashboard-set-heading-icons t)
-  (dashboard-set-navigator t)
+  (dashboard-set-heading-icons nil)
+  (dashboard-startupify-list
+   '(dashboard-insert-banner
+     dashboard-insert-newline
+     dashboard-insert-banner-title
+     dashboard-insert-newline
+     dashboard-insert-navigator
+     dashboard-insert-newline
+     dashboard-insert-init-info
+     dashboard-insert-items
+     dashboard-insert-newline
+     dashboard-insert-footer))
   (dashboard-navigator-buttons
-   (if (featurep 'all-the-icons)
-       `(((,(all-the-icons-octicon "mark-github" :height 1.1 :v-adjust -0.05)
-           "Blog" "Browse Homepage"
-           (lambda (&rest _) (browse-url "https://zorowk.github.io/")))
-          (,(all-the-icons-fileicon "elisp" :height 1.0 :v-adjust -0.1)
-           "Configuration" "Documents" (lambda (&rest _) (edit-configs)))))
-     `((("" "Blog" "Browse Homepage"
-         (lambda (&rest _) (browse-url "https://zorowk.github.io/")))
-        ("" "Configuration" "Documents" (lambda (&rest _) (edit-configs)))))))
+   '((("" "Blog" "Browse Homepage"
+       (lambda (&rest _) (browse-url "https://zorowk.github.io/")))
+     ("" "Configuration" "Edit a configuration file"
+      (lambda (&rest _)
+        (let ((default-directory user-emacs-directory))
+          (project-find-file))))
+     ("" "Info" "Open Emacs Info"
+      (lambda (&rest _) (info))))))
   :custom-face
   (dashboard-banner-logo-title ((t (:family "Apple Chancery" :height 200))))
   :config
+  (defun zoro-dashboard-update-banner (appearance)
+    "Set and refresh the dashboard banner for APPEARANCE."
+    (setq dashboard-startup-banner
+          (expand-file-name
+           (if (eq appearance 'dark)
+               "images/KEC_Dark_BK_Small.png"
+             "images/KEC_Light_BK_Small.png")
+           user-emacs-directory))
+    (when-let ((buffer (get-buffer dashboard-buffer-name)))
+      (with-current-buffer buffer
+        (dashboard-insert-startupify-lists t))))
+  (zoro-dashboard-update-banner frame-background-mode)
   (dashboard-setup-startup-hook)
   ;; Open Dashboard function
   (defun open-dashboard ()
