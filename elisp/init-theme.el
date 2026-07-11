@@ -55,10 +55,16 @@
   (setq modus-themes-mixed-fonts t)
   (setq modus-themes-italic-constructs t)
 
-  ;; Finally, load your theme of choice (or a random one with
-  ;; `modus-themes-load-random', `modus-themes-load-random-dark',
-  ;; `modus-themes-load-random-light').
-  (modus-themes-load-theme 'ef-frost))
+  (defun zoro-apply-theme (appearance)
+    "Load the theme matching system APPEARANCE."
+    (mapc #'disable-theme custom-enabled-themes)
+    (pcase appearance
+      ('light (load-theme 'ef-frost t))
+      ('dark (load-theme 'ef-autumn t)))
+    (when (fboundp 'zoro-dashboard-update-banner)
+      (zoro-dashboard-update-banner appearance)))
+  (add-hook 'ns-system-appearance-change-functions #'zoro-apply-theme)
+  (zoro-apply-theme 'light))
 
 ;; SpaciousPadding
 (use-package spacious-padding
