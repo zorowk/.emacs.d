@@ -38,6 +38,16 @@
 ;; dictionary
 (setq dictionary-use-single-buffer t)
 (global-set-key (kbd "C-c s") #'dictionary-lookup-definition)
+(defun zoro-dictionary-new-search-no-select (orig-fun &rest args)
+  "Run ORIG-FUN without leaving focus in the Dictionary window."
+  (save-selected-window
+    (apply orig-fun args)))
+
+(with-eval-after-load 'dictionary
+  (advice-remove 'dictionary-new-search
+                 #'zoro-dictionary-new-search-no-select)
+  (advice-add 'dictionary-new-search :around
+              #'zoro-dictionary-new-search-no-select))
 ;; -dictionary
 
 ;; nov
