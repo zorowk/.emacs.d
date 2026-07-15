@@ -144,6 +144,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 ;; Office
 (require 'init-org)
 
+(require 'init-hyperbole)
+
 (require 'init-reader)
 
 ;; Internet
