@@ -65,7 +65,7 @@
 ;; -MatchParens
 
 ;; patch linux wayland
-(when (eq system-type 'gnu/linux)
+(when (and (eq system-type 'gnu/linux) (display-graphic-p))
   (setq select-enable-clipboard t
         select-enable-primary t)  ; 开启鼠标中键选区(Primary selection)同步
 
