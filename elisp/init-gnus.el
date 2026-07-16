@@ -39,6 +39,8 @@
   :defer t
   :init
   (use-package auth-source-xoauth2-plugin :defer t)
+  (with-eval-after-load 'auth-source
+    (add-to-list 'auth-sources "~/.authinfo.json.gpg"))
   :defer t
   ;; Gnus configuration
   ;; (info "(gnus) Don't Panic")

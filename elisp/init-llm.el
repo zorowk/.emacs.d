@@ -46,11 +46,16 @@
 (use-package agent-shell
   :defer t
   :bind (("C-z a" . agent-shell))
-  :config
-  (setopt agent-shell-markdown-render-function #'agent-shell-markdown-replace-markup)
-  (setopt agent-shell-highlight-blocks t)
-  (setopt agent-shell-session-restore-verbosity 'full)
-  (setopt agent-shell-inhibit-system-sleep nil))
+  :custom
+  (agent-shell-markdown-render-function #'agent-shell-markdown-replace-markup)
+  (agent-shell-highlight-blocks t)
+  (agent-shell-show-session-id nil)
+  (agent-shell-header-style 'text)
+  (agent-shell-busy-indicator-frames 'dots-block)
+  ( agent-shell-agent-configs
+    '(agent-shell-openai-make-codex-config))
+  ( agent-shell-session-restore-verbosity 'full)
+  ( agent-shell-inhibit-system-sleep nil))
 
 (provide 'init-llm)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

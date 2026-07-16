@@ -37,6 +37,7 @@
 
 ;; dictionary
 (setq dictionary-use-single-buffer t)
+(setq dictionary-server "dict.tw")
 (global-set-key (kbd "C-c s") #'dictionary-lookup-definition)
 (defun zoro-dictionary-new-search-no-select (orig-fun &rest args)
   "Run ORIG-FUN without leaving focus in the Dictionary window."
