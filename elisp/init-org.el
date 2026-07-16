@@ -232,6 +232,10 @@
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 ;; -org bullets
 
+;; Keep Org tables monospaced, especially when prose uses a variable-pitch face.
+(with-eval-after-load 'org
+  (set-face-attribute 'org-table nil :inherit 'fixed-pitch))
+
 (provide 'init-org)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-org.el ends here
