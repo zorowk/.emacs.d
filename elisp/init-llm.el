@@ -51,7 +51,6 @@
   (agent-shell-highlight-blocks t)
   (agent-shell-show-session-id nil)
   (agent-shell-header-style 'text)
-  (agent-shell-busy-indicator-frames 'dots-block)
   ( agent-shell-agent-configs
     '(agent-shell-openai-make-codex-config))
   ( agent-shell-session-restore-verbosity 'full)

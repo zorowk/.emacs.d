@@ -105,6 +105,11 @@
   ;; Capfs and Dabbrev can be used globally (M-/).  See also the customization
   ;; variable `global-corfu-modes' to exclude certain modes.
   (global-corfu-mode)
+  (global-corfu-minibuffer
+   (lambda ()
+     (not (or (bound-and-true-p mct--active)
+              (bound-and-true-p vertico--input)
+              (eq (current-local-map) read-passwd-map)))))
 
   ;; Enable optional extension modes:
   (corfu-history-mode)
