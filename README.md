@@ -7,7 +7,7 @@
 
 - 补全：Corfu、Cape、Vertico、Orderless、Consult、Embark、Marginalia
 - 开发：Eglot、内置 Tree-sitter、ESS、AUCTeX、Magit
-- 编辑：内置 Electric Pair、Expreg、Avy、Ace Window、Vundo
+- 编辑：内置 Electric Pair 与 Tempo、Expreg、Avy、Ace Window、Vundo
 - 笔记：Org、Denote、Consult Denote、Org Bullets
 - 阅读与网络：EWW、Elfeed、Nov、Elpher、ERC、Gnus
 - 界面：Ef Themes、Spacious Padding、Pulsar、Popper、Olivetti、Dashboard
@@ -24,6 +24,7 @@
 | `elisp/init-files.el` | Recentf、备份、自动保存、Customize 和文件模式 |
 | `elisp/init-search.el` | minibuffer 补全、搜索和 Embark |
 | `elisp/init-complete.el` | buffer 内补全、Cape 与 Eglot |
+| `elisp/init-templates.el` | 内置 Tempo 模板、按 mode 注册和展开命令 |
 | `elisp/init-*.el` | 其余按功能拆分的独立模块 |
 | `straight/versions/default.el` | 第三方包及配方仓库的版本锁文件 |
 
@@ -42,6 +43,9 @@ emacs
 
 个人 Dropbox 路径集中在 `elisp/init-const.el`。如果目录布局不同，只需修改该文件中的
 共享常量。
+
+内置模板使用 `M-+` 展开光标前的标签，或使用 `M-*` 从当前 major mode 可用的模板中
+选择。模板插入后可通过 `C-c t n` 跳到下一个占位位置。
 
 ## 更新所有包
 

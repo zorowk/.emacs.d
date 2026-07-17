@@ -115,6 +115,8 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 (require 'init-complete)
 
+(require 'init-templates)
+
 ;; Programming
 (require 'init-ess)
 
