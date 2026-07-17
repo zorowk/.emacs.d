@@ -60,13 +60,11 @@
                   ("https://www.phoronix.com/rss.php" linux phoronix)
                   ("https://hnrss.org/frontpage" hacker-news)
                   ("https://lobste.rs/rss" lobsters)))
-
-  (setq-default elfeed-db-directory
-                (expand-file-name "elfeed" user-emacs-directory)
-                elfeed-save-multiple-enclosures-without-asking t
-                elfeed-search-clipboard-type 'CLIPBOARD
-                elfeed-search-date-format '("%Y-%m-%d" 10 :left)
-                elfeed-search-title-min-width 45))
+  (elfeed-db-directory (expand-file-name "elfeed" user-emacs-directory))
+  (elfeed-save-multiple-enclosures-without-asking t)
+  (elfeed-search-clipboard-type 'CLIPBOARD)
+  (elfeed-search-date-format '("%Y-%m-%d" 10 :left))
+  (elfeed-search-title-min-width 45))
 ;; -elfeed
 
 (provide 'init-reader)

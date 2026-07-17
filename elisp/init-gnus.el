@@ -33,6 +33,8 @@
 ;;
 ;;; Code:
 
+(require 'init-const)
+
 ;; gnus
 (use-package gnus
   :ensure nil
@@ -54,7 +56,7 @@
     :defer t
     :commands auth-source-xoauth2-plugin-mode)
   (with-eval-after-load 'auth-source
-    (add-to-list 'auth-sources "~/.authinfo.json.gpg"))
+    (add-to-list 'auth-sources zoro-auth-source-file))
   ;; Tell Emacs we'd like to use Gnus and its Message integration
   ;; for reading and writing mail.
   (setq mail-user-agent 'gnus-user-agent)
@@ -91,9 +93,9 @@
      (t . "%Y-%m-%d")))
   (setq gnus-summary-selected-face 'gnus-summary-selected)
 
-  ;; Configure two IMAP mail accounts.
+  ;; Configure mail and news sources.
   (setq gnus-secondary-select-methods
-   '((nntp "news.gmane.io"
+   `((nntp "news.gmane.io"
          (nntp-open-connection-function nntp-open-network-stream)
          (nntp-stream ssl)
          (nntp-port-number 119))
@@ -114,7 +116,7 @@
       (nnimap-address "imap.gmail.com")
       (nnimap-server-port 993) ; imaps
       (nnimap-authenticator xoauth2)
-      (nnimap-user "near.kingzero@gmail.com")
+      (nnimap-user ,zoro-gmail-address)
       (nnimap-mailbox-list ("INBOX" "[Gmail]/Sent Mail" "[Gmail]/All Mail" "[Gmail]/Trash" "[Gmail]/Spam"))
       (nnimap-expunge-on-delete t)
       ;; Archive messages into yearly Archive folders upon pressing
@@ -174,8 +176,8 @@
   ;; server for sending mail.  See: (info "(gnus) Posting Styles")
   ;; Also see sample .authinfo file provided below.
   (setq gnus-posting-styles
-   '(("nnimap\\+Gmail:.*"
-      (address "near.kingzero@gmail.com")
+   `(("nnimap\\+Gmail:.*"
+      (address ,zoro-gmail-address)
       ("X-Message-SMTP-Method" "smtp smtp.gmail.com 587")
       (gcc "nnimap+Gmail:INBOX"))))
 

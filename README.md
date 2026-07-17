@@ -17,7 +17,7 @@
 
 | 文件 | 职责 |
 | --- | --- |
-| `early-init.el` | 启动阶段的 GC、文件处理器和基础界面设置 |
+| `early-init.el` | 版本检查、包激活策略和基础界面设置 |
 | `init.el` | 建立加载路径并按职责加载各模块 |
 | `elisp/init-const.el` | 个人身份、平台判断和共享外部数据目录 |
 | `elisp/init-core.el` | 全局行为、按键、编码和无持久状态的 Hook |
@@ -27,9 +27,6 @@
 | `elisp/init-templates.el` | 内置 Tempo 模板、按 mode 注册和展开命令 |
 | `elisp/init-*.el` | 其余按功能拆分的独立模块 |
 | `elisp/init-package.el` | 内置 package.el、软件源优先级和 use-package 设置 |
-
-`init-private.el` 如果存在，会在所有普通模块之后加载。它已被 Git 忽略，适合存放不应
-提交的本机配置；密码和令牌应继续使用 `auth-source`，不要写进配置文件。
 
 ## 安装
 
@@ -45,8 +42,8 @@ package.el 用软件源版本替换 Emacs 自带库。
 当前配置没有 Git-only 包。以后若需直接跟踪 Git 仓库，应使用 Emacs 31 内置的
 `use-package :vc`，由 `package-vc` 安装，而不是引入第二套包管理器。
 
-个人 Dropbox 路径集中在 `elisp/init-const.el`。如果目录布局不同，只需修改该文件中的
-共享常量。
+个人身份、邮箱地址和 Dropbox 路径集中在 `elisp/init-const.el`。如果账号或目录布局
+不同，只需修改该文件中的共享常量。
 
 内置模板使用 `M-+` 展开光标前的标签，或使用 `M-*` 从当前 major mode 可用的模板中
 选择。模板插入后可通过 `C-c t n` 跳到下一个占位位置。

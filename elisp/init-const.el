@@ -35,9 +35,19 @@
 ;;
 ;;; Code:
 
-;; Personal identity.
+;; Personal identity and account paths.
+(defconst zoro-primary-mail-address "nearkingzero@outlook.com"
+  "Primary email address used by Emacs.")
+
+(defconst zoro-gmail-address "near.kingzero@gmail.com"
+  "Gmail address used by the Gnus account configuration.")
+
+(defconst zoro-auth-source-file
+  (expand-file-name "~/.authinfo.json.gpg")
+  "Encrypted auth-source file used by mail accounts.")
+
 (setq user-full-name "zorowk"
-      user-mail-address "nearkingzero@outlook.com")
+      user-mail-address zoro-primary-mail-address)
 
 ;; Shared environment constants.
 (defconst zoro-windows-p

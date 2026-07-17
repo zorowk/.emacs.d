@@ -9,9 +9,6 @@
 
 (use-package hyperbole
   :ensure t
-  ;; Keep Hyperbole off the startup critical path; enable it once Emacs has
-  ;; been idle for a few seconds.
-  :defer 8
   :bind (("C-z h" . hyperbole))
   :init
   ;; Set this before Hyperbole loads so HyWiki initializes against the

@@ -14,7 +14,7 @@
 ;;
 ;;; Commentary:
 ;;
-;; This initializes prettify-symbols-mode and other UI configurations
+;; Configure global UI behavior.
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -41,24 +41,6 @@
 ;; Highlight
 (global-hl-line-mode 1)
 ;; -Highlight
-
-;; PreSym
-(defun setup-prettify-symbols ()
-  "Setup prettify-symbols-mode with predefined symbols."
-  (setq prettify-symbols-alist
-        '(("lambda" . 955)
-          ("delta" . 120517)
-          ("epsilon" . 120518)
-          ("->" . 8594)
-          ("<=" . 8804)
-          (">=" . 8805)))
-  ;;(prettify-symbols-mode 1)
-  )
-
-;;(global-prettify-symbols-mode 1)
-(add-hook 'prog-mode-hook #'setup-prettify-symbols)
-(add-hook 'org-mode-hook #'setup-prettify-symbols)
-;; -PreSym
 
 ;; TitleBar
 (setq-default frame-title-format '("M-EMACS - " user-login-name "@" system-name " - %b"))

@@ -1,7 +1,7 @@
 ;;; init-buffer.el --- -*- lexical-binding: t -*-
 ;;
 ;; Filename: init-buffer.el
-;; Description: Initialize ibuffer and ibuffer-vc
+;; Description: Configure Ibuffer
 ;; Author: Mingde (Matthew) Zeng
 ;; Copyright (C) 2019 Mingde (Matthew) Zeng
 ;; Created: Thu Feb  6 16:25:12 2020 (-0500)
@@ -14,7 +14,7 @@
 ;;
 ;;; Commentary:
 ;;
-;; This file initializes ibuffer and ibuffer-vc
+;; Configure the built-in Ibuffer interface.
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -39,12 +39,6 @@
 (use-package ibuffer
   :ensure nil
   :bind ("C-x C-b" . ibuffer)
-  :init
-  (use-package ibuffer-vc
-    :ensure t
-    :commands (ibuffer-vc-set-filter-groups-by-vc-root)
-    :custom
-    (ibuffer-vc-skip-if-remote 'nil))
   :custom
   (ibuffer-human-readable-size t)
   (ibuffer-use-header-line 'title)
