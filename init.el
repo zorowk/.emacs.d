@@ -62,20 +62,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 ;; -AutoGC
 
 ;; LoadPath
-(defun update-to-load-path (folder)
-  "Update FOLDER and its subdirectories to `load-path'."
-  (let ((base folder))
-    (unless (member base load-path)
-      (add-to-list 'load-path base))
-    (dolist (f (directory-files base))
-      (let ((name (concat base "/" f)))
-        (when (and (file-directory-p name)
-                   (not (equal f ".."))
-                   (not (equal f ".")))
-          (unless (member base load-path)
-            (add-to-list 'load-path name)))))))
-
-(update-to-load-path (expand-file-name "elisp" user-emacs-directory))
+(add-to-list 'load-path (expand-file-name "elisp" user-emacs-directory))
 ;; -LoadPath
 
 ;; Constants
@@ -158,4 +145,3 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (provide 'init)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init.el ends here
-(put 'set-goal-column 'disabled nil)

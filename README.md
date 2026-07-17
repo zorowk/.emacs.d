@@ -1,38 +1,73 @@
 # Emacs Configuration
 
-轻量、高效、现代化的 Emacs 配置，专注 C++ 开发 + Org-mode 笔记 + 阅读写作。
+面向日常编程、Org/Denote 笔记和阅读写作的个人 Emacs 配置。当前跟随 Emacs master，
+使用 `straight.el` 管理第三方包，并提交版本锁文件以保持环境可复现。
 
-当前基于 **Emacs master**，使用 **straight.el** 管理包，极简但功能强大。
+## 功能概览
 
-## 核心特点
+- 补全：Corfu、Cape、Vertico、Orderless、Consult、Embark、Marginalia
+- 开发：Eglot、内置 Tree-sitter、ESS、AUCTeX、Magit
+- 编辑：内置 Electric Pair、Expreg、Avy、Ace Window、Vundo
+- 笔记：Org、Denote、Consult Denote、Org Bullets
+- 阅读与网络：EWW、Elfeed、Nov、Elpher、ERC、Gnus
+- 界面：Ef Themes、Spacious Padding、Pulsar、Popper、Olivetti、Dashboard
+- AI：Agent Shell
 
-- **补全体系**：Corfu + Cape + Vertico + Orderless + Consult + Embark + Marginalia（极致补全体验）
-- **LSP & 高亮**：Eglot + clangd + 内置 Tree-sitter（C++23/内核代码高亮 & 语义跳转）
-- **项目管理**：内置 project.el + Consult（快速搜索、打开项目文件）
-- **Org & 写作**：Org + Denote + Tempel（知识管理 & 模板）
-- **美化 & 留白**：Spacious-padding + Ef-themes / Modus-themes（呼吸感界面）
-- **其他**：Magit（Git）、Smartparens（括号）、multiple-cursors（批量编辑）、Vundo（可视化 undo）
+## 配置结构
 
-## 主要包列表（精选）
+| 文件 | 职责 |
+| --- | --- |
+| `early-init.el` | 启动阶段的 GC、文件处理器和基础界面设置 |
+| `init.el` | 建立加载路径并按职责加载各模块 |
+| `elisp/init-const.el` | 个人身份、平台判断和共享外部数据目录 |
+| `elisp/init-core.el` | 全局行为、按键、编码和无持久状态的 Hook |
+| `elisp/init-files.el` | Recentf、备份、自动保存、Customize 和文件模式 |
+| `elisp/init-search.el` | minibuffer 补全、搜索和 Embark |
+| `elisp/init-complete.el` | buffer 内补全、Cape 与 Eglot |
+| `elisp/init-*.el` | 其余按功能拆分的独立模块 |
+| `straight/versions/default.el` | 第三方包及配方仓库的版本锁文件 |
 
-| 分类           | 包名                              | 作用简述                              |
-|----------------|-----------------------------------|---------------------------------------|
-| 补全           | corfu / cape / vertico / orderless / consult / embark / marginalia | 现代补全栈（buffer / minibuffer）     |
-| LSP & 高亮     | eglot / treesit / clangd          | C++ 语义补全 & Tree-sitter 高亮       |
-| 项目管理       | project.el / consult              | 项目文件搜索 & 切换                   |
-| 笔记 / 知识管理| org / denote                      | 原子化笔记 / 知识网络                 |
-| 模板           | tempel                            | 轻量代码/文本模板                     |
-| Git            | magit                             | Git 一站式管理                        |
-| 美化           | spacious-padding / ef-themes      | 全局留白 + 现代主题                   |
-| 编辑增强       | smartparens / multiple-cursors / expreg / easy-kill | 智能括号 / 多光标批量编辑             |
-| 差异查看       | ediff                             | 内置 diff/merge 工具                  |
-| 阅读           | nov + shrface                     | EPUB 阅读 + 美化                      |
-| 其他           | vundo / avy / ace-window          | 可视化 undo / 快速跳转                |
+`init-private.el` 如果存在，会在所有普通模块之后加载。它已被 Git 忽略，适合存放不应
+提交的本机配置；密码和令牌应继续使用 `auth-source`，不要写进配置文件。
 
-完整列表见仓库根目录下的 `straight/repos` 或 `.emacs.d/elpa`。
+## 安装
 
-## 安装与使用
+```sh
+git clone https://github.com/zorowk/.emacs.d.git ~/.emacs.d
+emacs
+```
 
-1. **克隆仓库**
-   ```bash
-   git clone https://github.com/zorowk/.emacs.d.git ~/.emacs.d
+第一次启动需要网络连接来引导 Straight 并克隆缺失的包。仓库中的
+`straight/versions/default.el` 会让新环境使用已经验证过的包版本。
+
+个人 Dropbox 路径集中在 `elisp/init-const.el`。如果目录布局不同，只需修改该文件中的
+共享常量。
+
+## 更新所有包
+
+Straight 可以直接升级全部包：
+
+1. 运行 `M-x straight-pull-all` 拉取并合并所有包的上游更新。
+2. 重启 Emacs，或在仓库根目录运行下面的批处理启动检查。
+3. 确认配置正常后，运行 `M-x straight-freeze-versions` 更新版本锁文件。
+4. 检查并提交 `straight/versions/default.el` 的变化。
+
+Straight 会在需要时重建发生变化的包。只有排查构建问题时，才需要手动运行
+`M-x straight-rebuild-all` 强制重建全部包。
+
+要恢复锁文件记录的版本，运行 `M-x straight-thaw-versions`。该命令遇到包仓库中的本地
+改动时会交互确认；升级前不要把个人修改遗留在 `straight/repos/` 中。
+
+## 验证
+
+从仓库根目录执行一次独立启动检查：
+
+```sh
+emacs --batch -Q -l early-init.el -l init.el
+```
+
+正常启动不应产生 Elisp 错误或过时警告。ERC、Gnus、Org、Denote、Hyperbole 等较重模块
+按需加载，不应仅因启动配置而提前进入 `features`。
+
+运行时产生的 `agent/`、`elpa/`、`projects`、Straight 构建目录和其他历史/缓存文件均被
+Git 忽略；可复现状态由手写配置和 Straight 锁文件共同定义。

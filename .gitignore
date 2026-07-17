@@ -40,6 +40,9 @@
 /straight/versions/*
 !/straight/versions/default.el
 /org-persist/
+/agent/
+/elpa/
+/projects
 .aider*
 /tree-sitter/
 *.DS_Store

@@ -117,6 +117,7 @@
 (add-hook 'mouse-leave-buffer-hook #'abort-minibuffer-using-mouse)
 
 (put 'erase-buffer 'disabled nil)
+(put 'set-goal-column 'disabled nil)
 
 (provide 'init-core)
 ;;; init-core.el ends here
