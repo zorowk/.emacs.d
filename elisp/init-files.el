@@ -10,7 +10,7 @@
 ;;; Code:
 
 (use-package recentf
-  :straight (:type built-in)
+  :ensure nil
   :hook (after-init . recentf-mode)
   :custom
   (recentf-auto-cleanup "05:00am")
@@ -41,10 +41,6 @@
 (setq-default create-lockfiles t)
 (setopt remote-file-name-inhibit-locks t
         remote-file-name-inhibit-auto-save-visited t)
-
-;; Keep Customize output separate from hand-written configuration.
-(setq custom-file (expand-file-name "custom-set-variables.el" user-emacs-directory))
-(load custom-file 'noerror)
 
 (global-so-long-mode)
 (setq require-final-newline t

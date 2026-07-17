@@ -37,7 +37,7 @@
 
 ;; DiredPackage
 (use-package dired
-  :straight (:type built-in)
+  :ensure nil
   :bind
   (("C-x C-j" . dired-jump))
   :custom

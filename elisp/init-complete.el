@@ -38,7 +38,7 @@
 
 ;; Eglot supplies LSP completion, navigation, diagnostics, and code actions.
 (use-package eglot
-  :straight (:type built-in)
+  :ensure nil
   :commands (eglot eglot-ensure)
   :custom
   (eglot-autoshutdown t)
@@ -83,6 +83,7 @@
 
 ;; Query workspace symbols through Consult's completing-read interface.
 (use-package consult-eglot
+  :ensure t
   :after eglot
   :bind (:map eglot-mode-map
               ("C-M-." . consult-eglot-symbols)
@@ -90,6 +91,7 @@
 
 ;; Corfu renders completion-at-point candidates in a child-frame popup.
 (use-package corfu
+  :ensure t
   :bind (:map corfu-map
               ("TAB" . corfu-next)
               ([tab] . corfu-next)
@@ -113,6 +115,7 @@
 
 ;; TAB first indents, then invokes completion when indentation is unchanged.
 (use-package emacs
+  :ensure nil
   :custom
   (tab-always-indent 'complete)
   ;; Do not let the Emacs 30 Ispell CAPF take precedence in text buffers.
@@ -120,7 +123,7 @@
 
 ;; Dabbrev completes words gathered from related buffers.
 (use-package dabbrev
-  :straight (:type built-in)
+  :ensure nil
   :bind (("M-/" . dabbrev-completion)
          ("C-M-/" . dabbrev-expand))
   :config
@@ -132,6 +135,7 @@
 
 ;; Cape contributes additional completion-at-point functions (Capfs).
 (use-package cape
+  :ensure t
   :bind ("C-c p" . cape-prefix-map)
   :init
   ;; Offer file names after any earlier, mode-specific Capfs decline.

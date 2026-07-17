@@ -43,6 +43,7 @@
 
 ;; nov
 (use-package nov
+  :ensure t
   :defer t
   :init
   (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode)))
@@ -50,6 +51,7 @@
 
 ;; elfeed
 (use-package elfeed
+  :ensure t
   :defer t
   :bind (("C-z e" . elfeed))
   :custom

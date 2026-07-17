@@ -37,6 +37,7 @@
 
 ;; ExecPathFromShellPac
 (use-package exec-path-from-shell
+  :ensure t
   :if (memq window-system '(mac ns))
   :custom
   (exec-path-from-shell-variables

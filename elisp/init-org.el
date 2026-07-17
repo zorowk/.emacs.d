@@ -86,7 +86,7 @@
 
 ;; OrgPac
 (use-package org
-  :straight (:type built-in)
+  :ensure nil
   :defer t
   :bind (("C-c C-l" . org-store-link)
          ("C-c C-i" . org-insert-link)
@@ -207,6 +207,7 @@
 
 ;; Denote
 (use-package denote
+  :ensure t
   :defer t
   :hook
   (;; If you use plain text files (.txt), then you want to make the
@@ -265,6 +266,7 @@
   (denote-rename-buffer-mode 1))
 
 (use-package consult-denote
+  :ensure t
   :bind
   (("C-c n f" . consult-denote-find)
    ("C-c n g" . consult-denote-grep))
@@ -274,6 +276,7 @@
 
 ;; org bullets
 (use-package org-bullets
+  :ensure t
   :after org
   :init
   (setq org-bullets-bullet-list '("◉" "○" "✸" "✿" "✤" "✜" "◆" "●"))

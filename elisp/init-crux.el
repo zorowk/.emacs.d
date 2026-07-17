@@ -37,6 +37,7 @@
 
 ;; CruxPac
 (use-package crux
+  :ensure t
   :bind
   (("C-a" . crux-move-beginning-of-line)
    ("C-x 4 t" . crux-transpose-windows)

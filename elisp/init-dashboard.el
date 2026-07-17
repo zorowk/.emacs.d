@@ -37,6 +37,7 @@
 
 ;; DashboardPac
 (use-package dashboard
+  :ensure t
   :demand
   :diminish (dashboard-mode)
   :bind

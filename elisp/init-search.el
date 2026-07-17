@@ -39,6 +39,7 @@
 
 ;; Vertico displays standard completing-read candidates vertically.
 (use-package vertico
+  :ensure t
   :bind (:map vertico-map
               ("?" . minibuffer-completion-help)
               ("M-RET" . minibuffer-force-complete-and-exit)
@@ -53,12 +54,13 @@
 
 ;; Savehist persists minibuffer history; Vertico uses it when sorting candidates.
 (use-package savehist
-  :straight (:type built-in)
+  :ensure nil
   :init
   (savehist-mode))
 
 ;; Built-in minibuffer behavior shared by Vertico and other completion commands.
 (use-package emacs
+  :ensure nil
   :custom
   ;; Enable Emacs's general right-click context menu (independent of Vertico).
   (context-menu-mode t)
@@ -75,6 +77,7 @@
 
 ;; Orderless treats space-separated input components as independent filters.
 (use-package orderless
+  :ensure t
   :custom
   ;; `basic' is the fallback required by some dynamic completion tables.
   (completion-styles '(orderless basic))
@@ -87,6 +90,7 @@
 
 ;; Marginalia adds category-aware annotations such as file size or command keys.
 (use-package marginalia
+  :ensure t
   :bind (:map minibuffer-local-map
               ("M-A" . marginalia-cycle))
   :init
@@ -94,6 +98,7 @@
 
 ;; Consult supplies completing-read based navigation and asynchronous search.
 (use-package consult
+  :ensure t
   :bind (("C-c M-x" . consult-mode-command)
          ("C-c h" . consult-history)
          ("C-c k" . consult-kmacro)
@@ -159,6 +164,7 @@
 
 ;; Embark exposes context-sensitive actions for the candidate or thing at point.
 (use-package embark
+  :ensure t
   :bind (("C-." . embark-act)
          ("C-;" . embark-dwim)
          ("C-h B" . embark-bindings))
@@ -173,6 +179,7 @@
 
 ;; Add Consult preview support to Embark collect buffers.
 (use-package embark-consult
+  :ensure t
   :after (embark consult)
   :hook (embark-collect-mode . consult-preview-at-point-mode))
 

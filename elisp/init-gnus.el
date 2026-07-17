@@ -35,7 +35,7 @@
 
 ;; gnus
 (use-package gnus
-  :straight (:type built-in)
+  :ensure nil
   :defer t
   :commands gnus
   ;; Gnus configuration
@@ -50,6 +50,7 @@
    (message-mode-hook . #'flyspell-mode))
   :init
   (use-package auth-source-xoauth2-plugin
+    :ensure t
     :defer t
     :commands auth-source-xoauth2-plugin-mode)
   (with-eval-after-load 'auth-source

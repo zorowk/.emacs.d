@@ -1,67 +1,45 @@
-;;; init-package.el --- -*- lexical-binding: t -*-
-;;
-;; Filename: init-package.el
-;; Description: Initialize Package Management for M-EMACS
-;; Author: Mingde (Matthew) Zeng
-;; Copyright (C) 2019 Mingde (Matthew) Zeng
-;; Created: Thu Mar 14 10:53:00 2019 (-0400)
-;; Version: 3.0
-;; URL: https://github.com/MatthewZMD/.emacs.d
-;; Keywords: M-EMACS .emacs.d packages use-package
-;; Compatibility: emacs-version >= 26.1
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;; init-package.el --- Built-in package management -*- lexical-binding: t -*-
+
+;; SPDX-License-Identifier: GPL-3.0-or-later
+
 ;;; Commentary:
-;;
-;; This file initializes packages from melpa using use-package macro
-;; as well as auto-package-update, diminish, gnu-elpa-keyring-update
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; This program is free software: you can redistribute it and/or modify
-;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation, either version 3 of the License, or (at
-;; your option) any later version.
-;;
-;; This program is distributed in the hope that it will be useful, but
-;; WITHOUT ANY WARRANTY; without even the implied warranty of
-;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-;; General Public License for more details.
-;;
-;; You should have received a copy of the GNU General Public License
-;; along with GNU Emacs.  If not, see <https://www.gnu.org/licenses/>.
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;; Use package.el and use-package bundled with Emacs 31.  Package declarations
+;; explicitly distinguish built-in packages (`:ensure nil') from packages
+;; installed from GNU ELPA, NonGNU ELPA, or MELPA (`:ensure t').
+
 ;;; Code:
 
-;; StraightBootstrap
-(defvar bootstrap-version)
-(let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 7))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
-;; Install third-party `use-package' declarations with Straight by default.
-(setq straight-use-package-by-default t)
-;; -StraightBootstrap
+(require 'package)
 
-(eval-and-compile
-  (require 'use-package)
-  (require 'bind-key)
-  (setq use-package-verbose t
+(setopt package-archives
+        '(("gnu" . "https://elpa.gnu.org/packages/")
+          ("nongnu" . "https://elpa.nongnu.org/nongnu/")
+          ("melpa" . "https://melpa.org/packages/"))
+        package-archive-priorities
+        '(("gnu" . 30)
+          ("nongnu" . 20)
+          ("melpa" . 10))
+        ;; Never replace a library bundled with Emacs 31 merely because an
+        ;; archive carries a newer version.
+        package-install-upgrade-built-in nil)
+
+;; `package-enable-at-startup' is disabled in early-init.el.  Activating here
+;; makes GUI, daemon, and documented batch startup follow the same path.
+(package-initialize)
+
+;; Keep package-selected-packages and all other Customize output out of the
+;; hand-written init file, including during first-run package installation.
+(setq custom-file (expand-file-name "custom-set-variables.el"
+                                    user-emacs-directory))
+(load custom-file 'noerror)
+
+(require 'use-package)
+
+(setopt use-package-always-ensure nil
+        use-package-compute-statistics nil
+        use-package-enable-imenu-support t
         use-package-expand-minimally t
-        use-package-compute-statistics t
-        use-package-enable-imenu-support t))
-;; -UsePackage
+        use-package-verbose nil)
 
 (provide 'init-package)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-package.el ends here

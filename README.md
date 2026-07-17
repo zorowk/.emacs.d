@@ -1,7 +1,7 @@
 # Emacs Configuration
 
-面向日常编程、Org/Denote 笔记和阅读写作的个人 Emacs 配置。当前跟随 Emacs master，
-使用 `straight.el` 管理第三方包，并提交版本锁文件以保持环境可复现。
+面向日常编程、Org/Denote 笔记和阅读写作的个人 Emacs 配置，最低支持 Emacs 31。
+使用 Emacs 内置的 `package.el` 和 `use-package` 管理第三方包。
 
 ## 功能概览
 
@@ -26,7 +26,7 @@
 | `elisp/init-complete.el` | buffer 内补全、Cape 与 Eglot |
 | `elisp/init-templates.el` | 内置 Tempo 模板、按 mode 注册和展开命令 |
 | `elisp/init-*.el` | 其余按功能拆分的独立模块 |
-| `straight/versions/default.el` | 第三方包及配方仓库的版本锁文件 |
+| `elisp/init-package.el` | 内置 package.el、软件源优先级和 use-package 设置 |
 
 `init-private.el` 如果存在，会在所有普通模块之后加载。它已被 Git 忽略，适合存放不应
 提交的本机配置；密码和令牌应继续使用 `auth-source`，不要写进配置文件。
@@ -38,8 +38,12 @@ git clone https://github.com/zorowk/.emacs.d.git ~/.emacs.d
 emacs
 ```
 
-第一次启动需要网络连接来引导 Straight 并克隆缺失的包。仓库中的
-`straight/versions/default.el` 会让新环境使用已经验证过的包版本。
+第一次启动需要网络连接。带有 `:ensure t` 的第三方包会优先从 GNU ELPA、NonGNU
+ELPA 安装，并以 MELPA 作为补充来源。内置包统一标记为 `:ensure nil`，同时禁止
+package.el 用软件源版本替换 Emacs 自带库。
+
+当前配置没有 Git-only 包。以后若需直接跟踪 Git 仓库，应使用 Emacs 31 内置的
+`use-package :vc`，由 `package-vc` 安装，而不是引入第二套包管理器。
 
 个人 Dropbox 路径集中在 `elisp/init-const.el`。如果目录布局不同，只需修改该文件中的
 共享常量。
@@ -49,18 +53,13 @@ emacs
 
 ## 更新所有包
 
-Straight 可以直接升级全部包：
+1. 运行 `M-x package-refresh-contents` 刷新软件源。
+2. 运行 `M-x package-upgrade-all` 升级 package.el 管理的包。
+3. 如果以后加入 `:vc` 包，再运行 `M-x package-vc-upgrade-all` 更新 Git 包。
+4. 重启 Emacs，并执行下面的批处理启动检查。
 
-1. 运行 `M-x straight-pull-all` 拉取并合并所有包的上游更新。
-2. 重启 Emacs，或在仓库根目录运行下面的批处理启动检查。
-3. 确认配置正常后，运行 `M-x straight-freeze-versions` 更新版本锁文件。
-4. 检查并提交 `straight/versions/default.el` 的变化。
-
-Straight 会在需要时重建发生变化的包。只有排查构建问题时，才需要手动运行
-`M-x straight-rebuild-all` 强制重建全部包。
-
-要恢复锁文件记录的版本，运行 `M-x straight-thaw-versions`。该命令遇到包仓库中的本地
-改动时会交互确认；升级前不要把个人修改遗留在 `straight/repos/` 中。
+配置以明确的 `:ensure`/`:vc` 声明、软件源优先级和 Emacs 31 内置库优先策略保持
+包管理路径单一。
 
 ## 验证
 
@@ -73,5 +72,5 @@ emacs --batch -Q -l early-init.el -l init.el
 正常启动不应产生 Elisp 错误或过时警告。ERC、Gnus、Org、Denote、Hyperbole 等较重模块
 按需加载，不应仅因启动配置而提前进入 `features`。
 
-运行时产生的 `agent/`、`elpa/`、`projects`、Straight 构建目录和其他历史/缓存文件均被
-Git 忽略；可复现状态由手写配置和 Straight 锁文件共同定义。
+运行时产生的 `agent/`、`elpa/`、`projects` 和其他历史/缓存文件均被 Git 忽略；仓库只
+保存手写配置，不提交下载后的包或构建产物。

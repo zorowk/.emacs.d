@@ -44,6 +44,7 @@
 ;;; Code:
 
 (use-package agent-shell
+  :ensure t
   :defer t
   :bind (("C-z a" . agent-shell))
   :custom

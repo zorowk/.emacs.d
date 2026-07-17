@@ -37,6 +37,7 @@
 
 ;; AUCTeXPac
 (use-package auctex
+  :ensure t
   :defer t
   :custom
   (TeX-auto-save t)
@@ -61,6 +62,7 @@
 
 ;; Cdlatex
 (use-package cdlatex
+  :ensure t
   :defer t
   :hook (org-mode . org-cdlatex-mode))
 ;; -Cdlatex

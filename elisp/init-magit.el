@@ -37,6 +37,7 @@
 
 ;; MagitPac
 (use-package magit
+  :ensure t
   :defer t
   :if (executable-find "git")
   :bind

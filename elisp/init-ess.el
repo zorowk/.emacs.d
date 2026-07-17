@@ -37,6 +37,7 @@
 
 ;; ESSPac
 (use-package ess
+  :ensure t
   :defer t
   :commands R
   :config
@@ -45,6 +46,7 @@
 
 ;; Gnuplot
 (use-package gnuplot
+  :ensure t
   :defer t)
 ;; -Gnuplot
 

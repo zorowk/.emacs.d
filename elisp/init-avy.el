@@ -37,6 +37,7 @@
 
 ;; AvyPac
 (use-package avy
+  :ensure t
   :defer t
   :bind
   (("C-z j" . avy-goto-char-timer)

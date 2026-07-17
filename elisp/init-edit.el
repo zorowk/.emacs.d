@@ -37,13 +37,14 @@
 
 ;; expreg
 (use-package expreg
+  :ensure t
   :bind (("C-=" . expreg-expand)
          ("C--" . expreg-contract)))
 ;; -expreg
 
 ;; ElectricPair
 (use-package elec-pair
-  :straight (:type built-in)
+  :ensure nil
   :hook (prog-mode . electric-pair-local-mode)
   :custom
   (electric-pair-preserve-balance t)
@@ -53,7 +54,7 @@
 
 ;; MatchParens
 (use-package paren
-  :straight (:type built-in)
+  :ensure nil
   :custom
   (show-paren-when-point-inside-paren t)
   (show-paren-when-point-in-periphery t)

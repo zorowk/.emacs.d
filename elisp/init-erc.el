@@ -39,7 +39,7 @@
 
 ;; ERCPac
 (use-package erc
-  :straight (:type built-in)
+  :ensure nil
   :defer t
   :commands (erc erc-tls)
   :init

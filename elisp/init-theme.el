@@ -37,6 +37,7 @@
 ;;; Code:
 
 (use-package ef-themes
+  :ensure t
   :init
   ;; This makes the Modus commands listed below consider only the Ef
   ;; themes.  For an alternative that includes Modus and all
@@ -65,6 +66,7 @@
 
 ;; SpaciousPadding
 (use-package spacious-padding
+  :ensure t
   :config
   (setopt spacious-padding-widths
           '( :internal-border-width 16
@@ -86,6 +88,7 @@
 
 ;; Pulsar
 (use-package pulsar
+  :ensure t
   :init
   (pulsar-global-mode 1)
   :config
@@ -98,6 +101,7 @@
 
 ;; popper
 (use-package popper
+  :ensure t
   :bind (("C-`"   . popper-toggle)
          ("M-`"   . popper-cycle)
          ("C-M-`" . popper-toggle-type))
@@ -145,6 +149,7 @@
 
 ;; olivetti
 (use-package olivetti
+  :ensure t
   :defer t)
 (add-hook 'eww-after-render-hook
           (lambda ()
