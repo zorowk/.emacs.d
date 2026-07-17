@@ -270,6 +270,9 @@
 ;; Auto-Select Help Windows
 (setq help-window-select t)
 
+;; Open URLs inside Emacs with EWW
+(setq browse-url-browser-function #'eww-browse-url)
+
 ;; Don't break out a separate frame for ediff
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 
