@@ -35,7 +35,10 @@
 /emojis/
 /org-roam.db
 /lsp-bridge/
-/straight/
+/straight/*
+!/straight/versions/
+/straight/versions/*
+!/straight/versions/default.el
 /org-persist/
 .aider*
 /tree-sitter/

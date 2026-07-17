@@ -37,7 +37,6 @@
 
 ;; expreg
 (use-package expreg
-  :ensure t
   :bind (("C-=" . expreg-expand)
          ("C--" . expreg-contract)))
 ;; -expreg

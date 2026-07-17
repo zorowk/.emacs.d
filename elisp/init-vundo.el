@@ -9,7 +9,6 @@
 
 ;; VundoPac
 (use-package vundo
-  :ensure t
   :bind ("C-z u" . vundo))
 ;; -VundoPac
 

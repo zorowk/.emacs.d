@@ -49,6 +49,7 @@
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
+;; Install third-party `use-package' declarations with Straight by default.
 (setq straight-use-package-by-default t)
 ;; -StraightBootstrap
 

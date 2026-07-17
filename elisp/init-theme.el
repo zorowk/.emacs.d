@@ -89,7 +89,6 @@
 
 ;; Pulsar
 (use-package pulsar
-  :ensure t
   :init
   (pulsar-global-mode 1)
   :config
@@ -102,7 +101,6 @@
 
 ;; popper
 (use-package popper
-  :ensure t ; or :straight t
   :bind (("C-`"   . popper-toggle)
          ("M-`"   . popper-cycle)
          ("C-M-`" . popper-toggle-type))
