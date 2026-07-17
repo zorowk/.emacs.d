@@ -35,45 +35,30 @@
 ;;
 ;;; Code:
 
-;; UserInfo
-(setq user-full-name "zorowk")
-(setq user-mail-address "nearkingzero@outlook.com")
-;; -UserInfo
+;; Personal identity.
+(setq user-full-name "zorowk"
+      user-mail-address "nearkingzero@outlook.com")
 
-;; Consts
-(defconst *sys/win32*
+;; Shared environment constants.
+(defconst zoro-windows-p
   (eq system-type 'windows-nt)
-  "Are we running on a WinTel system?")
+  "Non-nil when Emacs is running on Windows.")
 
-(defconst *sys/linux*
-  (eq system-type 'gnu/linux)
-  "Are we running on a GNU/Linux system?")
+(defconst zoro-dropbox-directory
+  (file-name-as-directory (expand-file-name "~/Dropbox/"))
+  "Root directory of the personal Dropbox tree.")
 
-(defconst *sys/mac*
-  (eq system-type 'darwin)
-  "Are we running on a Mac system?")
+(defconst zoro-org-directory
+  (expand-file-name "brain/" zoro-dropbox-directory)
+  "Directory containing Org agenda files.")
 
-(defconst python-p
-  (or (executable-find "python3")
-      (and (executable-find "python")
-           (> (length (shell-command-to-string "python --version | grep 'Python 3'")) 0)))
-  "Do we have python3?")
+(defconst zoro-denote-directory
+  (expand-file-name "notes/" zoro-dropbox-directory)
+  "Directory containing Denote notes.")
 
-(defconst pip-p
-  (or (executable-find "pip3")
-      (and (executable-find "pip")
-           (> (length (shell-command-to-string "pip --version | grep 'python 3'")) 0)))
-  "Do we have pip3?")
-
-(defconst clangd-p
-  (or (executable-find "clangd")  ;; usually
-      (executable-find "/usr/local/opt/llvm/bin/clangd"))  ;; macOS
-  "Do we have clangd?")
-
-(defconst eaf-env-p
-  (and (display-graphic-p) python-p pip-p)
-  "Do we have EAF environment setup?")
-;; -Consts
+(defconst zoro-hywiki-directory
+  (expand-file-name "hywiki/" zoro-dropbox-directory)
+  "Directory containing HyWiki pages.")
 
 (provide 'init-const)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

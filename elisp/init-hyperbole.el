@@ -5,6 +5,8 @@
 
 ;;; Code:
 
+(require 'init-const)
+
 (use-package hyperbole
   ;; Keep Hyperbole off the startup critical path; enable it once Emacs has
   ;; been idle for a few seconds.
@@ -13,8 +15,7 @@
   :init
   ;; Set this before Hyperbole loads so HyWiki initializes against the
   ;; persistent wiki rather than `user-emacs-directory'.
-  (setq hywiki-directory
-        (file-name-as-directory (expand-file-name "~/Dropbox/hywiki/")))
+  (setq hywiki-directory zoro-hywiki-directory)
   :config
   (hyperbole-mode 1)
   ;; Recognize HyWikiWords in text buffers and programming comments.

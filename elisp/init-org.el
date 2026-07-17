@@ -35,6 +35,8 @@
 ;;
 ;;; Code:
 
+(require 'init-const)
+
 (defun zoro-org-decide-line-range (file begin end)
   "Return the line range in FILE delimited by regexps BEGIN and END."
   (let (left right)
@@ -159,7 +161,7 @@
      (gnuplot . t)))
 
   ;; define the refile targets
-  (setq org-agenda-dir "~/Dropbox/brain/")
+  (setq org-agenda-dir zoro-org-directory)
   (setq org-agenda-file-note (expand-file-name "notes.org" org-agenda-dir))
   (setq org-agenda-file-gtd (expand-file-name "gtd.org" org-agenda-dir))
   (setq org-agenda-file-code-snippet (expand-file-name "snippet.org" org-agenda-dir))
@@ -246,7 +248,7 @@
 
   :config
   ;; Remember to check the doc string of each of those variables.
-  (setq denote-directory (expand-file-name "~/Dropbox/notes/"))
+  (setq denote-directory zoro-denote-directory)
   (setq denote-save-buffers nil)
   (setq denote-known-keywords '("deepin" "book" "math" "blog"))
   (setq denote-infer-keywords t)
