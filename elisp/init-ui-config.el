@@ -36,8 +36,7 @@
 ;;; Code:
 
 (eval-when-compile
-  (require 'battery)
-  (require 'init-const))
+  (require 'battery))
 
 ;; Highlight
 (global-hl-line-mode 1)

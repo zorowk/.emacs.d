@@ -35,9 +35,6 @@
 ;;
 ;;; Code:
 
-(eval-when-compile
-  (require 'init-const))
-
 ;; ExecPathFromShellPac
 (use-package exec-path-from-shell
   :if (memq window-system '(mac ns))

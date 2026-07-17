@@ -36,9 +36,6 @@
 ;;
 ;;; Code:
 
-(eval-when-compile
-  (require 'init-const))
-
 ;; Eglot supplies LSP completion, navigation, diagnostics, and code actions.
 (use-package eglot
   :straight (:type built-in)

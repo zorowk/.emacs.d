@@ -84,7 +84,7 @@
                "images/KEC_Dark_BK_Small.png"
              "images/KEC_Light_BK_Small.png")
            user-emacs-directory))
-    (when-let ((buffer (get-buffer dashboard-buffer-name)))
+    (when-let* ((buffer (get-buffer dashboard-buffer-name)))
       (with-current-buffer buffer
         (dashboard-insert-startupify-lists t))))
   (zoro-dashboard-update-banner frame-background-mode)

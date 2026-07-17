@@ -43,11 +43,6 @@
   :defer t
   :commands (erc erc-tls)
   :init
-  ;; Prerequisite: Configure this to your IRC nickname
-  (defcustom my-irc-nick "zorowk"
-    "The nickname used to login into ERC"
-    :type 'string
-    :group 'erc)
   (setq erc-autojoin-channels-alist '(("irc.libera.chat" "#emacs"))
         erc-user-full-name user-full-name
         erc-hide-list '("JOIN" "NICK" "PART" "QUIT" "MODE" "324" "331" "333" "353")

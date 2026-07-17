@@ -36,9 +36,6 @@
 ;;
 ;;; Code:
 
-(eval-when-compile
-  (require 'init-const))
-
 (use-package ef-themes
   :init
   ;; This makes the Modus commands listed below consider only the Ef
