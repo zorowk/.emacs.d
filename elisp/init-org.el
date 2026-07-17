@@ -45,11 +45,11 @@
          ("C-c c" . org-capture))
   :custom
   (org-log-done 'time)
-  (calendar-latitude 114.3052) ;; Prerequisite: set it to your location, currently default: Toronto, Canada
-  (calendar-longitude 30.5928) ;; Usable for M-x `sunrise-sunset' or in `org-agenda'
+  (calendar-latitude 30.5928) ;; Used by `sunrise-sunset' and `org-agenda'.
+  (calendar-longitude 114.3052)
   (org-export-backends (quote (ascii html icalendar latex md odt)))
   (org-use-speed-commands t)
-  (org-confirm-babel-evaluate 'nil)
+  (org-confirm-babel-evaluate t)
   (org-latex-listings-options '(("breaklines" "true")))
   (org-latex-src-block-backend 'listings)
   (org-hide-leading-stars t)

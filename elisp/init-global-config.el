@@ -181,8 +181,8 @@
 ;; Show Keystrokes in Progress Instantly
 (setq echo-keystrokes 0.1)
 
-;; Don't Lock Files
-(setq-default create-lockfiles nil)
+;; Protect local files from concurrent edits by other Emacs processes.
+(setq-default create-lockfiles t)
 (setopt remote-file-name-inhibit-locks t)
 (setopt remote-file-name-inhibit-auto-save-visited t)
 
@@ -207,8 +207,8 @@
 ;; Add a newline automatically at the end of the file upon save.
 (setq require-final-newline t)
 
-;; Keep warnings visible enough for package and configuration debugging.
-(setq warning-minimum-level :emergency)
+;; Keep package and configuration warnings visible.
+(setq warning-minimum-level :warning)
 
 ;; enable pinentry loopback
 (setq epg-pinentry-mode 'loopback)
