@@ -7,14 +7,14 @@
 ;; Created: Thu Mar 28 13:25:24 2019 (-0400)
 ;; Version: 3.0
 ;; URL: https://github.com/MatthewZMD/.emacs.d
-;; Keywords: M-EMACS .emacs.d iedit
-;; Compatibility: emacs-version >= 26.1
+;; Keywords: M-EMACS .emacs.d editing
+;; Compatibility: Emacs 31
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;; Commentary:
 ;;
-;; This initializes iedit, electric-pair, delete-block
+;; Configure region expansion, paired delimiters, matching parens, and clipboard integration.
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;

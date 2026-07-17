@@ -1,21 +1,20 @@
 ;;; init-theme.el --- -*- lexical-binding: t -*-
 ;;
 ;; Filename: init-theme.el
-;; Description: Initialize Doom Themes and Modeline
+;; Description: Configure themes and focused UI helpers
 ;; Author: Mingde (Matthew) Zeng
 ;; Copyright (C) 2019 Mingde (Matthew) Zeng
 ;; Created: Thu Mar 14 17:11:56 2019 (-0400)
 ;; Version: 3.0
 ;; URL: https://github.com/MatthewZMD/.emacs.d
-;; Keywords: M-EMACS .emacs.d doom-themes doom-modeline
-;; Compatibility: emacs-version >= 31
+;; Keywords: M-EMACS .emacs.d themes ui
+;; Compatibility: Emacs 31
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;; Commentary:
 ;;
-;; This initializes doom-themes and doom-modeline
-;; This is NOT Doom, but doom-themes and doom-modeine
+;; Configure Ef themes, padding, visual feedback, popup windows, and reading width.
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;

@@ -1,20 +1,20 @@
 ;;; init-scroll.el --- -*- lexical-binding: t -*-
 ;;
 ;; Filename: init-scroll.el
-;; Description: Initialize Smooth Scroll
+;; Description: Configure scrolling behavior
 ;; Author: Mingde (Matthew) Zeng
 ;; Copyright (C) 2019 Mingde (Matthew) Zeng
 ;; Created: Fri Mar 15 08:30:08 2019 (-0400)
 ;; Version: 3.0
 ;; URL: https://github.com/MatthewZMD/.emacs.d
-;; Keywords: M-EMACS .emacs.d smooth-scroll
-;; Compatibility: emacs-version >= 26.1
+;; Keywords: M-EMACS .emacs.d scrolling
+;; Compatibility: Emacs 31
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;; Commentary:
 ;;
-;; This initializes smooth scroll
+;; Keep keyboard scrolling stable while pixel scrolling handles touchpads.
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;

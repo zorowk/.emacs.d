@@ -1,20 +1,20 @@
 ;;; init-org.el --- -*- lexical-binding: t -*-
 ;;
 ;; Filename: init-org.el
-;; Description: Initialize Org, Toc-org, HTMLize, OX-GFM
+;; Description: Configure Org and Denote
 ;; Author: Mingde (Matthew) Zeng
 ;; Copyright (C) 2019 Mingde (Matthew) Zeng
 ;; Created: Fri Mar 15 11:09:30 2019 (-0400)
 ;; Version: 3.0
 ;; URL: https://github.com/MatthewZMD/.emacs.d
-;; Keywords: M-EMACS .emacs.d org toc-org htmlize ox-gfm
-;; Compatibility: emacs-version >= 26.1
+;; Keywords: M-EMACS .emacs.d org denote
+;; Compatibility: Emacs 31
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;; Commentary:
 ;;
-;; This initializes org toc-org htmlize ox-gfm
+;; Configure Org workflows, export, capture, Babel, and Denote notes.
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -80,10 +80,6 @@
   "Update marked Org INCLUDE ranges whenever this buffer is saved."
   (add-hook 'before-save-hook #'zoro-org-update-include-ranges nil t))
 
-;; Preserve the previous public command names.
-(defalias 'save-and-update-includes #'zoro-org-update-include-ranges)
-(defalias 'decide-line-range #'zoro-org-decide-line-range)
-
 ;; OrgPac
 (use-package org
   :ensure nil
@@ -129,8 +125,7 @@
   (org-agenda-current-time ((t (:foreground "spring green"))))
   :config
   (add-to-list 'org-latex-packages-alist '("" "listings"))
-  (unless (version< org-version "9.2")
-    (require 'org-tempo))
+  (require 'org-tempo)
 
   ;; config stuck project
   (setq org-stuck-projects

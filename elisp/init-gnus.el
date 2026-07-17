@@ -6,7 +6,7 @@
 ;; Created: Tue Sep  3 21:28:26 2019 (-0400)
 ;; Version: 3.0
 ;; Keywords: M-EMACS .emacs.d gnus
-;; Compatibility: emacs-version >= 26.1
+;; Compatibility: Emacs 31
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;

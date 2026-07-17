@@ -1,20 +1,20 @@
 ;;; init-shell.el --- -*- lexical-binding: t -*-
 ;;
 ;; Filename: init-shell.el
-;; Description: Initialize Shell
+;; Description: Import the login-shell environment
 ;; Author: Mingde (Matthew) Zeng
 ;; Copyright (C) 2019 Mingde (Matthew) Zeng
 ;; Created: Tue Mar 19 09:20:19 2019 (-0400)
 ;; Version: 3.0
 ;; URL: https://github.com/MatthewZMD/.emacs.d
-;; Keywords: M-EMACS .emacs.d shell shell-here
-;; Compatibility: emacs-version >= 26.1
+;; Keywords: M-EMACS .emacs.d environment shell
+;; Compatibility: Emacs 31
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;; Commentary:
 ;;
-;; This initializes shell-here, term-keys, multi-term, aweshell
+;; Import environment variables for graphical macOS sessions.
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;

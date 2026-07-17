@@ -1,7 +1,7 @@
 ;;; init-llm.el --- -*- lexical-binding: t -*-
 ;;
 ;; Filename: init-llm.el
-;; Description:
+;; Description: Configure Agent Shell
 ;; Author: Mingde (Matthew) Zeng
 ;; Maintainer:
 ;; Copyright (C) 2019 Mingde (Matthew) Zeng
@@ -10,8 +10,8 @@
 ;; Package-Requires: ()
 ;; URL:
 ;; Doc URL:
-;; Keywords:
-;; Compatibility:
+;; Keywords: M-EMACS .emacs.d agent-shell ai
+;; Compatibility: Emacs 31
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;

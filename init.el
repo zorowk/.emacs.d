@@ -8,7 +8,7 @@
 ;; Version: 3.0
 ;; URL: https://github.com/MatthewZMD/.emacs.d
 ;; Keywords: M-EMACS .emacs.d init
-;; Compatibility: emacs-version >= 26.1
+;; Compatibility: Emacs 31
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -53,12 +53,10 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 ;; AutoGC
 (add-hook 'emacs-startup-hook
           (lambda ()
-            (if (boundp 'after-focus-change-function)
-                (add-function :after after-focus-change-function
-                              (lambda ()
-                                (unless (frame-focus-state)
-                                  (garbage-collect))))
-              (add-hook 'after-focus-change-function 'garbage-collect))))
+            (add-function :after after-focus-change-function
+                          (lambda ()
+                            (unless (frame-focus-state)
+                              (garbage-collect))))))
 ;; -AutoGC
 
 ;; LoadPath
