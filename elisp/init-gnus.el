@@ -37,11 +37,7 @@
 (use-package gnus
   :straight (:type built-in)
   :defer t
-  :init
-  (use-package auth-source-xoauth2-plugin :defer t)
-  (with-eval-after-load 'auth-source
-    (add-to-list 'auth-sources "~/.authinfo.json.gpg"))
-  :defer t
+  :commands gnus
   ;; Gnus configuration
   ;; (info "(gnus) Don't Panic")
   :bind (("C-z g" . gnus))
@@ -52,45 +48,50 @@
    (message-mode-hook . #'display-fill-column-indicator-mode)
    ;; Enable Flyspell for on-the-fly spell checking.
    (message-mode-hook . #'flyspell-mode))
-  :custom
+  :init
+  (use-package auth-source-xoauth2-plugin
+    :defer t
+    :commands auth-source-xoauth2-plugin-mode)
+  (with-eval-after-load 'auth-source
+    (add-to-list 'auth-sources "~/.authinfo.json.gpg"))
   ;; Tell Emacs we'd like to use Gnus and its Message integration
   ;; for reading and writing mail.
-  (mail-user-agent 'gnus-user-agent)
-  (read-mail-command #'gnus)
+  (setq mail-user-agent 'gnus-user-agent)
+  (setq read-mail-command #'gnus)
   ;; Consolidate various Gnus files inside a gnus directory in the
   ;; `user-emacs-directory'.
-  (gnus-home-directory (expand-file-name "gnus/" user-emacs-directory))
-  (gnus-directory (expand-file-name "gnus/news/" user-emacs-directory))
+  (setq gnus-home-directory (expand-file-name "gnus/" user-emacs-directory))
+  (setq gnus-directory (expand-file-name "gnus/news/" user-emacs-directory))
   ;; don't bother with .newsrc, use .newsrc.eld instead
-  (gnus-save-newsrc-file nil)
-  (gnus-read-newsrc-file nil)
+  (setq gnus-save-newsrc-file nil)
+  (setq gnus-read-newsrc-file nil)
   ;; Don't prompt for confirmation when exiting Gnus.
-  (gnus-interactive-exit nil)
-  (gnus-select-method '(nnnil ""))
+  (setq gnus-interactive-exit nil)
+  (setq gnus-select-method '(nnnil ""))
 
   ;; Gnus summary theme: visible status marks, aligned dates, and
   ;; low-noise Unicode thread glyphs.
   ;; Status columns: %U read mark, %R reply/secondary mark,
   ;; %O download mark, %z score mark.
-  (gnus-unread-mark ?U)
-  (gnus-dormant-mark ?D)
-  (gnus-sum-thread-tree-root "● ")
-  (gnus-sum-thread-tree-false-root "○ ")
-  (gnus-sum-thread-tree-single-indent "  ")
-  (gnus-sum-thread-tree-vertical "│ ")
-  (gnus-sum-thread-tree-indent "  ")
-  (gnus-sum-thread-tree-leaf-with-other "├─ ")
-  (gnus-sum-thread-tree-single-leaf "└─ ")
-  (gnus-summary-line-format "%U%R%O%z │ %-12&user-date; │ %-24,24f │ %B%S\n")
-  (gnus-user-date-format-alist
+  (setq gnus-unread-mark ?U)
+  (setq gnus-dormant-mark ?D)
+  (setq gnus-sum-thread-tree-root "● ")
+  (setq gnus-sum-thread-tree-false-root "○ ")
+  (setq gnus-sum-thread-tree-single-indent "  ")
+  (setq gnus-sum-thread-tree-vertical "│ ")
+  (setq gnus-sum-thread-tree-indent "  ")
+  (setq gnus-sum-thread-tree-leaf-with-other "├─ ")
+  (setq gnus-sum-thread-tree-single-leaf "└─ ")
+  (setq gnus-summary-line-format "%U%R%O%z │ %-12&user-date; │ %-24,24f │ %B%S\n")
+  (setq gnus-user-date-format-alist
    '(((gnus-seconds-today) . "Today %H:%M")
      ((+ 86400 (gnus-seconds-today)) . "Yday  %H:%M")
      ((gnus-seconds-year) . "%m-%d %H:%M")
      (t . "%Y-%m-%d")))
-  (gnus-summary-selected-face 'gnus-summary-selected)
+  (setq gnus-summary-selected-face 'gnus-summary-selected)
 
   ;; Configure two IMAP mail accounts.
-  (gnus-secondary-select-methods
+  (setq gnus-secondary-select-methods
    '((nntp "news.gmane.io"
          (nntp-open-connection-function nntp-open-network-stream)
          (nntp-stream ssl)
@@ -122,12 +123,12 @@
       (nnmail-fancy-expiry-targets
        (("from" ".*" "nnimap+Gmail:Archive.%Y"))))))
   ;; `init-file-debug' corresponds to launching emacs with --debug-init
-  (nnimap-record-commands init-file-debug)
+  (setq nnimap-record-commands init-file-debug)
   ;; The "Sent" folder
-  (gnus-message-archive-group "nnimap+Gmail:INBOX")
+  (setq gnus-message-archive-group "nnimap+Gmail:INBOX")
   ;; Display the following message headers in Article buffers,
   ;; in the given order.
-  (gnus-sorted-header-list
+  (setq gnus-sorted-header-list
    '("^From:"
      "^X-RT-Originator"
      "^Newsgroups:"
@@ -157,55 +158,60 @@
      "^Gnus-Warning:"))
   ;; Fine-tune sorting of summaries: newest threads/articles first.
   ;; See: (info "(gnus) Sorting the Summary Buffer")
-  (gnus-thread-sort-functions
+  (setq gnus-thread-sort-functions
    '(gnus-thread-sort-by-number
      gnus-thread-sort-by-subject
      gnus-thread-sort-by-most-recent-date))
-  (gnus-article-sort-functions
+  (setq gnus-article-sort-functions
    '(gnus-article-sort-by-number
      (not gnus-article-sort-by-date)))
   ;;;; Message and sending mail
 
   ;; Automatically mark Gcc (sent) messages as read.
-  (gnus-gcc-mark-as-read t)
+  (setq gnus-gcc-mark-as-read t)
   ;; Configure posting styles for per-account Gcc groups, and SMTP
   ;; server for sending mail.  See: (info "(gnus) Posting Styles")
   ;; Also see sample .authinfo file provided below.
-  (gnus-posting-styles
+  (setq gnus-posting-styles
    '(("nnimap\\+Gmail:.*"
       (address "near.kingzero@gmail.com")
       ("X-Message-SMTP-Method" "smtp smtp.gmail.com 587")
       (gcc "nnimap+Gmail:INBOX"))))
 
   ;; Ask for confirmation when sending a message.
-  (message-confirm-send t)
+  (setq message-confirm-send t)
   ;; Wrap messages at 70 characters when pressing M-q or when
   ;; auto-fill-mode is enabled.
-  (message-fill-column 70)
+  (setq message-fill-column 70)
   ;; Forward messages (C-c C-f) as a proper MIME part.
-  (message-forward-as-mime t)
+  (setq message-forward-as-mime t)
   ;; Send mail using Emacs's built-in smtpmail library.
-  (message-send-mail-function #'smtpmail-send-it)
-  :custom-face
-  (gnus-summary-selected ((t (:inherit highlight :extend t))))
-  (gnus-summary-normal-unread ((t (:inherit default :weight bold))))
-  (gnus-summary-normal-read ((t (:inherit shadow))))
-  (gnus-summary-normal-ancient ((t (:inherit shadow))))
-  (gnus-summary-low-unread ((t (:inherit font-lock-comment-face :weight bold))))
-  (gnus-summary-low-read ((t (:inherit shadow))))
-  (gnus-summary-high-unread ((t (:inherit font-lock-keyword-face :weight bold))))
-  (gnus-summary-high-read ((t (:inherit font-lock-keyword-face))))
-  (gnus-summary-normal-ticked ((t (:inherit warning :weight bold))))
-  (gnus-summary-high-ticked ((t (:inherit warning :weight bold))))
-  (gnus-summary-low-ticked ((t (:inherit warning))))
-  (gnus-summary-cancelled ((t (:inherit error :strike-through t))))
-  (gnus-header-name ((t (:inherit font-lock-keyword-face :weight bold))))
-  (gnus-header-content ((t (:inherit default))))
-  (gnus-header-from ((t (:inherit font-lock-variable-name-face :weight bold))))
-  (gnus-header-subject ((t (:inherit font-lock-function-name-face :weight bold))))
-  (gnus-header-newsgroups ((t (:inherit font-lock-string-face))))
-  (gnus-signature ((t (:inherit shadow))))
+  (setq message-send-mail-function #'smtpmail-send-it)
   :config
+  (custom-set-faces
+   '(gnus-summary-selected ((t (:inherit highlight :extend t))))
+   '(gnus-summary-normal-unread ((t (:inherit default :weight bold))))
+   '(gnus-summary-normal-read ((t (:inherit shadow))))
+   '(gnus-summary-normal-ancient ((t (:inherit shadow))))
+   '(gnus-summary-low-unread
+     ((t (:inherit font-lock-comment-face :weight bold))))
+   '(gnus-summary-low-read ((t (:inherit shadow))))
+   '(gnus-summary-high-unread
+     ((t (:inherit font-lock-keyword-face :weight bold))))
+   '(gnus-summary-high-read ((t (:inherit font-lock-keyword-face))))
+   '(gnus-summary-normal-ticked ((t (:inherit warning :weight bold))))
+   '(gnus-summary-high-ticked ((t (:inherit warning :weight bold))))
+   '(gnus-summary-low-ticked ((t (:inherit warning))))
+   '(gnus-summary-cancelled ((t (:inherit error :strike-through t))))
+   '(gnus-header-name
+     ((t (:inherit font-lock-keyword-face :weight bold))))
+   '(gnus-header-content ((t (:inherit default))))
+   '(gnus-header-from
+     ((t (:inherit font-lock-variable-name-face :weight bold))))
+   '(gnus-header-subject
+     ((t (:inherit font-lock-function-name-face :weight bold))))
+   '(gnus-header-newsgroups ((t (:inherit font-lock-string-face))))
+   '(gnus-signature ((t (:inherit shadow)))))
   (setq gnus-visible-headers
         (mapconcat #'identity
                    '("^From:" "^Subject:" "^Date:" "^Newsgroups:" "^To:" "^Cc:")
