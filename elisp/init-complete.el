@@ -1,20 +1,21 @@
 ;;; init-complete.el --- -*- lexical-binding: t -*-
 ;;
 ;; Filename: init-complete.el
-;; Description: Initialize completion and LSP
+;; Description: Initialize in-buffer completion and LSP
 ;; Author: Mingde (Matthew) Zeng
 ;; Copyright (C) 2019 Mingde (Matthew) Zeng
 ;; Created: Fri Mar 15 10:02:00 2019 (-0400)
 ;; Version: 3.0
 ;; URL: https://github.com/MatthewZMD/.emacs.d
-;; Keywords: M-EMACS .emacs.d corfu cape eglot consult embark
-;; Compatibility: emacs-version >= 26.1
+;; Keywords: M-EMACS .emacs.d corfu cape eglot
+;; Compatibility: emacs-version >= 30
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;; Commentary:
 ;;
-;; This initializes Eglot, Corfu, Cape, Consult, Embark, and Marginalia.
+;; This initializes in-buffer completion with Corfu and Cape, plus Eglot.
+;; Minibuffer completion and search commands live in `init-search.el'.
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -38,7 +39,7 @@
 (eval-when-compile
   (require 'init-const))
 
-;; Enable Eglot for LSP support
+;; Eglot supplies LSP completion, navigation, diagnostics, and code actions.
 (use-package eglot
   :straight (:type built-in)
   :commands (eglot eglot-ensure)
@@ -67,80 +68,62 @@
   (add-to-list 'eglot-server-programs
                '((web-mode js-mode js-ts-mode typescript-mode typescript-ts-mode tsx-mode) .
                  ("typescript-language-server" "--stdio")))
-  ;; 绑定跳转和诊断快捷键
   :bind (:map eglot-mode-map
               ("M-." . xref-find-definitions)
               ("M-," . xref-go-back)
               ("M-/" . eglot-find-implementation)
               ("M-i" . eglot-find-declaration)
-              ("C-M-." . consult-eglot-symbols)
               ("C-c l r" . xref-find-references)
               ("C-c l a" . eglot-code-actions)
               ("C-c l f" . eglot-format-buffer))
-  :hook
-  ;; 自动启用 eglot
-  ((c-mode c-ts-mode c++-mode c++-ts-mode
-           python-mode python-ts-mode
-           rust-mode rust-ts-mode
-           latex-mode LaTeX-mode
-           web-mode js-mode js-ts-mode typescript-mode typescript-ts-mode tsx-mode) . eglot-ensure))
+  :hook ((c-mode c-ts-mode c++-mode c++-ts-mode
+                 python-mode python-ts-mode
+                 rust-mode rust-ts-mode
+                 latex-mode LaTeX-mode
+                 web-mode js-mode js-ts-mode
+                 typescript-mode typescript-ts-mode tsx-mode)
+         . eglot-ensure))
 
+;; Query workspace symbols through Consult's completing-read interface.
 (use-package consult-eglot
   :after eglot
-  :bind
-  (:map eglot-mode-map
-	("C-c f" . consult-eglot-symbols)))
+  :bind (:map eglot-mode-map
+              ("C-M-." . consult-eglot-symbols)
+              ("C-c f" . consult-eglot-symbols)))
 
-;; Corfu
+;; Corfu renders completion-at-point candidates in a child-frame popup.
 (use-package corfu
+  :bind (:map corfu-map
+              ("TAB" . corfu-next)
+              ([tab] . corfu-next)
+              ("S-TAB" . corfu-previous)
+              ([backtab] . corfu-previous))
   :custom
-  (corfu-auto t)
-  (corfu-auto-prefix 3)
-  (corfu-auto-delay 0.1)
-  (corfu-popupinfo-delay '(0.5 . 0.2))
-  (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
-
-  :init
-  ;; Recommended: Enable Corfu globally.  Recommended since many modes provide
-  ;; Capfs and Dabbrev can be used globally (M-/).  See also the customization
-  ;; variable `global-corfu-modes' to exclude certain modes.
-  (global-corfu-mode)
   (global-corfu-minibuffer
    (lambda ()
+     ;; Let Vertico own completion minibuffers, and never complete passwords.
      (not (or (bound-and-true-p mct--active)
               (bound-and-true-p vertico--input)
               (eq (current-local-map) read-passwd-map)))))
-
-  ;; Enable optional extension modes:
+  (corfu-auto t)
+  (corfu-cycle t)
+  :init
+  (global-corfu-mode)
+  :config
+  ;; Reuse previous candidates and show documentation in a second popup.
   (corfu-history-mode)
-  (corfu-popupinfo-mode)
+  (corfu-popupinfo-mode))
 
-  ;; Use TAB for cycling, default is `corfu-complete'.
-  :bind
-  (:map corfu-map
-        ("TAB" . corfu-next)
-        ([tab] . corfu-next)
-        ("S-TAB" . corfu-previous)
-        ([backtab] . corfu-previous)))
-
-;; A few more useful configurations...
+;; TAB first indents, then invokes completion when indentation is unchanged.
 (use-package emacs
   :custom
-  ;; TAB cycle if there are only few candidates
-  ;; (completion-cycle-threshold 3)
-
-  ;; Enable indentation+completion using the TAB key.
-  ;; `completion-at-point' is often bound to M-TAB.
   (tab-always-indent 'complete)
-
-  ;; Emacs 30 and newer: Disable Ispell completion function.
-  ;; Try `cape-dict' as an alternative.
+  ;; Do not let the Emacs 30 Ispell CAPF take precedence in text buffers.
   (text-mode-ispell-word-completion nil))
 
-;; Use Dabbrev with Corfu!
+;; Dabbrev completes words gathered from related buffers.
 (use-package dabbrev
   :straight (:type built-in)
-  ;; Swap M-/ and C-M-/
   :bind (("M-/" . dabbrev-completion)
          ("C-M-/" . dabbrev-expand))
   :config
@@ -149,173 +132,16 @@
   (add-to-list 'dabbrev-ignored-buffer-modes 'doc-view-mode)
   (add-to-list 'dabbrev-ignored-buffer-modes 'pdf-view-mode)
   (add-to-list 'dabbrev-ignored-buffer-modes 'tags-table-mode))
-;; -CorFu
 
-;; Add extensions
+;; Cape contributes additional completion-at-point functions (Capfs).
 (use-package cape
-  ;; Bind prefix keymap providing all Cape commands under a mnemonic key.
-  ;; Press C-c p ? to for help.
-  :bind ("C-c p" . cape-prefix-map) ;; Alternative key: M-<tab>, M-p, M-+
-  ;; Alternatively bind Cape commands individually.
-  ;; :bind (("C-c p d" . cape-dabbrev)
-  ;;        ("C-c p h" . cape-history)
-  ;;        ("C-c p f" . cape-file)
-  ;;        ...)
+  :bind ("C-c p" . cape-prefix-map)
   :init
-  ;; Add to the global default value of `completion-at-point-functions' which is
-  ;; used by `completion-at-point'.  The order of the functions matters, the
-  ;; first function returning a result wins.  Note that the list of buffer-local
-  ;; completion functions takes precedence over the global list.
-  ;;(add-hook 'completion-at-point-functions #'cape-dabbrev)
+  ;; Offer file names after any earlier, mode-specific Capfs decline.
   (add-hook 'completion-at-point-functions #'cape-file)
-  ;;(add-hook 'completion-at-point-functions #'cape-elisp-block)
-
   :config
-  (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
+  ;; Let `cape-file' run when Eglot returns no matching candidates.
   (advice-add 'eglot-completion-at-point :around #'cape-wrap-nonexclusive))
-
-;; Enable rich annotations using the Marginalia package
-(use-package marginalia
-  ;; Bind `marginalia-cycle' locally in the minibuffer.  To make the binding
-  ;; available in the *Completions* buffer, add it to the
-  ;; `completion-list-mode-map'.
-  :bind (:map minibuffer-local-map
-         ("M-A" . marginalia-cycle))
-
-  ;; The :init section is always executed.
-  :init
-  ;; Marginalia must be activated in the :init section of use-package such that
-  ;; the mode gets enabled right away. Note that this forces loading the
-  ;; package.
-  (marginalia-mode))
-
-(use-package embark
-  :bind
-  (("C-." . embark-act)         ;; pick some comfortable binding
-   ("C-;" . embark-dwim)        ;; good alternative: M-.
-   ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
-  :init
-  ;; Optionally replace the key help with a completing-read interface
-  (setq prefix-help-command #'embark-prefix-help-command)
-  ;; Show the Embark target at point via Eldoc. You may adjust the
-  ;; Eldoc strategy, if you want to see the documentation from
-  ;; multiple providers. Beware that using this can be a little
-  ;; jarring since the message shown in the minibuffer can be more
-  ;; than one line, causing the modeline to move up and down:
-  ;; (add-hook 'eldoc-documentation-functions #'embark-eldoc-first-target)
-  ;; (setq eldoc-documentation-strategy #'eldoc-documentation-compose-eagerly)
-
-  ;; Add Embark to the mouse context menu. Also enable `context-menu-mode'.
-  ;; (context-menu-mode 1)
-  ;; (add-hook 'context-menu-functions #'embark-context-menu 100)
-
-  :config
-  ;; Hide the mode line of the Embark live/completions buffers
-  (add-to-list 'display-buffer-alist
-               '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
-                 nil
-                 (window-parameters (mode-line-format . none)))))
-
-;; Consult users will also want the embark-consult package.
-(use-package embark-consult
-  :straight t ; only need to install it, embark loads it after consult if found
-  :hook
-  (embark-collect-mode . consult-preview-at-point-mode))
-
-(use-package consult
-  :bind (;; C-c bindings in `mode-specific-map'
-         ("C-c M-x" . consult-mode-command)
-         ("C-c h" . consult-history)
-         ("C-c k" . consult-kmacro)
-         ("C-c m" . consult-man)
-         ("C-c i" . consult-info)
-         ([remap Info-search] . consult-info)
-         ;; C-x bindings in `ctl-x-map'
-         ("C-x M-:" . consult-complex-command)     ;; orig. repeat-complex-command
-         ("C-x b" . consult-buffer)                ;; orig. switch-to-buffer
-         ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
-         ("C-x 5 b" . consult-buffer-other-frame)  ;; orig. switch-to-buffer-other-frame
-         ("C-x t b" . consult-buffer-other-tab)    ;; orig. switch-to-buffer-other-tab
-         ("C-x r b" . consult-bookmark)            ;; orig. bookmark-jump
-         ;; Custom M-# bindings for fast register access
-         ("M-#" . consult-register-load)
-         ("M-'" . consult-register-store)          ;; orig. abbrev-prefix-mark (unrelated)
-         ("C-M-#" . consult-register)
-         ;; Other custom bindings
-         ("M-y" . consult-yank-pop)                ;; orig. yank-pop
-         ;; M-g bindings in `goto-map'
-         ("M-g e" . consult-compile-error)
-         ("M-g f" . consult-flymake)               ;; Alternative: consult-flycheck
-         ("M-g g" . consult-goto-line)             ;; orig. goto-line
-         ("M-g M-g" . consult-goto-line)           ;; orig. goto-line
-         ("M-g o" . consult-outline)               ;; Alternative: consult-org-heading
-         ("M-g m" . consult-mark)
-         ("M-g k" . consult-global-mark)
-         ("M-g i" . consult-imenu)
-         ("M-g I" . consult-imenu-multi)
-         ;; M-s bindings in `search-map'
-         ("M-s d" . consult-find)                  ;; Alternative: consult-fd
-         ("M-s c" . consult-locate)
-         ("M-s g" . consult-grep)
-         ("M-s G" . consult-git-grep)
-         ("M-s r" . consult-ripgrep)
-         ("M-s l" . consult-line)
-         ("M-s L" . consult-line-multi)
-         ("M-s k" . consult-keep-lines)
-         ("M-s u" . consult-focus-lines)
-         ;; Isearch integration
-         ("M-s e" . consult-isearch-history)
-         :map isearch-mode-map
-         ("M-e" . consult-isearch-history)         ;; orig. isearch-edit-string
-         ("M-s e" . consult-isearch-history)       ;; orig. isearch-edit-string
-         ("M-s l" . consult-line)                  ;; needed by consult-line to detect isearch
-         ("M-s L" . consult-line-multi)            ;; needed by consult-line to detect isearch
-         ;; Minibuffer history
-         :map minibuffer-local-map
-         ("M-s" . consult-history)                 ;; orig. next-matching-history-element
-         ("M-r" . consult-history))                ;; orig. previous-matching-history-element
-
-  ;; The :init configuration is always executed (Not lazy)
-  :init
-  ;; Tweak the register preview for `consult-register-load',
-  ;; `consult-register-store' and the built-in commands.  This improves the
-  ;; register formatting, adds thin separator lines, register sorting and hides
-  ;; the window mode line.
-  (advice-add #'register-preview :override #'consult-register-window)
-  (setq register-preview-delay 0.5)
-
-  ;; Use Consult to select xref locations with preview
-  (setq xref-search-program 'ripgrep
-        xref-show-xrefs-function #'consult-xref
-        xref-show-definitions-function #'consult-xref)
-
-  ;; Configure other variables and modes in the :config section,
-  ;; after lazily loading the package.
-  :config
-  ;; Optionally configure preview. The default value
-  ;; is 'any, such that any key triggers the preview.
-  ;; (setq consult-preview-key 'any)
-  ;; (setq consult-preview-key "M-.")
-  ;; (setq consult-preview-key '("S-<down>" "S-<up>"))
-  ;; For some commands and buffer sources it is useful to configure the
-  ;; :preview-key on a per-command basis using the `consult-customize' macro.
-  (consult-customize
-   consult-theme :preview-key '(:debounce 0.2 any)
-   consult-ripgrep consult-git-grep consult-grep consult-man
-   consult-bookmark consult-recent-file consult-xref
-   consult-source-bookmark consult-source-file-register
-   consult-source-recent-file consult-source-project-recent-file
-   ;; :preview-key "M-."
-   :preview-key '(:debounce 0.4 any))
-
-  ;; Optionally configure the narrowing key.
-  ;; Both < and C-+ work reasonably well.
-  (setq consult-narrow-key "<")
-
-  ;; Optionally make narrowing help available in the minibuffer.
-  ;; You may want to use `embark-prefix-help-command' or which-key instead.
-  ;; (keymap-set consult-narrow-map (concat consult-narrow-key " ?") #'consult-narrow-help)
-  )
 
 (provide 'init-complete)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
