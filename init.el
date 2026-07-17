@@ -87,10 +87,10 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 ;; Package Management
 (require 'init-package)
 
-;; Global Functionalities
-(require 'init-global-config)
-
-(require 'init-func)
+;; Core behavior, persistent files, and side-effect-free helpers.
+(require 'init-core)
+(require 'init-files)
+(require 'zoro-utils)
 
 (require 'init-search)
 
