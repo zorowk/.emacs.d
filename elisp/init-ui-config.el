@@ -35,6 +35,8 @@
 ;;
 ;;; Code:
 
+(require 'init-function)
+
 ;; Highlight
 (global-hl-line-mode 1)
 ;; -Highlight
@@ -63,25 +65,7 @@
 (column-number-mode 1)
 ;; -DisLineNum
 
-;; Enable the clock after startup reaches its first idle period.
-(run-with-idle-timer 1 nil #'display-time-mode)
-
-;; PixelScrollPrecMode
-(run-with-idle-timer 3 nil #'pixel-scroll-precision-mode)
-;; -PixelScrollPrecMode
-
 ;; Alpha
-(defun setup-frame-alpha (&optional frame)
-  "Apply alpha transparency, blur, and mode-line tweaks to the given frame."
-  (with-selected-frame (or frame (selected-frame))
-      (when (display-graphic-p)
-        (set-frame-parameter nil 'ns-alpha-elements
-                             '(ns-alpha-default
-                               ns-alpha-fringe
-                               ns-alpha-glyphs))
-        (set-frame-parameter nil 'alpha-background 0.95)
-        (set-frame-parameter nil 'ns-background-blur 25))))
-
 (when (and (display-graphic-p)
            (not (daemonp)))
   (setup-frame-alpha))

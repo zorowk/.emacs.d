@@ -35,17 +35,9 @@
 ;;
 ;;; Code:
 
-(defconst zoro-dashboard-items-with-agenda
-  '((recents . 7)
-    (bookmarks . 7)
-    (agenda . 5))
-  "Dashboard items shown after deferred Agenda initialization.")
+(require 'init-function)
 
-(setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
-
-(defun zoro-dashboard-load ()
-  "Load Dashboard after the initial frame becomes idle."
-  (require 'dashboard))
+(setq initial-buffer-choice #'zoro-initial-dashboard-buffer)
 
 ;; DashboardPac
 (use-package dashboard
@@ -77,49 +69,16 @@
      dashboard-insert-footer))
   (dashboard-navigator-buttons
    '((("" "Blog" "Browse Homepage"
-       (lambda (&rest _) (browse-url "https://zorowk.github.io/")))
+       zoro-dashboard-browse-homepage)
      ("" "Configuration" "Edit a configuration file"
-      (lambda (&rest _)
-        (let ((default-directory user-emacs-directory))
-          (project-find-file))))
+      zoro-dashboard-find-config)
      ("" "Info" "Open Emacs Info"
-      (lambda (&rest _) (info))))))
+      zoro-dashboard-open-info))))
   :custom-face
   (dashboard-banner-logo-title ((t (:family "Apple Chancery" :height 200))))
-  :init
-  (run-with-idle-timer 0.1 nil #'zoro-dashboard-load)
   :config
-  (defun zoro-dashboard-update-banner (appearance)
-    "Set and refresh the dashboard banner for APPEARANCE."
-    (setq dashboard-startup-banner
-          (expand-file-name
-           (if (eq appearance 'dark)
-               "images/KEC_Dark_BK_Small.png"
-             "images/KEC_Light_BK_Small.png")
-           user-emacs-directory))
-    (when-let* ((buffer (get-buffer dashboard-buffer-name)))
-      (with-current-buffer buffer
-        (dashboard-insert-startupify-lists t))))
   (zoro-dashboard-update-banner frame-background-mode)
-  (add-hook 'window-size-change-functions #'dashboard-resize-on-hook 100)
-
-  (defun zoro-dashboard-enable-agenda ()
-    "Add the Agenda widget and refresh an existing Dashboard buffer."
-    (setq dashboard-items zoro-dashboard-items-with-agenda)
-    (when-let* ((buffer (get-buffer dashboard-buffer-name)))
-      (with-current-buffer buffer
-        (dashboard-insert-startupify-lists t))))
-
-  (run-with-idle-timer 2 nil #'zoro-dashboard-enable-agenda)
-
-  ;; Open Dashboard function
-  (defun open-dashboard ()
-    "Open the *dashboard* buffer and jump to the first widget."
-    (interactive)
-    (dashboard-insert-startupify-lists)
-    (switch-to-buffer dashboard-buffer-name)
-    (goto-char (point-min))
-    (delete-other-windows)))
+  (add-hook 'window-size-change-functions #'dashboard-resize-on-hook 100))
 ;; -DashboardPac
 
 (provide 'init-dashboard)

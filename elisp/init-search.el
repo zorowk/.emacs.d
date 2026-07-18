@@ -55,9 +55,7 @@
 ;; Savehist persists minibuffer history; Vertico uses it when sorting candidates.
 (use-package savehist
   :ensure nil
-  :commands savehist-mode
-  :init
-  (run-with-idle-timer 2.5 nil #'savehist-mode))
+  :commands savehist-mode)
 
 ;; Built-in minibuffer behavior shared by Vertico and other completion commands.
 (use-package emacs
@@ -94,9 +92,7 @@
   :ensure t
   :commands marginalia-mode
   :bind (:map minibuffer-local-map
-              ("M-A" . marginalia-cycle))
-  :init
-  (run-with-idle-timer 0.35 nil #'marginalia-mode))
+              ("M-A" . marginalia-cycle)))
 
 ;; Consult supplies completing-read based navigation and asynchronous search.
 (use-package consult

@@ -35,39 +35,16 @@
 ;;
 ;;; Code:
 
-;; BetterGC
-(defvar better-gc-cons-threshold (* 16 1024 1024)
-  "The default value to use for `gc-cons-threshold'.
-
-If you experience freezing, decrease this.  If you experience stuttering, increase this.")
-
-(defun zoro-restore-startup-state ()
-  "Restore GC and file handling after loading the init file."
-  (setq gc-cons-threshold better-gc-cons-threshold
-        gc-cons-percentage 0.1)
-  (when (boundp 'file-name-handler-alist-original)
-    (setq file-name-handler-alist file-name-handler-alist-original)
-    (makunbound 'file-name-handler-alist-original)))
-
-(add-hook 'after-init-hook #'zoro-restore-startup-state)
-;; -BetterGC
-
-;; AutoGC
-(add-hook 'emacs-startup-hook
-          (lambda ()
-            (add-function :after after-focus-change-function
-                          (lambda ()
-                            (unless (frame-focus-state)
-                              (garbage-collect))))))
-;; -AutoGC
-
 ;; LoadPath
 (add-to-list 'load-path (expand-file-name "elisp" user-emacs-directory))
 ;; -LoadPath
 
-;; Constants
-
+;; Shared constants and named functions.
 (require 'init-const)
+(require 'init-function)
+
+(add-hook 'after-init-hook #'zoro-restore-startup-state)
+(add-hook 'emacs-startup-hook #'zoro-install-focus-gc)
 
 ;; Packages
 
@@ -81,7 +58,6 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 ;; Core behavior, persistent files, and side-effect-free helpers.
 (require 'init-core)
 (require 'init-files)
-(require 'zoro-utils)
 
 (require 'init-search)
 
@@ -139,6 +115,9 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (require 'init-gnus)
 
 (require 'init-elpher)
+
+;; Register deferred work only after every package declaration is in place.
+(zoro-startup-schedule-idle-tasks)
 
 (provide 'init)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -42,8 +42,6 @@
 (setopt remote-file-name-inhibit-locks t
         remote-file-name-inhibit-auto-save-visited t)
 
-;; Long-line mitigation is needed for visited files, not the initial frame.
-(run-with-idle-timer 4 nil #'global-so-long-mode)
 (setq require-final-newline t
       large-file-warning-threshold 100000000)
 

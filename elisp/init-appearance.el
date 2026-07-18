@@ -9,6 +9,8 @@
 
 ;;; Code:
 
+(require 'init-function)
+
 (use-package ef-themes
   :ensure t
   :init
@@ -16,15 +18,6 @@
   :config
   (setq modus-themes-mixed-fonts t
         modus-themes-italic-constructs t)
-
-  (defun zoro-apply-theme (appearance)
-    "Load the theme matching system APPEARANCE."
-    (mapc #'disable-theme custom-enabled-themes)
-    (pcase appearance
-      ('light (load-theme 'ef-frost t))
-      ('dark (load-theme 'ef-autumn t)))
-    (when (fboundp 'zoro-dashboard-update-banner)
-      (zoro-dashboard-update-banner appearance)))
 
   (add-hook 'ns-system-appearance-change-functions #'zoro-apply-theme)
   (zoro-apply-theme 'light))

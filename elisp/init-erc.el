@@ -36,6 +36,7 @@
 ;;; Code:
 
 (require 'subr-x)
+(require 'init-function)
 
 ;; ERCPac
 (use-package erc
@@ -97,20 +98,7 @@
   (add-to-list 'erc-modules 'notifications)
   (erc-track-mode t)
   (erc-services-mode 1)
-  (erc-keep-place-indicator-mode 1)
-
-  (defun erc-notify (nickname message)
-    "Displays a notification message for ERC."
-    (let* ((channel (buffer-name))
-           (nick nickname)
-           (title (if (string-match-p (concat "^" nickname) channel)
-                      nick
-                    (concat nick " (" channel ")")))
-           (msg (string-trim
-                 (replace-regexp-in-string "[[:space:]\n]+" " " message))))
-      (if (fboundp 'notifications-notify)
-          (notifications-notify :title title :body (concat nick ": " msg))
-        (message "%s: %s" title msg)))))
+  (erc-keep-place-indicator-mode 1))
 ;; -ERCPac
 
 (provide 'init-erc)

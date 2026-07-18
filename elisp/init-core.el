@@ -9,18 +9,7 @@
 
 ;;; Code:
 
-(require 'init-const)
-
-;; Keep one server for command-line clients without blocking the initial frame.
-(defun zoro-start-server ()
-  "Start an Emacs server unless another server is already available."
-  (require 'server)
-  (unless (server-running-p)
-    (server-start)))
-
-(when (and (not noninteractive)
-           (not (daemonp)))
-  (run-with-idle-timer 0.5 nil #'zoro-start-server))
+(require 'init-function)
 
 ;; Global bindings.
 (global-set-key (kbd "C-z") nil)
@@ -49,11 +38,6 @@
 (when (display-graphic-p)
   (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
 
-(defun emacs-trim-on-save ()
-  "Delete trailing whitespace in ordinary editing buffers."
-  (unless (derived-mode-p 'org-mode 'markdown-mode)
-    (add-hook 'before-save-hook #'delete-trailing-whitespace nil t)))
-
 (add-hook 'prog-mode-hook #'emacs-trim-on-save)
 (add-hook 'text-mode-hook #'emacs-trim-on-save)
 (add-hook 'conf-mode-hook #'emacs-trim-on-save)
@@ -66,9 +50,6 @@
         split-window-preferred-direction 'horizontal)
 (delete-selection-mode 1)
 (repeat-mode 1)
-
-;; Prefix-key hints do not participate in the initial frame.
-(run-with-idle-timer 3.5 nil #'which-key-mode)
 
 (setq x-alt-keysym 'meta
       confirm-kill-emacs 'y-or-n-p
@@ -113,12 +94,6 @@
 
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
-
-(defun abort-minibuffer-using-mouse ()
-  "Abort an active minibuffer when the mouse leaves its buffer."
-  (when (and (>= (recursion-depth) 1)
-             (active-minibuffer-window))
-    (abort-recursive-edit)))
 
 (add-hook 'mouse-leave-buffer-hook #'abort-minibuffer-using-mouse)
 

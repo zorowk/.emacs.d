@@ -42,9 +42,7 @@
   :commands exec-path-from-shell-initialize
   :custom
   (exec-path-from-shell-variables
-   '("PATH" "MANPATH" "LANG" "LC_ALL"))
-  :init
-  (run-with-idle-timer 0.75 nil #'exec-path-from-shell-initialize))
+   '("PATH" "MANPATH" "LANG" "LC_ALL")))
 ;; -ExecPathFromShellPac
 
 (provide 'init-shell)

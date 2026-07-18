@@ -35,6 +35,8 @@
 ;;
 ;;; Code:
 
+(require 'init-function)
+
 (when (treesit-available-p)
   (setopt treesit-enabled-modes
           '(c-ts-mode
@@ -49,14 +51,7 @@
             yaml-ts-mode))
   (setopt treesit-auto-install-grammar 'ask)
   (setopt treesit-extra-load-path
-          (list (expand-file-name "tree-sitter" user-emacs-directory)))
-
-  (defun treesit-show-parser-used-at-point ()
-    "Show the Tree-sitter parser used at point."
-    (interactive)
-    (if-let* ((lang (treesit-language-at (point))))
-        (message "%s" lang)
-      (message "treesit is not available"))))
+          (list (expand-file-name "tree-sitter" user-emacs-directory))))
 
 (provide 'init-treesit)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -19,7 +19,8 @@
 | --- | --- |
 | `early-init.el` | 版本检查、包激活策略和基础界面设置 |
 | `init.el` | 建立加载路径并按职责加载各模块 |
-| `elisp/init-const.el` | 个人身份、平台判断和共享外部数据目录 |
+| `elisp/init-const.el` | 固定值、共享目录和启动空闲任务表 |
+| `elisp/init-function.el` | 集中的命名函数和启动空闲任务调度器 |
 | `elisp/init-core.el` | 全局行为、按键、编码和无持久状态的 Hook |
 | `elisp/init-files.el` | Recentf、备份、自动保存、Customize 和文件模式 |
 | `elisp/init-appearance.el` | 启动主题和系统外观切换 |
@@ -82,6 +83,10 @@ emacs --batch -Q -l early-init.el -l elisp/benchmark-startup.el \
 
 报告包含 package 激活、每个 `init-*` 模块的首次加载、累计耗时和 GC 次数。空闲计时器和
 延迟加载的 Dashboard Agenda 不属于同步首屏路径，因此不会计入。
+
+启动后的延迟任务由 `init-const.el` 中的 `zoro-startup-idle-tasks` 统一排序，并由
+`init-function.el` 注册、去重和记录耗时。运行 `M-x zoro-startup-idle-task-report` 可以查看
+尚未执行的任务以及已完成任务的结果。
 
 运行时产生的 `agent/`、`elpa/`、`projects` 和其他历史/缓存文件均被 Git 忽略；仓库只
 保存手写配置，不提交下载后的包或构建产物。

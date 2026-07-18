@@ -9,12 +9,7 @@
 
 ;;; Code:
 
-(defun where-am-i ()
-  "Show and copy `buffer-file-name' or `buffer-name'."
-  (interactive)
-  (message (kill-new (if (buffer-file-name)
-                         (buffer-file-name)
-                       (buffer-name)))))
+(require 'init-function)
 
 (provide 'zoro-utils)
 ;;; zoro-utils.el ends here

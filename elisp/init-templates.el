@@ -5,6 +5,7 @@
 
 ;;; Code:
 
+(require 'init-function)
 (require 'tempo)
 
 (setopt tempo-interactive t)
@@ -19,89 +20,6 @@
 (defvar zoro-tempo-java-tags nil)
 (defvar zoro-tempo-c-tags nil)
 (defvar zoro-tempo-org-tags nil)
-
-(defun zoro-tempo--define (scope tag elements &optional documentation)
-  "Define a Tempo template for SCOPE named TAG from ELEMENTS.
-
-DOCUMENTATION describes the generated insertion command.  A nil SCOPE makes
-the template available globally."
-  (tempo-define-template
-   (format "zoro-%s-%s" (or scope "global") tag)
-   elements tag documentation
-   (and scope (intern (format "zoro-tempo-%s-tags" scope)))))
-
-(defun zoro-tempo--latex-matrix ()
-  "Read matrix dimensions and return a LaTeX matrix string."
-  (let* ((rows (read-number "Rows: " 2))
-         (columns (read-number "Columns: " 2))
-         (type (read-string "Matrix type: " nil nil "pmatrix"))
-         (row (string-join (make-list columns "") " & ")))
-    (concat "\\begin{" type "}\n"
-            (string-join (make-list rows row) " \\\\\n")
-            "\n\\end{" type "}")))
-
-(defun zoro-tempo--text-table ()
-  "Read table dimensions and return an Org-style table string."
-  (let* ((rows (read-number "Rows: " 2))
-         (columns (read-number "Columns: " 2))
-         (row (concat "| " (string-join (make-list columns "  ") " | ") " |"))
-         (separator (concat "|" (string-join (make-list columns "----") "+") "|")))
-    (string-join (append (list row separator) (make-list rows row)) "\n")))
-
-(defun zoro-tempo--match-tag ()
-  "Return the Tempo tag immediately before point and its start position.
-
-Accept both ordinary word tags and the angle-prefixed tags provided by
-`org-tempo'."
-  (let ((end (point)))
-    (save-excursion
-      (skip-syntax-backward "w_")
-      (when (< (point) end)
-        (when (eq (char-before) ?<)
-          (backward-char))
-        (cons (buffer-substring-no-properties (point) end) (point))))))
-
-(defun zoro-tempo-setup ()
-  "Install the Tempo tag lists appropriate for the current major mode."
-  (when (derived-mode-p 'prog-mode 'conf-mode)
-    (tempo-use-tag-list 'zoro-tempo-prog-tags))
-  (when (derived-mode-p 'text-mode)
-    (tempo-use-tag-list 'zoro-tempo-text-tags))
-  (when (derived-mode-p 'latex-mode 'LaTeX-mode)
-    (tempo-use-tag-list 'zoro-tempo-latex-tags))
-  (when (derived-mode-p 'texinfo-mode)
-    (tempo-use-tag-list 'zoro-tempo-texinfo-tags))
-  (when (derived-mode-p 'lisp-mode 'emacs-lisp-mode 'lisp-interaction-mode)
-    (tempo-use-tag-list 'zoro-tempo-lisp-tags))
-  (when (derived-mode-p 'eshell-mode)
-    (tempo-use-tag-list 'zoro-tempo-eshell-tags))
-  (when (derived-mode-p 'rst-mode)
-    (tempo-use-tag-list 'zoro-tempo-rst-tags))
-  (when (derived-mode-p 'java-mode)
-    (tempo-use-tag-list 'zoro-tempo-java-tags))
-  (when (derived-mode-p 'c-mode)
-    (tempo-use-tag-list 'zoro-tempo-c-tags))
-  (when (derived-mode-p 'org-mode)
-    (tempo-use-tag-list 'zoro-tempo-org-tags))
-  ;; `org-tempo' narrows this matcher to angle-prefixed tags.  Use one matcher
-  ;; that supports both its tags and the migrated word tags.
-  (setq-local tempo-match-finder #'zoro-tempo--match-tag))
-
-(defun zoro-tempo-complete-tag ()
-  "Expand the Tempo tag immediately before point."
-  (interactive)
-  (zoro-tempo-setup)
-  (call-interactively #'tempo-complete-tag))
-
-(defun zoro-tempo-insert (tag)
-  "Select and insert a Tempo template by TAG."
-  (interactive
-   (progn
-     (zoro-tempo-setup)
-     (list (completing-read "Template: " (tempo-build-collection) nil t))))
-  (zoro-tempo-setup)
-  (tempo-insert-template (cdr (assoc tag (tempo-build-collection)))
-                         current-prefix-arg))
 
 (global-set-key (kbd "M-+") #'zoro-tempo-complete-tag)
 (global-set-key (kbd "M-*") #'zoro-tempo-insert)

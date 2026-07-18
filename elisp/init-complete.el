@@ -107,8 +107,6 @@
               (eq (current-local-map) read-passwd-map)))))
   (corfu-auto t)
   (corfu-cycle t)
-  :init
-  (run-with-idle-timer 0.5 nil #'global-corfu-mode)
   :config
   ;; Reuse previous candidates and show documentation in a second popup.
   (corfu-history-mode)

@@ -35,50 +35,7 @@
 ;;
 ;;; Code:
 
-(require 'init-const)
-
-(defun zoro-org-decide-line-range (file begin end)
-  "Return the line range in FILE delimited by regexps BEGIN and END."
-  (let (left right)
-    (save-match-data
-      (with-temp-buffer
-        (insert-file-contents file)
-        (goto-char (point-min))
-        (if (null begin)
-            (setq left "")
-          (re-search-forward begin)
-          (setq left (line-number-at-pos (match-beginning 0))))
-        (if (null end)
-            (setq right "")
-          (re-search-forward end)
-          (setq right (1+ (line-number-at-pos (match-end 0)))))
-        (format "%s-%s" (1+ left) (1- right))))))
-
-(defun zoro-org-update-include-ranges ()
-  "Update :lines ranges for marked #+INCLUDE directives."
-  (interactive)
-  (save-excursion
-    (goto-char (point-min))
-    (while (re-search-forward
-            "^\\s-*#\\+INCLUDE: *\"\\([^\"]+\\)\".*:range-\\(begin\\|end\\)"
-            nil t)
-      (let* ((file (expand-file-name (match-string-no-properties 1)))
-             lines begin end)
-        (forward-line 0)
-        (when (looking-at "^.*:range-begin *\"\\([^\"]+\\)\"")
-          (setq begin (match-string-no-properties 1)))
-        (when (looking-at "^.*:range-end *\"\\([^\"]+\\)\"")
-          (setq end (match-string-no-properties 1)))
-        (setq lines (zoro-org-decide-line-range file begin end))
-        (when lines
-          (if (looking-at ".*:lines *\"\\([-0-9]+\\)\"")
-              (replace-match lines :fixedcase :literal nil 1)
-            (goto-char (line-end-position))
-            (insert " :lines \"" lines "\"")))))))
-
-(defun zoro-org-enable-include-range-updates ()
-  "Update marked Org INCLUDE ranges whenever this buffer is saved."
-  (add-hook 'before-save-hook #'zoro-org-update-include-ranges nil t))
+(require 'init-function)
 
 ;; OrgPac
 (use-package org
@@ -186,18 +143,7 @@
            :empty-lines 1)
           ("L" "Protocol Link" entry (file+headline org-agenda-file-note "Chrome Links")
            "* %? [[%:link][%:description]] \nCaptured On: %U"
-           :empty-lines 1)))
-
-  (defun org-export-toggle-syntax-highlight ()
-    "Setup variables to turn on syntax highlighting when calling `org-latex-export-to-pdf'."
-    (interactive)
-    (setq-local org-latex-src-block-backend 'minted)
-    (add-to-list 'org-latex-packages-alist '("newfloat" "minted")))
-
-  (defun org-table-insert-vertical-hline ()
-    "Insert a #+attr_latex to the current buffer, default the align to |c|c|c|, adjust if necessary."
-    (interactive)
-    (insert "#+attr_latex: :align |c|c|c|")))
+           :empty-lines 1))))
 ;; -OrgPac
 
 ;; Denote

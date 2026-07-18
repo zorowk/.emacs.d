@@ -35,6 +35,30 @@
 ;;
 ;;; Code:
 
+;; Startup policy.
+(defconst better-gc-cons-threshold (* 16 1024 1024)
+  "GC threshold restored after initialization completes.")
+
+(defconst zoro-startup-idle-tasks
+  '((:name dashboard  :delay 0.10 :function zoro-dashboard-load)
+    (:name marginalia :delay 0.45 :function marginalia-mode)
+    (:name corfu       :delay 0.65 :function global-corfu-mode)
+    (:name server      :delay 0.90 :function zoro-start-server)
+    (:name shell-env   :delay 1.15 :function zoro-initialize-shell-environment)
+    (:name clock       :delay 1.40 :function display-time-mode)
+    (:name pulsar      :delay 1.60 :function zoro-enable-pulsar)
+    (:name popper      :delay 1.80 :function zoro-enable-popper)
+    (:name agenda      :delay 2.10 :function zoro-dashboard-enable-agenda)
+    (:name savehist    :delay 2.45 :function savehist-mode)
+    (:name pixel-scroll :delay 2.70 :function pixel-scroll-precision-mode)
+    (:name which-key   :delay 2.95 :function which-key-mode)
+    (:name so-long     :delay 3.20 :function global-so-long-mode))
+  "Ordered one-shot tasks scheduled after the initial frame becomes idle.
+
+Delays reflect measured cold-load costs and user-facing priority.  Dashboard
+gets a 350ms window because package loading and rendering measured about 261ms;
+the remaining tasks are staggered so their 6-14ms loads do not form one burst.")
+
 ;; Personal identity and account paths.
 (defconst zoro-primary-mail-address "nearkingzero@outlook.com"
   "Primary email address used by Emacs.")
@@ -69,6 +93,12 @@
 (defconst zoro-hywiki-directory
   (expand-file-name "hywiki/" zoro-dropbox-directory)
   "Directory containing HyWiki pages.")
+
+(defconst zoro-dashboard-items-with-agenda
+  '((recents . 7)
+    (bookmarks . 7)
+    (agenda . 5))
+  "Dashboard items shown after deferred Agenda initialization.")
 
 (provide 'init-const)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

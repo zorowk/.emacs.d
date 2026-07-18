@@ -9,6 +9,8 @@
 
 ;;; Code:
 
+(require 'init-function)
+
 (setq package-archives
       '(("gnu" . "https://elpa.gnu.org/packages/")
         ("nongnu" . "https://elpa.nongnu.org/nongnu/")
@@ -32,20 +34,6 @@
 (load custom-file 'noerror)
 
 (require 'use-package)
-
-(defun zoro-use-package-ensure (name arguments state)
-  "Ensure NAME from ARGUMENTS and STATE without eagerly loading package.el."
-  (if (cl-every
-       (lambda (ensure)
-         (let ((package (or (and (eq ensure t)
-                                 (use-package-as-symbol name))
-                            ensure)))
-           (or (null package)
-               (and (symbolp package)
-                    (package-installed-p package)))))
-       arguments)
-      t
-    (use-package-ensure-elpa name arguments state)))
 
 (setopt use-package-always-ensure nil
         use-package-compute-statistics nil
