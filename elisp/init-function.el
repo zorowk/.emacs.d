@@ -3,12 +3,32 @@
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
 ;;; Commentary:
-;; Keep named configuration functions in one place.  Feature modules retain
-;; declarations, hooks, key bindings, and package-specific settings.
+;; Keep only callbacks shared across feature modules, multi-step package
+;; operations, and user commands without a direct Emacs or package equivalent.
+;; Feature modules retain declarations, hooks, bindings, and ordinary settings.
+;; Prefer calling public APIs directly at those use sites when no policy is
+;; added here.
 
 ;;; Code:
 
 (require 'init-const)
+
+;; These packages remain deferred.  The declarations provide byte-compiler
+;; context without loading them as a side effect of this shared module.
+(declare-function dashboard-insert-startupify-lists "dashboard")
+(declare-function popper-echo-mode "popper")
+(declare-function popper-mode "popper")
+(declare-function tempo-build-collection "tempo")
+(declare-function tempo-complete-tag "tempo")
+(declare-function tempo-define-template "tempo")
+(declare-function tempo-insert-template "tempo")
+(declare-function tempo-use-tag-list "tempo")
+(declare-function treesit-language-at "treesit" (position))
+
+(defvar dashboard-buffer-name)
+(defvar dashboard-items)
+(defvar dashboard-startup-banner)
+(defvar org-latex-packages-alist)
 
 ;; Startup lifecycle and deferred work.
 
@@ -115,10 +135,13 @@ non-nil."
     (garbage-collect)))
 
 (defun zoro-install-focus-gc ()
-  "Install garbage collection after frame focus changes."
+  "Install garbage collection after frame focus changes.
+
+`after-focus-change-function' is an abnormal function variable rather than a
+normal hook, so attach the callback with `add-function'."
   (add-function :after after-focus-change-function #'zoro-gc-when-unfocused))
 
-;; Core editing helpers.
+;; Editing commands without direct built-in equivalents.
 
 (defun abort-minibuffer-using-mouse ()
   "Abort an active minibuffer when the mouse leaves its buffer."
@@ -184,7 +207,7 @@ non-nil."
       (set-frame-parameter nil 'alpha-background 0.95)
       (set-frame-parameter nil 'ns-background-blur 25))))
 
-;; Deferred UI features.
+;; Deferred UI features that coordinate more than one package operation.
 
 (defun zoro-enable-popper ()
   "Enable Popper and its echo mode."
@@ -241,7 +264,7 @@ non-nil."
   "Open the Emacs Info reader."
   (info))
 
-;; Org helpers.
+;; Org helpers for the custom regexp-delimited INCLUDE convention.
 
 (defun zoro-org-decide-line-range (file begin end)
   "Return an Org :lines range in FILE delimited by BEGIN and END.
@@ -386,7 +409,7 @@ the template available globally."
   (tempo-insert-template (cdr (assoc tag (tempo-build-collection)))
                          current-prefix-arg))
 
-;; Tree-sitter helpers.
+;; Tree-sitter has a language query API but no matching interactive command.
 
 (defun treesit-show-parser-used-at-point ()
   "Show the Tree-sitter parser used at point."
