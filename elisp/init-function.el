@@ -396,12 +396,5 @@ the template available globally."
       (message "%s" lang)
     (message "treesit is not available")))
 
-;; Package-specific commands.
-
-(defun magit-log-follow-current-file ()
-  "Call `magit-log-buffer-file' with history following enabled."
-  (interactive)
-  (magit-log-buffer-file t))
-
 (provide 'init-function)
 ;;; init-function.el ends here

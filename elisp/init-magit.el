@@ -46,7 +46,9 @@
   (("C-x g" . magit-status)
    (:map magit-status-mode-map
          ("M-RET" . magit-diff-visit-file-other-window)))
-  :commands magit-log-follow-current-file)
+  ;; `magit-log-buffer-file' enables --follow with a prefix argument or when
+  ;; that transient argument is already active.
+  :commands magit-log-buffer-file)
 ;; -MagitPac
 
 (provide 'init-magit)
