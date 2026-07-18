@@ -11,11 +11,16 @@
 
 (require 'init-const)
 
-;; Keep one server for command-line clients without starting one in batch jobs.
-(require 'server)
+;; Keep one server for command-line clients without blocking the initial frame.
+(defun zoro-start-server ()
+  "Start an Emacs server unless another server is already available."
+  (require 'server)
+  (unless (server-running-p)
+    (server-start)))
+
 (when (and (not noninteractive)
-           (not (server-running-p)))
-  (server-start))
+           (not (daemonp)))
+  (run-with-idle-timer 0.5 nil #'zoro-start-server))
 
 ;; Global bindings.
 (global-set-key (kbd "C-z") nil)
