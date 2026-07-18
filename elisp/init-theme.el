@@ -58,10 +58,15 @@
 ;; -SpaciousPadding
 
 ;; Pulsar
+(defun zoro-enable-pulsar ()
+  "Enable Pulsar after startup becomes idle."
+  (pulsar-global-mode 1))
+
 (use-package pulsar
   :ensure t
+  :commands pulsar-global-mode
   :init
-  (pulsar-global-mode 1)
+  (run-with-idle-timer 1.25 nil #'zoro-enable-pulsar)
   :config
   (setq pulsar-delay 0.055)
   (setq pulsar-iterations 5)
@@ -71,8 +76,14 @@
 ;; -Pulsar
 
 ;; popper
+(defun zoro-enable-popper ()
+  "Enable Popper after startup becomes idle."
+  (popper-mode 1)
+  (popper-echo-mode 1))
+
 (use-package popper
   :ensure t
+  :commands (popper-mode popper-echo-mode)
   :bind (("C-`"   . popper-toggle)
          ("M-`"   . popper-cycle)
          ("C-M-`" . popper-toggle-type))
@@ -114,8 +125,7 @@
       compilation-mode))
   (setq popper-group-function #'popper-group-by-directory)
   (setq popper-window-height 0.33)
-  (popper-mode +1)
-  (popper-echo-mode +1))
+  (run-with-idle-timer 1.5 nil #'zoro-enable-popper))
 ;; -popper
 
 ;; olivetti
