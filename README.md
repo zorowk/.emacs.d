@@ -72,5 +72,16 @@ emacs --batch -Q -l early-init.el --eval '(package-activate-all)' -l init.el
 Org、Denote、Hyperbole 等较重模块
 按需加载，不应仅因启动配置而提前进入 `features`。
 
+需要检查同步启动关键路径时，运行模块计时报告：
+
+```sh
+emacs --batch -Q -l early-init.el -l elisp/benchmark-startup.el \
+  --eval '(zoro-startup-benchmark-activate-packages)' -l init.el \
+  --eval '(zoro-startup-benchmark-report)'
+```
+
+报告包含 package 激活、每个 `init-*` 模块的首次加载、累计耗时和 GC 次数。空闲计时器和
+延迟加载的 Dashboard Agenda 不属于同步首屏路径，因此不会计入。
+
 运行时产生的 `agent/`、`elpa/`、`projects` 和其他历史/缓存文件均被 Git 忽略；仓库只
 保存手写配置，不提交下载后的包或构建产物。
