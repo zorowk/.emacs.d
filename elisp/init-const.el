@@ -13,23 +13,25 @@
 ;; Startup policy.
 (defconst zoro-startup-idle-tasks
   '((:name dashboard  :delay 0.10 :function zoro-dashboard-load)
-    (:name marginalia :delay 0.45 :function marginalia-mode)
-    (:name corfu       :delay 0.65 :function global-corfu-mode)
+    (:name marginalia :delay 0.45 :function marginalia-mode :arguments (1))
+    (:name corfu       :delay 0.65 :function global-corfu-mode :arguments (1))
     (:name server      :delay 0.90 :function zoro-start-server)
     (:name shell-env   :delay 1.15 :function zoro-initialize-shell-environment)
-    (:name clock       :delay 1.40 :function display-time-mode)
-    (:name pulsar      :delay 1.60 :function zoro-enable-pulsar)
+    (:name clock       :delay 1.40 :function display-time-mode :arguments (1))
+    (:name pulsar      :delay 1.60 :function pulsar-global-mode :arguments (1))
     (:name popper      :delay 1.80 :function zoro-enable-popper)
     (:name agenda      :delay 2.10 :function zoro-dashboard-enable-agenda)
-    (:name savehist    :delay 2.45 :function savehist-mode)
-    (:name pixel-scroll :delay 2.70 :function pixel-scroll-precision-mode)
-    (:name which-key   :delay 2.95 :function which-key-mode)
-    (:name so-long     :delay 3.20 :function global-so-long-mode))
+    (:name savehist    :delay 2.45 :function savehist-mode :arguments (1))
+    (:name pixel-scroll :delay 2.70 :function pixel-scroll-precision-mode
+     :arguments (1))
+    (:name which-key   :delay 2.95 :function which-key-mode :arguments (1))
+    (:name so-long     :delay 3.20 :function global-so-long-mode :arguments (1)))
   "Ordered one-shot tasks scheduled after the initial frame becomes idle.
 
 Delays reflect measured cold-load costs and user-facing priority.  Dashboard
 gets a 350ms window because package loading and rendering measured about 261ms;
-the remaining tasks are staggered so their 6-14ms loads do not form one burst.")
+the remaining tasks are staggered so their 6-14ms loads do not form one burst.
+Each optional :arguments list is passed unchanged to the task function.")
 
 ;; Personal identity and account paths.
 (defconst zoro-gmail-address "near.kingzero@gmail.com"

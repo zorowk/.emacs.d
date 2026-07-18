@@ -26,13 +26,13 @@
     (setq file-name-handler-alist file-name-handler-alist-original)
     (makunbound 'file-name-handler-alist-original)))
 
-(defun zoro-startup--run-idle-task (name function)
-  "Run startup idle task NAME by calling FUNCTION once."
+(defun zoro-startup--run-idle-task (name function arguments)
+  "Run startup idle task NAME by applying FUNCTION to ARGUMENTS once."
   (remhash name zoro-startup-idle-timers)
   (let ((started-at (current-time)))
     (condition-case error-data
         (progn
-          (funcall function)
+          (apply function arguments)
           (push (list :name name
                       :status 'ok
                       :elapsed-ms
@@ -70,10 +70,12 @@ non-nil."
     (dolist (task zoro-startup-idle-tasks)
       (let ((name (plist-get task :name))
             (delay (plist-get task :delay))
-            (function (plist-get task :function)))
+            (function (plist-get task :function))
+            (arguments (plist-get task :arguments)))
         (puthash name
                  (run-with-idle-timer
-                  delay nil #'zoro-startup--run-idle-task name function)
+                  delay nil #'zoro-startup--run-idle-task
+                  name function arguments)
                  zoro-startup-idle-timers)))))
 
 (defun zoro-startup-idle-task-report ()
@@ -89,7 +91,10 @@ non-nil."
             (princ (format "%-16s %5.2fs  %s\n"
                            name
                            (plist-get task :delay)
-                           (plist-get task :function)))))))
+                           (if-let* ((arguments
+                                      (plist-get task :arguments)))
+                               (cons (plist-get task :function) arguments)
+                             (plist-get task :function))))))))
     (princ "\nCompleted\n---------\n")
     (if zoro-startup-idle-task-history
         (dolist (result (reverse zoro-startup-idle-task-history))
@@ -191,10 +196,6 @@ non-nil."
       (set-frame-parameter nil 'ns-background-blur 25))))
 
 ;; Deferred UI features.
-
-(defun zoro-enable-pulsar ()
-  "Enable Pulsar globally."
-  (pulsar-global-mode 1))
 
 (defun zoro-enable-popper ()
   "Enable Popper and its echo mode."
