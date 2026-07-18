@@ -3,6 +3,9 @@
 面向日常编程、Org/Denote 笔记和阅读写作的个人 Emacs 配置，最低支持 Emacs 31。
 使用 Emacs 内置的 `package.el` 和 `use-package` 管理第三方包。
 
+本配置源自 [M-EMACS](https://github.com/MatthewZMD/.emacs.d)，保留 Mingde
+(Matthew) Zeng 的原始版权；后续修改由 zorowk 维护并署名。具体归属以各源文件头为准。
+
 ## 功能概览
 
 - 补全：Corfu、Cape、Vertico、Orderless、Consult、Embark、Marginalia

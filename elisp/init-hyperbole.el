@@ -1,6 +1,7 @@
 ;;; init-hyperbole.el --- Configure Hyperbole and HyWiki -*- lexical-binding: t -*-
 
 ;; Author: zorowk
+;; Copyright (C) 2026 zorowk
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
 ;;; Commentary:

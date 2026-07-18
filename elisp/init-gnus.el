@@ -1,7 +1,7 @@
 ;;; init-gnus.el --- Mail and news reader configuration -*- lexical-binding: t -*-
 
 ;; Author: WenHao Peng
-;; Copyright (C) 2026
+;; Copyright (C) 2026 WenHao Peng
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
 ;;; Commentary:

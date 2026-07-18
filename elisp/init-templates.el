@@ -1,6 +1,7 @@
 ;;; init-templates.el --- Built-in Tempo templates -*- lexical-binding: t -*-
 
 ;; Author: zorowk
+;; Copyright (C) 2026 zorowk
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
 ;;; Commentary:

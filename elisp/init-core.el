@@ -1,7 +1,9 @@
 ;;; init-core.el --- Core Emacs behavior -*- lexical-binding: t -*-
 
-;; Author: zorowk
-;; Copyright (C) 2019 zorowk
+;; Author: Mingde (Matthew) Zeng
+;; Maintainer: zorowk
+;; Copyright (C) 2019 Mingde (Matthew) Zeng
+;; Copyright (C) 2026 zorowk
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
 ;;; Commentary:
