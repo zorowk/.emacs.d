@@ -35,9 +35,6 @@
 ;;
 ;;; Code:
 
-(eval-when-compile
-  (require 'battery))
-
 ;; Highlight
 (global-hl-line-mode 1)
 ;; -Highlight
@@ -66,12 +63,8 @@
 (column-number-mode 1)
 ;; -DisLineNum
 
-;; DisTimeBat
-(display-time-mode 1)
-(when (and battery-status-function
-           (not (string-match-p "N/A" (battery-format "%B" (funcall battery-status-function)))))
-  (display-battery-mode 0))
-;; -DisTimeBat
+;; Enable the clock after startup reaches its first idle period.
+(run-with-idle-timer 1 nil #'display-time-mode)
 
 ;; PixelScrollPrecMode
 (pixel-scroll-precision-mode 1)
