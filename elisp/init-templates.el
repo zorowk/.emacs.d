@@ -1,5 +1,8 @@
 ;;; init-templates.el --- Built-in Tempo templates -*- lexical-binding: t -*-
 
+;; Author: zorowk
+;; SPDX-License-Identifier: GPL-3.0-or-later
+
 ;;; Commentary:
 ;; Define mode-aware templates using Emacs's built-in Tempo library.
 

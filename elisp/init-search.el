@@ -1,40 +1,14 @@
-;;; init-search.el --- -*- lexical-binding: t -*-
-;;
-;; Filename: init-search.el
-;; Description: Initialize minibuffer completion, actions, and search
+;;; init-search.el --- Minibuffer completion and search -*- lexical-binding: t -*-
+
 ;; Author: zorowk
 ;; Copyright (C) 2019 zorowk
-;; Created: Thu Mar 14 11:01:43 2019 (-0400)
-;; Version: 3.0
-;; URL: https://github.com/MatthewZMD/.emacs.d
-;; Keywords: M-EMACS .emacs.d vertico orderless marginalia consult embark
-;; Compatibility: Emacs 31
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;; SPDX-License-Identifier: GPL-3.0-or-later
+
 ;;; Commentary:
-;;
 ;; Vertico renders candidates, Orderless filters them, and Marginalia annotates
 ;; them.  Consult provides search/navigation commands; Embark acts on or exports
 ;; the current candidate.  In-buffer completion lives in `init-complete.el'.
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; This program is free software: you can redistribute it and/or modify
-;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation, either version 3 of the License, or (at
-;; your option) any later version.
-;;
-;; This program is distributed in the hope that it will be useful, but
-;; WITHOUT ANY WARRANTY; without even the implied warranty of
-;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-;; General Public License for more details.
-;;
-;; You should have received a copy of the GNU General Public License
-;; along with GNU Emacs.  If not, see <https://www.gnu.org/licenses/>.
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+
 ;;; Code:
 
 ;; Vertico displays standard completing-read candidates vertically.
@@ -186,5 +160,4 @@
   :hook (embark-collect-mode . consult-preview-at-point-mode))
 
 (provide 'init-search)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-search.el ends here

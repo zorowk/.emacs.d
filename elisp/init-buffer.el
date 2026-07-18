@@ -1,41 +1,14 @@
-;;; init-buffer.el --- -*- lexical-binding: t -*-
-;;
-;; Filename: init-buffer.el
-;; Description: Configure Ibuffer
+;;; init-buffer.el --- Buffer list configuration -*- lexical-binding: t -*-
+
 ;; Author: zorowk
 ;; Copyright (C) 2019 zorowk
-;; Created: Thu Feb  6 16:25:12 2020 (-0500)
-;; Version: 3.0
-;; URL: https://github.com/MatthewZMD/.emacs.d
-;; Keywords: M-EMACS .emacs.d
-;; Compatibility: Emacs 31
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;; SPDX-License-Identifier: GPL-3.0-or-later
+
 ;;; Commentary:
-;;
 ;; Configure the built-in Ibuffer interface.
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; This program is free software: you can redistribute it and/or modify
-;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation, either version 3 of the License, or (at
-;; your option) any later version.
-;;
-;; This program is distributed in the hope that it will be useful, but
-;; WITHOUT ANY WARRANTY; without even the implied warranty of
-;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-;; General Public License for more details.
-;;
-;; You should have received a copy of the GNU General Public License
-;; along with GNU Emacs.  If not, see <https://www.gnu.org/licenses/>.
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+
 ;;; Code:
 
-;; IBufferPac
 (use-package ibuffer
   :ensure nil
   :bind ("C-x C-b" . ibuffer)
@@ -53,8 +26,6 @@
      (mark " "
            (name 16 -1)
            " " filename))))
-;; -IBufferPac
 
 (provide 'init-buffer)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-buffer.el ends here

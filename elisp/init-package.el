@@ -1,5 +1,6 @@
 ;;; init-package.el --- Built-in package management -*- lexical-binding: t -*-
 
+;; Author: zorowk
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
 ;;; Commentary:

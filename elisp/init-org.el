@@ -1,38 +1,12 @@
-;;; init-org.el --- -*- lexical-binding: t -*-
-;;
-;; Filename: init-org.el
-;; Description: Configure Org and Denote
+;;; init-org.el --- Org and Denote workflows -*- lexical-binding: t -*-
+
 ;; Author: zorowk
 ;; Copyright (C) 2019 zorowk
-;; Created: Fri Mar 15 11:09:30 2019 (-0400)
-;; Version: 3.0
-;; URL: https://github.com/MatthewZMD/.emacs.d
-;; Keywords: M-EMACS .emacs.d org denote
-;; Compatibility: Emacs 31
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;; SPDX-License-Identifier: GPL-3.0-or-later
+
 ;;; Commentary:
-;;
 ;; Configure Org workflows, export, capture, Babel, and Denote notes.
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; This program is free software: you can redistribute it and/or modify
-;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation, either version 3 of the License, or (at
-;; your option) any later version.
-;;
-;; This program is distributed in the hope that it will be useful, but
-;; WITHOUT ANY WARRANTY; without even the implied warranty of
-;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-;; General Public License for more details.
-;;
-;; You should have received a copy of the GNU General Public License
-;; along with GNU Emacs.  If not, see <https://www.gnu.org/licenses/>.
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+
 ;;; Code:
 
 (require 'init-const)
@@ -102,7 +76,6 @@ by Org before the current buffer is saved."
   (interactive)
   (insert "#+attr_latex: :align |c|c|c|"))
 
-;; OrgPac
 (use-package org
   :ensure nil
   :defer t
@@ -209,9 +182,7 @@ by Org before the current buffer is saved."
           ("L" "Protocol Link" entry (file+headline org-agenda-file-note "Chrome Links")
            "* %? [[%:link][%:description]] \nCaptured On: %U"
            :empty-lines 1))))
-;; -OrgPac
 
-;; Denote
 (use-package denote
   :ensure t
   :defer t
@@ -278,9 +249,7 @@ by Org before the current buffer is saved."
    ("C-c n g" . consult-denote-grep))
   :config
   (consult-denote-mode 1))
-;; -Denote
 
-;; org bullets
 (use-package org-bullets
   :ensure t
   :after org
@@ -288,12 +257,10 @@ by Org before the current buffer is saved."
   (setq org-bullets-bullet-list '("◉" "○" "✸" "✿" "✤" "✜" "◆" "●"))
   :config
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
-;; -org bullets
 
 ;; Keep Org tables monospaced, especially when prose uses a variable-pitch face.
 (with-eval-after-load 'org
   (set-face-attribute 'org-table nil :inherit 'fixed-pitch))
 
 (provide 'init-org)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-org.el ends here

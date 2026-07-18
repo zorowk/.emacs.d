@@ -1,39 +1,13 @@
-;;; init-complete.el --- -*- lexical-binding: t -*-
-;;
-;; Filename: init-complete.el
-;; Description: Initialize in-buffer completion and LSP
+;;; init-complete.el --- In-buffer completion and LSP -*- lexical-binding: t -*-
+
 ;; Author: zorowk
 ;; Copyright (C) 2019 zorowk
-;; Created: Fri Mar 15 10:02:00 2019 (-0400)
-;; Version: 3.0
-;; URL: https://github.com/MatthewZMD/.emacs.d
-;; Keywords: M-EMACS .emacs.d corfu cape eglot
-;; Compatibility: Emacs 31
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;; SPDX-License-Identifier: GPL-3.0-or-later
+
 ;;; Commentary:
-;;
-;; This initializes in-buffer completion with Corfu and Cape, plus Eglot.
+;; Configure Corfu, Cape, and Eglot.
 ;; Minibuffer completion and search commands live in `init-search.el'.
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; This program is free software: you can redistribute it and/or modify
-;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation, either version 3 of the License, or (at
-;; your option) any later version.
-;;
-;; This program is distributed in the hope that it will be useful, but
-;; WITHOUT ANY WARRANTY; without even the implied warranty of
-;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-;; General Public License for more details.
-;;
-;; You should have received a copy of the GNU General Public License
-;; along with GNU Emacs.  If not, see <https://www.gnu.org/licenses/>.
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+
 ;;; Code:
 
 ;; Eglot supplies LSP completion, navigation, diagnostics, and code actions.
@@ -146,5 +120,4 @@
   (advice-add 'eglot-completion-at-point :around #'cape-wrap-nonexclusive))
 
 (provide 'init-complete)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-complete.el ends here

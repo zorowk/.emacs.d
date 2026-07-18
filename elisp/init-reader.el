@@ -1,55 +1,24 @@
-;;; init-reader.el --- -*- lexical-binding: t -*-
-;;
-;; Filename: init-reader.el
-;; Description: emacs reader
+;;; init-reader.el --- Reading tools -*- lexical-binding: t -*-
+
 ;; Author: zorowk
 ;; Copyright (C) 2019 zorowk
-;; Created: Tue Jun  4 00:26:09 2019 (-0400)
-;; Version: 3.0
-;; URL: https://github.com/MatthewZMD/.emacs.d
-;; Keywords: M-EMACS .emacs.d reader
-;; Compatibility: Emacs 31
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;; SPDX-License-Identifier: GPL-3.0-or-later
+
 ;;; Commentary:
-;;
-;; This initializes emacs reader
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; This program is free software: you can redistribute it and/or modify
-;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation, either version 3 of the License, or (at
-;; your option) any later version.
-;;
-;; This program is distributed in the hope that it will be useful, but
-;; WITHOUT ANY WARRANTY; without even the implied warranty of
-;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-;; General Public License for more details.
-;;
-;; You should have received a copy of the GNU General Public License
-;; along with GNU Emacs.  If not, see <https://www.gnu.org/licenses/>.
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;; Configure Dictionary, Nov, Elfeed, and Elpher.
+
 ;;; Code:
 
-;; dictionary
 (setq dictionary-use-single-buffer t)
 (setq dictionary-server "dict.tw")
 (global-set-key (kbd "C-c s") #'dictionary-lookup-definition)
-;; -dictionary
 
-;; nov
 (use-package nov
   :ensure t
   :defer t
   :init
   (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode)))
-;; -nov
 
-;; elfeed
 (use-package elfeed
   :ensure t
   :defer t
@@ -65,14 +34,10 @@
   (elfeed-search-clipboard-type 'CLIPBOARD)
   (elfeed-search-date-format '("%Y-%m-%d" 10 :left))
   (elfeed-search-title-min-width 45))
-;; -elfeed
 
-;; elpher
 (use-package elpher
   :ensure t
   :bind ("C-z b" . elpher))
-;; -elpher
 
 (provide 'init-reader)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-reader.el ends here

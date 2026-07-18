@@ -1,41 +1,16 @@
-;;; init-gnus.el --- -*- lexical-binding: t -*-
-;;
-;; Description: Initialize GNUS
+;;; init-gnus.el --- Mail and news reader configuration -*- lexical-binding: t -*-
+
 ;; Author: WenHao Peng
 ;; Copyright (C) 2026
-;; Created: Tue Sep  3 21:28:26 2019 (-0400)
-;; Version: 3.0
-;; Keywords: M-EMACS .emacs.d gnus
-;; Compatibility: Emacs 31
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;; SPDX-License-Identifier: GPL-3.0-or-later
+
 ;;; Commentary:
-;;
-;; This initialies gnus
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; This program is free software: you can redistribute it and/or modify
-;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation, either version 3 of the License, or (at
-;; your option) any later version.
-;;
-;; This program is distributed in the hope that it will be useful, but
-;; WITHOUT ANY WARRANTY; without even the implied warranty of
-;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-;; General Public License for more details.
-;;
-;; You should have received a copy of the GNU General Public License
-;; along with GNU Emacs.  If not, see <https://www.gnu.org/licenses/>.
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;; Configure Gnus accounts, message sending, summaries, and authentication.
+
 ;;; Code:
 
 (require 'init-const)
 
-;; gnus
 (use-package gnus
   :ensure nil
   :defer t
@@ -222,8 +197,6 @@
   (add-hook 'gnus-article-prepare-hook #'gnus-article-add-buttons)
   (setq gnus-article-margin 2)
   (auth-source-xoauth2-plugin-mode t))
-;; -gnus
 
 (provide 'init-gnus)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-gnus.el ends here

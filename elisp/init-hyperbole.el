@@ -1,5 +1,8 @@
 ;;; init-hyperbole.el --- Configure Hyperbole and HyWiki -*- lexical-binding: t -*-
 
+;; Author: zorowk
+;; SPDX-License-Identifier: GPL-3.0-or-later
+
 ;;; Commentary:
 ;; Configure GNU Hyperbole and keep HyWiki pages in Dropbox.
 

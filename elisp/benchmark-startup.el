@@ -1,5 +1,6 @@
 ;;; benchmark-startup.el --- Report synchronous startup costs -*- lexical-binding: t -*-
 
+;; Author: zorowk
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
 ;;; Commentary:

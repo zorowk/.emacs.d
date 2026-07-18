@@ -1,49 +1,20 @@
-;;; init-edit.el --- -*- lexical-binding: t -*-
-;;
-;; Filename: init-edit.el
-;; Description: Initialize Editing Configuration
+;;; init-edit.el --- Editing and direct navigation -*- lexical-binding: t -*-
+
 ;; Author: zorowk
 ;; Copyright (C) 2019 zorowk
-;; Created: Thu Mar 28 13:25:24 2019 (-0400)
-;; Version: 3.0
-;; URL: https://github.com/MatthewZMD/.emacs.d
-;; Keywords: M-EMACS .emacs.d editing
-;; Compatibility: Emacs 31
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;; SPDX-License-Identifier: GPL-3.0-or-later
+
 ;;; Commentary:
-;;
 ;; Configure editing commands, direct navigation, window selection, paired
 ;; delimiters, matching parens, and clipboard integration.
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; This program is free software: you can redistribute it and/or modify
-;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation, either version 3 of the License, or (at
-;; your option) any later version.
-;;
-;; This program is distributed in the hope that it will be useful, but
-;; WITHOUT ANY WARRANTY; without even the implied warranty of
-;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-;; General Public License for more details.
-;;
-;; You should have received a copy of the GNU General Public License
-;; along with GNU Emacs.  If not, see <https://www.gnu.org/licenses/>.
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+
 ;;; Code:
 
-;; expreg
 (use-package expreg
   :ensure t
   :bind (("C-=" . expreg-expand)
          ("C--" . expreg-contract)))
-;; -expreg
 
-;; CruxPac
 (use-package crux
   :ensure t
   :bind
@@ -68,9 +39,7 @@
   (crux-with-region-or-buffer untabify)
   (crux-with-region-or-point-to-eol kill-ring-save)
   (defalias 'rename-file-and-buffer #'crux-rename-file-and-buffer))
-;; -CruxPac
 
-;; AvyPac
 (use-package avy
   :ensure t
   :defer t
@@ -82,15 +51,11 @@
   (avy-style 'pre)
   :custom-face
   (avy-lead-face ((t (:background "#51afef" :foreground "#870000" :weight bold)))))
-;; -AvyPac
 
-;; VundoPac
 (use-package vundo
   :ensure t
   :bind ("C-z u" . vundo))
-;; -VundoPac
 
-;; AceWindowPac
 (use-package ace-window
   :ensure t
   :bind ("C-x C-o" . ace-window)
@@ -117,9 +82,7 @@
           (?h aw-split-window-horz "Split Horz Window")
           (?d delete-other-windows "Delete Other Windows")
           (?? aw-show-dispatch-help))))
-;; -AceWindowPac
 
-;; ElectricPair
 (use-package elec-pair
   :ensure nil
   :hook (prog-mode . electric-pair-local-mode)
@@ -127,9 +90,7 @@
   (electric-pair-preserve-balance t)
   (electric-pair-delete-adjacent-pairs t)
   (electric-pair-skip-self t))
-;; -ElectricPair
 
-;; MatchParens
 (use-package paren
   :ensure nil
   :custom
@@ -139,9 +100,7 @@
   (show-paren-not-in-comments-or-strings 'on-mismatch)
   :config
   (show-paren-mode 1))
-;; -MatchParens
 
-;; patch linux wayland
 (when (and (eq system-type 'gnu/linux) (display-graphic-p))
   (setq select-enable-clipboard t
         select-enable-primary t)  ; 开启鼠标中键选区(Primary selection)同步
@@ -162,8 +121,6 @@
             (with-output-to-string
               (with-current-buffer standard-output
                 (call-process "wl-paste" nil t nil "-n")))))))
-;; -patch linux wayland
 
 (provide 'init-edit)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-edit.el ends here

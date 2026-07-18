@@ -1,6 +1,6 @@
 ;;; init-files.el --- File persistence and save behavior -*- lexical-binding: t -*-
 
-;; Derived from M-EMACS configuration by zorowk.
+;; Author: zorowk
 ;; Copyright (C) 2019 zorowk
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 

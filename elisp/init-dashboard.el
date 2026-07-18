@@ -1,38 +1,12 @@
-;;; init-dashboard.el --- -*- lexical-binding: t -*-
-;;
-;; Filename: init-dashboard.el
-;; Description: Initialize Dashboard
+;;; init-dashboard.el --- Startup dashboard -*- lexical-binding: t -*-
+
 ;; Author: zorowk
 ;; Copyright (C) 2019 zorowk
-;; Created: Thu Mar 14 17:21:46 2019 (-0400)
-;; Version: 3.0
-;; URL: https://github.com/MatthewZMD/.emacs.d
-;; Keywords: M-EMACS .emacs.d dashboard
-;; Compatibility: Emacs 31
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;; SPDX-License-Identifier: GPL-3.0-or-later
+
 ;;; Commentary:
-;;
-;; This initializes dashboard
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; This program is free software: you can redistribute it and/or modify
-;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation, either version 3 of the License, or (at
-;; your option) any later version.
-;;
-;; This program is distributed in the hope that it will be useful, but
-;; WITHOUT ANY WARRANTY; without even the implied warranty of
-;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-;; General Public License for more details.
-;;
-;; You should have received a copy of the GNU General Public License
-;; along with GNU Emacs.  If not, see <https://www.gnu.org/licenses/>.
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;; Configure and populate the startup dashboard.
+
 ;;; Code:
 
 (declare-function dashboard-insert-startupify-lists "dashboard")
@@ -93,7 +67,6 @@
 
 (setq initial-buffer-choice #'zoro-initial-dashboard-buffer)
 
-;; DashboardPac
 (use-package dashboard
   :ensure t
   :defer t
@@ -133,8 +106,6 @@
   :config
   (zoro-dashboard-update-banner frame-background-mode)
   (add-hook 'window-size-change-functions #'dashboard-resize-on-hook 100))
-;; -DashboardPac
 
 (provide 'init-dashboard)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-dashboard.el ends here
