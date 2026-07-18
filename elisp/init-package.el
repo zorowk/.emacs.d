@@ -23,9 +23,9 @@
         ;; archive carries a newer version.
         package-install-upgrade-built-in nil)
 
-;; `package-enable-at-startup' is disabled in early-init.el.  Activating here
-;; makes GUI, daemon, and documented batch startup follow the same path.
-(package-initialize)
+;; Normal startup activates installed packages after early-init.el and before
+;; init.el.  Keep activation on that lightweight built-in path instead of
+;; rescanning package descriptors and archive metadata here.
 
 ;; Keep package-selected-packages and all other Customize output out of the
 ;; hand-written init file, including during first-run package installation.

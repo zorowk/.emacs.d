@@ -48,10 +48,6 @@
 (setq gc-cons-percentage 0.6)
 ;; -DeferGC
 
-;; UnsetPES
-(setq package-enable-at-startup nil)
-;; -UnsetPES
-
 ;; UnsetFNHA
 (defvar file-name-handler-alist-original file-name-handler-alist)
 (setq file-name-handler-alist nil)

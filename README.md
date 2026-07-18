@@ -64,10 +64,12 @@ package.el 用软件源版本替换 Emacs 自带库。
 从仓库根目录执行一次独立启动检查：
 
 ```sh
-emacs --batch -Q -l early-init.el -l init.el
+emacs --batch -Q -l early-init.el --eval '(package-activate-all)' -l init.el
 ```
 
-正常启动不应产生 Elisp 错误或过时警告。ERC、Gnus、Org、Denote、Hyperbole 等较重模块
+`--batch -Q` 不会自动激活第三方包，因此命令在 `early-init.el` 和 `init.el` 之间显式模拟
+正常 GUI/daemon 启动的 package 激活阶段。启动不应产生 Elisp 错误或过时警告。ERC、Gnus、
+Org、Denote、Hyperbole 等较重模块
 按需加载，不应仅因启动配置而提前进入 `features`。
 
 运行时产生的 `agent/`、`elpa/`、`projects` 和其他历史/缓存文件均被 Git 忽略；仓库只
