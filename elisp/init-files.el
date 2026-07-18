@@ -56,10 +56,13 @@
 (add-hook 'after-save-hook
           #'executable-make-buffer-file-executable-if-script-p)
 
-(advice-add 'save-place-find-file-hook :after
-            (lambda (&rest _)
-              (when buffer-file-name
-                (ignore-errors (recenter)))))
+(defun zoro-recenter-after-restoring-place ()
+  "Recenter after restoring point in a displayed file buffer."
+  (when buffer-file-name
+    (ignore-errors (recenter))))
+
+(add-hook 'save-place-after-find-file-hook
+          #'zoro-recenter-after-restoring-place)
 
 (provide 'init-files)
 ;;; init-files.el ends here
