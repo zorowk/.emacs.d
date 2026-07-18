@@ -63,10 +63,12 @@
 (setopt indent-tabs-mode nil
         isearch-lazy-count t
         eldoc-help-at-pt t
-        split-window-preferred-direction 'horizontal
-        which-key-mode t)
+        split-window-preferred-direction 'horizontal)
 (delete-selection-mode 1)
 (repeat-mode 1)
+
+;; Prefix-key hints do not participate in the initial frame.
+(run-with-idle-timer 3.5 nil #'which-key-mode)
 
 (setq x-alt-keysym 'meta
       confirm-kill-emacs 'y-or-n-p
