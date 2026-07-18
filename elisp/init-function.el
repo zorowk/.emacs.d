@@ -124,28 +124,7 @@ non-nil."
   "Install garbage collection after frame focus changes."
   (add-function :after after-focus-change-function #'zoro-gc-when-unfocused))
 
-;; Package management.
-
-(defun zoro-use-package-ensure (name arguments state)
-  "Ensure NAME from ARGUMENTS and STATE without eagerly loading package.el."
-  (if (cl-every
-       (lambda (ensure)
-         (let ((package (or (and (eq ensure t)
-                                 (use-package-as-symbol name))
-                            ensure)))
-           (or (null package)
-               (and (symbolp package)
-                    (package-installed-p package)))))
-       arguments)
-      t
-    (use-package-ensure-elpa name arguments state)))
-
 ;; Core editing helpers.
-
-(defun emacs-trim-on-save ()
-  "Delete trailing whitespace in ordinary editing buffers."
-  (unless (derived-mode-p 'org-mode 'markdown-mode)
-    (add-hook 'before-save-hook #'delete-trailing-whitespace nil t)))
 
 (defun abort-minibuffer-using-mouse ()
   "Abort an active minibuffer when the mouse leaves its buffer."

@@ -37,7 +37,6 @@
 
 (setopt use-package-always-ensure nil
         use-package-compute-statistics nil
-        use-package-ensure-function #'zoro-use-package-ensure
         use-package-enable-imenu-support t
         use-package-expand-minimally t
         use-package-verbose nil)

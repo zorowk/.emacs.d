@@ -38,9 +38,14 @@
 (when (display-graphic-p)
   (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
 
-(add-hook 'prog-mode-hook #'emacs-trim-on-save)
-(add-hook 'text-mode-hook #'emacs-trim-on-save)
-(add-hook 'conf-mode-hook #'emacs-trim-on-save)
+;; Emacs 31 provides a buffer-local save-time whitespace cleaner.  Enable it
+;; for editing modes, then opt out where trailing spaces can carry meaning.
+(add-hook 'prog-mode-hook #'delete-trailing-whitespace-mode)
+(add-hook 'text-mode-hook #'delete-trailing-whitespace-mode)
+(add-hook 'conf-mode-hook #'delete-trailing-whitespace-mode)
+(add-hook 'org-mode-hook (lambda () (delete-trailing-whitespace-mode -1)))
+(add-hook 'markdown-mode-hook
+          (lambda () (delete-trailing-whitespace-mode -1)))
 (add-hook 'makefile-mode-hook #'indent-tabs-mode)
 (add-hook 'prog-mode-hook #'editorconfig-mode)
 
