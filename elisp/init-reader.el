@@ -67,6 +67,12 @@
   (elfeed-search-title-min-width 45))
 ;; -elfeed
 
+;; elpher
+(use-package elpher
+  :ensure t
+  :bind ("C-z b" . elpher))
+;; -elpher
+
 (provide 'init-reader)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-reader.el ends here

@@ -103,8 +103,6 @@
 
 (require 'init-gnus)
 
-(require 'init-elpher)
-
 ;; Defer only the measured startup outliers.
 (unless noninteractive
   (run-with-idle-timer 0.10 nil #'require 'dashboard)
