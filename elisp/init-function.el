@@ -396,25 +396,12 @@ the template available globally."
       (message "%s" lang)
     (message "treesit is not available")))
 
-;; Package-specific commands and callbacks.
+;; Package-specific commands.
 
 (defun magit-log-follow-current-file ()
   "Call `magit-log-buffer-file' with history following enabled."
   (interactive)
   (magit-log-buffer-file t))
-
-(defun erc-notify (nickname message)
-  "Display an ERC notification from NICKNAME containing MESSAGE."
-  (let* ((channel (buffer-name))
-         (title (if (string-match-p (concat "^" nickname) channel)
-                    nickname
-                  (concat nickname " (" channel ")")))
-         (text (string-trim
-                (replace-regexp-in-string "[[:space:]\n]+" " " message))))
-    (if (fboundp 'notifications-notify)
-        (notifications-notify :title title
-                              :body (concat nickname ": " text))
-      (message "%s: %s" title text))))
 
 (provide 'init-function)
 ;;; init-function.el ends here

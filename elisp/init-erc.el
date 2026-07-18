@@ -35,7 +35,7 @@
 ;;
 ;;; Code:
 
-(require 'subr-x)
+(require 'seq)
 (require 'init-function)
 
 ;; ERCPac
@@ -82,20 +82,19 @@
   :bind (:map erc-mode-map
               ("RET" . nil)
               ("C-c C-c" . #'erc-send-current-line))
-  :hook
-  (ercn-notify . erc-notify)
   :config
   (require 'erc-sasl)
   (custom-set-faces
    '(erc-notice-face ((t (:slant italic :weight unspecified)))))
   ;; Prefer SASL to NickServ and keep tracking focused on real mentions.
+  ;; Emacs 31's notifications module handles private messages and nickname
+  ;; mentions, including focus filtering and click-to-open actions.
   (setopt erc-modules
-          (seq-union '(sasl nicks scrolltobottom)
+          (seq-union '(notifications sasl nicks scrolltobottom)
                      erc-modules))
   (setopt erc-track-faces-priority-list
           (remq 'erc-notice-face erc-track-faces-priority-list))
   (make-directory (expand-file-name ".erc-logs" user-emacs-directory) t)
-  (add-to-list 'erc-modules 'notifications)
   (erc-track-mode t)
   (erc-services-mode 1)
   (erc-keep-place-indicator-mode 1))
