@@ -74,7 +74,6 @@
       mouse-yank-at-point t
       apropos-do-all t
       search-default-mode t
-      frame-inhibit-implied-resize t
       echo-keystrokes 0.1
       ad-redefinition-action 'accept
       warning-minimum-level :warning
