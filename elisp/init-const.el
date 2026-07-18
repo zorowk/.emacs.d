@@ -12,11 +12,13 @@
 
 ;; Startup policy.
 (defconst zoro-startup-idle-tasks
-  '((:name dashboard  :delay 0.10 :function zoro-dashboard-load)
+  '((:name dashboard  :delay 0.10 :function require :arguments (dashboard))
     (:name marginalia :delay 0.45 :function marginalia-mode :arguments (1))
     (:name corfu       :delay 0.65 :function global-corfu-mode :arguments (1))
-    (:name server      :delay 0.90 :function zoro-start-server)
-    (:name shell-env   :delay 1.15 :function zoro-initialize-shell-environment)
+    (:name server      :delay 0.90 :function server-mode :arguments (1)
+     :predicate (lambda () (not (daemonp))))
+    (:name shell-env   :delay 1.15 :function exec-path-from-shell-initialize
+     :predicate (lambda () (memq window-system '(mac ns))))
     (:name clock       :delay 1.40 :function display-time-mode :arguments (1))
     (:name pulsar      :delay 1.60 :function pulsar-global-mode :arguments (1))
     (:name popper      :delay 1.80 :function zoro-enable-popper)
@@ -31,7 +33,8 @@
 Delays reflect measured cold-load costs and user-facing priority.  Dashboard
 gets a 350ms window because package loading and rendering measured about 261ms;
 the remaining tasks are staggered so their 6-14ms loads do not form one burst.
-Each optional :arguments list is passed unchanged to the task function.")
+Each optional :arguments list is passed unchanged to the task function.  A
+task with :predicate is scheduled only when that function returns non-nil.")
 
 ;; Personal identity and account paths.
 (defconst zoro-gmail-address "near.kingzero@gmail.com"

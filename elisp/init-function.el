@@ -71,12 +71,14 @@ non-nil."
       (let ((name (plist-get task :name))
             (delay (plist-get task :delay))
             (function (plist-get task :function))
-            (arguments (plist-get task :arguments)))
-        (puthash name
-                 (run-with-idle-timer
-                  delay nil #'zoro-startup--run-idle-task
-                  name function arguments)
-                 zoro-startup-idle-timers)))))
+            (arguments (plist-get task :arguments))
+            (predicate (plist-get task :predicate)))
+        (when (or (null predicate) (funcall predicate))
+          (puthash name
+                   (run-with-idle-timer
+                    delay nil #'zoro-startup--run-idle-task
+                    name function arguments)
+                   zoro-startup-idle-timers))))))
 
 (defun zoro-startup-idle-task-report ()
   "Display pending and completed startup idle tasks."
@@ -106,19 +108,6 @@ non-nil."
                              (format "  %s" (error-message-string error-data))
                            ""))))
       (princ "None\n"))))
-
-(defun zoro-start-server ()
-  "Start an Emacs server unless this session should not own one."
-  (when (and (not noninteractive)
-             (not (daemonp)))
-    (require 'server)
-    (unless (server-running-p)
-      (server-start))))
-
-(defun zoro-initialize-shell-environment ()
-  "Import login-shell variables on graphical macOS sessions."
-  (when (memq window-system '(mac ns))
-    (exec-path-from-shell-initialize)))
 
 (defun zoro-gc-when-unfocused ()
   "Collect garbage after the last frame loses focus."
@@ -205,10 +194,6 @@ non-nil."
 (defun zoro-initial-dashboard-buffer ()
   "Return the lightweight initial Dashboard buffer."
   (get-buffer-create "*dashboard*"))
-
-(defun zoro-dashboard-load ()
-  "Load Dashboard after the initial frame."
-  (require 'dashboard))
 
 (defun zoro-dashboard-update-banner (appearance)
   "Set and refresh the Dashboard banner for APPEARANCE."
