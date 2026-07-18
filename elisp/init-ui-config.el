@@ -35,7 +35,14 @@
 ;;
 ;;; Code:
 
-(require 'init-function)
+(defun zoro-setup-frame-alpha (&optional frame)
+  "Apply transparency and blur to FRAME."
+  (with-selected-frame (or frame (selected-frame))
+    (when (display-graphic-p)
+      (set-frame-parameter nil 'ns-alpha-elements
+                           '(ns-alpha-default ns-alpha-fringe ns-alpha-glyphs))
+      (set-frame-parameter nil 'alpha-background 0.95)
+      (set-frame-parameter nil 'ns-background-blur 25))))
 
 ;; Highlight
 (global-hl-line-mode 1)

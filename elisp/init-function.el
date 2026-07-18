@@ -15,9 +15,6 @@
 
 ;; These packages remain deferred.  The declarations provide byte-compiler
 ;; context without loading them as a side effect of this shared module.
-(declare-function dashboard-insert-startupify-lists "dashboard")
-(declare-function popper-echo-mode "popper")
-(declare-function popper-mode "popper")
 (declare-function tempo-build-collection "tempo")
 (declare-function tempo-complete-tag "tempo")
 (declare-function tempo-define-template "tempo")
@@ -25,9 +22,6 @@
 (declare-function tempo-use-tag-list "tempo")
 (declare-function treesit-language-at "treesit" (position))
 
-(defvar dashboard-buffer-name)
-(defvar dashboard-items)
-(defvar dashboard-startup-banner)
 (defvar org-latex-packages-alist)
 
 ;; Startup lifecycle and deferred work.
@@ -153,116 +147,6 @@ normal hook, so attach the callback with `add-function'."
   "Show and copy `buffer-file-name' or `buffer-name'."
   (interactive)
   (message (kill-new (or buffer-file-name (buffer-name)))))
-
-;; Fonts and frames.
-
-(defun zoro-apply-theme (appearance)
-  "Load the theme matching system APPEARANCE."
-  (mapc #'disable-theme custom-enabled-themes)
-  (pcase appearance
-    ('light (load-theme 'ef-frost t))
-    ('dark (load-theme 'ef-autumn t)))
-  (when (featurep 'dashboard)
-    (zoro-dashboard-update-banner appearance)))
-
-(defun zoro-change-font ()
-  "Apply the configured fixed, variable, symbol, emoji, and CJK fonts."
-  (let ((font-height (if (eq system-type 'darwin) 150 110)))
-    (set-face-attribute 'default nil
-                        :family "JetBrains Mono"
-                        :height font-height))
-  (set-face-attribute 'fixed-pitch nil :family "JetBrains Mono" :height 1.0)
-  (if (eq system-type 'darwin)
-      (set-face-attribute 'variable-pitch nil :family "Georgia" :height 1.0)
-    (set-face-attribute 'variable-pitch nil :family "Gelasio" :height 1.0))
-  (if (eq system-type 'darwin)
-      (progn
-        (set-fontset-font t 'emoji (font-spec :family "Apple Color Emoji"))
-        (set-fontset-font t 'symbol (font-spec :family "STIX Two Math"))
-        (set-fontset-font t 'greek (font-spec :family "Apple Symbols"))
-        (set-fontset-font t 'hangul (font-spec :family "Apple SD Gothic Neo"))
-        (set-fontset-font t 'kana (font-spec :family "Hiragino Maru Gothic ProN"))
-        (set-fontset-font t 'cjk-misc (font-spec :family "PingFang SC"))
-        (set-fontset-font t 'bopomofo (font-spec :family "PingFang SC"))
-        (set-fontset-font t 'han (font-spec :family "PingFang SC")))
-    (set-fontset-font t 'emoji (font-spec :family "Noto Color Emoji"))
-    (set-fontset-font t 'symbol (font-spec :family "Noto Sans Math"))
-    (set-fontset-font t 'greek (font-spec :family "Noto Sans Symbols"))
-    (set-fontset-font t 'hangul (font-spec :family "Noto Sans CJK KR"))
-    (set-fontset-font t 'kana (font-spec :family "Noto Sans CJK JP"))
-    (set-fontset-font t 'han (font-spec :family "Noto Sans CJK SC"))))
-
-(defun zoro-apply-font-to-frame (frame)
-  "Apply configured fonts to graphical FRAME."
-  (with-selected-frame frame
-    (when (display-graphic-p)
-      (zoro-change-font))))
-
-(defun zoro-setup-frame-alpha (&optional frame)
-  "Apply transparency and blur to FRAME."
-  (with-selected-frame (or frame (selected-frame))
-    (when (display-graphic-p)
-      (set-frame-parameter nil 'ns-alpha-elements
-                           '(ns-alpha-default ns-alpha-fringe ns-alpha-glyphs))
-      (set-frame-parameter nil 'alpha-background 0.95)
-      (set-frame-parameter nil 'ns-background-blur 25))))
-
-;; Deferred UI features that coordinate more than one package operation.
-
-(defun zoro-enable-popper ()
-  "Enable Popper and its echo mode."
-  (popper-mode 1)
-  (popper-echo-mode 1))
-
-(defun zoro-initial-dashboard-buffer ()
-  "Return the lightweight initial Dashboard buffer."
-  (get-buffer-create "*dashboard*"))
-
-(defun zoro-dashboard-update-banner (appearance)
-  "Set and refresh the Dashboard banner for APPEARANCE."
-  (setq dashboard-startup-banner
-        (expand-file-name
-         (if (eq appearance 'dark)
-             "images/KEC_Dark_BK_Small.png"
-           "images/KEC_Light_BK_Small.png")
-         user-emacs-directory))
-  (when-let* ((buffer-name (and (boundp 'dashboard-buffer-name)
-                                dashboard-buffer-name))
-              (buffer (get-buffer buffer-name)))
-    (with-current-buffer buffer
-      (dashboard-insert-startupify-lists t))))
-
-(defun zoro-dashboard-enable-agenda ()
-  "Add the Agenda widget and refresh an existing Dashboard buffer."
-  (require 'dashboard)
-  (setq dashboard-items '((recents . 7)
-                          (bookmarks . 7)
-                          (agenda . 5)))
-  (when-let* ((buffer (get-buffer dashboard-buffer-name)))
-    (with-current-buffer buffer
-      (dashboard-insert-startupify-lists t))))
-
-(defun zoro-open-dashboard ()
-  "Open the Dashboard buffer and jump to the first widget."
-  (interactive)
-  (require 'dashboard)
-  (dashboard-insert-startupify-lists)
-  (switch-to-buffer dashboard-buffer-name)
-  (goto-char (point-min))
-  (delete-other-windows))
-
-(defun zoro-dashboard-browse-homepage (&rest _)
-  "Open the configured homepage."
-  (browse-url "https://zorowk.github.io/"))
-
-(defun zoro-dashboard-find-config (&rest _)
-  "Find a file in the Emacs configuration project."
-  (let ((default-directory user-emacs-directory))
-    (project-find-file)))
-
-(defun zoro-dashboard-open-info (&rest _)
-  "Open the Emacs Info reader."
-  (info))
 
 ;; Org helpers for the custom regexp-delimited INCLUDE convention.
 

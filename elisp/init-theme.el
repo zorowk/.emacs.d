@@ -35,6 +35,14 @@
 ;;
 ;;; Code:
 
+(declare-function popper-echo-mode "popper")
+(declare-function popper-mode "popper")
+
+(defun zoro-enable-popper ()
+  "Enable Popper and its echo mode."
+  (popper-mode 1)
+  (popper-echo-mode 1))
+
 ;; SpaciousPadding
 (use-package spacious-padding
   :ensure t
