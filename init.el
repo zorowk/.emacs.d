@@ -58,13 +58,7 @@
 
 (require 'init-search)
 
-(require 'init-crux)
-
-(require 'init-avy)
-
-(require 'init-vundo)
-
-(require 'init-ace-window)
+(require 'init-edit)
 
 (require 'init-shell)
 
@@ -85,8 +79,6 @@
 (require 'init-magit)
 
 (require 'init-treesit)
-
-(require 'init-edit)
 
 (require 'init-complete)
 
