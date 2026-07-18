@@ -9,7 +9,30 @@
 
 ;;; Code:
 
-(require 'init-function)
+(defun zoro-gc-when-unfocused ()
+  "Collect garbage after the last frame loses focus."
+  (unless (frame-focus-state)
+    (garbage-collect)))
+
+(defun zoro-install-focus-gc ()
+  "Install garbage collection after frame focus changes.
+
+`after-focus-change-function' is an abnormal function variable rather than a
+normal hook, so attach the callback with `add-function'."
+  (add-function :after after-focus-change-function #'zoro-gc-when-unfocused))
+
+(defun zoro-abort-minibuffer-using-mouse ()
+  "Abort an active minibuffer when the mouse leaves its buffer."
+  (when (and (>= (recursion-depth) 1)
+             (active-minibuffer-window))
+    (abort-recursive-edit)))
+
+(defun zoro-where-am-i ()
+  "Show and copy `buffer-file-name' or `buffer-name'."
+  (interactive)
+  (message (kill-new (or buffer-file-name (buffer-name)))))
+
+(add-hook 'emacs-startup-hook #'zoro-install-focus-gc)
 
 ;; Global bindings.
 (global-set-key (kbd "C-z") nil)

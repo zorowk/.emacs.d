@@ -44,7 +44,6 @@
 (require 'init-function)
 
 (add-hook 'after-init-hook #'zoro-restore-startup-state)
-(add-hook 'emacs-startup-hook #'zoro-install-focus-gc)
 
 ;; Packages
 

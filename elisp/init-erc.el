@@ -36,7 +36,6 @@
 ;;; Code:
 
 (require 'seq)
-(require 'init-function)
 
 ;; ERCPac
 (use-package erc

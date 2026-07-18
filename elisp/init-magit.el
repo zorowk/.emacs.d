@@ -35,8 +35,6 @@
 ;;
 ;;; Code:
 
-(require 'init-function)
-
 ;; MagitPac
 (use-package magit
   :ensure t

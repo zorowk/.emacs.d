@@ -13,8 +13,6 @@
 
 (require 'init-const)
 
-(declare-function treesit-language-at "treesit" (position))
-
 ;; Startup lifecycle and deferred work.
 
 (defvar zoro-startup-idle-timers (make-hash-table :test #'eq)
@@ -113,41 +111,6 @@ non-nil."
                              (format "  %s" (error-message-string error-data))
                            ""))))
       (princ "None\n"))))
-
-(defun zoro-gc-when-unfocused ()
-  "Collect garbage after the last frame loses focus."
-  (unless (frame-focus-state)
-    (garbage-collect)))
-
-(defun zoro-install-focus-gc ()
-  "Install garbage collection after frame focus changes.
-
-`after-focus-change-function' is an abnormal function variable rather than a
-normal hook, so attach the callback with `add-function'."
-  (add-function :after after-focus-change-function #'zoro-gc-when-unfocused))
-
-;; Editing commands without direct built-in equivalents.
-
-(defun zoro-abort-minibuffer-using-mouse ()
-  "Abort an active minibuffer when the mouse leaves its buffer."
-  (when (and (>= (recursion-depth) 1)
-             (active-minibuffer-window))
-    (abort-recursive-edit)))
-
-(defun zoro-where-am-i ()
-  "Show and copy `buffer-file-name' or `buffer-name'."
-  (interactive)
-  (message (kill-new (or buffer-file-name (buffer-name)))))
-
-;; Tree-sitter has a language query API but no matching interactive command.
-
-(defun zoro-treesit-show-parser-used-at-point ()
-  "Show the Tree-sitter parser used at point."
-  (interactive)
-  (if-let* ((lang (and (treesit-available-p)
-                       (treesit-language-at (point)))))
-      (message "%s" lang)
-    (message "treesit is not available")))
 
 (provide 'init-function)
 ;;; init-function.el ends here

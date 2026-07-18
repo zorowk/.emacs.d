@@ -35,7 +35,15 @@
 ;;
 ;;; Code:
 
-(require 'init-function)
+(declare-function treesit-language-at "treesit" (position))
+
+(defun zoro-treesit-show-parser-used-at-point ()
+  "Show the Tree-sitter parser used at point."
+  (interactive)
+  (if-let* ((lang (and (treesit-available-p)
+                       (treesit-language-at (point)))))
+      (message "%s" lang)
+    (message "treesit is not available")))
 
 (when (treesit-available-p)
   (setopt treesit-enabled-modes

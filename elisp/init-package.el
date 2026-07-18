@@ -9,8 +9,6 @@
 
 ;;; Code:
 
-(require 'init-function)
-
 (setq package-archives
       '(("gnu" . "https://elpa.gnu.org/packages/")
         ("nongnu" . "https://elpa.nongnu.org/nongnu/")
