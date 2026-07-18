@@ -67,7 +67,7 @@
 (run-with-idle-timer 1 nil #'display-time-mode)
 
 ;; PixelScrollPrecMode
-(pixel-scroll-precision-mode 1)
+(run-with-idle-timer 3 nil #'pixel-scroll-precision-mode)
 ;; -PixelScrollPrecMode
 
 ;; Alpha
