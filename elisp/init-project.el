@@ -5,18 +5,18 @@
 ;;; Commentary:
 ;; Use the built-in project and compilation frameworks as the common entry
 ;; point for builds and tests.  `project-compile' runs `compile-command' from
-;; the project root; `recompile' repeats it without another prompt.
+;; the project root; `project-recompile' repeats it without another prompt.
 ;;
 ;; Emacs 31 already binds `project-compile' to C-x p c, `next-error' to
 ;; M-g n, `previous-error' to M-g p, and `recompile' to g in Compilation
-;; buffers.  C-x p t repeats the last build or test from source buffers.
+;; buffers.  C-x p t repeats the project build or test from source buffers.
 
 ;;; Code:
 
 (use-package project
   :ensure nil
   :bind (:map project-prefix-map
-              ("t" . recompile))
+              ("t" . project-recompile))
   :config
   (add-to-list 'project-switch-commands
                '(project-compile "Build/test") t))
