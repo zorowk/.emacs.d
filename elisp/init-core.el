@@ -27,7 +27,7 @@
 (global-set-key (kbd "<f5>") #'revert-buffer-quick)
 
 ;; Prefer UTF-8 throughout the editor and clipboard.
-(unless zoro-windows-p
+(unless (eq system-type 'windows-nt)
   (set-selection-coding-system 'utf-8)
   (prefer-coding-system 'utf-8)
   (set-language-environment "UTF-8")

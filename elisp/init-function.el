@@ -20,7 +20,7 @@
 
 (defun zoro-restore-startup-state ()
   "Restore GC and file handling after loading the init file."
-  (setq gc-cons-threshold better-gc-cons-threshold
+  (setq gc-cons-threshold (* 16 1024 1024)
         gc-cons-percentage 0.1)
   (when (boundp 'file-name-handler-alist-original)
     (setq file-name-handler-alist file-name-handler-alist-original)
@@ -247,7 +247,9 @@ non-nil."
 (defun zoro-dashboard-enable-agenda ()
   "Add the Agenda widget and refresh an existing Dashboard buffer."
   (require 'dashboard)
-  (setq dashboard-items zoro-dashboard-items-with-agenda)
+  (setq dashboard-items '((recents . 7)
+                          (bookmarks . 7)
+                          (agenda . 5)))
   (when-let* ((buffer (get-buffer dashboard-buffer-name)))
     (with-current-buffer buffer
       (dashboard-insert-startupify-lists t))))
