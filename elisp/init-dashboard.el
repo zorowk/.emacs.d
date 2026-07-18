@@ -41,10 +41,16 @@
     (agenda . 5))
   "Dashboard items shown after deferred Agenda initialization.")
 
+(setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
+
+(defun zoro-dashboard-load ()
+  "Load Dashboard after the initial frame becomes idle."
+  (require 'dashboard))
+
 ;; DashboardPac
 (use-package dashboard
   :ensure t
-  :demand
+  :defer t
   :diminish (dashboard-mode)
   :bind
   (("C-z d" . open-dashboard)
@@ -57,7 +63,6 @@
   (dashboard-banner-logo-title "Close the world. Open the nExt.")
   (dashboard-items '((recents  . 7)
                      (bookmarks . 7)))
-  (initial-buffer-choice (lambda () (get-buffer-create dashboard-buffer-name)))
   (dashboard-set-heading-icons nil)
   (dashboard-startupify-list
    '(dashboard-insert-banner
@@ -81,6 +86,8 @@
       (lambda (&rest _) (info))))))
   :custom-face
   (dashboard-banner-logo-title ((t (:family "Apple Chancery" :height 200))))
+  :init
+  (run-with-idle-timer 0.1 nil #'zoro-dashboard-load)
   :config
   (defun zoro-dashboard-update-banner (appearance)
     "Set and refresh the dashboard banner for APPEARANCE."
@@ -94,7 +101,7 @@
       (with-current-buffer buffer
         (dashboard-insert-startupify-lists t))))
   (zoro-dashboard-update-banner frame-background-mode)
-  (dashboard-setup-startup-hook)
+  (add-hook 'window-size-change-functions #'dashboard-resize-on-hook 100)
 
   (defun zoro-dashboard-enable-agenda ()
     "Add the Agenda widget and refresh an existing Dashboard buffer."
