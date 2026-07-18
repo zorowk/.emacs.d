@@ -244,24 +244,33 @@ non-nil."
 ;; Org helpers.
 
 (defun zoro-org-decide-line-range (file begin end)
-  "Return the line range in FILE delimited by regexps BEGIN and END."
-  (let (left right)
+  "Return an Org :lines range in FILE delimited by BEGIN and END.
+
+BEGIN and END are optional regexps.  The matching delimiter lines are
+excluded: Org treats the first line as inclusive and the second as exclusive.
+An omitted delimiter produces an open range such as `-20' or `10-'."
+  (let ((first-line "")
+        (last-line ""))
     (save-match-data
       (with-temp-buffer
         (insert-file-contents file)
         (goto-char (point-min))
-        (if (null begin)
-            (setq left "")
+        (when begin
           (re-search-forward begin)
-          (setq left (line-number-at-pos (match-beginning 0))))
-        (if (null end)
-            (setq right "")
+          (setq first-line
+                (1+ (line-number-at-pos (match-beginning 0)))))
+        (when end
           (re-search-forward end)
-          (setq right (1+ (line-number-at-pos (match-end 0)))))
-        (format "%s-%s" (1+ left) (1- right))))))
+          (setq last-line
+                (line-number-at-pos (match-beginning 0))))
+        (format "%s-%s" first-line last-line)))))
 
 (defun zoro-org-update-include-ranges ()
-  "Update :lines ranges for marked #+INCLUDE directives."
+  "Update :lines on #+INCLUDE directives carrying :range-* markers.
+
+The nonstandard :range-begin and :range-end parameters contain regexps matched
+against the included file.  They are converted to the numeric range understood
+by Org before the current buffer is saved."
   (interactive)
   (save-excursion
     (goto-char (point-min))
