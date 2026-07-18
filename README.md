@@ -22,6 +22,7 @@
 | `elisp/init-const.el` | 个人身份、平台判断和共享外部数据目录 |
 | `elisp/init-core.el` | 全局行为、按键、编码和无持久状态的 Hook |
 | `elisp/init-files.el` | Recentf、备份、自动保存、Customize 和文件模式 |
+| `elisp/init-appearance.el` | 启动主题和系统外观切换 |
 | `elisp/init-search.el` | minibuffer 补全、搜索和 Embark |
 | `elisp/init-complete.el` | buffer 内补全、Cape 与 Eglot |
 | `elisp/init-templates.el` | 内置 Tempo 模板、按 mode 注册和展开命令 |

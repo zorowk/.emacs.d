@@ -72,6 +72,9 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 ;; Package Management
 (require 'init-package)
 
+;; Apply the selected theme before loading nonessential startup modules.
+(require 'init-appearance)
+
 ;; Core behavior, persistent files, and side-effect-free helpers.
 (require 'init-core)
 (require 'init-files)
