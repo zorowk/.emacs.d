@@ -1,7 +1,7 @@
 ;;; init-ui.el --- Core appearance and frame behavior -*- lexical-binding: t -*-
 
-;; Derived from M-EMACS configuration by Mingde (Matthew) Zeng.
-;; Copyright (C) 2019 Mingde (Matthew) Zeng
+;; Derived from M-EMACS configuration by zorowk.
+;; Copyright (C) 2019 zorowk
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
 ;;; Commentary:

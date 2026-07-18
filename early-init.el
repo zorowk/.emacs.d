@@ -2,8 +2,8 @@
 ;;
 ;; Filename: early-init.el
 ;; Description: Early initialization
-;; Author: Mingde (Matthew) Zeng
-;; Copyright (C) 2019 Mingde (Matthew) Zeng
+;; Author: zorowk
+;; Copyright (C) 2019 zorowk
 ;; Created: Sun Jun  9 17:58:05 2019 (-0400)
 ;; Version: 3.0
 ;; URL: https://github.com/MatthewZMD/.emacs.d

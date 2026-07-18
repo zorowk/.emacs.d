@@ -2,8 +2,8 @@
 ;;
 ;; Filename: init-dired.el
 ;; Description: Initialize Dired and Related Configurations
-;; Author: Mingde (Matthew) Zeng
-;; Copyright (C) 2019 Mingde (Matthew) Zeng
+;; Author: zorowk
+;; Copyright (C) 2019 zorowk
 ;; Created: Thu Mar 14 11:37:00 2019 (-0400)
 ;; Version: 3.0
 ;; URL: https://github.com/MatthewZMD/.emacs.d

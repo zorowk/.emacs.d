@@ -2,8 +2,8 @@
 ;;
 ;; Filename: init-ess.el
 ;; Description: Initialize ESS
-;; Author: Mingde (Matthew) Zeng
-;; Copyright (C) 2019 Mingde (Matthew) Zeng
+;; Author: zorowk
+;; Copyright (C) 2019 zorowk
 ;; Created: Tue Sep  3 21:28:26 2019 (-0400)
 ;; Version: 3.0
 ;; URL: https://github.com/MatthewZMD/.emacs.d

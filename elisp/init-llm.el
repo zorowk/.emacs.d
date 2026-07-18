@@ -2,9 +2,9 @@
 ;;
 ;; Filename: init-llm.el
 ;; Description: Configure Agent Shell
-;; Author: Mingde (Matthew) Zeng
+;; Author: zorowk
 ;; Maintainer:
-;; Copyright (C) 2019 Mingde (Matthew) Zeng
+;; Copyright (C) 2019 zorowk
 ;; Created: Thu Jan  9 13:07:47 2025 (-0500)
 ;; Version:
 ;; Package-Requires: ()

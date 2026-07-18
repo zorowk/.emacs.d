@@ -2,8 +2,8 @@
 ;;
 ;; Filename: init-buffer.el
 ;; Description: Configure Ibuffer
-;; Author: Mingde (Matthew) Zeng
-;; Copyright (C) 2019 Mingde (Matthew) Zeng
+;; Author: zorowk
+;; Copyright (C) 2019 zorowk
 ;; Created: Thu Feb  6 16:25:12 2020 (-0500)
 ;; Version: 3.0
 ;; URL: https://github.com/MatthewZMD/.emacs.d

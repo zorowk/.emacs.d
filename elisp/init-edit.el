@@ -2,8 +2,8 @@
 ;;
 ;; Filename: init-edit.el
 ;; Description: Initialize Editing Configuration
-;; Author: Mingde (Matthew) Zeng
-;; Copyright (C) 2019 Mingde (Matthew) Zeng
+;; Author: zorowk
+;; Copyright (C) 2019 zorowk
 ;; Created: Thu Mar 28 13:25:24 2019 (-0400)
 ;; Version: 3.0
 ;; URL: https://github.com/MatthewZMD/.emacs.d

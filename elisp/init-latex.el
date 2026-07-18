@@ -2,8 +2,8 @@
 ;;
 ;; Filename: init-latex.el
 ;; Description: Initialize AUCTex
-;; Author: Mingde (Matthew) Zeng
-;; Copyright (C) 2019 Mingde (Matthew) Zeng
+;; Author: zorowk
+;; Copyright (C) 2019 zorowk
 ;; Created: Wed Sep  4 16:35:00 2019 (-0400)
 ;; Version: 3.0
 ;; URL: https://github.com/MatthewZMD/.emacs.d

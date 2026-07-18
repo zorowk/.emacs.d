@@ -2,8 +2,8 @@
 ;;
 ;; Filename: init-org.el
 ;; Description: Configure Org and Denote
-;; Author: Mingde (Matthew) Zeng
-;; Copyright (C) 2019 Mingde (Matthew) Zeng
+;; Author: zorowk
+;; Copyright (C) 2019 zorowk
 ;; Created: Fri Mar 15 11:09:30 2019 (-0400)
 ;; Version: 3.0
 ;; URL: https://github.com/MatthewZMD/.emacs.d
