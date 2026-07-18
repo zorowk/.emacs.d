@@ -92,6 +92,7 @@
 ;; Corfu renders completion-at-point candidates in a child-frame popup.
 (use-package corfu
   :ensure t
+  :commands global-corfu-mode
   :bind (:map corfu-map
               ("TAB" . corfu-next)
               ([tab] . corfu-next)
@@ -107,7 +108,7 @@
   (corfu-auto t)
   (corfu-cycle t)
   :init
-  (global-corfu-mode)
+  (run-with-idle-timer 0.5 nil #'global-corfu-mode)
   :config
   ;; Reuse previous candidates and show documentation in a second popup.
   (corfu-history-mode)
