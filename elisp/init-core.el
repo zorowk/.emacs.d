@@ -86,9 +86,6 @@
       ediff-split-window-function 'split-window-horizontally)
 
 (setq-default history-length 500
-              compilation-always-kill t
-              compilation-ask-about-save nil
-              compilation-scroll-output t
               bidi-paragraph-direction 'left-to-right
               cursor-in-non-selected-windows nil)
 

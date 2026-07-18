@@ -58,6 +58,7 @@
 ;; Core behavior, persistent files, and side-effect-free helpers.
 (require 'init-core)
 (require 'init-files)
+(require 'init-project)
 
 (require 'init-search)
 
