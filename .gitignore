@@ -19,6 +19,7 @@
 /oauth2.plstore
 /gnus/
 /transient/history.el
+/transient/values.el
 /network-security.data
 /.lsp-session-v1
 /pyim/
