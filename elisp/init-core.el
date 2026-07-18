@@ -78,6 +78,11 @@ normal hook, so attach the callback with `add-function'."
         split-window-preferred-direction 'horizontal)
 (delete-selection-mode 1)
 (repeat-mode 1)
+(unless (or noninteractive (daemonp))
+  (server-mode 1))
+(unless noninteractive
+  (which-key-mode 1)
+  (global-so-long-mode 1))
 
 (setq x-alt-keysym 'meta
       confirm-kill-emacs 'y-or-n-p

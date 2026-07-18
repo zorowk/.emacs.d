@@ -40,6 +40,8 @@
 (setq scroll-margin 1)
 (setq scroll-conservatively 101)
 (setq mouse-wheel-progressive-speed nil)
+(unless noninteractive
+  (pixel-scroll-precision-mode 1))
 ;; -Scroll
 
 (provide 'init-scroll)

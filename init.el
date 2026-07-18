@@ -41,9 +41,6 @@
 
 ;; Shared constants and named functions.
 (require 'init-const)
-(require 'init-function)
-
-(add-hook 'after-init-hook #'zoro-restore-startup-state)
 
 ;; Packages
 
@@ -116,8 +113,12 @@
 
 (require 'init-elpher)
 
-;; Register deferred work only after every package declaration is in place.
-(zoro-startup-schedule-idle-tasks)
+;; Defer only the measured startup outliers.
+(unless noninteractive
+  (run-with-idle-timer 0.10 nil #'require 'dashboard)
+  (when (memq window-system '(mac ns))
+    (run-with-idle-timer 1.15 nil #'exec-path-from-shell-initialize))
+  (run-with-idle-timer 2.10 nil #'zoro-dashboard-enable-agenda))
 
 (provide 'init)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

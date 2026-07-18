@@ -35,14 +35,6 @@
 ;;
 ;;; Code:
 
-(declare-function popper-echo-mode "popper")
-(declare-function popper-mode "popper")
-
-(defun zoro-enable-popper ()
-  "Enable Popper and its echo mode."
-  (popper-mode 1)
-  (popper-echo-mode 1))
-
 ;; SpaciousPadding
 (use-package spacious-padding
   :ensure t
@@ -68,19 +60,19 @@
 ;; Pulsar
 (use-package pulsar
   :ensure t
-  :commands pulsar-global-mode
   :config
   (setq pulsar-delay 0.055)
   (setq pulsar-iterations 5)
   (setq pulsar-face 'pulsar-green)
   (setq pulsar-region-face 'pulsar-yellow)
-  (setq pulsar-highlight-face 'pulsar-magenta))
+  (setq pulsar-highlight-face 'pulsar-magenta)
+  (unless noninteractive
+    (pulsar-global-mode 1)))
 ;; -Pulsar
 
 ;; popper
 (use-package popper
   :ensure t
-  :commands (popper-mode popper-echo-mode)
   :bind (("C-`"   . popper-toggle)
          ("M-`"   . popper-cycle)
          ("C-M-`" . popper-toggle-type))
@@ -121,7 +113,11 @@
       dictionary-mode
       compilation-mode))
   (setq popper-group-function #'popper-group-by-directory)
-  (setq popper-window-height 0.33))
+  (setq popper-window-height 0.33)
+  :config
+  (unless noninteractive
+    (popper-mode 1)
+    (popper-echo-mode 1)))
 ;; -popper
 
 ;; olivetti

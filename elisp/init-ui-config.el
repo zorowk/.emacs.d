@@ -70,6 +70,8 @@
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 ;; Display column numbers in modeline
 (column-number-mode 1)
+(unless noninteractive
+  (display-time-mode 1))
 ;; -DisLineNum
 
 ;; Alpha
