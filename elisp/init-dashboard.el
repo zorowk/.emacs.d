@@ -35,6 +35,12 @@
 ;;
 ;;; Code:
 
+(defconst zoro-dashboard-items-with-agenda
+  '((recents . 7)
+    (bookmarks . 7)
+    (agenda . 5))
+  "Dashboard items shown after deferred Agenda initialization.")
+
 ;; DashboardPac
 (use-package dashboard
   :ensure t
@@ -50,8 +56,7 @@
   :custom
   (dashboard-banner-logo-title "Close the world. Open the nExt.")
   (dashboard-items '((recents  . 7)
-                     (bookmarks . 7)
-                     (agenda . 5)))
+                     (bookmarks . 7)))
   (initial-buffer-choice (lambda () (get-buffer-create dashboard-buffer-name)))
   (dashboard-set-heading-icons nil)
   (dashboard-startupify-list
@@ -90,6 +95,16 @@
         (dashboard-insert-startupify-lists t))))
   (zoro-dashboard-update-banner frame-background-mode)
   (dashboard-setup-startup-hook)
+
+  (defun zoro-dashboard-enable-agenda ()
+    "Add the Agenda widget and refresh an existing Dashboard buffer."
+    (setq dashboard-items zoro-dashboard-items-with-agenda)
+    (when-let* ((buffer (get-buffer dashboard-buffer-name)))
+      (with-current-buffer buffer
+        (dashboard-insert-startupify-lists t))))
+
+  (run-with-idle-timer 2 nil #'zoro-dashboard-enable-agenda)
+
   ;; Open Dashboard function
   (defun open-dashboard ()
     "Open the *dashboard* buffer and jump to the first widget."
