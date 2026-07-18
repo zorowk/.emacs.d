@@ -55,8 +55,9 @@
 ;; Savehist persists minibuffer history; Vertico uses it when sorting candidates.
 (use-package savehist
   :ensure nil
+  :commands savehist-mode
   :init
-  (savehist-mode))
+  (run-with-idle-timer 2.5 nil #'savehist-mode))
 
 ;; Built-in minibuffer behavior shared by Vertico and other completion commands.
 (use-package emacs
