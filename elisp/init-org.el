@@ -35,7 +35,72 @@
 ;;
 ;;; Code:
 
-(require 'init-function)
+(require 'init-const)
+
+(defvar org-latex-packages-alist)
+
+(defun zoro-org-decide-line-range (file begin end)
+  "Return an Org :lines range in FILE delimited by BEGIN and END.
+
+BEGIN and END are optional regexps.  The matching delimiter lines are
+excluded: Org treats the first line as inclusive and the second as exclusive.
+An omitted delimiter produces an open range such as `-20' or `10-'."
+  (let ((first-line "")
+        (last-line ""))
+    (save-match-data
+      (with-temp-buffer
+        (insert-file-contents file)
+        (goto-char (point-min))
+        (when begin
+          (re-search-forward begin)
+          (setq first-line
+                (1+ (line-number-at-pos (match-beginning 0)))))
+        (when end
+          (re-search-forward end)
+          (setq last-line
+                (line-number-at-pos (match-beginning 0))))
+        (format "%s-%s" first-line last-line)))))
+
+(defun zoro-org-update-include-ranges ()
+  "Update :lines on #+INCLUDE directives carrying :range-* markers.
+
+The nonstandard :range-begin and :range-end parameters contain regexps matched
+against the included file.  They are converted to the numeric range understood
+by Org before the current buffer is saved."
+  (interactive)
+  (save-excursion
+    (goto-char (point-min))
+    (while (re-search-forward
+            "^\\s-*#\\+INCLUDE: *\"\\([^\"]+\\)\".*:range-\\(begin\\|end\\)"
+            nil t)
+      (let* ((file (expand-file-name (match-string-no-properties 1)))
+             lines begin end)
+        (forward-line 0)
+        (when (looking-at "^.*:range-begin *\"\\([^\"]+\\)\"")
+          (setq begin (match-string-no-properties 1)))
+        (when (looking-at "^.*:range-end *\"\\([^\"]+\\)\"")
+          (setq end (match-string-no-properties 1)))
+        (setq lines (zoro-org-decide-line-range file begin end))
+        (when lines
+          (if (looking-at ".*:lines *\"\\([-0-9]+\\)\"")
+              (replace-match lines :fixedcase :literal nil 1)
+            (goto-char (line-end-position))
+            (insert " :lines \"" lines "\"")))))))
+
+(defun zoro-org-enable-include-range-updates ()
+  "Update marked Org INCLUDE ranges whenever this buffer is saved."
+  (add-hook 'before-save-hook #'zoro-org-update-include-ranges nil t))
+
+(defun zoro-org-export-toggle-syntax-highlight ()
+  "Use minted syntax highlighting for the current Org export buffer."
+  (interactive)
+  (setq-local org-latex-src-block-backend 'minted)
+  (add-to-list 'org-latex-packages-alist '("newfloat" "minted")))
+
+(defun zoro-org-table-insert-vertical-hline ()
+  "Insert a LaTeX table alignment attribute with vertical rules."
+  (interactive)
+  (insert "#+attr_latex: :align |c|c|c|"))
 
 ;; OrgPac
 (use-package org
