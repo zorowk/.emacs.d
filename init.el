@@ -41,13 +41,15 @@
 
 If you experience freezing, decrease this.  If you experience stuttering, increase this.")
 
-(add-hook 'emacs-startup-hook
-          (lambda ()
-            (setq gc-cons-threshold better-gc-cons-threshold
-                  gc-cons-percentage 0.1)
-            (when (boundp 'file-name-handler-alist-original)
-              (setq file-name-handler-alist file-name-handler-alist-original)
-              (makunbound 'file-name-handler-alist-original))))
+(defun zoro-restore-startup-state ()
+  "Restore GC and file handling after loading the init file."
+  (setq gc-cons-threshold better-gc-cons-threshold
+        gc-cons-percentage 0.1)
+  (when (boundp 'file-name-handler-alist-original)
+    (setq file-name-handler-alist file-name-handler-alist-original)
+    (makunbound 'file-name-handler-alist-original)))
+
+(add-hook 'after-init-hook #'zoro-restore-startup-state)
 ;; -BetterGC
 
 ;; AutoGC

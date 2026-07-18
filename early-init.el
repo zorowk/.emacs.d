@@ -42,10 +42,10 @@
 (setq frame-inhibit-implied-resize t)
 
 ;; DeferGC
-;; Temporarily increase GC threshold during startup
-(setq gc-cons-threshold most-positive-fixnum)
-
-(setq gc-cons-percentage 0.6)
+;; A bounded startup threshold avoids collections without allowing unbounded
+;; allocation if initialization fails.
+(setq gc-cons-threshold (* 64 1024 1024)
+      gc-cons-percentage 0.6)
 ;; -DeferGC
 
 ;; UnsetFNHA
