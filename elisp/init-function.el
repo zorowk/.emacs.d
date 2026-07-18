@@ -143,13 +143,13 @@ normal hook, so attach the callback with `add-function'."
 
 ;; Editing commands without direct built-in equivalents.
 
-(defun abort-minibuffer-using-mouse ()
+(defun zoro-abort-minibuffer-using-mouse ()
   "Abort an active minibuffer when the mouse leaves its buffer."
   (when (and (>= (recursion-depth) 1)
              (active-minibuffer-window))
     (abort-recursive-edit)))
 
-(defun where-am-i ()
+(defun zoro-where-am-i ()
   "Show and copy `buffer-file-name' or `buffer-name'."
   (interactive)
   (message (kill-new (or buffer-file-name (buffer-name)))))
@@ -165,7 +165,7 @@ normal hook, so attach the callback with `add-function'."
   (when (featurep 'dashboard)
     (zoro-dashboard-update-banner appearance)))
 
-(defun change-font ()
+(defun zoro-change-font ()
   "Apply the configured fixed, variable, symbol, emoji, and CJK fonts."
   (let ((font-height (if (eq system-type 'darwin) 150 110)))
     (set-face-attribute 'default nil
@@ -196,9 +196,9 @@ normal hook, so attach the callback with `add-function'."
   "Apply configured fonts to graphical FRAME."
   (with-selected-frame frame
     (when (display-graphic-p)
-      (change-font))))
+      (zoro-change-font))))
 
-(defun setup-frame-alpha (&optional frame)
+(defun zoro-setup-frame-alpha (&optional frame)
   "Apply transparency and blur to FRAME."
   (with-selected-frame (or frame (selected-frame))
     (when (display-graphic-p)
@@ -242,7 +242,7 @@ normal hook, so attach the callback with `add-function'."
     (with-current-buffer buffer
       (dashboard-insert-startupify-lists t))))
 
-(defun open-dashboard ()
+(defun zoro-open-dashboard ()
   "Open the Dashboard buffer and jump to the first widget."
   (interactive)
   (require 'dashboard)
@@ -318,13 +318,13 @@ by Org before the current buffer is saved."
   "Update marked Org INCLUDE ranges whenever this buffer is saved."
   (add-hook 'before-save-hook #'zoro-org-update-include-ranges nil t))
 
-(defun org-export-toggle-syntax-highlight ()
+(defun zoro-org-export-toggle-syntax-highlight ()
   "Use minted syntax highlighting for the current Org export buffer."
   (interactive)
   (setq-local org-latex-src-block-backend 'minted)
   (add-to-list 'org-latex-packages-alist '("newfloat" "minted")))
 
-(defun org-table-insert-vertical-hline ()
+(defun zoro-org-table-insert-vertical-hline ()
   "Insert a LaTeX table alignment attribute with vertical rules."
   (interactive)
   (insert "#+attr_latex: :align |c|c|c|"))
@@ -411,7 +411,7 @@ the template available globally."
 
 ;; Tree-sitter has a language query API but no matching interactive command.
 
-(defun treesit-show-parser-used-at-point ()
+(defun zoro-treesit-show-parser-used-at-point ()
   "Show the Tree-sitter parser used at point."
   (interactive)
   (if-let* ((lang (and (treesit-available-p)

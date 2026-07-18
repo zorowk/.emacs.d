@@ -39,7 +39,7 @@
 
 ;; FontFun
 (when (display-graphic-p)
-  (change-font))
+  (zoro-change-font))
 
 ;; Re-apply when creating new frames (for emacsclient)
 (add-hook 'after-make-frame-functions #'zoro-apply-font-to-frame)

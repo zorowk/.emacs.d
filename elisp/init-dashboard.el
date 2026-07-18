@@ -45,7 +45,7 @@
   :defer t
   :diminish (dashboard-mode)
   :bind
-  (("C-z d" . open-dashboard)
+  (("C-z d" . zoro-open-dashboard)
    :map dashboard-mode-map
    (("n" . dashboard-next-line)
     ("p" . dashboard-previous-line)

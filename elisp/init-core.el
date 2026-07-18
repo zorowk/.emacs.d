@@ -100,7 +100,7 @@
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
 
-(add-hook 'mouse-leave-buffer-hook #'abort-minibuffer-using-mouse)
+(add-hook 'mouse-leave-buffer-hook #'zoro-abort-minibuffer-using-mouse)
 
 (put 'erase-buffer 'disabled nil)
 (put 'set-goal-column 'disabled nil)

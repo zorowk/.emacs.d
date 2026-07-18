@@ -68,10 +68,10 @@
 ;; Alpha
 (when (and (display-graphic-p)
            (not (daemonp)))
-  (setup-frame-alpha))
+  (zoro-setup-frame-alpha))
 
 (when (daemonp)
-  (add-hook 'after-make-frame-functions #'setup-frame-alpha))
+  (add-hook 'after-make-frame-functions #'zoro-setup-frame-alpha))
 
 (setq mode-line-collapse-minor-modes '(not))
 ;; -Alpha
