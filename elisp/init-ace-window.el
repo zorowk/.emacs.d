@@ -39,9 +39,9 @@
 (use-package ace-window
   :ensure t
   :bind ("C-x C-o" . ace-window)
-  :init (ace-window-display-mode 1)
   :custom-face (aw-mode-line-face ((t (:inherit (bold mode-line-emphasis)))))
   :config
+  (ace-window-display-mode 1)
   (setq aw-swap-invert t)
   (setq aw-dispatch-always t
         aw-scope 'global
