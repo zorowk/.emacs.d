@@ -74,6 +74,7 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 
 ;; Apply the selected theme before loading nonessential startup modules.
 (require 'init-appearance)
+(require 'init-fonts)
 
 ;; Core behavior, persistent files, and side-effect-free helpers.
 (require 'init-core)
@@ -102,8 +103,6 @@ If you experience freezing, decrease this.  If you experience stuttering, increa
 (require 'init-theme)
 
 (require 'init-dashboard)
-
-(require 'init-fonts)
 
 (require 'init-scroll)
 
