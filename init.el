@@ -54,7 +54,7 @@
 ;; Core behavior, persistent files, and side-effect-free helpers.
 (require 'init-core)
 (require 'init-files)
-(require 'init-project)
+(require 'init-development)
 
 (require 'init-search)
 
@@ -74,11 +74,6 @@
 (require 'init-dashboard)
 
 (require 'init-scroll)
-
-;; General Programming
-(require 'init-magit)
-
-(require 'init-treesit)
 
 (require 'init-complete)
 
