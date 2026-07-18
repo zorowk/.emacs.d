@@ -48,8 +48,7 @@
 (require 'init-package)
 
 ;; Apply the selected theme before loading nonessential startup modules.
-(require 'init-appearance)
-(require 'init-fonts)
+(require 'init-ui)
 
 ;; Core behavior, persistent files, and side-effect-free helpers.
 (require 'init-core)
@@ -66,14 +65,9 @@
 
 (require 'init-buffer)
 
-;; UI Enhancements
-(require 'init-ui-config)
-
 (require 'init-theme)
 
 (require 'init-dashboard)
-
-(require 'init-scroll)
 
 (require 'init-complete)
 
