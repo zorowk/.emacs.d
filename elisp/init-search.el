@@ -92,10 +92,11 @@
 ;; Marginalia adds category-aware annotations such as file size or command keys.
 (use-package marginalia
   :ensure t
+  :commands marginalia-mode
   :bind (:map minibuffer-local-map
               ("M-A" . marginalia-cycle))
   :init
-  (marginalia-mode))
+  (run-with-idle-timer 0.35 nil #'marginalia-mode))
 
 ;; Consult supplies completing-read based navigation and asynchronous search.
 (use-package consult
