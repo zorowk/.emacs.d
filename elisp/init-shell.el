@@ -39,11 +39,12 @@
 (use-package exec-path-from-shell
   :ensure t
   :if (memq window-system '(mac ns))
+  :commands exec-path-from-shell-initialize
   :custom
   (exec-path-from-shell-variables
    '("PATH" "MANPATH" "LANG" "LC_ALL"))
-  :config
-  (exec-path-from-shell-initialize))
+  :init
+  (run-with-idle-timer 0.75 nil #'exec-path-from-shell-initialize))
 ;; -ExecPathFromShellPac
 
 (provide 'init-shell)
