@@ -9,19 +9,17 @@
 
 ;;; Code:
 
-(require 'package)
-
-(setopt package-archives
-        '(("gnu" . "https://elpa.gnu.org/packages/")
-          ("nongnu" . "https://elpa.nongnu.org/nongnu/")
-          ("melpa" . "https://melpa.org/packages/"))
-        package-archive-priorities
-        '(("gnu" . 30)
-          ("nongnu" . 20)
-          ("melpa" . 10))
-        ;; Never replace a library bundled with Emacs 31 merely because an
-        ;; archive carries a newer version.
-        package-install-upgrade-built-in nil)
+(setq package-archives
+      '(("gnu" . "https://elpa.gnu.org/packages/")
+        ("nongnu" . "https://elpa.nongnu.org/nongnu/")
+        ("melpa" . "https://melpa.org/packages/"))
+      package-archive-priorities
+      '(("gnu" . 30)
+        ("nongnu" . 20)
+        ("melpa" . 10))
+      ;; Never replace a library bundled with Emacs 31 merely because an
+      ;; archive carries a newer version.
+      package-install-upgrade-built-in nil)
 
 ;; Normal startup activates installed packages after early-init.el and before
 ;; init.el.  Keep activation on that lightweight built-in path instead of
@@ -35,8 +33,23 @@
 
 (require 'use-package)
 
+(defun zoro-use-package-ensure (name arguments state)
+  "Ensure NAME from ARGUMENTS and STATE without eagerly loading package.el."
+  (if (cl-every
+       (lambda (ensure)
+         (let ((package (or (and (eq ensure t)
+                                 (use-package-as-symbol name))
+                            ensure)))
+           (or (null package)
+               (and (symbolp package)
+                    (package-installed-p package)))))
+       arguments)
+      t
+    (use-package-ensure-elpa name arguments state)))
+
 (setopt use-package-always-ensure nil
         use-package-compute-statistics nil
+        use-package-ensure-function #'zoro-use-package-ensure
         use-package-enable-imenu-support t
         use-package-expand-minimally t
         use-package-verbose nil)
