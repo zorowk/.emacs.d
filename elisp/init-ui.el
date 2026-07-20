@@ -12,6 +12,8 @@
 ;;; Code:
 
 (declare-function zoro-dashboard-update-banner "init-dashboard" (appearance))
+(declare-function set-fontset-font "fontset.c"
+                  (fontset characters font-spec &optional frame add))
 
 (defun zoro-apply-theme (appearance)
   "Load the theme matching system APPEARANCE."
