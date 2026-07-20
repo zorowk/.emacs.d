@@ -204,7 +204,6 @@ by Org before the current buffer is saved."
   ( :map global-map
     ("C-c n n" . denote)
     ("C-c n d" . denote-dired)
-    ("C-c n g" . denote-grep)
     ;; If you intend to use Denote with a variety of file types, it is
     ;; easier to bind the link-related commands to the `global-map', as
     ;; shown here.  Otherwise follow the same pattern for `org-mode-map',

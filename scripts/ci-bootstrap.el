@@ -2,8 +2,8 @@
 
 ;;; Commentary:
 ;; Refresh the configured package archives and load the complete configuration.
-;; Every `:ensure t' declaration is therefore exercised against a clean or
-;; cached package directory before the offline validation steps run.
+;; Every external package declaration is therefore exercised against a clean
+;; or cached package directory before the offline validation steps run.
 
 ;;; Code:
 

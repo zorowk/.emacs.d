@@ -37,9 +37,10 @@
    ("C-c I" . crux-find-user-init-file)
    ("C-c e" . crux-eval-and-replace))
   :config
-  (crux-with-region-or-buffer indent-region)
-  (crux-with-region-or-buffer untabify)
-  (crux-with-region-or-point-to-eol kill-ring-save)
+  (with-suppressed-warnings ((obsolete defadvice))
+    (crux-with-region-or-buffer indent-region)
+    (crux-with-region-or-buffer untabify)
+    (crux-with-region-or-point-to-eol kill-ring-save))
   (defalias 'rename-file-and-buffer #'crux-rename-file-and-buffer))
 
 (use-package avy

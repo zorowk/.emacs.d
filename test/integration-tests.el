@@ -18,17 +18,20 @@
 
 (ert-deftest zoro-integration-package-declarations-have-explicit-origin ()
   (dolist (form (zoro-test-use-package-forms))
-    (should (memq :ensure (cddr form)))))
+    (should (or (memq :ensure (cddr form))
+                (memq :vc (cddr form))))))
 
 (ert-deftest zoro-integration-third-party-packages-are-installed ()
   (dolist (form (zoro-test-use-package-forms))
-    (when (eq (plist-get (cddr form) :ensure) t)
+    (when (or (eq (plist-get (cddr form) :ensure) t)
+              (memq :vc (cddr form)))
       (should (package-installed-p (cadr form))))))
 
 (ert-deftest zoro-integration-builtins-are-not-replaced-by-archives ()
   (should-not package-install-upgrade-built-in)
   (dolist (form (zoro-test-use-package-forms))
-    (when (null (plist-get (cddr form) :ensure))
+    (when (and (null (plist-get (cddr form) :ensure))
+               (not (memq :vc (cddr form))))
       (let ((package (cadr form)))
         (should (zoro-test-bundled-library-p package))))))
 
@@ -72,7 +75,6 @@
               #'eglot-find-implementation)))
 
 (ert-deftest zoro-integration-denote-search-key-has-single-declaration ()
-  :expected-result :failed
   (with-temp-buffer
     (insert-file-contents (expand-file-name "elisp/init-org.el" zoro-test-root))
     (goto-char (point-min))
@@ -80,6 +82,10 @@
       (while (search-forward "\"C-c n g\"" nil t)
         (setq count (1+ count)))
       (should (= count 1)))))
+
+(ert-deftest zoro-integration-hyperbole-provides-hywiki ()
+  (require 'hywiki)
+  (should (fboundp 'hywiki-mode)))
 
 (provide 'integration-tests)
 ;;; integration-tests.el ends here

@@ -43,8 +43,8 @@ emacs
 ELPA 安装，并以 MELPA 作为补充来源。内置包统一标记为 `:ensure nil`，同时禁止
 package.el 用软件源版本替换 Emacs 自带库。
 
-当前配置没有 Git-only 包。以后若需直接跟踪 Git 仓库，应使用 Emacs 31 内置的
-`use-package :vc`，由 `package-vc` 安装，而不是引入第二套包管理器。
+HyWiki 需要 Hyperbole 9.0.2pre，因此 Hyperbole 使用 Emacs 31 内置的
+`use-package :vc` 从 GNU Savannah 官方仓库安装。
 
 个人身份、邮箱地址和 Dropbox 路径集中在 `elisp/init-const.el`。如果账号或目录布局
 不同，只需修改该文件中的共享常量。
@@ -56,7 +56,7 @@ package.el 用软件源版本替换 Emacs 自带库。
 
 1. 运行 `M-x package-refresh-contents` 刷新软件源。
 2. 运行 `M-x package-upgrade-all` 升级 package.el 管理的包。
-3. 如果以后加入 `:vc` 包，再运行 `M-x package-vc-upgrade-all` 更新 Git 包。
+3. 运行 `M-x package-vc-upgrade-all` 更新 Hyperbole。
 4. 重启 Emacs，并执行下面的批处理启动检查。
 
 配置以明确的 `:ensure`/`:vc` 声明、软件源优先级和 Emacs 31 内置库优先策略保持

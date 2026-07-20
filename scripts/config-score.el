@@ -80,6 +80,8 @@
        (module-count (length (zoro-score-elisp-files)))
        (use-package-count (zoro-score-count "^[[:space:]]*(use-package " all-elisp))
        (ensure-count (zoro-score-count "^[[:space:]]*:ensure " all-elisp))
+       (vc-count (zoro-score-count "^[[:space:]]*:vc " all-elisp))
+       (origin-count (+ ensure-count vc-count))
        (rows
         (list
          (list "结构与职责边界" 15
@@ -90,12 +92,13 @@
                (format "%d 个职责模块；README 职责表；模块 Commentary/provide 契约" module-count))
          (list "官方与内置能力优先" 15
                (+ (if (zoro-score-match-p "package-install-upgrade-built-in nil" "elisp/init-package.el") 4 0)
-                  (if (= use-package-count ensure-count) 5 0)
+                  (if (= use-package-count origin-count) 5 0)
                   (if (not (string-match-p "straight-use-package\\|quelpa\\|package-enable-at-startup t" all-elisp)) 3 0)
                   (if (string-match-p "Emacs 31 内置" readme) 3 0))
-               (format "%d/%d 个包声明显式 :ensure；禁用内置包替换" ensure-count use-package-count))
+               (format "%d/%d 个包声明显式 :ensure/:vc；禁用内置包替换"
+                       origin-count use-package-count))
          (list "依赖纪律" 10
-               (+ (if (= use-package-count ensure-count) 4 0)
+               (+ (if (= use-package-count origin-count) 4 0)
                   (if (zoro-score-status "ZORO_BOOTSTRAP_STATUS") 3 0)
                   (if (string-match-p "包管理路径单一" readme) 3 0))
                "显式来源、单一 package.el 路径、干净环境安装结果")

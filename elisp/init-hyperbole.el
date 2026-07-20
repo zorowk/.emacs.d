@@ -12,7 +12,8 @@
 (require 'init-const)
 
 (use-package hyperbole
-  :ensure t
+  :vc (:url "https://git.savannah.gnu.org/git/hyperbole.git"
+       :rev :newest)
   :bind (("C-z h" . hyperbole))
   :init
   ;; Set this before Hyperbole loads so HyWiki initializes against the
