@@ -76,6 +76,7 @@ jobs:
         continue-on-error: true
         run: >-
           emacs --batch -Q
+          --eval '(setq user-emacs-directory default-directory)'
           --eval '(setq package-user-dir (file-name-as-directory (getenv "ZORO_PACKAGE_DIR")))'
           -l early-init.el
           --eval '(package-activate-all)'
