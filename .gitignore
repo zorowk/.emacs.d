@@ -43,3 +43,4 @@
 /tree-sitter/
 *.DS_Store
 /.agent-shell/
+/image-dired/
