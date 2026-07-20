@@ -91,7 +91,7 @@
       (nnimap-address "imap.gmail.com")
       (nnimap-server-port 993) ; imaps
       (nnimap-authenticator xoauth2)
-      (nnimap-user ,zoro-gmail-address)
+      (nnimap-user ,user-mail-address)
       (nnimap-mailbox-list ("INBOX" "[Gmail]/Sent Mail" "[Gmail]/All Mail" "[Gmail]/Trash" "[Gmail]/Spam"))
       (nnimap-expunge-on-delete t)
       ;; Archive messages into yearly Archive folders upon pressing
@@ -152,7 +152,7 @@
   ;; Also see sample .authinfo file provided below.
   (setq gnus-posting-styles
    `(("nnimap\\+Gmail:.*"
-      (address ,zoro-gmail-address)
+      (address ,user-mail-address)
       ("X-Message-SMTP-Method" "smtp smtp.gmail.com 587")
       (gcc "nnimap+Gmail:INBOX"))))
 

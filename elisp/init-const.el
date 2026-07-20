@@ -13,15 +13,12 @@
 ;;; Code:
 
 ;; Personal identity and account paths.
-(defconst zoro-gmail-address "near.kingzero@gmail.com"
-  "Gmail address used by the Gnus account configuration.")
-
 (defconst zoro-auth-source-file
   (expand-file-name "~/.authinfo.json.gpg")
   "Encrypted auth-source file used by mail accounts.")
 
 (setq user-full-name "zorowk"
-      user-mail-address "nearkingzero@outlook.com")
+      user-mail-address "near.kingzero@gmail.com")
 
 ;; Shared environment constants.
 (defconst zoro-dropbox-directory
