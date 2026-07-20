@@ -34,12 +34,8 @@
    ("C-c S-RET" . crux-smart-open-line-above)
    ("C-c x" . crux-eval-and-replace)
    ("C-c S" . crux-find-shell-init-file)
-   ("C-c I" . crux-find-user-init-file)
-   ("C-c e" . crux-eval-and-replace))
+   ("C-c I" . crux-find-user-init-file))
   :config
-  (crux-with-region-or-buffer indent-region)
-  (crux-with-region-or-buffer untabify)
-  (crux-with-region-or-point-to-eol kill-ring-save)
   (defalias 'rename-file-and-buffer #'crux-rename-file-and-buffer))
 
 (use-package avy

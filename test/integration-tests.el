@@ -83,6 +83,17 @@
         (setq count (1+ count)))
       (should (= count 1)))))
 
+(ert-deftest zoro-integration-crux-avoids-legacy-advice-and-duplicate-key ()
+  (with-temp-buffer
+    (insert-file-contents (expand-file-name "elisp/init-edit.el" zoro-test-root))
+    (goto-char (point-min))
+    (should-not (search-forward "crux-with-region-" nil t))
+    (goto-char (point-min))
+    (let ((count 0))
+      (while (search-forward "crux-eval-and-replace" nil t)
+        (setq count (1+ count)))
+      (should (= count 1)))))
+
 (ert-deftest zoro-integration-hyperbole-provides-hywiki ()
   (require 'hywiki)
   (should (fboundp 'hywiki-mode)))

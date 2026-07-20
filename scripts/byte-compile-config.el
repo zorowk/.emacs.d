@@ -17,7 +17,7 @@
   "Repository root used by the compatibility compiler.")
 
 (defconst zoro-compile-warning-allowlist
-  '("elisp/init-edit.el" "elisp/init-latex.el")
+  '("elisp/init-latex.el")
   "Files with accepted third-party or deferred-package compiler warnings.")
 
 (setq user-emacs-directory zoro-compile-root)
