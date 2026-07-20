@@ -30,7 +30,6 @@ jobs:
             version: snapshot
             experimental: true
     env:
-      ZORO_PACKAGE_DIR: ${{ runner.temp }}/zoro-emacs-packages
       ZORO_STARTUP_RUNS: "5"
       ZORO_STARTUP_MAX_MS: "2000"
 
@@ -39,6 +38,9 @@ jobs:
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
+
+      - name: Configure package directory
+        run: echo "ZORO_PACKAGE_DIR=$RUNNER_TEMP/zoro-emacs-packages" >> "$GITHUB_ENV"
 
       - name: Install Emacs
         uses: purcell/setup-emacs@bdc64dc730ae1fcba200bfd52cb1b4cf6159cbe5
@@ -52,7 +54,7 @@ jobs:
         if: github.event_name != 'schedule'
         uses: actions/cache@v4
         with:
-          path: ${{ env.ZORO_PACKAGE_DIR }}
+          path: ${{ runner.temp }}/zoro-emacs-packages
           key: emacs-${{ matrix.version }}-${{ hashFiles('elisp/init-*.el') }}
           restore-keys: |
             emacs-${{ matrix.version }}-
