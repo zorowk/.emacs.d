@@ -95,6 +95,16 @@
         (setq count (1+ count)))
       (should (= count 1)))))
 
+(ert-deftest zoro-integration-crux-uses-vc-source ()
+  (let* ((form (seq-find (lambda (candidate)
+                           (eq (cadr candidate) 'crux))
+                         (zoro-test-use-package-forms)))
+         (vc (plist-get (cddr form) :vc)))
+    (should form)
+    (should (equal (plist-get vc :url)
+                   "https://github.com/bbatsov/crux.git"))
+    (should (eq (plist-get vc :rev) :newest))))
+
 (ert-deftest zoro-integration-hyperbole-provides-hywiki ()
   (require 'hywiki)
   (should (fboundp 'hywiki-mode)))
