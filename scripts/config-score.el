@@ -84,78 +84,79 @@
        (origin-count (+ ensure-count vc-count))
        (rows
         (list
-         (list "结构与职责边界" 15
+         (list "Structure and separation of concerns" 15
                (+ (if (>= module-count 15) 5 0)
                   (if (string-match-p "## 配置结构" readme) 4 0)
                   (if (zoro-score-module-contracts-p) 4 0)
                   (if (file-exists-p (expand-file-name "elisp/init-const.el" zoro-score-root)) 2 0))
-               (format "%d 个职责模块；README 职责表；模块 Commentary/provide 契约" module-count))
-         (list "官方与内置能力优先" 15
+               (format "%d responsibility-focused modules; README responsibility table; module Commentary/provide contracts"
+                       module-count))
+         (list "Preference for official and built-in features" 15
                (+ (if (zoro-score-match-p "package-install-upgrade-built-in nil" "elisp/init-package.el") 4 0)
                   (if (= use-package-count origin-count) 5 0)
                   (if (not (string-match-p "straight-use-package\\|quelpa\\|package-enable-at-startup t" all-elisp)) 3 0)
                   (if (string-match-p "Emacs 31 内置" readme) 3 0))
-               (format "%d/%d 个包声明显式 :ensure/:vc；禁用内置包替换"
+               (format "%d/%d package declarations explicitly use :ensure/:vc; built-in package replacement disabled"
                        origin-count use-package-count))
-         (list "依赖纪律" 10
+         (list "Dependency discipline" 10
                (+ (if (= use-package-count origin-count) 4 0)
                   (if (zoro-score-status "ZORO_BOOTSTRAP_STATUS") 3 0)
                   (if (string-match-p "包管理路径单一" readme) 3 0))
-               "显式来源、单一 package.el 路径、干净环境安装结果")
-         (list "可理解与可维护性" 15
+               "Explicit sources, a single package.el path, and clean-environment installation results")
+         (list "Understandability and maintainability" 15
                (+ (if (zoro-score-module-contracts-p) 5 0)
                   (if (>= test-count 10) 4 0)
                   (if (zoro-score-status "ZORO_COMPILE_STATUS") 4 0)
                   (if (string-match-p "## 配置结构" readme) 2 0))
-               (format "%d 个 ERT；warning-as-error 编译=%s"
-                       test-count (or (getenv "ZORO_COMPILE_STATUS") "未运行")))
-         (list "可靠性与测试" 15
+               (format "%d ERT tests; warning-as-error compilation=%s"
+                       test-count (or (getenv "ZORO_COMPILE_STATUS") "not run")))
+         (list "Reliability and testing" 15
                (max 0
                     (- (+ (if (zoro-score-status "ZORO_ERT_STATUS") 6 0)
                           (if (zoro-score-status "ZORO_STARTUP_STATUS") 4 0)
                           (if (file-exists-p (expand-file-name ".github/workflows/validate.yml" zoro-score-root)) 3 0)
                           (if (>= test-count 10) 2 0))
                        (min 2 finding-count)))
-               (format "ERT=%s；启动=%s；%d 个已记录 finding"
-                       (or (getenv "ZORO_ERT_STATUS") "未运行")
-                       (or (getenv "ZORO_STARTUP_STATUS") "未运行") finding-count))
-         (list "启动与运行性能" 10
+               (format "ERT=%s; startup=%s; %d recorded findings"
+                       (or (getenv "ZORO_ERT_STATUS") "not run")
+                       (or (getenv "ZORO_STARTUP_STATUS") "not run") finding-count))
+         (list "Startup and runtime performance" 10
                (+ (if (file-exists-p (expand-file-name "elisp/benchmark-startup.el" zoro-score-root)) 3 0)
                   (if (zoro-score-status "ZORO_PERF_STATUS") 4 0)
                   (if (string-match-p "模块计时报告" readme) 3 0))
-               (format "benchmark、GC 与模块计时；性能检查=%s"
-                       (or (getenv "ZORO_PERF_STATUS") "未运行")))
-         (list "可移植与可恢复性" 8
+               (format "Benchmark, GC, and module timing; performance check=%s"
+                       (or (getenv "ZORO_PERF_STATUS") "not run")))
+         (list "Portability and recoverability" 8
                (+ (if (file-exists-p (expand-file-name "elisp/init-const.el" zoro-score-root)) 3 0)
                   (if (not (string-match-p "/home/[^/]" all-elisp)) 2 0)
                   (if (string-match-p "## 安装" readme) 2 0)
                   (if (zoro-score-match-p "/elpa/" ".gitignore") 1 0))
-               "共享路径集中、无硬编码 /home 路径、安装与忽略规则")
-         (list "文档与历史" 7
+               "Centralized shared paths, no hard-coded /home paths, installation instructions, and ignore rules")
+         (list "Documentation and history" 7
                (+ (if (and (string-match-p "## 验证" readme)
                            (string-match-p "## 配置结构" readme)) 3 0)
                   (if (zoro-score-module-contracts-p) 2 0)
                   (if (zoro-score-git-history-p) 2 0))
-               "README 验证说明、模块文档、可用 Git 历史")
-         (list "与个人工作流契合度" 5
+               "README verification instructions, module documentation, and sufficient Git history")
+         (list "Fit with personal workflows" 5
                (+ (if (seq-every-p (lambda (word) (string-match-p word readme))
                                     '("Org" "Denote" "AI")) 3 0)
                   (if (and (string-match-p "org-capture-templates" all-elisp)
                            (string-match-p "hywiki-directory" all-elisp)) 2 0))
-               "Org/Denote/AI、GTD capture 与 HyWiki 均有实际配置")))
+               "Practical configuration for Org/Denote/AI, GTD capture, and HyWiki")))
        (total (apply #'+ (mapcar (lambda (row) (nth 2 row)) rows)))
        (report
         (concat
          (format "## Emacs configuration score: %d/100\n\n" total)
          (format "Emacs: `%s` · ERT declarations: %d · Recorded findings: %d\n\n"
                  emacs-version test-count finding-count)
-         "| 维度 | 得分 | 权重 | 自动证据 |\n|---|---:|---:|---|\n"
+         "| Dimension | Score | Weight | Automated evidence |\n|---|---:|---:|---|\n"
          (mapconcat
           (lambda (row)
             (format "| %s | %d | %d | %s |"
                     (nth 0 row) (nth 2 row) (nth 1 row) (nth 3 row)))
           rows "\n")
-         "\n\n> 分数来自公开规则和本次 CI 证据；主观质量仍需人工复核。\n")))
+         "\n\n> This score is based on documented rules and evidence from the current CI run; subjective quality still requires human review.\n")))
   (princ report)
   (when-let* ((summary (getenv "GITHUB_STEP_SUMMARY")))
     (with-temp-buffer
