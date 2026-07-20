@@ -31,6 +31,8 @@
 ;; Savehist persists minibuffer history; Vertico uses it when sorting candidates.
 (use-package savehist
   :ensure nil
+  :custom
+  (savehist-additional-variables '(corfu-history))
   :init
   (unless noninteractive
     (savehist-mode 1)))
