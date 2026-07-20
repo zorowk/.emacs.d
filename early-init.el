@@ -37,9 +37,9 @@
 
 (setq site-run-file nil)
 
-(menu-bar-mode -1)
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
+(dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode))
+  (when (fboundp mode)
+    (funcall mode -1)))
 
 (provide 'early-init)
 ;;; early-init.el ends here
