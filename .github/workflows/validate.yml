@@ -1,0 +1,118 @@
+name: Validate Emacs configuration
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 3 * * 1"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: emacs-config-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Emacs ${{ matrix.label }}
+    runs-on: ubuntu-latest
+    continue-on-error: ${{ matrix.experimental }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - label: ">= 31.0.90 baseline"
+            version: release-snapshot
+            experimental: false
+          - label: "latest snapshot"
+            version: snapshot
+            experimental: true
+    env:
+      ZORO_PACKAGE_DIR: ${{ runner.temp }}/zoro-emacs-packages
+      ZORO_STARTUP_RUNS: "5"
+      ZORO_STARTUP_MAX_MS: "2000"
+
+    steps:
+      - name: Check out configuration
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Install Emacs
+        uses: purcell/setup-emacs@bdc64dc730ae1fcba200bfd52cb1b4cf6159cbe5
+        with:
+          version: ${{ matrix.version }}
+
+      - name: Show Emacs version
+        run: emacs --batch -Q --eval '(princ (format "Emacs %s\n" emacs-version))'
+
+      - name: Restore package cache
+        if: github.event_name != 'schedule'
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.ZORO_PACKAGE_DIR }}
+          key: emacs-${{ matrix.version }}-${{ hashFiles('elisp/init-*.el') }}
+          restore-keys: |
+            emacs-${{ matrix.version }}-
+
+      - name: Install and activate declared packages
+        id: bootstrap
+        continue-on-error: true
+        run: emacs --batch -Q -l scripts/ci-bootstrap.el
+
+      - name: Run ERT unit and integration tests
+        id: ert
+        if: always()
+        continue-on-error: true
+        run: emacs --batch -Q -L test -l test/run-tests.el
+
+      - name: Check clean synchronous startup
+        id: startup
+        if: always()
+        continue-on-error: true
+        run: >-
+          emacs --batch -Q
+          --eval '(setq package-user-dir (file-name-as-directory (getenv "ZORO_PACKAGE_DIR")))'
+          -l early-init.el
+          --eval '(package-activate-all)'
+          -l init.el
+          -l scripts/check-startup.el
+
+      - name: Compile configuration with warnings as errors
+        id: compile
+        if: always()
+        continue-on-error: true
+        run: emacs --batch -Q -l scripts/byte-compile-config.el
+
+      - name: Measure warm startup
+        id: performance
+        if: always()
+        continue-on-error: true
+        run: scripts/run-startup-benchmark.sh
+
+      - name: Write evidence scorecard
+        if: always()
+        env:
+          ZORO_BOOTSTRAP_STATUS: ${{ steps.bootstrap.outcome }}
+          ZORO_ERT_STATUS: ${{ steps.ert.outcome }}
+          ZORO_STARTUP_STATUS: ${{ steps.startup.outcome }}
+          ZORO_COMPILE_STATUS: ${{ steps.compile.outcome }}
+          ZORO_PERF_STATUS: ${{ steps.performance.outcome }}
+        run: emacs --batch -Q -l scripts/config-score.el
+
+      - name: Enforce required checks
+        if: always()
+        env:
+          BOOTSTRAP_STATUS: ${{ steps.bootstrap.outcome }}
+          ERT_STATUS: ${{ steps.ert.outcome }}
+          STARTUP_STATUS: ${{ steps.startup.outcome }}
+          COMPILE_STATUS: ${{ steps.compile.outcome }}
+          PERF_STATUS: ${{ steps.performance.outcome }}
+        run: |
+          for status in "$BOOTSTRAP_STATUS" "$ERT_STATUS" "$STARTUP_STATUS" "$COMPILE_STATUS" "$PERF_STATUS"; do
+            if [[ "$status" != "success" ]]; then
+              exit 1
+            fi
+          done

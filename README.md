@@ -1,6 +1,6 @@
 # Emacs Configuration
 
-面向日常编程、Org/Denote 笔记和阅读写作的个人 Emacs 配置，最低支持 Emacs 31。
+面向日常编程、Org/Denote 笔记和阅读写作的个人 Emacs 配置，最低支持 Emacs 31.0.90。
 使用 Emacs 内置的 `package.el` 和 `use-package` 管理第三方包。
 
 本配置源自 [M-EMACS](https://github.com/MatthewZMD/.emacs.d)，保留 Mingde
@@ -88,6 +88,33 @@ emacs --batch -Q -l early-init.el -l elisp/benchmark-startup.el \
 
 启动只延迟实测较重的 Dashboard、Dashboard Agenda 和 macOS shell 环境导入；其余全局
 minor mode 在各自模块中直接启用。
+
+### 自动测试
+
+在已经安装配置所声明包的环境中运行完整 ERT：
+
+```sh
+emacs --batch -Q -L test -l test/run-tests.el
+```
+
+测试加载完整配置，覆盖配置自有函数、包来源、内置包保护，以及 Eglot、Cape、Corfu、
+Vertico、Orderless 等补全组件的职责边界。已确认但尚未修复的问题记录在
+`test/FINDINGS.md`，并可暂时表示为 ERT expected failure；unexpected failure 始终使测试失败。
+
+运行 Emacs 31.0.90 兼容性编译和多次 warm startup 测量：
+
+```sh
+emacs --batch -Q -l scripts/byte-compile-config.el
+scripts/run-startup-benchmark.sh
+```
+
+兼容性编译将警告视为错误，并把 `.elc` 写入临时目录。性能脚本默认运行 5 次，报告中位数、
+最慢一次和 2000ms 安全上限；可通过 `ZORO_STARTUP_RUNS` 与
+`ZORO_STARTUP_MAX_MS` 调整。
+
+GitHub Actions 同时验证最低基线 `release-snapshot`（不低于 31.0.90）和最新开发快照。
+最低基线为必过任务，最新快照暂为前瞻性允许失败任务。每次运行都把九维、满分 100 的证据
+评分写入 Job Summary；评分规则位于 `scripts/config-score.el`，不会隐藏在 workflow 中。
 
 运行时产生的 `agent/`、`elpa/`、`projects` 和其他历史/缓存文件均被 Git 忽略；仓库只
 保存手写配置，不提交下载后的包或构建产物。
