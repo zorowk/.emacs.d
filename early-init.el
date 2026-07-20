@@ -11,8 +11,8 @@
 
 ;;; Code:
 
-(when (version< emacs-version "31.1")
-  (error "This configuration requires Emacs 31.1 or newer"))
+(when (version< emacs-version "31.0.90")
+  (error "This configuration requires Emacs 31.0.90 or newer"))
 
 ;; Stabilize frame geometry before init.el loads the selected theme.
 (setq frame-inhibit-implied-resize t)
