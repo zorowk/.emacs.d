@@ -16,16 +16,16 @@
     (file-name-directory (or load-file-name buffer-file-name))))
   "Repository root used by the compatibility compiler.")
 
-(defconst zoro-compile-warning-allowlist
-  '("elisp/init-latex.el")
-  "Files with accepted third-party or deferred-package compiler warnings.")
-
 (setq user-emacs-directory zoro-compile-root)
 (when-let* ((package-directory (getenv "ZORO_PACKAGE_DIR")))
   (setq package-user-dir (file-name-as-directory package-directory)))
 (add-to-list 'load-path (expand-file-name "elisp" zoro-compile-root))
 (package-activate-all)
 (require 'use-package)
+;; Load declarations from deferred LaTeX packages before compiling their
+;; configuration with warnings promoted to errors.
+(require 'tex)
+(require 'reftex)
 
 (let* ((destination (make-temp-file "zoro-byte-compile-" t))
        (byte-compile-error-on-warn t)
@@ -42,17 +42,14 @@
        failures)
   (unwind-protect
       (dolist (file files)
-        (let* ((relative (file-relative-name file zoro-compile-root))
-               (byte-compile-error-on-warn
-                (not (member relative zoro-compile-warning-allowlist))))
-          (princ (format "Compiling %s\n" relative))
-          (condition-case error-data
-              (unless (byte-compile-file file)
-                (push relative failures))
-            (error
-             (princ (format "Compilation error: %s\n"
-                            (error-message-string error-data)))
-             (push relative failures)))))
+        (princ (format "Compiling %s\n" (file-relative-name file zoro-compile-root)))
+        (condition-case error-data
+            (unless (byte-compile-file file)
+              (push (file-relative-name file zoro-compile-root) failures))
+          (error
+           (princ (format "Compilation error: %s\n"
+                          (error-message-string error-data)))
+           (push (file-relative-name file zoro-compile-root) failures))))
     (delete-directory destination t))
   (when failures
     (error "Byte compilation failed for: %s"
