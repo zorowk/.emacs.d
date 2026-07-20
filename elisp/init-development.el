@@ -36,6 +36,10 @@
          ("M-RET" . magit-diff-visit-file-other-window)))
   :commands magit-log-buffer-file)
 
+(use-package rec-mode
+  :ensure t
+  :mode ("\\.rec\\'" . rec-mode))
+
 (declare-function treesit-language-at "treesit" (position))
 
 (defun zoro-treesit-show-parser-used-at-point ()
