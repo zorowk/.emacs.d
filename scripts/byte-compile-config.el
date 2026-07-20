@@ -20,6 +20,23 @@
 (when-let* ((package-directory (getenv "ZORO_PACKAGE_DIR")))
   (setq package-user-dir (file-name-as-directory package-directory)))
 (add-to-list 'load-path (expand-file-name "elisp" zoro-compile-root))
+(require 'init-const)
+(defconst zoro-compile-state-directory
+  (make-temp-file "zoro-compile-state-" t)
+  "Disposable personal-data root used while compiling configuration.")
+;; A `use-package' macro expansion may load Hyperbole before its runtime
+;; `:init' form runs.  Keep that compile-time initialization disposable.
+(setq hbmap:dir-user
+      (expand-file-name "hyperbole/" zoro-compile-state-directory)
+      hbmap:dir-filename (expand-file-name "HBMAP" hbmap:dir-user)
+      hywiki-directory
+      (expand-file-name "hywiki/" zoro-compile-state-directory)
+      hywiki-org-publishing-directory
+      (expand-file-name "public_hywiki/" zoro-compile-state-directory)
+      hyrolo-default-file
+      (expand-file-name "rolo.org" zoro-compile-state-directory)
+      hyrolo-file-list (list hyrolo-default-file)
+      hynote-directory-list (list hywiki-directory))
 (package-activate-all)
 (require 'use-package)
 ;; Load declarations from deferred LaTeX packages before compiling their
@@ -50,7 +67,8 @@
            (princ (format "Compilation error: %s\n"
                           (error-message-string error-data)))
            (push (file-relative-name file zoro-compile-root) failures))))
-    (delete-directory destination t))
+    (delete-directory destination t)
+    (delete-directory zoro-compile-state-directory t))
   (when failures
     (error "Byte compilation failed for: %s"
            (string-join (nreverse failures) ", "))))

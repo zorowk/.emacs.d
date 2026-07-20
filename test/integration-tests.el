@@ -27,6 +27,16 @@
               (memq :vc (cddr form)))
       (should (package-installed-p (cadr form))))))
 
+(ert-deftest zoro-integration-rec-mode-owns-rec-files ()
+  (let ((form (seq-find (lambda (candidate)
+                          (eq (cadr candidate) 'rec-mode))
+                        (zoro-test-use-package-forms))))
+    (should form)
+    (should (eq (plist-get (cddr form) :ensure) t))
+    (should (equal (plist-get (cddr form) :mode)
+                   '("\\.rec\\'" . rec-mode)))
+    (should (eq (cdr (assoc "\\.rec\\'" auto-mode-alist)) 'rec-mode))))
+
 (ert-deftest zoro-integration-builtins-are-not-replaced-by-archives ()
   (should-not package-install-upgrade-built-in)
   (dolist (form (zoro-test-use-package-forms))
@@ -108,6 +118,30 @@
 (ert-deftest zoro-integration-hyperbole-provides-hywiki ()
   (require 'hywiki)
   (should (fboundp 'hywiki-mode)))
+
+(ert-deftest zoro-integration-hyperbole-data-stays-in-dropbox ()
+  (dolist (path (list zoro-hyperbole-directory
+                      zoro-hywiki-directory
+                      zoro-hywiki-publishing-directory
+                      zoro-hyrolo-file
+                      hbmap:dir-user
+                      hbmap:dir-filename
+                      hywiki-directory
+                      hywiki-org-publishing-directory
+                      hyrolo-default-file))
+    (should (file-in-directory-p path zoro-dropbox-directory)))
+  (should (equal hbmap:dir-user zoro-hyperbole-directory))
+  (should (equal hbmap:dir-filename
+                 (expand-file-name "HBMAP" zoro-hyperbole-directory)))
+  (should (equal hywiki-directory zoro-hywiki-directory))
+  (should (equal hywiki-org-publishing-directory
+                 zoro-hywiki-publishing-directory))
+  (should (equal hyrolo-default-file zoro-hyrolo-file))
+  (should (equal hyrolo-file-list (list zoro-hyrolo-file)))
+  (should (equal hynote-directory-list
+                 (list zoro-org-directory
+                       zoro-denote-directory
+                       zoro-hywiki-directory))))
 
 (provide 'integration-tests)
 ;;; integration-tests.el ends here

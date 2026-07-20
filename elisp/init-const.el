@@ -33,9 +33,21 @@
   (expand-file-name "notes/" zoro-dropbox-directory)
   "Directory containing Denote notes.")
 
+(defconst zoro-hyperbole-directory
+  (expand-file-name "hyperbole/" zoro-dropbox-directory)
+  "Directory containing personal Hyperbole button-map data.")
+
 (defconst zoro-hywiki-directory
   (expand-file-name "hywiki/" zoro-dropbox-directory)
   "Directory containing HyWiki pages.")
+
+(defconst zoro-hywiki-publishing-directory
+  (expand-file-name "public_hywiki/" zoro-dropbox-directory)
+  "Directory containing published HyWiki pages.")
+
+(defconst zoro-hyrolo-file
+  (expand-file-name "rolo.org" zoro-dropbox-directory)
+  "File containing personal HyRolo entries.")
 
 (provide 'init-const)
 ;;; init-const.el ends here

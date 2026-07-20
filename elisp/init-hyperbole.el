@@ -5,7 +5,7 @@
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
 ;;; Commentary:
-;; Configure GNU Hyperbole and keep HyWiki pages in Dropbox.
+;; Configure GNU Hyperbole and keep all personal Hyperbole data in Dropbox.
 
 ;;; Code:
 
@@ -16,9 +16,18 @@
        :rev :newest)
   :bind (("C-z h" . hyperbole))
   :init
-  ;; Set this before Hyperbole loads so HyWiki initializes against the
-  ;; persistent wiki rather than `user-emacs-directory'.
-  (setq hywiki-directory zoro-hywiki-directory)
+  ;; Set every personal data path before Hyperbole loads so none of its
+  ;; home-directory defaults can take effect.
+  (setq hbmap:dir-user zoro-hyperbole-directory
+        hbmap:dir-filename
+        (expand-file-name "HBMAP" zoro-hyperbole-directory)
+        hywiki-directory zoro-hywiki-directory
+        hywiki-org-publishing-directory zoro-hywiki-publishing-directory
+        hyrolo-default-file zoro-hyrolo-file
+        hyrolo-file-list (list zoro-hyrolo-file)
+        hynote-directory-list (list zoro-org-directory
+                                    zoro-denote-directory
+                                    zoro-hywiki-directory))
   :config
   (hyperbole-mode 1)
   ;; Recognize HyWikiWords in text buffers and programming comments.
