@@ -11,12 +11,6 @@
 
 ;;; Code:
 
-(declare-function TeX-revert-document-buffer "tex-buf")
-(defvar TeX-PDF-mode)
-(defvar TeX-source-correlate-method)
-(defvar TeX-source-correlate-start-server)
-(defvar reftex-plug-into-AUCTeX)
-
 (use-package auctex
   :ensure t
   :defer t

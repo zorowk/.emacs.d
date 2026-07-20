@@ -16,6 +16,10 @@
     (file-name-directory (or load-file-name buffer-file-name))))
   "Repository root used by the compatibility compiler.")
 
+(defconst zoro-compile-warning-allowlist
+  '("elisp/init-edit.el" "elisp/init-latex.el")
+  "Files with accepted third-party or deferred-package compiler warnings.")
+
 (setq user-emacs-directory zoro-compile-root)
 (when-let* ((package-directory (getenv "ZORO_PACKAGE_DIR")))
   (setq package-user-dir (file-name-as-directory package-directory)))
@@ -38,14 +42,17 @@
        failures)
   (unwind-protect
       (dolist (file files)
-        (princ (format "Compiling %s\n" (file-relative-name file zoro-compile-root)))
-        (condition-case error-data
-            (unless (byte-compile-file file)
-              (push (file-relative-name file zoro-compile-root) failures))
-          (error
-           (princ (format "Compilation error: %s\n"
-                          (error-message-string error-data)))
-           (push (file-relative-name file zoro-compile-root) failures))))
+        (let* ((relative (file-relative-name file zoro-compile-root))
+               (byte-compile-error-on-warn
+                (not (member relative zoro-compile-warning-allowlist))))
+          (princ (format "Compiling %s\n" relative))
+          (condition-case error-data
+              (unless (byte-compile-file file)
+                (push relative failures))
+            (error
+             (princ (format "Compilation error: %s\n"
+                            (error-message-string error-data)))
+             (push relative failures)))))
     (delete-directory destination t))
   (when failures
     (error "Byte compilation failed for: %s"
