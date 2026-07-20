@@ -13,16 +13,20 @@ trap 'rm -rf "$results_dir"' EXIT
 : >"$results_dir/totals"
 
 for run in $(seq 1 "$run_count"); do
-  output=$(
+  if ! output=$(
     cd "$repo_root"
     "$emacs_binary" --batch -Q \
+      --eval '(setq user-emacs-directory default-directory)' \
       --eval '(when-let* ((directory (getenv "ZORO_PACKAGE_DIR"))) (setq package-user-dir (file-name-as-directory directory)))' \
       -l early-init.el \
       -l elisp/benchmark-startup.el \
       --eval '(zoro-startup-benchmark-activate-packages)' \
       -l init.el \
       --eval '(zoro-startup-benchmark-report)' 2>&1
-  )
+  ); then
+    printf '%s\n' "$output" >&2
+    exit 1
+  fi
   printf '%s\n' "$output"
   total=$(printf '%s\n' "$output" | sed -n 's/^Total: \([0-9.]*\)ms.*/\1/p')
   if [[ -z "$total" ]]; then
