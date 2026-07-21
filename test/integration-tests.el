@@ -120,16 +120,18 @@
   (should (fboundp 'hywiki-mode)))
 
 (ert-deftest zoro-integration-hyperbole-data-stays-in-dropbox ()
-  (dolist (path (list zoro-hyperbole-directory
-                      zoro-hywiki-directory
-                      zoro-hywiki-publishing-directory
-                      zoro-hyrolo-file
-                      hbmap:dir-user
-                      hbmap:dir-filename
-                      hywiki-directory
-                      hywiki-org-publishing-directory
-                      hyrolo-default-file))
-    (should (file-in-directory-p path zoro-dropbox-directory)))
+  (let ((dropbox-root
+         (file-name-as-directory (expand-file-name zoro-dropbox-directory))))
+    (dolist (path (list zoro-hyperbole-directory
+                        zoro-hywiki-directory
+                        zoro-hywiki-publishing-directory
+                        zoro-hyrolo-file
+                        hbmap:dir-user
+                        hbmap:dir-filename
+                        hywiki-directory
+                        hywiki-org-publishing-directory
+                        hyrolo-default-file))
+      (should (string-prefix-p dropbox-root (expand-file-name path)))))
   (should (equal hbmap:dir-user zoro-hyperbole-directory))
   (should (equal hbmap:dir-filename
                  (expand-file-name "HBMAP" zoro-hyperbole-directory)))
