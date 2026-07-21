@@ -30,20 +30,13 @@
   "Face for the dashboard tagline."
   :group 'faces)
 
-(defface zoro-dashboard-rune
-  '((((type ns)) (:inherit shadow :height 1.15))
-    (t (:inherit shadow :family "Noto Sans Runic" :height 1.15)))
-  "Face for the dashboard's runic inscription."
-  :group 'faces)
-
 (defface zoro-dashboard-action
   '((t (:inherit default :height 1.12)))
   "Face for dashboard actions."
   :group 'faces)
 
 (defface zoro-dashboard-icon
-  '((((type ns)) (:inherit shadow :height 1.35))
-    (t (:inherit shadow :family "Noto Sans Runic" :height 1.35)))
+  '((t (:inherit shadow :family "Symbola" :height 1.35)))
   "Face for dashboard action icons."
   :group 'faces)
 
@@ -53,17 +46,26 @@
   :group 'faces)
 
 (defconst zoro-dashboard--actions
-  '(("f" "ᚠ" "Find File"      find-file)
-    ("r" "ᚱ" "Recent Files"   recentf-open-files)
-    ("a" "ᚨ" "Agenda"         org-agenda-list)
-    ("c" "ᚲ" "Capture"        org-capture)
-    ("n" "ᚾ" "Notes"          zoro-dashboard-open-notes)
-    ("p" "ᛈ" "Projects"       project-switch-project)
-    ("b" "ᛒ" "Bookmarks"      bookmark-bmenu-list)
-    ("q" "ᛢ" "Quit"           save-buffers-kill-emacs))
+  '(("f" "✣" "Find File"      find-file)
+    ("r" "⌁" "Recent Files"   recentf-open-files)
+    ("a" "❖" "Agenda"         org-agenda-list)
+    ("c" "✢" "Capture"        org-capture)
+    ("n" "✎" "Notes"          zoro-dashboard-open-notes)
+    ("p" "⌘" "Projects"       project-switch-project)
+    ("b" "✦" "Bookmarks"      zoro-dashboard-open-bookmarks)
+    ("q" "⚙" "Quit"           save-buffers-kill-emacs))
   "Shortcut, symbol, label, and command for each dashboard action.")
 
 (defvar-local zoro-dashboard--rendering nil)
+
+(defun zoro-dashboard-open-bookmarks ()
+  "Load the default bookmark file and display the bookmark list."
+  (interactive)
+  (require 'bookmark)
+  (bookmark-maybe-load-default-file)
+  (bookmark-bmenu-list)
+  (when (null bookmark-alist)
+    (message "No bookmarks yet; visit a file and use C-x r m to create one")))
 
 (defun zoro-dashboard-open-notes ()
   "Open the configured notes interface."
@@ -161,8 +163,7 @@ The optional FRAME argument makes this suitable for resize hooks."
               (insert "\n")
               (zoro-dashboard--insert-rule)
               (zoro-dashboard--insert-centered
-               "ᚾᛟᛏ ᛏᛟ ᛒᛖ ᛊᛖᚱᚠᛖᛞ ᛫ ᛒᚢᛏ ᛏᛟ ᛊᛖᚱᚠᛖ"
-               'zoro-dashboard-rune)
+               "Not to be served, but to serve." 'zoro-dashboard-tagline)
               (zoro-dashboard--insert-centered "—  GNU Project" 'shadow)
               (goto-char (point-min))
               (forward-button 1 t))))))))
@@ -174,8 +175,8 @@ The optional FRAME argument makes this suitable for resize hooks."
   "a" (lambda () (interactive) (org-agenda-list))
   "c" (lambda () (interactive) (org-capture))
   "n" #'zoro-dashboard-open-notes
-  "p" (lambda () (interactive) (project-switch-project))
-  "b" (lambda () (interactive) (bookmark-bmenu-list))
+  "p" #'project-switch-project
+  "b" #'zoro-dashboard-open-bookmarks
   "q" (lambda () (interactive) (save-buffers-kill-emacs))
   "j" #'forward-button
   "k" (lambda () (interactive) (forward-button -1 t))
