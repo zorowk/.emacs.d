@@ -103,5 +103,27 @@
       scroll-conservatively 101
       mouse-wheel-progressive-speed nil)
 
+(setq-default
+ mode-line-format
+ '("%e"
+   mode-line-front-space
+   mode-line-modified
+   mode-line-remote
+   mode-line-window-dedicated
+   mode-line-frame-identification
+   mode-line-buffer-identification
+   "  "
+   (project-mode-line project-mode-line-format)
+   (vc-mode vc-mode)
+   "  "
+   mode-line-modes
+   mode-line-format-right-align
+   mode-line-mule-info
+   mode-line-client
+   mode-line-misc-info
+   "  "
+   mode-line-position
+   mode-line-end-spaces))
+
 (provide 'init-ui)
 ;;; init-ui.el ends here
