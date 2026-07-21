@@ -30,9 +30,21 @@
   "Face for the dashboard tagline."
   :group 'faces)
 
+(defface zoro-dashboard-rune
+  '((((type ns)) (:inherit shadow :height 1.15))
+    (t (:inherit shadow :family "Noto Sans Runic" :height 1.15)))
+  "Face for the dashboard's runic inscription."
+  :group 'faces)
+
 (defface zoro-dashboard-action
   '((t (:inherit default :height 1.12)))
   "Face for dashboard actions."
+  :group 'faces)
+
+(defface zoro-dashboard-icon
+  '((((type ns)) (:inherit shadow :height 1.35))
+    (t (:inherit shadow :family "Noto Sans Runic" :height 1.35)))
+  "Face for dashboard action icons."
   :group 'faces)
 
 (defface zoro-dashboard-key
@@ -41,14 +53,14 @@
   :group 'faces)
 
 (defconst zoro-dashboard--actions
-  '(("f" "✣" "Find File"      find-file)
-    ("r" "⌁" "Recent Files"   recentf-open-files)
-    ("a" "❖" "Agenda"         org-agenda-list)
-    ("c" "✢" "Capture"        org-capture)
-    ("n" "✎" "Notes"          zoro-dashboard-open-notes)
-    ("p" "⌘" "Projects"       project-switch-project)
-    ("b" "✦" "Bookmarks"      bookmark-bmenu-list)
-    ("q" "⚙" "Quit"           save-buffers-kill-emacs))
+  '(("f" "ᚠ" "Find File"      find-file)
+    ("r" "ᚱ" "Recent Files"   recentf-open-files)
+    ("a" "ᚨ" "Agenda"         org-agenda-list)
+    ("c" "ᚲ" "Capture"        org-capture)
+    ("n" "ᚾ" "Notes"          zoro-dashboard-open-notes)
+    ("p" "ᛈ" "Projects"       project-switch-project)
+    ("b" "ᛒ" "Bookmarks"      bookmark-bmenu-list)
+    ("q" "ᛢ" "Quit"           save-buffers-kill-emacs))
   "Shortcut, symbol, label, and command for each dashboard action.")
 
 (defvar-local zoro-dashboard--rendering nil)
@@ -89,18 +101,22 @@
 (defun zoro-dashboard--insert-action (key symbol label command)
   "Insert an action row described by KEY, SYMBOL, LABEL, and COMMAND."
   (if (display-graphic-p)
-      (progn
+      (let* ((icon (propertize symbol 'face 'zoro-dashboard-icon))
+             (icon-width (string-pixel-width icon (current-buffer)))
+             (half-icon-width (round (/ icon-width 2.0))))
         (insert (propertize
                  " " 'display
-                 '(space :align-to (- center (14 . width)))))
-        (insert (propertize symbol 'face 'shadow))
+                 `(space :align-to
+                         (- center (12 . width) (,half-icon-width)))))
+        (insert icon)
         (insert (propertize
                  " " 'display
                  '(space :align-to (- center (10 . width))))))
     (let* ((row-width 30)
            (padding (max 0 (/ (- (window-body-width) row-width) 2))))
       (insert (make-string padding ?\s))
-      (insert (propertize (format "%-3s" symbol) 'face 'shadow))))
+      (insert (propertize (format "%-3s" symbol)
+                          'face 'zoro-dashboard-icon))))
   (let ((button-label (if (display-graphic-p) label (format "%-20s" label))))
     (insert-text-button
      button-label
@@ -145,7 +161,8 @@ The optional FRAME argument makes this suitable for resize hooks."
               (insert "\n")
               (zoro-dashboard--insert-rule)
               (zoro-dashboard--insert-centered
-               "Not to be served, but to serve." 'zoro-dashboard-tagline)
+               "ᚾᛟᛏ ᛏᛟ ᛒᛖ ᛊᛖᚱᚠᛖᛞ ᛫ ᛒᚢᛏ ᛏᛟ ᛊᛖᚱᚠᛖ"
+               'zoro-dashboard-rune)
               (zoro-dashboard--insert-centered "—  GNU Project" 'shadow)
               (goto-char (point-min))
               (forward-button 1 t))))))))
