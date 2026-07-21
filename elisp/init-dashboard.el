@@ -36,7 +36,10 @@
   :group 'faces)
 
 (defface zoro-dashboard-icon
-  '((t (:inherit shadow :family "Symbola" :height 1.35)))
+  `((t (:inherit shadow
+        :family ,(cond ((eq system-type 'gnu/linux) "Symbola")
+                       ((eq system-type 'darwin) "Apple Symbols"))
+        :height 1.25)))
   "Face for dashboard action icons."
   :group 'faces)
 
@@ -46,14 +49,14 @@
   :group 'faces)
 
 (defconst zoro-dashboard--actions
-  '(("f" "✣" "Find File"      find-file)
-    ("r" "⌁" "Recent Files"   recentf-open-files)
-    ("a" "❖" "Agenda"         org-agenda-list)
-    ("c" "✢" "Capture"        org-capture)
-    ("n" "✎" "Notes"          zoro-dashboard-open-notes)
-    ("p" "⌘" "Projects"       project-switch-project)
-    ("b" "✦" "Bookmarks"      zoro-dashboard-open-bookmarks)
-    ("q" "⚙" "Quit"           save-buffers-kill-emacs))
+  '(("f" "♘" "Find File"      find-file)
+    ("r" "♖" "Recent Files"   recentf-open-files)
+    ("a" "♗" "Agenda"         org-agenda-list)
+    ("c" "♙" "Capture"        org-capture)
+    ("n" "♕" "Notes"          zoro-dashboard-open-notes)
+    ("p" "♔" "Projects"       project-switch-project)
+    ("b" "♖" "Bookmarks"      zoro-dashboard-open-bookmarks)
+    ("q" "♙" "Quit"           save-buffers-kill-emacs))
   "Shortcut, symbol, label, and command for each dashboard action.")
 
 (defvar-local zoro-dashboard--rendering nil)
@@ -95,10 +98,17 @@
     (insert rendered)
     (insert "\n")))
 
-(defun zoro-dashboard--insert-rule ()
-  "Insert the dashboard's plain centered divider."
-  (zoro-dashboard--insert-centered
-   "────────────────────────────────────────" 'shadow))
+(defun zoro-dashboard--insert-rule (ornament)
+  "Insert a centered divider decorated with ORNAMENT."
+  (let* ((ornament-text (concat " " ornament " "))
+         (remaining-width (max 2 (- 40 (string-width ornament-text))))
+         (left-width (/ remaining-width 2))
+         (right-width (- remaining-width left-width))
+         (left-rule (propertize (make-string left-width ?─) 'face 'shadow))
+         (center (propertize ornament-text
+                             'face '(:inherit zoro-dashboard-icon :height 1.0)))
+         (right-rule (propertize (make-string right-width ?─) 'face 'shadow)))
+    (zoro-dashboard--insert-centered (concat left-rule center right-rule))))
 
 (defun zoro-dashboard--insert-action (key symbol label command)
   "Insert an action row described by KEY, SYMBOL, LABEL, and COMMAND."
@@ -113,7 +123,7 @@
         (insert icon)
         (insert (propertize
                  " " 'display
-                 '(space :align-to (- center (10 . width))))))
+                 '(space :align-to (- center (9 . width))))))
     (let* ((row-width 30)
            (padding (max 0 (/ (- (window-body-width) row-width) 2))))
       (insert (make-string padding ?\s))
@@ -154,14 +164,14 @@ The optional FRAME argument makes this suitable for resize hooks."
               (zoro-dashboard--insert-centered
                "S C R I P T O R I U M" 'zoro-dashboard-subtitle)
               (insert "\n")
-              (zoro-dashboard--insert-rule)
+              (zoro-dashboard--insert-rule "⚚")
               (zoro-dashboard--insert-centered
                "KNOWLEDGE  ·  FREEDOM  ·  CRAFT" 'zoro-dashboard-tagline)
               (insert "\n")
               (dolist (action zoro-dashboard--actions)
                 (apply #'zoro-dashboard--insert-action action))
               (insert "\n")
-              (zoro-dashboard--insert-rule)
+              (zoro-dashboard--insert-rule "⪻ ⚖ ⪼")
               (zoro-dashboard--insert-centered
                "Not to be served, but to serve." 'zoro-dashboard-tagline)
               (zoro-dashboard--insert-centered "—  GNU Project" 'shadow)
