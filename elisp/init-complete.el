@@ -82,6 +82,8 @@
               (eq (current-local-map) read-passwd-map)))))
   (corfu-auto t)
   (corfu-cycle t)
+  (corfu-preview-current nil)
+  (corfu-popupinfo-delay '(1.0 . 0.5))
   :init
   (unless noninteractive
     (global-corfu-mode 1))

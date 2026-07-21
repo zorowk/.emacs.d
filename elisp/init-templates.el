@@ -27,7 +27,10 @@ the template available globally."
   "Read matrix dimensions and return a LaTeX matrix string."
   (let* ((rows (read-number "Rows: " 2))
          (columns (read-number "Columns: " 2))
-         (type (read-string "Matrix type: " nil nil "pmatrix"))
+         (type (completing-read
+                "Matrix type: "
+                '("pmatrix" "bmatrix" "Bmatrix" "vmatrix" "Vmatrix" "matrix")
+                nil t nil nil "pmatrix"))
          (row (string-join (make-list columns "") " & ")))
     (concat "\\begin{" type "}\n"
             (string-join (make-list rows row) " \\\\\n")

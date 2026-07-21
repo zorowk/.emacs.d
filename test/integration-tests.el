@@ -57,6 +57,8 @@
 (ert-deftest zoro-integration-corfu-yields-vertico-minibuffers ()
   (require 'corfu)
   (should (memq 'corfu-history savehist-additional-variables))
+  (should-not corfu-preview-current)
+  (should (equal corfu-popupinfo-delay '(1.0 . 0.5)))
   (should (functionp global-corfu-minibuffer))
   (let ((vertico--input t))
     (should-not (funcall global-corfu-minibuffer)))
