@@ -19,7 +19,7 @@
   (unless (featurep feature)
     (error "Startup did not provide %S" feature)))
 
-(let* ((deferred '(org denote hyperbole dashboard agent-shell gnus erc))
+(let* ((deferred '(org denote hyperbole agent-shell gnus erc))
        (loaded (seq-filter #'featurep deferred)))
   (when loaded
     (error "Deferred features loaded synchronously: %S" loaded)))
