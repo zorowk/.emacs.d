@@ -11,9 +11,10 @@
 - 补全：Corfu、Cape、Vertico、Orderless、Consult、Embark、Marginalia
 - 开发：Eglot、内置 Tree-sitter、ESS、AUCTeX、Magit
 - 编辑：内置 Electric Pair 与 Tempo、Expreg、Avy、Ace Window、Vundo
-- 笔记：Org、Denote、Consult Denote、Org Bullets
+- 笔记：Org、Denote、Consult Denote、Org Bullets、rec-mode
+- 个人知识库：Hyperbole、HyWiki、HyRolo、HyNote
 - 阅读与网络：EWW、Elfeed、Nov、Elpher、ERC、Gnus
-- 界面：Ef Themes、Spacious Padding、Pulsar、Popper、Olivetti、Dashboard
+- 界面：Ef Themes、Spacious Padding、Pulsar、Popper、Olivetti、Dashboard，以及紧凑的 mode-line
 - AI：Agent Shell
 
 ## 配置结构
@@ -48,6 +49,19 @@ HyWiki 需要 Hyperbole 9.0.2pre，因此 Hyperbole 使用 Emacs 31 内置的
 
 个人身份、邮箱地址和 Dropbox 路径集中在 `elisp/init-const.el`。如果账号或目录布局
 不同，只需修改该文件中的共享常量。
+
+Hyperbole 的个人数据统一保存在 Dropbox 中：
+
+| 路径 | 内容 |
+| --- | --- |
+| `~/Dropbox/hyperbole/` | Hyperbole 按钮映射和 `HBMAP` |
+| `~/Dropbox/hywiki/` | HyWiki Org 源文件 |
+| `~/Dropbox/public_hywiki/` | HyWiki 发布的 HTML 文件 |
+| `~/Dropbox/rolo.org` | HyRolo 个人条目 |
+
+HyNote 默认搜索 Dropbox 下的 `brain/`、`notes/` 和 `hywiki/`。打开 `.rec` 文件时，
+`rec-mode` 会自动启用，用于浏览和编辑 GNU Recutils 数据文件；使用其查询、统计和校验
+功能时还需要安装 GNU Recutils 命令行工具。
 
 内置模板使用 `M-+` 展开光标前的标签，或使用 `M-*` 从当前 major mode 可用的模板中
 选择。模板插入后可通过 `C-c t n` 跳到下一个占位位置。
@@ -107,6 +121,9 @@ Vertico、Orderless 等补全组件的职责边界。已确认但尚未修复的
 emacs --batch -Q -l scripts/byte-compile-config.el
 scripts/run-startup-benchmark.sh
 ```
+
+兼容性编译阶段使用临时的 Hyperbole 数据目录，不会在用户主目录或 Dropbox 中创建
+编译产物。
 
 兼容性编译将警告视为错误，并把 `.elc` 写入临时目录。性能脚本默认运行 5 次，报告中位数、
 最慢一次和 2000ms 安全上限；可通过 `ZORO_STARTUP_RUNS` 与

@@ -117,12 +117,12 @@
    (vc-mode vc-mode)
    "  "
    mode-line-modes
+   "  "
+   mode-line-position
    mode-line-format-right-align
    mode-line-mule-info
    mode-line-client
    mode-line-misc-info
-   "  "
-   mode-line-position
    mode-line-end-spaces))
 
 (provide 'init-ui)
