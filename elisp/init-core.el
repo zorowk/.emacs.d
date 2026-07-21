@@ -80,8 +80,14 @@ normal hook, so attach the callback with `add-function'."
         split-window-preferred-direction 'horizontal)
 (delete-selection-mode 1)
 (repeat-mode 1)
-(unless (or noninteractive (daemonp))
-  (server-mode 1))
+(require 'server)
+
+(defun zoro-start-server-if-needed ()
+  "Start the Emacs server unless another instance already provides it."
+  (unless (or noninteractive (daemonp) (server-running-p))
+    (server-mode 1)))
+
+(zoro-start-server-if-needed)
 (unless noninteractive
   (which-key-mode 1)
   (global-so-long-mode 1))
