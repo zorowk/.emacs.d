@@ -21,21 +21,10 @@
   (get-buffer-create "*dashboard*"))
 
 (defun zoro-dashboard-load ()
-  "Load Dashboard and render its initial widgets."
+  "Load Dashboard and render its widgets."
   (require 'dashboard)
-  (when-let* ((buffer (get-buffer dashboard-buffer-name)))
-    (with-current-buffer buffer
-      (dashboard-insert-startupify-lists t))))
-
-(defun zoro-dashboard-enable-agenda ()
-  "Add the Agenda widget and refresh an existing Dashboard buffer."
-  (require 'dashboard)
-  (setq dashboard-items '((recents . 7)
-                          (bookmarks . 7)
-                          (agenda . 5)))
-  (when-let* ((buffer (get-buffer dashboard-buffer-name)))
-    (with-current-buffer buffer
-      (dashboard-insert-startupify-lists t))))
+  (with-current-buffer (zoro-initial-dashboard-buffer)
+    (dashboard-insert-startupify-lists t)))
 
 (defun zoro-open-dashboard ()
   "Open the Dashboard buffer and jump to the first widget."
@@ -50,7 +39,7 @@
 
 (use-package dashboard
   :ensure t
-  :defer t
+  :demand t
   :diminish (dashboard-mode)
   :bind
   (("C-z d" . zoro-open-dashboard)
@@ -63,7 +52,8 @@
   (dashboard-banner-logo-title "Close the world. Open the nExt.")
   (dashboard-startup-banner 'logo-braille)
   (dashboard-items '((recents  . 7)
-                     (bookmarks . 7)))
+                     (bookmarks . 7)
+                     (agenda . 5)))
   (dashboard-set-heading-icons nil)
   (dashboard-startupify-list
    '(dashboard-insert-banner

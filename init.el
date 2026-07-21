@@ -68,12 +68,10 @@
 
 (require 'init-gnus)
 
-;; Defer only the measured startup outliers.
 (unless noninteractive
-  (run-with-idle-timer 0.10 nil #'zoro-dashboard-load)
   (when (memq window-system '(mac ns))
-    (run-with-idle-timer 1.15 nil #'zoro-import-shell-environment))
-  (run-with-idle-timer 2.10 nil #'zoro-dashboard-enable-agenda))
+    (zoro-import-shell-environment))
+  (zoro-dashboard-load))
 
 (provide 'init)
 ;;; init.el ends here
