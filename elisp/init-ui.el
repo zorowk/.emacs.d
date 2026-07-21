@@ -11,7 +11,6 @@
 
 ;;; Code:
 
-(declare-function zoro-dashboard-update-banner "init-dashboard" (appearance))
 (declare-function set-fontset-font "fontset.c"
                   (fontset characters font-spec &optional frame add))
 
@@ -20,9 +19,7 @@
   (mapc #'disable-theme custom-enabled-themes)
   (pcase appearance
     ('light (load-theme 'ef-frost t))
-    ('dark (load-theme 'ef-autumn t)))
-  (when (featurep 'dashboard)
-    (zoro-dashboard-update-banner appearance)))
+    ('dark (load-theme 'ef-autumn t))))
 
 (use-package ef-themes
   :ensure t
