@@ -36,7 +36,7 @@
   :group 'faces)
 
 (defface zoro-dashboard-icon
-  `((t (:inherit shadow
+  `((t (:inherit default
         :family ,(cond ((eq system-type 'gnu/linux) "Symbola")
                        ((eq system-type 'darwin) "Apple Symbols"))
         :height 1.25)))
@@ -49,26 +49,17 @@
   :group 'faces)
 
 (defconst zoro-dashboard--actions
-  '(("f" "♘" "Find File"      find-file)
-    ("r" "♖" "Recent Files"   recentf-open-files)
-    ("a" "♗" "Agenda"         org-agenda-list)
-    ("c" "♙" "Capture"        org-capture)
-    ("n" "♕" "Notes"          zoro-dashboard-open-notes)
+  '(("r" "♖" "Recent Files"   recentf-open-files)
+    ("f" "♘" "Find File"      find-file)
     ("p" "♔" "Projects"       project-switch-project)
-    ("b" "♖" "Bookmarks"      zoro-dashboard-open-bookmarks)
+    ("a" "♗" "Agenda"         org-agenda-list)
+    ("e" "♙" "Elfeed"         elfeed)
+    ("n" "♕" "Notes"          zoro-dashboard-open-notes)
+    ("g" "♖" "Gnus"           gnus)
     ("q" "♙" "Quit"           save-buffers-kill-emacs))
   "Shortcut, symbol, label, and command for each dashboard action.")
 
 (defvar-local zoro-dashboard--rendering nil)
-
-(defun zoro-dashboard-open-bookmarks ()
-  "Load the default bookmark file and display the bookmark list."
-  (interactive)
-  (require 'bookmark)
-  (bookmark-maybe-load-default-file)
-  (bookmark-bmenu-list)
-  (when (null bookmark-alist)
-    (message "No bookmarks yet; visit a file and use C-x r m to create one")))
 
 (defun zoro-dashboard-open-notes ()
   "Open the configured notes interface."
@@ -174,25 +165,25 @@ The optional FRAME argument makes this suitable for resize hooks."
               (zoro-dashboard--insert-rule "⪻ ⚖ ⪼")
               (zoro-dashboard--insert-centered
                "Not to be served, but to serve." 'zoro-dashboard-tagline)
-              (zoro-dashboard--insert-centered "—  GNU Project" 'shadow)
+              (zoro-dashboard--insert-centered "—  GNU Emacs" 'shadow)
               (goto-char (point-min))
               (forward-button 1 t))))))))
 
 (defvar-keymap zoro-dashboard-mode-map
   :parent special-mode-map
-  "f" (lambda () (interactive) (call-interactively #'find-file))
   "r" (lambda () (interactive) (recentf-open-files))
-  "a" (lambda () (interactive) (org-agenda-list))
-  "c" (lambda () (interactive) (org-capture))
-  "n" #'zoro-dashboard-open-notes
+  "f" (lambda () (interactive) (call-interactively #'find-file))
   "p" #'project-switch-project
-  "b" #'zoro-dashboard-open-bookmarks
+  "a" (lambda () (interactive) (org-agenda-list))
+  "e" #'elfeed
+  "n" #'zoro-dashboard-open-notes
+  "g" #'gnus
   "q" (lambda () (interactive) (save-buffers-kill-emacs))
   "j" #'forward-button
   "k" (lambda () (interactive) (forward-button -1 t))
   "<down>" #'forward-button
   "<up>" (lambda () (interactive) (forward-button -1 t))
-  "g" #'zoro-dashboard-render)
+  "G" #'zoro-dashboard-render)
 
 (define-derived-mode zoro-dashboard-mode special-mode "Scriptorium"
   "Major mode for the Scriptorium startup page."
