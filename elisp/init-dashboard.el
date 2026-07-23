@@ -170,7 +170,6 @@ The optional FRAME argument makes this suitable for resize hooks."
 (defvar-keymap zoro-dashboard-mode-map
   :parent special-mode-map
   "r" (lambda () (interactive) (recentf-open-files))
-  "f" (lambda () (interactive) (call-interactively #'find-file))
   "p" #'project-switch-project
   "a" (lambda () (interactive) (org-agenda-list))
   "e" #'elfeed
