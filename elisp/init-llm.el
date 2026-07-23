@@ -20,9 +20,10 @@
   (agent-shell-highlight-blocks t)
   (agent-shell-show-session-id nil)
   (agent-shell-header-style 'text)
-  ( agent-shell-agent-configs
-    '(agent-shell-openai-make-codex-config
-      agent-shell-omp-make-agent-config))
+  (agent-shell-agent-configs
+   (append '(agent-shell-openai-make-codex-config)
+           (when (executable-find "omp")
+             '(agent-shell-omp-make-agent-config))))
   ( agent-shell-session-restore-verbosity 'full)
   ( agent-shell-inhibit-system-sleep nil))
 
