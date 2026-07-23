@@ -255,7 +255,7 @@ by Org before the current buffer is saved."
   :ensure t
   :after org
   :init
-  (setq org-bullets-bullet-list '("⚙" "※" "✥" "⚛" "§" "☩" "♅" "⚔"))
+  (setq org-bullets-bullet-list '("✾" "❃" "❁" "❇" "❊" "᪥" "❉" "⚘"))
   :config
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
