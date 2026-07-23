@@ -50,13 +50,11 @@
 
 (defconst zoro-dashboard--actions
   '(("r" "♖" "Recent Files"   recentf-open-files)
-    ("f" "♘" "Find File"      find-file)
     ("p" "♔" "Projects"       project-switch-project)
     ("a" "♗" "Agenda"         org-agenda-list)
     ("e" "♙" "Elfeed"         elfeed)
     ("n" "♕" "Notes"          zoro-dashboard-open-notes)
-    ("g" "♖" "Gnus"           gnus)
-    ("q" "♙" "Quit"           save-buffers-kill-emacs))
+    ("g" "♘" "Gnus"           gnus))
   "Shortcut, symbol, label, and command for each dashboard action.")
 
 (defvar-local zoro-dashboard--rendering nil)
