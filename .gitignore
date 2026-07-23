@@ -44,3 +44,4 @@
 *.DS_Store
 /.agent-shell/
 /image-dired/
+/elfeed/
