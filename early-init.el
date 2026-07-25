@@ -14,8 +14,25 @@
 (when (version< emacs-version "31.0.90")
   (error "This configuration requires Emacs 31.0.90 or newer"))
 
-;; Stabilize frame geometry before init.el loads the selected theme.
-(setq frame-inhibit-implied-resize t)
+(defvar zoro-system-themes
+  '((light . ef-frost)
+    (dark . ef-autumn))
+  "Themes selected for light and dark system appearances.")
+
+(defun zoro-apply-system-theme (&optional appearance)
+  "Load the configured theme for APPEARANCE or the current system."
+  (let* ((appearance (or appearance
+                         (bound-and-true-p ns-system-appearance)
+                         'light))
+         (theme (alist-get appearance zoro-system-themes)))
+    (unless theme
+      (error "No theme configured for system appearance `%s'" appearance))
+    (mapc #'disable-theme custom-enabled-themes)
+    (load-theme theme t)))
+
+;; Packages are active by `before-init-hook', while the initial graphical
+;; frame has not yet been created.
+(add-hook 'before-init-hook #'zoro-apply-system-theme)
 
 ;; A bounded startup threshold avoids collections without allowing unbounded
 ;; allocation if initialization fails.

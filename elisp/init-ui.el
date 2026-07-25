@@ -14,13 +14,6 @@
 (declare-function set-fontset-font "fontset.c"
                   (fontset characters font-spec &optional frame add))
 
-(defun zoro-apply-theme (appearance)
-  "Load the theme matching system APPEARANCE."
-  (mapc #'disable-theme custom-enabled-themes)
-  (pcase appearance
-    ('light (load-theme 'ef-frost t))
-    ('dark (load-theme 'ef-autumn t))))
-
 (use-package ef-themes
   :ensure t
   :init
@@ -28,8 +21,9 @@
   :config
   (setq modus-themes-mixed-fonts t
         modus-themes-italic-constructs t)
-  (add-hook 'ns-system-appearance-change-functions #'zoro-apply-theme)
-  (zoro-apply-theme 'light))
+  (add-hook 'ns-system-appearance-change-functions
+            #'zoro-apply-system-theme)
+  (zoro-apply-system-theme))
 
 (defun zoro-change-font ()
   "Apply the configured fixed, variable, symbol, emoji, and CJK fonts."

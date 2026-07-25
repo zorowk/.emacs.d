@@ -117,7 +117,6 @@ normal hook, so attach the callback with `add-function'."
       window-combination-resize t
       set-mark-command-repeat-pop t
       help-window-select t
-      browse-url-browser-function #'eww-browse-url
       ediff-window-setup-function 'ediff-setup-windows-plain
       ediff-split-window-function 'split-window-horizontally)
 
