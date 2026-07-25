@@ -13,6 +13,8 @@
 
 (declare-function set-fontset-font "fontset.c"
                   (fontset characters font-spec &optional frame add))
+(declare-function zoro-apply-system-theme "early-init"
+                  (&optional appearance))
 
 (use-package ef-themes
   :ensure t

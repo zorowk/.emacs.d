@@ -44,6 +44,12 @@
 (require 'tex)
 (require 'reftex)
 
+;; Reproduce the real startup dependency: init-ui uses a theme function
+;; defined by early-init.el.  Restore temporary startup state immediately so
+;; compilation retains normal file handling and garbage collection settings.
+(load (expand-file-name "early-init.el" zoro-compile-root) nil 'nomessage)
+(zoro-restore-startup-state)
+
 (let* ((destination (make-temp-file "zoro-byte-compile-" t))
        (byte-compile-error-on-warn t)
        (byte-compile-dest-file-function
