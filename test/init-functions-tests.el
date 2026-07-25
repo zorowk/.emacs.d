@@ -22,24 +22,6 @@
     (should (equal file-name-handler-alist '(("example" . ignore))))
     (should-not (boundp 'file-name-handler-alist-original))))
 
-(ert-deftest zoro-start-server-reuses-running-instance ()
-  (let ((noninteractive nil) started)
-    (cl-letf (((symbol-function 'daemonp) (lambda () nil))
-              ((symbol-function 'server-running-p) (lambda (&optional _) t))
-              ((symbol-function 'server-mode)
-               (lambda (&optional argument) (setq started argument))))
-      (zoro-start-server-if-needed)
-      (should-not started))))
-
-(ert-deftest zoro-start-server-starts-first-instance ()
-  (let ((noninteractive nil) started)
-    (cl-letf (((symbol-function 'daemonp) (lambda () nil))
-              ((symbol-function 'server-running-p) (lambda (&optional _) nil))
-              ((symbol-function 'server-mode)
-               (lambda (&optional argument) (setq started argument))))
-      (zoro-start-server-if-needed)
-      (should (= started 1)))))
-
 (ert-deftest zoro-org-line-range-excludes-delimiters ()
   (zoro-test-with-temp-file "zero\nBEGIN\none\ntwo\nEND\nlast\n" file
     (should (equal (zoro-org-decide-line-range file "^BEGIN$" "^END$")

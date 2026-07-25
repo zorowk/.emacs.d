@@ -27,38 +27,39 @@
             #'zoro-apply-system-theme)
   (zoro-apply-system-theme))
 
-(defun zoro-change-font ()
-  "Apply the configured fixed, variable, symbol, emoji, and CJK fonts."
-  (let ((font-height (if (eq system-type 'darwin) 150 110)))
-    (set-face-attribute 'default nil
-                        :family "JetBrains Mono"
-                        :height font-height))
-  (set-face-attribute 'fixed-pitch nil :family "JetBrains Mono" :height 1.0)
-  (if (eq system-type 'darwin)
-      (set-face-attribute 'variable-pitch nil :family "Georgia" :height 1.0)
-    (set-face-attribute 'variable-pitch nil :family "Gelasio" :height 1.0))
-  (if (eq system-type 'darwin)
-      (progn
-        (set-fontset-font t 'emoji (font-spec :family "Apple Color Emoji"))
-        (set-fontset-font t 'symbol (font-spec :family "STIX Two Math"))
-        (set-fontset-font t 'greek (font-spec :family "Apple Symbols"))
-        (set-fontset-font t 'hangul (font-spec :family "Apple SD Gothic Neo"))
-        (set-fontset-font t 'kana (font-spec :family "Hiragino Maru Gothic ProN"))
-        (set-fontset-font t 'cjk-misc (font-spec :family "PingFang SC"))
-        (set-fontset-font t 'bopomofo (font-spec :family "PingFang SC"))
-        (set-fontset-font t 'han (font-spec :family "PingFang SC")))
-    (set-fontset-font t 'emoji (font-spec :family "Noto Color Emoji"))
-    (set-fontset-font t 'symbol (font-spec :family "Noto Sans Math"))
-    (set-fontset-font t 'greek (font-spec :family "Noto Sans Symbols"))
-    (set-fontset-font t 'hangul (font-spec :family "Noto Sans CJK KR"))
-    (set-fontset-font t 'kana (font-spec :family "Noto Sans CJK JP"))
-    (set-fontset-font t 'han (font-spec :family "Noto Sans CJK SC"))))
-
-(defun zoro-apply-font-to-frame (frame)
-  "Apply configured fonts to graphical FRAME."
-  (with-selected-frame frame
+(defun zoro-apply-font (&optional frame)
+  "Apply configured fonts to graphical FRAME or the selected frame."
+  (with-selected-frame (or frame (selected-frame))
     (when (display-graphic-p)
-      (zoro-change-font))))
+      (let ((font-height (if (eq system-type 'darwin) 150 110)))
+        (set-face-attribute 'default nil
+                            :family "JetBrains Mono"
+                            :height font-height))
+      (set-face-attribute 'fixed-pitch nil
+                          :family "JetBrains Mono" :height 1.0)
+      (set-face-attribute 'variable-pitch nil
+                          :family (if (eq system-type 'darwin)
+                                      "Georgia"
+                                    "Gelasio")
+                          :height 1.0)
+      (dolist (entry
+               (if (eq system-type 'darwin)
+                   '((emoji . "Apple Color Emoji")
+                     (symbol . "STIX Two Math")
+                     (greek . "Apple Symbols")
+                     (hangul . "Apple SD Gothic Neo")
+                     (kana . "Hiragino Maru Gothic ProN")
+                     (cjk-misc . "PingFang SC")
+                     (bopomofo . "PingFang SC")
+                     (han . "PingFang SC"))
+                 '((emoji . "Noto Color Emoji")
+                   (symbol . "Noto Sans Math")
+                   (greek . "Noto Sans Symbols")
+                   (hangul . "Noto Sans CJK KR")
+                   (kana . "Noto Sans CJK JP")
+                   (han . "Noto Sans CJK SC"))))
+        (set-fontset-font t (car entry)
+                          (font-spec :family (cdr entry)))))))
 
 (defun zoro-setup-frame-alpha (&optional frame)
   "Apply transparency and blur to FRAME."
@@ -69,9 +70,8 @@
       (set-frame-parameter nil 'alpha-background 0.95)
       (set-frame-parameter nil 'ns-background-blur 25))))
 
-(when (display-graphic-p)
-  (zoro-change-font))
-(add-hook 'after-make-frame-functions #'zoro-apply-font-to-frame)
+(zoro-apply-font)
+(add-hook 'after-make-frame-functions #'zoro-apply-font)
 
 (global-hl-line-mode 1)
 (setq-default frame-title-format
@@ -89,10 +89,8 @@
   (display-time-mode 1)
   (pixel-scroll-precision-mode 1))
 
-(when (and (display-graphic-p) (not (daemonp)))
-  (zoro-setup-frame-alpha))
-(when (daemonp)
-  (add-hook 'after-make-frame-functions #'zoro-setup-frame-alpha))
+(zoro-setup-frame-alpha)
+(add-hook 'after-make-frame-functions #'zoro-setup-frame-alpha)
 
 (setq mode-line-collapse-minor-modes '(not)
       scroll-margin 1

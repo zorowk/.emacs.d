@@ -16,12 +16,7 @@
   (unless (frame-focus-state)
     (garbage-collect)))
 
-(defun zoro-install-focus-gc ()
-  "Install garbage collection after frame focus changes.
-
-`after-focus-change-function' is an abnormal function variable rather than a
-normal hook, so attach the callback with `add-function'."
-  (add-function :after after-focus-change-function #'zoro-gc-when-unfocused))
+(add-function :after after-focus-change-function #'zoro-gc-when-unfocused)
 
 (defun zoro-abort-minibuffer-using-mouse ()
   "Abort an active minibuffer when the mouse leaves its buffer."
@@ -33,8 +28,6 @@ normal hook, so attach the callback with `add-function'."
   "Show and copy `buffer-file-name' or `buffer-name'."
   (interactive)
   (message (kill-new (or buffer-file-name (buffer-name)))))
-
-(add-hook 'emacs-startup-hook #'zoro-install-focus-gc)
 
 ;; Global bindings.
 (global-set-key (kbd "C-z") nil)
@@ -82,12 +75,8 @@ normal hook, so attach the callback with `add-function'."
 (repeat-mode 1)
 (require 'server)
 
-(defun zoro-start-server-if-needed ()
-  "Start the Emacs server unless another instance already provides it."
-  (unless (or noninteractive (daemonp) (server-running-p))
-    (server-mode 1)))
-
-(zoro-start-server-if-needed)
+(unless (or noninteractive (daemonp) (server-running-p))
+  (server-mode 1))
 (unless noninteractive
   (which-key-mode 1)
   (global-so-long-mode 1))

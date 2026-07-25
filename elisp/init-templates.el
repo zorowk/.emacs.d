@@ -81,18 +81,15 @@ the template available globally."
 (defun zoro-tempo-complete-tag ()
   "Expand the Tempo tag immediately before point."
   (interactive)
-  (zoro-tempo-setup)
   (call-interactively #'tempo-complete-tag))
 
-(defun zoro-tempo-insert (tag)
-  "Select and insert a Tempo template by TAG."
+(defun zoro-tempo-insert (template)
+  "Select and insert a Tempo TEMPLATE."
   (interactive
-   (progn
-     (zoro-tempo-setup)
-     (list (completing-read "Template: " (tempo-build-collection) nil t))))
-  (zoro-tempo-setup)
-  (tempo-insert-template (cdr (assoc tag (tempo-build-collection)))
-                         current-prefix-arg))
+   (let* ((collection (tempo-build-collection))
+          (tag (completing-read "Template: " collection nil t)))
+     (list (cdr (assoc tag collection)))))
+  (tempo-insert-template template current-prefix-arg))
 
 (defvar zoro-tempo-prog-tags nil)
 (defvar zoro-tempo-latex-tags nil)

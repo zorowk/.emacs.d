@@ -13,7 +13,6 @@
 ;;; Code:
 
 (require 'button)
-(require 'recentf)
 
 (defface zoro-dashboard-title
   '((t (:inherit variable-pitch :height 4.2 :weight light)))
@@ -69,10 +68,6 @@
    ((boundp 'zoro-denote-directory) (dired zoro-denote-directory))
    (t (user-error "No notes command is configured"))))
 
-(defun zoro-dashboard--run (command)
-  "Invoke dashboard COMMAND interactively."
-  (call-interactively command))
-
 (defun zoro-dashboard--insert-centered (text &optional face)
   "Insert TEXT centered in the current window, optionally using FACE."
   (let ((rendered (if face (propertize text 'face face) text)))
@@ -125,7 +120,7 @@
      'mouse-face 'highlight
      'follow-link t
      'help-echo (format "[%s] %s" key label)
-     'action (lambda (_) (zoro-dashboard--run command))))
+     'action (lambda (_) (call-interactively command))))
   (when (display-graphic-p)
     (insert (propertize
              " " 'display
@@ -169,17 +164,17 @@ The optional FRAME argument makes this suitable for resize hooks."
 
 (defvar-keymap zoro-dashboard-mode-map
   :parent special-mode-map
-  "r" (lambda () (interactive) (recentf-open-files))
+  "r" #'recentf-open-files
   "p" #'project-switch-project
-  "a" (lambda () (interactive) (org-agenda-list))
+  "a" #'org-agenda-list
   "e" #'elfeed
   "n" #'zoro-dashboard-open-notes
   "g" #'gnus
-  "q" (lambda () (interactive) (save-buffers-kill-emacs))
+  "q" #'save-buffers-kill-emacs
   "j" #'forward-button
-  "k" (lambda () (interactive) (forward-button -1 t))
+  "k" #'backward-button
   "<down>" #'forward-button
-  "<up>" (lambda () (interactive) (forward-button -1 t))
+  "<up>" #'backward-button
   "G" #'zoro-dashboard-render)
 
 (define-derived-mode zoro-dashboard-mode special-mode "Scriptorium"

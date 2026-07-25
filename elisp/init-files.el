@@ -13,6 +13,7 @@
 
 (use-package recentf
   :ensure nil
+  :commands recentf-open-files
   :hook (after-init . recentf-mode)
   :custom
   (recentf-auto-cleanup "05:00am")
