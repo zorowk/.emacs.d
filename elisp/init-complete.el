@@ -46,6 +46,8 @@
               ("M-," . xref-go-back)
               ("M-/" . eglot-find-implementation)
               ("M-i" . eglot-find-declaration)
+              ("C-M-." . xref-find-apropos)
+              ("C-c f" . xref-find-apropos)
               ("C-c l r" . xref-find-references)
               ("C-c l a" . eglot-code-actions)
               ("C-c l f" . eglot-format-buffer))
@@ -56,14 +58,6 @@
                  web-mode js-mode js-ts-mode
                  typescript-mode typescript-ts-mode tsx-mode)
          . eglot-ensure))
-
-;; Query workspace symbols through Consult's completing-read interface.
-(use-package consult-eglot
-  :ensure t
-  :after eglot
-  :bind (:map eglot-mode-map
-              ("C-M-." . consult-eglot-symbols)
-              ("C-c f" . consult-eglot-symbols)))
 
 ;; Corfu renders completion-at-point candidates in a child-frame popup.
 (use-package corfu
