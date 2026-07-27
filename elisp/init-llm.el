@@ -16,16 +16,13 @@
   :defer t
   :bind (("C-z a" . agent-shell))
   :custom
-  (agent-shell-markdown-render-function #'agent-shell-markdown-replace-markup)
-  (agent-shell-highlight-blocks t)
-  (agent-shell-show-session-id nil)
   (agent-shell-header-style 'text)
   (agent-shell-agent-configs
    (append '(agent-shell-openai-make-codex-config)
            (when (executable-find "omp")
              '(agent-shell-omp-make-agent-config))))
-  ( agent-shell-session-restore-verbosity 'full)
-  ( agent-shell-inhibit-system-sleep nil))
+  (agent-shell-session-restore-verbosity 'full)
+  (agent-shell-inhibit-system-sleep nil))
 
 (with-eval-after-load 'agent-shell
   (let ((skills-root
@@ -33,15 +30,7 @@
                            (or (getenv "CODEX_HOME") "~/.codex"))))
     (dolist (extension
              '(("emacs-code-navigator/scripts/agent-shell-code-context.el"
-                . emacs-code-navigator-agent-shell-enable)
-               ("git-commit/scripts/agent-shell-git-review.el"
-                . agent-shell-git-review-enable)
-               ("emacs-gtd-assistant/scripts/agent-shell-gtd-capture.el"
-                . agent-shell-gtd-capture-enable)
-               ("denote-scribe/scripts/agent-shell-denote-capture.el"
-                . agent-shell-denote-capture-enable)
-               ("skill-usage-review/scripts/agent-shell-skill-usage-review.el"
-                . agent-shell-skill-usage-review-enable)))
+                . emacs-code-navigator-agent-shell-enable)))
       (when (load (expand-file-name (car extension) skills-root) t t)
         (funcall (cdr extension))))))
 
