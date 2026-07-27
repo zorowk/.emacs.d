@@ -31,36 +31,19 @@
   (let ((skills-root
          (expand-file-name "skills/"
                            (or (getenv "CODEX_HOME") "~/.codex"))))
-    (when (load
-           (expand-file-name
-            "emacs-code-navigator/scripts/agent-shell-code-context.el"
-            skills-root)
-           t t)
-      (emacs-code-navigator-agent-shell-enable))
-    (when (load
-           (expand-file-name
-            "git-commit/scripts/agent-shell-git-review.el"
-            skills-root)
-           t t)
-      (agent-shell-git-review-enable))
-    (when (load
-           (expand-file-name
-            "emacs-gtd-assistant/scripts/agent-shell-gtd-capture.el"
-            skills-root)
-           t t)
-      (agent-shell-gtd-capture-enable))
-    (when (load
-           (expand-file-name
-            "denote-scribe/scripts/agent-shell-denote-capture.el"
-            skills-root)
-           t t)
-      (agent-shell-denote-capture-enable))
-    (when (load
-           (expand-file-name
-            "skill-usage-review/scripts/agent-shell-skill-usage-review.el"
-            skills-root)
-           t t)
-      (agent-shell-skill-usage-review-enable))))
+    (dolist (extension
+             '(("emacs-code-navigator/scripts/agent-shell-code-context.el"
+                . emacs-code-navigator-agent-shell-enable)
+               ("git-commit/scripts/agent-shell-git-review.el"
+                . agent-shell-git-review-enable)
+               ("emacs-gtd-assistant/scripts/agent-shell-gtd-capture.el"
+                . agent-shell-gtd-capture-enable)
+               ("denote-scribe/scripts/agent-shell-denote-capture.el"
+                . agent-shell-denote-capture-enable)
+               ("skill-usage-review/scripts/agent-shell-skill-usage-review.el"
+                . agent-shell-skill-usage-review-enable)))
+      (when (load (expand-file-name (car extension) skills-root) t t)
+        (funcall (cdr extension))))))
 
 (provide 'init-llm)
 ;;; init-llm.el ends here
