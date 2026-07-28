@@ -48,25 +48,15 @@
   :group 'faces)
 
 (defconst zoro-dashboard--actions
-  '(("r" "♖" "Recent Files"   recentf-open-files)
+  '(("r" "♖" "Recent Files"   consult-recent-file)
     ("p" "♔" "Projects"       project-switch-project)
-    ("a" "♗" "Agenda"         org-agenda-list)
+    ("a" "♗" "Agenda"         consult-org-agenda)
     ("e" "♙" "Elfeed"         elfeed)
-    ("n" "♕" "Notes"          zoro-dashboard-open-notes)
-    ("g" "♘" "Gnus"           gnus))
+    ("n" "♕" "Notes"          consult-denote-find)
+    ("b" "♘" "Bookmark"       consult-bookmark))
   "Shortcut, symbol, label, and command for each dashboard action.")
 
 (defvar-local zoro-dashboard--rendering nil)
-
-(defun zoro-dashboard-open-notes ()
-  "Open the configured notes interface."
-  (interactive)
-  (cond
-   ((fboundp 'consult-denote-find) (call-interactively #'consult-denote-find))
-   ((fboundp 'denote-open-or-create)
-    (call-interactively #'denote-open-or-create))
-   ((boundp 'zoro-denote-directory) (dired zoro-denote-directory))
-   (t (user-error "No notes command is configured"))))
 
 (defun zoro-dashboard--insert-centered (text &optional face)
   "Insert TEXT centered in the current window, optionally using FACE."
@@ -166,16 +156,16 @@ The optional FRAME argument makes this suitable for resize hooks."
   :parent special-mode-map
   "r" #'consult-recent-file
   "p" #'project-switch-project
-  "a" #'org-agenda-list
+  "a" #'consult-org-agenda
   "e" #'elfeed
-  "n" #'zoro-dashboard-open-notes
-  "g" #'gnus
+  "n" #'consult-denote-find
+  "b" #'consult-bookmark
   "q" #'save-buffers-kill-emacs
   "j" #'forward-button
   "k" #'backward-button
   "<down>" #'forward-button
   "<up>" #'backward-button
-  "G" #'zoro-dashboard-render)
+  "g" #'zoro-dashboard-render)
 
 (define-derived-mode zoro-dashboard-mode special-mode "Scriptorium"
   "Major mode for the Scriptorium startup page."
