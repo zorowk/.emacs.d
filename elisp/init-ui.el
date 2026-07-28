@@ -92,6 +92,8 @@
 (zoro-setup-frame-alpha)
 (add-hook 'after-make-frame-functions #'zoro-setup-frame-alpha)
 
+(setopt project-mode-line 'non-remote)
+
 (setq mode-line-collapse-minor-modes '(not)
       scroll-margin 1
       scroll-conservatively 101
