@@ -16,10 +16,20 @@
   :bind
   (("C-x C-j" . dired-jump))
   :custom
-  ;; Always delete and copy recursively
   (dired-listing-switches "-lah")
+  ;; Keep long names readable and movement on file lines.
+  (dired-filename-display-length 'window)
+  (dired-movement-style 'bounded-files)
+  ;; Search file names when point is on one, otherwise search all text.
+  (dired-isearch-filenames 'dwim)
+  ;; Offer to create missing destination directories when copying or moving.
+  (dired-create-destination-dirs 'ask)
+  (dired-create-destination-dirs-on-trailing-dirsep t)
+  ;; Always delete and copy recursively
   (dired-recursive-deletes 'top)
   (dired-recursive-copies 'always)
+  ;; Allow dragging files from Dired to other graphical applications.
+  (dired-mouse-drag-files t)
   ;; Auto refresh Dired, but be quiet about it
   (global-auto-revert-non-file-buffers t)
   (auto-revert-verbose nil)
