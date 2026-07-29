@@ -43,14 +43,14 @@
   :group 'faces)
 
 (defface zoro-dashboard-key
-  '((t (:inherit font-lock-keyword-face :weight bold)))
+  '((t (:inherit shadow :weight bold)))
   "Face for dashboard shortcut keys."
   :group 'faces)
 
 (defconst zoro-dashboard--actions
-  '(("r" "♖" "Recent Files"   consult-recent-file)
+  '(("r" "♖" "Recent Files"   recesuodntf-open-files)
     ("p" "♔" "Projects"       project-switch-project)
-    ("a" "♗" "Agenda"         consult-org-agenda)
+    ("a" "♗" "Agenda"         org-agenda-list)
     ("e" "♙" "Elfeed"         elfeed)
     ("n" "♕" "Notes"          consult-denote-find)
     ("b" "♘" "Bookmark"       consult-bookmark))
