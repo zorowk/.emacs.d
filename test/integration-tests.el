@@ -45,6 +45,9 @@
       (let ((package (cadr form)))
         (should (zoro-test-bundled-library-p package))))))
 
+(ert-deftest zoro-integration-crux-is-pinned-to-melpa ()
+  (should (equal (alist-get 'crux package-pinned-packages) "melpa")))
+
 (ert-deftest zoro-integration-completion-roles-are-explicit ()
   (should (equal completion-styles '(orderless basic)))
   (should (equal (alist-get 'file completion-category-overrides)
@@ -107,15 +110,13 @@
         (setq count (1+ count)))
       (should (= count 1)))))
 
-(ert-deftest zoro-integration-crux-uses-vc-source ()
-  (let* ((form (seq-find (lambda (candidate)
-                           (eq (cadr candidate) 'crux))
-                         (zoro-test-use-package-forms)))
-         (vc (plist-get (cddr form) :vc)))
+(ert-deftest zoro-integration-crux-uses-package-archive ()
+  (let ((form (seq-find (lambda (candidate)
+                          (eq (cadr candidate) 'crux))
+                        (zoro-test-use-package-forms))))
     (should form)
-    (should (equal (plist-get vc :url)
-                   "https://github.com/bbatsov/crux.git"))
-    (should (eq (plist-get vc :rev) :newest))))
+    (should (eq (plist-get (cddr form) :ensure) t))
+    (should-not (memq :vc (cddr form)))))
 
 (ert-deftest zoro-integration-hyperbole-provides-hywiki ()
   (require 'hywiki)

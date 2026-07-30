@@ -21,9 +21,16 @@
       '(("gnu" . 30)
         ("nongnu" . 20)
         ("melpa" . 10))
+      package-pinned-packages
+      '((crux . "melpa"))
       ;; Never replace a library bundled with Emacs 31 merely because an
       ;; archive carries a newer version.
       package-install-upgrade-built-in nil)
+
+;; Package activation happens before init.el and may have populated archive
+;; metadata before the archives and pins above were configured.  Reload it on
+;; demand so future installs and upgrades honor `package-pinned-packages'.
+(setq package-archive-contents nil)
 
 ;; Normal startup activates installed packages after early-init.el and before
 ;; init.el.  Keep activation on that lightweight built-in path instead of

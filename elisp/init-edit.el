@@ -18,8 +18,7 @@
          ("C--" . expreg-contract)))
 
 (use-package crux
-  :vc (:url "https://github.com/bbatsov/crux.git"
-       :rev :newest)
+  :ensure t
   :bind
   (("C-a" . crux-move-beginning-of-line)
    ("C-x 4 t" . crux-transpose-windows)
