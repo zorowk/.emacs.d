@@ -46,6 +46,7 @@
 
 (use-package popper
   :ensure t
+  :demand t
   :bind (("C-`"   . popper-toggle)
          ("M-`"   . popper-cycle)
          ("C-M-`" . popper-toggle-type))
