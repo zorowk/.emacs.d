@@ -12,8 +12,7 @@
 (require 'init-const)
 
 (use-package hyperbole
-  :vc (:url "https://git.savannah.gnu.org/git/hyperbole.git"
-       :rev :newest)
+  :ensure t
   :bind (("C-z h" . hyperbole))
   :init
   ;; Set every personal data path before Hyperbole loads so none of its
