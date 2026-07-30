@@ -49,11 +49,11 @@
 
 (defconst zoro-dashboard--actions
   '(("r" "♖" "Recent Files"   recesuodntf-open-files)
+    ("b" "♘" "Bookmark"       consult-bookmark)
     ("p" "♔" "Projects"       project-switch-project)
     ("a" "♗" "Agenda"         org-agenda-list)
     ("e" "♙" "Elfeed"         elfeed)
-    ("n" "♕" "Notes"          consult-denote-find)
-    ("b" "♘" "Bookmark"       consult-bookmark))
+    ("n" "♕" "Notes"          consult-denote-find))
   "Shortcut, symbol, label, and command for each dashboard action.")
 
 (defvar-local zoro-dashboard--rendering nil)
