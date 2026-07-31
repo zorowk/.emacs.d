@@ -185,6 +185,12 @@ The optional FRAME argument makes this suitable for resize hooks."
     (zoro-dashboard-mode))
   (zoro-dashboard-render))
 
+(defun zoro-dashboard-report-startup ()
+  "Report the activated package count and completed startup time."
+  (message "Dashboard loaded: %d packages in %s"
+           (length package-activated-list)
+           (emacs-init-time)))
+
 (defun zoro-open-dashboard ()
   "Open and refresh the Scriptorium dashboard."
   (interactive)
@@ -198,6 +204,7 @@ The optional FRAME argument makes this suitable for resize hooks."
   (global-set-key (kbd "C-z") (make-sparse-keymap)))
 (global-set-key (kbd "C-z d") #'zoro-open-dashboard)
 (add-hook 'window-size-change-functions #'zoro-dashboard-render 100)
+(add-hook 'after-init-hook #'zoro-dashboard-report-startup 100)
 
 (provide 'init-dashboard)
 ;;; init-dashboard.el ends here
