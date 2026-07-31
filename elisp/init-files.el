@@ -11,6 +11,12 @@
 
 ;;; Code:
 
+(use-package markdown-mode
+  :ensure t
+  :mode (("\\.\\(?:md\\|markdown\\|mkd\\|mdown\\|mkdn\\|mdwn\\)\\'"
+          . markdown-mode)
+         ("README\\.md\\'" . gfm-mode)))
+
 (use-package recentf
   :ensure nil
   :commands recentf-open-files
