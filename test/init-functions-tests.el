@@ -11,6 +11,33 @@
 (ert-deftest zoro-version-baseline-accepts-current-emacs ()
   (should (version<= "31.0.90" emacs-version)))
 
+(ert-deftest zoro-system-theme-defers-when-package-is-unavailable ()
+  (let ((custom-enabled-themes '(existing-theme))
+        disabled-themes
+        loaded-theme)
+    (cl-letf (((symbol-function 'custom-available-themes) (lambda () nil))
+              ((symbol-function 'disable-theme)
+               (lambda (theme) (push theme disabled-themes)))
+              ((symbol-function 'load-theme)
+               (lambda (theme &rest _) (setq loaded-theme theme))))
+      (should-not (zoro-apply-system-theme 'light)))
+    (should-not disabled-themes)
+    (should-not loaded-theme)))
+
+(ert-deftest zoro-system-theme-loads-when-package-is-available ()
+  (let ((custom-enabled-themes '(existing-theme))
+        disabled-themes
+        loaded-theme)
+    (cl-letf (((symbol-function 'custom-available-themes)
+               (lambda () '(ef-frost)))
+              ((symbol-function 'disable-theme)
+               (lambda (theme) (push theme disabled-themes)))
+              ((symbol-function 'load-theme)
+               (lambda (theme &rest _) (setq loaded-theme theme))))
+      (zoro-apply-system-theme 'light))
+    (should (equal disabled-themes '(existing-theme)))
+    (should (eq loaded-theme 'ef-frost))))
+
 (ert-deftest zoro-restore-startup-state-restores-bounded-values ()
   (let ((gc-cons-threshold most-positive-fixnum)
         (gc-cons-percentage 0.9)

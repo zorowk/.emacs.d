@@ -20,15 +20,20 @@
   "Themes selected for light and dark system appearances.")
 
 (defun zoro-apply-system-theme (&optional appearance)
-  "Load the configured theme for APPEARANCE or the current system."
+  "Load the configured theme for APPEARANCE or the current system.
+Defer loading when the theme package is not available yet."
   (let* ((appearance (or appearance
                          (bound-and-true-p ns-system-appearance)
                          'light))
          (theme (alist-get appearance zoro-system-themes)))
     (unless theme
       (error "No theme configured for system appearance `%s'" appearance))
-    (mapc #'disable-theme custom-enabled-themes)
-    (load-theme theme t)))
+    (if (memq theme (custom-available-themes))
+        (progn
+          (mapc #'disable-theme custom-enabled-themes)
+          (load-theme theme t))
+      (message "Theme `%s' is not available yet; deferring" theme)
+      nil)))
 
 ;; Packages are active by `before-init-hook', while the initial graphical
 ;; frame has not yet been created.
