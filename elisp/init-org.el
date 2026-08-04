@@ -129,16 +129,17 @@ by Org before the current buffer is saved."
         '("TODO={.+}/-DONE" nil nil "SCHEDULED:\\|DEADLINE:"))
 
   (setq org-todo-keywords
-        (quote ((sequence "TODO(t)" "STARTED(s)" "|" "DONE(d!/!)")
-                (sequence "WAITING(w@/!)" "SOMEDAY(S)" "|" "CANCELLED(c@/!)" "MEETING(m)"))))
+        (quote ((sequence "TODO(t)" "STARTED(s)" "|" "DONE(d)")
+                (sequence "WAITING(w@/!)" "SOMEDAY(S)" "MEETING(m)" "|"
+                          "CANCELLED(c@/!)"))))
 
   ;; Change task state to STARTED when clocking in
   (setq org-clock-in-switch-to-state "STARTED")
   ;; Save clock data and notes in the LOGBOOK drawer
   (setq org-clock-into-drawer t)
   (setq org-log-into-drawer t)
-  ;; Removes clocked tasks with 0:00 duration
-  (setq org-clock-out-remove-zero-time-clocks t) ;; Show the clocked-in task - if any - in the header line
+  ;; Remove clock entries with a 0:00 duration.
+  (setq org-clock-out-remove-zero-time-clocks t)
   (setq org-tags-match-list-sublevels nil)
 
   (org-babel-do-load-languages
@@ -152,37 +153,23 @@ by Org before the current buffer is saved."
      (maxima . t)
      (gnuplot . t)))
 
-  ;; define the refile targets
+  ;; Define agenda and capture targets.
   (setq org-agenda-dir zoro-org-directory)
   (setq org-agenda-file-note (expand-file-name "notes.org" org-agenda-dir))
   (setq org-agenda-file-gtd (expand-file-name "gtd.org" org-agenda-dir))
-  (setq org-agenda-file-code-snippet (expand-file-name "snippet.org" org-agenda-dir))
   (setq org-default-notes-file (expand-file-name "gtd.org" org-agenda-dir))
-  (setq org-agenda-files (list org-agenda-dir))
+  (setq org-agenda-files (list org-agenda-file-gtd org-agenda-file-note))
 
-  ;; the %i would copy the selected text into the template
-  ;;http://www.howardism.org/Technical/Emacs/journaling-org.html
-  ;;add multi-file journal
+  ;; `%i' inserts the active region into a capture template.
   (setq org-capture-templates
         '(("t" "Todo" entry (file+headline org-agenda-file-gtd "Personal")
-           "* TODO [#B] %?\n  %i\n"
+           "* TODO [#B] %?\n:PROPERTIES:\n:CREATED: %U\n:END:\n  %i\n"
            :empty-lines 1)
-          ("n" "notes" entry (file+headline org-agenda-file-note "Quick notes")
-           "* %?\n  %i\n %U"
+          ("n" "Notes" entry (file+headline org-agenda-file-note "Quick notes")
+           "* %?\n:PROPERTIES:\n:CREATED: %U\n:END:\n  %i\n"
            :empty-lines 1)
-          ("l" "Learn" entry (file+headline org-agenda-file-note "Learning")
-           "* TODO [#B] %?\n  %i\n %U"
-           :empty-lines 1)
-          ("s" "Code Snippet" entry (file org-agenda-file-code-snippet)
-           "* %?\t%^g\n#+BEGIN_SRC %^{language}\n\n#+END_SRC")
-          ("w" "work" entry (file+headline org-agenda-file-gtd "Deepin")
-           "* TODO [#A] %?\n  %i\n %U"
-           :empty-lines 1)
-          ("p" "Protocol" entry (file+headline org-agenda-file-note "Chrome Content")
-           "* %^{Title}\nSource: %u, %c\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?"
-           :empty-lines 1)
-          ("L" "Protocol Link" entry (file+headline org-agenda-file-note "Chrome Links")
-           "* %? [[%:link][%:description]] \nCaptured On: %U"
+          ("w" "Work" entry (file+headline org-agenda-file-gtd "Deepin")
+           "* TODO [#A] %?\n:PROPERTIES:\n:CREATED: %U\n:END:\n  %i\n"
            :empty-lines 1))))
 
 (use-package denote
