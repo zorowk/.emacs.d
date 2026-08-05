@@ -31,13 +31,7 @@
 
 ;; Global bindings.
 (global-set-key (kbd "C-z") nil)
-(global-set-key (kbd "M-z") nil)
-(global-set-key (kbd "M-m") nil)
-(global-set-key (kbd "C-x C-z") nil)
-(global-set-key (kbd "M-/") nil)
 (global-set-key (kbd "C-x C-l") #'toggle-truncate-lines)
-(global-set-key (kbd "M-n") #'forward-paragraph)
-(global-set-key (kbd "M-p") #'backward-paragraph)
 (global-set-key (kbd "C-h C-f") #'find-function)
 (global-set-key (kbd "C-h C-l") #'find-library)
 (global-set-key (kbd "C-h C-k") #'find-function-on-key)

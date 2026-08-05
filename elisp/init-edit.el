@@ -42,8 +42,8 @@
   :ensure t
   :defer t
   :bind
-  (("C-z j" . avy-goto-char-timer)
-   ("C-z l" . avy-goto-line))
+  (("C-c j" . avy-goto-char-timer)
+   ("C-c l" . avy-goto-line))
   :custom
   (avy-timeout-seconds 0.3)
   (avy-style 'pre)
