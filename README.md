@@ -9,7 +9,7 @@
 ## 功能概览
 
 - 补全：Corfu、Cape、Vertico、Orderless、Consult、Embark、Marginalia
-- 开发：Eglot、内置 Tree-sitter、ESS、AUCTeX、Magit
+- 开发：Eglot、内置 Tree-sitter、AUCTeX、Magit
 - 编辑：内置 Electric Pair 与 Tempo、Expreg、Avy、Ace Window、Vundo
 - 笔记：Org、Denote、Consult Denote、Org Bullets、rec-mode
 - 个人知识库：Hyperbole、HyWiki、HyRolo、HyNote

@@ -50,7 +50,7 @@
 (require 'init-templates)
 
 ;; Programming
-(require 'init-ess)
+(require 'init-gnuplot)
 
 (require 'init-latex)
 
