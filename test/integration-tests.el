@@ -27,16 +27,6 @@
               (memq :vc (cddr form)))
       (should (package-installed-p (cadr form))))))
 
-(ert-deftest zoro-integration-rec-mode-owns-rec-files ()
-  (let ((form (seq-find (lambda (candidate)
-                          (eq (cadr candidate) 'rec-mode))
-                        (zoro-test-use-package-forms))))
-    (should form)
-    (should (eq (plist-get (cddr form) :ensure) t))
-    (should (equal (plist-get (cddr form) :mode)
-                   '("\\.rec\\'" . rec-mode)))
-    (should (eq (cdr (assoc "\\.rec\\'" auto-mode-alist)) 'rec-mode))))
-
 (ert-deftest zoro-integration-builtins-are-not-replaced-by-archives ()
   (should-not package-install-upgrade-built-in)
   (dolist (form (zoro-test-use-package-forms))

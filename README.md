@@ -11,7 +11,7 @@
 - 补全：Corfu、Cape、Vertico、Orderless、Consult、Embark、Marginalia
 - 开发：Eglot、内置 Tree-sitter、AUCTeX、Magit
 - 编辑：内置 Electric Pair 与 Tempo、Expreg、Avy、Ace Window、Vundo
-- 笔记：Org、Denote、Consult Denote、Org Bullets、rec-mode
+- 笔记：Org、Denote、Consult Denote、Org Bullets
 - 个人知识库：Hyperbole、HyWiki、HyRolo、HyNote
 - 阅读与网络：EWW、Elfeed、Nov、Elpher、ERC、Gnus
 - 界面：Ef Themes、Spacious Padding、Pulsar、Popper、Olivetti、Dashboard，以及紧凑的 mode-line
@@ -59,9 +59,7 @@ Hyperbole 的个人数据统一保存在 Dropbox 中：
 | `~/Dropbox/public_hywiki/` | HyWiki 发布的 HTML 文件 |
 | `~/Dropbox/rolo.org` | HyRolo 个人条目 |
 
-HyNote 默认搜索 Dropbox 下的 `brain/`、`notes/` 和 `hywiki/`。打开 `.rec` 文件时，
-`rec-mode` 会自动启用，用于浏览和编辑 GNU Recutils 数据文件；使用其查询、统计和校验
-功能时还需要安装 GNU Recutils 命令行工具。
+HyNote 默认搜索 Dropbox 下的 `brain/`、`notes/` 和 `hywiki/`。
 
 内置模板使用 `M-+` 展开光标前的标签，或使用 `M-*` 从当前 major mode 可用的模板中
 选择。模板插入后可通过 `C-c t n` 跳到下一个占位位置。
