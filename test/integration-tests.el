@@ -12,7 +12,7 @@
   (dolist (feature '(init-const init-package init-ui init-core init-files
                      init-development init-search init-edit init-shell
                      init-dired init-buffer init-theme init-dashboard
-                     init-complete init-templates init-ess init-latex init-org
+                     init-complete init-templates init-gnuplot init-latex init-org
                      init-hyperbole init-reader init-erc init-llm init-gnus))
     (should (featurep feature))))
 

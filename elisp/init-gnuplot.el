@@ -1,4 +1,4 @@
-;;; init-ess.el --- Gnuplot programming tools -*- lexical-binding: t -*-
+;;; init-gnuplot.el --- Gnuplot programming tools -*- lexical-binding: t -*-
 
 ;; Author: Mingde (Matthew) Zeng
 ;; Maintainer: zorowk

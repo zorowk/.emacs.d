@@ -81,7 +81,6 @@
       help-mode
       pydoc-mode
       inferior-python-mode
-      inferior-ess-mode
       TeX-special-mode
       messages-buffer-mode
       dictionary-mode
