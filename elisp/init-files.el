@@ -11,11 +11,10 @@
 
 ;;; Code:
 
-(use-package markdown-mode
-  :ensure t
+(use-package markdown-ts-mode
+  :ensure nil
   :mode (("\\.\\(?:md\\|markdown\\|mkd\\|mdown\\|mkdn\\|mdwn\\)\\'"
-          . markdown-mode)
-         ("README\\.md\\'" . gfm-mode)))
+          . markdown-ts-mode)))
 
 (use-package recentf
   :ensure nil
@@ -59,7 +58,7 @@
                  ("\\.args\\'" . text-mode)
                  ("\\.bb\\'" . shell-script-mode)
                  ("\\.bbclass\\'" . shell-script-mode)
-                 ("\\.Rmd\\'" . markdown-mode)))
+                 ("\\.Rmd\\'" . markdown-ts-mode)))
   (add-to-list 'auto-mode-alist entry))
 
 (add-hook 'after-save-hook

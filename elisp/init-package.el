@@ -22,8 +22,7 @@
         ("nongnu" . 20)
         ("melpa" . 10))
       package-pinned-packages
-      '((crux . "melpa")
-        (markdown-mode . "melpa"))
+      '((crux . "melpa"))
       ;; Never replace a library bundled with Emacs 31 merely because an
       ;; archive carries a newer version.
       package-install-upgrade-built-in nil)

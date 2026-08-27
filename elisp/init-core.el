@@ -56,7 +56,7 @@
 (add-hook 'text-mode-hook #'delete-trailing-whitespace-mode)
 (add-hook 'conf-mode-hook #'delete-trailing-whitespace-mode)
 (add-hook 'org-mode-hook (lambda () (delete-trailing-whitespace-mode -1)))
-(add-hook 'markdown-mode-hook
+(add-hook 'markdown-ts-mode-hook
           (lambda () (delete-trailing-whitespace-mode -1)))
 (add-hook 'makefile-mode-hook #'indent-tabs-mode)
 (add-hook 'prog-mode-hook #'editorconfig-mode)
