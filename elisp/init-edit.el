@@ -54,33 +54,6 @@
   :ensure t
   :bind ("C-z u" . vundo))
 
-(use-package ace-window
-  :ensure t
-  :bind ("C-x C-o" . ace-window)
-  :custom-face (aw-mode-line-face ((t (:inherit (bold mode-line-emphasis)))))
-  :config
-  (ace-window-display-mode 1)
-  (setq aw-swap-invert t)
-  (setq aw-dispatch-always t
-        aw-scope 'global
-        aw-background nil
-        aw-display-mode-overlay nil
-        ;; Keep window selection keys disjoint from `aw-dispatch-alist';
-        ;; dispatch keys are ignored when they also name candidate windows.
-        aw-keys '(?q ?w ?e ?r ?t ?y ?u ?i ?p))
-  (setq aw-dispatch-alist
-        '((?k aw-delete-window "Delete Window")
-          (?x aw-swap-window "Swap Windows")
-          (?c aw-copy-window "Copy Window")
-          (?j aw-switch-buffer-in-window "Select Buffer")
-          (?o aw-flip-window "Flip Window")
-          (?b aw-switch-buffer-other-window "Switch Buffer Other Window")
-          (?f aw-split-window-fair "Split Fair Window")
-          (?v aw-split-window-vert "Split Vert Window")
-          (?h aw-split-window-horz "Split Horz Window")
-          (?d delete-other-windows "Delete Other Windows")
-          (?? aw-show-dispatch-help))))
-
 (use-package elec-pair
   :ensure nil
   :hook (prog-mode . electric-pair-local-mode)
