@@ -22,6 +22,7 @@
            (when (executable-find "omp")
              '(agent-shell-omp-make-agent-config))))
   (agent-shell-session-restore-verbosity 'full)
+  (agent-shell-busy-indicator-frames "")
   (agent-shell-inhibit-system-sleep nil))
 
 (with-eval-after-load 'agent-shell
