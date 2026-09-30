@@ -28,9 +28,7 @@
                '((c-mode c-ts-mode c++-mode c++-ts-mode) .
                  ("clangd"
                   "--background-index"
-                  "--clang-tidy"
                   "--header-insertion=never"
-                  "--limit-results=15"
                   "--pch-storage=memory")))
   (add-to-list 'eglot-server-programs
                '((python-mode python-ts-mode) . ("pyright-langserver" "--stdio")))
@@ -39,7 +37,7 @@
   (add-to-list 'eglot-server-programs
                '((latex-mode LaTeX-mode) . ("texlab")))
   (add-to-list 'eglot-server-programs
-               '((web-mode js-mode js-ts-mode typescript-mode typescript-ts-mode tsx-mode) .
+               '((js-mode js-ts-mode typescript-mode typescript-ts-mode tsx-mode) .
                  ("typescript-language-server" "--stdio")))
   :bind (:map eglot-mode-map
               ("M-." . xref-find-definitions)
@@ -55,9 +53,15 @@
                  python-mode python-ts-mode
                  rust-mode rust-ts-mode
                  latex-mode LaTeX-mode
-                 web-mode js-mode js-ts-mode
+                 js-mode js-ts-mode
                  typescript-mode typescript-ts-mode tsx-mode)
          . eglot-ensure))
+
+;; Keep diagnostics available without filling every line with annotations.
+(use-package flymake
+  :ensure nil
+  :custom
+  (flymake-inline-diagnostics '((current . short) (t . nil))))
 
 ;; Corfu renders completion-at-point candidates in a child-frame popup.
 (use-package corfu

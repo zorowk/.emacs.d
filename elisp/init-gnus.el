@@ -11,6 +11,8 @@
 
 (require 'init-const)
 
+(declare-function gnus-article-add-buttons "gnus-art" ())
+
 (use-package gnus
   :ensure nil
   :defer t

@@ -61,8 +61,7 @@
 (add-hook 'makefile-mode-hook #'indent-tabs-mode)
 (add-hook 'prog-mode-hook #'editorconfig-mode)
 
-(setopt indent-tabs-mode nil
-        isearch-lazy-count t
+(setopt isearch-lazy-count t
         eldoc-help-at-pt t
         split-window-preferred-direction 'horizontal)
 (delete-selection-mode 1)
@@ -91,7 +90,6 @@
       warning-minimum-level :warning
       epg-pinentry-mode 'loopback
       bidi-inhibit-bpa t
-      redisplay-skip-fontification-on-input t
       read-process-output-max (* 4 1024 1024)
       highlight-nonselected-windows nil
       save-interprogram-paste-before-kill t

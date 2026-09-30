@@ -13,6 +13,9 @@
 
 (require 'seq)
 
+(declare-function erc-send-current-line "erc" ())
+(declare-function erc-server-delayed-check-reconnect "erc-backend" (buffer))
+
 (use-package erc
   :ensure nil
   :defer t
