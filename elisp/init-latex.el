@@ -18,10 +18,6 @@
   (TeX-auto-save t)
   (TeX-parse-self t)
   (TeX-master nil)
-  ;; to use pdfview with auctex
-  (TeX-view-program-selection '((output-pdf "pdf-tools")))
-  (TeX-source-correlate-start-server t)
-  (TeX-view-program-list '(("pdf-tools" "TeX-pdf-tools-sync-view")))
   :hook
   (LaTeX-mode . (lambda ()
                   (turn-on-reftex)
