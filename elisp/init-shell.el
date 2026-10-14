@@ -7,7 +7,7 @@
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
 ;;; Commentary:
-;; Import environment variables asynchronously for graphical macOS sessions.
+;; Import environment variables asynchronously for graphical sessions on Linux and macOS.
 
 ;;; Code:
 
@@ -46,6 +46,7 @@
 
 (defun zoro-import-shell-environment ()
   "Import selected variables from an interactive login shell asynchronously."
+  (interactive)
   (let ((output (generate-new-buffer " *login-shell-environment*"))
         (errors (generate-new-buffer " *login-shell-errors*")))
     (condition-case err

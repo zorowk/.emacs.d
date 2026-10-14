@@ -69,7 +69,7 @@
 (require 'init-gnus)
 
 (unless noninteractive
-  (when (memq window-system '(mac ns))
+  (when (display-graphic-p)
     (zoro-import-shell-environment))
   (zoro-dashboard-load))
 
