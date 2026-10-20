@@ -13,6 +13,7 @@
 
 (require 'seq)
 
+(declare-function erc-services-mode "erc-services" (&optional arg))
 (declare-function erc-send-current-line "erc" ())
 (declare-function erc-server-delayed-check-reconnect "erc-backend" (buffer))
 

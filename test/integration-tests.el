@@ -13,7 +13,7 @@
                      init-development init-search init-edit init-shell
                      init-dired init-buffer init-theme init-dashboard
                      init-complete init-templates init-gnuplot init-latex init-org
-                     init-hyperbole init-reader init-erc init-llm init-gnus))
+                     init-reader init-erc init-llm init-gnus))
     (should (featurep feature))))
 
 (ert-deftest zoro-integration-package-declarations-have-explicit-origin ()
@@ -108,35 +108,11 @@
     (should (eq (plist-get (cddr form) :ensure) t))
     (should-not (memq :vc (cddr form)))))
 
-(ert-deftest zoro-integration-hyperbole-provides-hywiki ()
-  (require 'hywiki)
-  (should (fboundp 'hywiki-mode)))
-
-(ert-deftest zoro-integration-hyperbole-data-stays-in-dropbox ()
-  (let ((dropbox-root
-         (file-name-as-directory (expand-file-name zoro-dropbox-directory))))
-    (dolist (path (list zoro-hyperbole-directory
-                        zoro-hywiki-directory
-                        zoro-hywiki-publishing-directory
-                        zoro-hyrolo-file
-                        hbmap:dir-user
-                        hbmap:dir-filename
-                        hywiki-directory
-                        hywiki-org-publishing-directory
-                        hyrolo-default-file))
-      (should (string-prefix-p dropbox-root (expand-file-name path)))))
-  (should (equal hbmap:dir-user zoro-hyperbole-directory))
-  (should (equal hbmap:dir-filename
-                 (expand-file-name "HBMAP" zoro-hyperbole-directory)))
-  (should (equal hywiki-directory zoro-hywiki-directory))
-  (should (equal hywiki-org-publishing-directory
-                 zoro-hywiki-publishing-directory))
-  (should (equal hyrolo-default-file zoro-hyrolo-file))
-  (should (equal hyrolo-file-list (list zoro-hyrolo-file)))
-  (should (equal hynote-directory-list
-                 (list zoro-org-directory
-                       zoro-denote-directory
-                       zoro-hywiki-directory))))
+(ert-deftest zoro-integration-removed-hyperbole-stays-disabled ()
+  (should-not (featurep 'hyperbole))
+  (should-not (featurep 'hywiki))
+  (should-not (memq 'hyperbole package-selected-packages))
+  (should-not (lookup-key global-map (kbd "C-z h"))))
 
 (ert-deftest zoro-integration-org-agent-task-entry-points ()
   (require 'org-agenda)

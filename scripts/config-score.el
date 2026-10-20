@@ -142,8 +142,8 @@
                (+ (if (seq-every-p (lambda (word) (string-match-p word readme))
                                     '("Org" "Denote" "AI")) 3 0)
                   (if (and (string-match-p "org-capture-templates" all-elisp)
-                           (string-match-p "hywiki-directory" all-elisp)) 2 0))
-               "Practical configuration for Org/Denote/AI, GTD capture, and HyWiki")))
+                           (string-match-p "emacs-gtd-agent-enable" all-elisp)) 2 0))
+               "Practical configuration for Org/Denote/AI, GTD capture, and project AI sessions")))
        (total (apply #'+ (mapcar (lambda (row) (nth 2 row)) rows)))
        (report
         (concat

@@ -11,5 +11,3 @@ There are currently no open findings.
   macros and duplicate `crux-eval-and-replace` key are no longer configured.
 - The compiler loads AUCTeX and RefTeX declarations before checking the
   unchanged deferred LaTeX configuration with warnings as errors.
-- Hyperbole follows the official Savannah repository through Emacs 31
-  `use-package :vc`, providing the 9.0.2pre HyWiki API.

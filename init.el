@@ -57,7 +57,6 @@
 ;; Office
 (require 'init-org)
 
-(require 'init-hyperbole)
 
 (require 'init-reader)
 

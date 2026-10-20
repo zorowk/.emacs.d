@@ -12,7 +12,6 @@
 - 开发：Eglot、内置 Tree-sitter、AUCTeX、Magit
 - 编辑：内置 Electric Pair 与 Tempo、Expreg、Avy、Ace Window、Vundo
 - 笔记：Org、Denote、Consult Denote、Org Bullets
-- 个人知识库：Hyperbole、HyWiki、HyRolo、HyNote
 - 阅读与网络：EWW、Elfeed、Nov、Elpher、ERC、Gnus
 - 界面：Ef Themes、Spacious Padding、Pulsar、Popper、Olivetti、Dashboard，以及紧凑的 mode-line
 - AI：Agent Shell
@@ -44,22 +43,8 @@ emacs
 ELPA 安装，并以 MELPA 作为补充来源。内置包统一标记为 `:ensure nil`，同时禁止
 package.el 用软件源版本替换 Emacs 自带库。
 
-HyWiki 需要 Hyperbole 9.0.2pre，因此 Hyperbole 使用 Emacs 31 内置的
-`use-package :vc` 从 GNU Savannah 官方仓库安装。
-
 个人身份、邮箱地址和 Dropbox 路径集中在 `elisp/init-const.el`。如果账号或目录布局
 不同，只需修改该文件中的共享常量。
-
-Hyperbole 的个人数据统一保存在 Dropbox 中：
-
-| 路径 | 内容 |
-| --- | --- |
-| `~/Dropbox/hyperbole/` | Hyperbole 按钮映射和 `HBMAP` |
-| `~/Dropbox/hywiki/` | HyWiki Org 源文件 |
-| `~/Dropbox/public_hywiki/` | HyWiki 发布的 HTML 文件 |
-| `~/Dropbox/rolo.org` | HyRolo 个人条目 |
-
-HyNote 默认搜索 Dropbox 下的 `brain/`、`notes/` 和 `hywiki/`。
 
 内置模板使用 `M-+` 展开光标前的标签，或使用 `M-*` 从当前 major mode 可用的模板中
 选择。模板插入后可通过 `C-c t n` 跳到下一个占位位置。
@@ -68,8 +53,7 @@ HyNote 默认搜索 Dropbox 下的 `brain/`、`notes/` 和 `hywiki/`。
 
 1. 运行 `M-x package-refresh-contents` 刷新软件源。
 2. 运行 `M-x package-upgrade-all` 升级 package.el 管理的包。
-3. 运行 `M-x package-vc-upgrade-all` 更新 Hyperbole。
-4. 重启 Emacs，并执行下面的批处理启动检查。
+3. 重启 Emacs，并执行下面的批处理启动检查。
 
 配置以明确的 `:ensure`/`:vc` 声明、软件源优先级和 Emacs 31 内置库优先策略保持
 包管理路径单一。
@@ -84,8 +68,8 @@ emacs --batch -Q -l early-init.el --eval '(package-activate-all)' -l init.el
 
 `--batch -Q` 不会自动激活第三方包，因此命令在 `early-init.el` 和 `init.el` 之间显式模拟
 正常 GUI/daemon 启动的 package 激活阶段。启动不应产生 Elisp 错误或过时警告。ERC、Gnus、
-Org、Denote、Hyperbole 等较重模块
-按需加载，不应仅因启动配置而提前进入 `features`。
+Org 随任务入口加载；Denote 等其余较重模块按需加载，不应仅因启动配置而提前进入
+`features`。
 
 需要检查同步启动关键路径时，运行模块计时报告：
 
@@ -119,9 +103,6 @@ Vertico、Orderless 等补全组件的职责边界。已确认但尚未修复的
 emacs --batch -Q -l scripts/byte-compile-config.el
 scripts/run-startup-benchmark.sh
 ```
-
-兼容性编译阶段使用临时的 Hyperbole 数据目录，不会在用户主目录或 Dropbox 中创建
-编译产物。
 
 兼容性编译将警告视为错误，并把 `.elc` 写入临时目录。性能脚本默认运行 5 次，报告中位数、
 最慢一次和 2000ms 安全上限；可通过 `ZORO_STARTUP_RUNS` 与
