@@ -19,7 +19,8 @@
   (unless (featurep feature)
     (error "Startup did not provide %S" feature)))
 
-(let* ((deferred '(denote agent-shell gnus erc))
+(let* ((deferred '(org org-agenda agent-shell-org-tasks emacs-gtd-assistant
+                      agent-shell-code-context denote agent-shell gnus erc))
        (loaded (seq-filter #'featurep deferred)))
   (when loaded
     (error "Deferred features loaded synchronously: %S" loaded)))

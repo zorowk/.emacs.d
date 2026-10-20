@@ -54,7 +54,7 @@ Org 的 PDF 导出使用 XeLaTeX。编译后由 Org 清理辅助文件，保留 
 
 Org/Agent Shell 任务和代码上下文集成是可选功能，脚本来自
 `${CODEX_HOME:-~/.codex}/skills/` 下的 `emacs-gtd-assistant` 和
-`emacs-code-navigator` 技能目录。未安装技能时基础配置仍可启动，任务集成缺失会提示警告。
+`emacs-code-navigator` 技能目录。未安装技能时跳过相应集成，基础配置仍可启动。
 
 ## 更新所有包
 
@@ -90,7 +90,8 @@ emacs --batch -Q -l early-init.el -l elisp/benchmark-startup.el \
 批处理检查不绘制 Dashboard，也不导入图形会话的登录 shell 环境，因此不代表 GUI 首屏时间。
 
 交互启动时同步绘制 Dashboard；图形会话在 Linux 和 macOS 上异步导入登录 shell 环境。
-Agenda 等内容在使用相应入口时加载；可选技能集成脚本仍在 `init-llm` 中同步加载。
+任务技能集成在首次进入 Org、加载 Agenda 或 Agent Shell 时加载；代码上下文集成在
+Agent Shell 加载后启用。普通启动不加载 Org、Agenda 或技能运行库。
 
 ### 自动测试
 
