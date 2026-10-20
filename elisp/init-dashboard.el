@@ -48,10 +48,10 @@
   :group 'faces)
 
 (defconst zoro-dashboard--actions
-  '(("r" "♖" "Recent Files"   recesuodntf-open-files)
+  '(("r" "♖" "Recent Files"   consult-recent-file)
     ("b" "♘" "Bookmark"       consult-bookmark)
     ("p" "♔" "Projects"       project-switch-project)
-    ("a" "♗" "Agenda"         org-agenda-list)
+    ("a" "♗" "Agenda"         consult-org-agenda)
     ("e" "♙" "Elfeed"         elfeed)
     ("n" "♕" "Notes"          consult-denote-find))
   "Shortcut, symbol, label, and command for each dashboard action.")
@@ -154,18 +154,16 @@ The optional FRAME argument makes this suitable for resize hooks."
 
 (defvar-keymap zoro-dashboard-mode-map
   :parent special-mode-map
-  "r" #'consult-recent-file
-  "p" #'project-switch-project
-  "a" #'consult-org-agenda
-  "e" #'elfeed
-  "n" #'consult-denote-find
-  "b" #'consult-bookmark
   "q" #'save-buffers-kill-emacs
   "j" #'forward-button
   "k" #'backward-button
   "<down>" #'forward-button
   "<up>" #'backward-button
   "g" #'zoro-dashboard-render)
+
+;; Buttons and keyboard shortcuts share the same command table.
+(dolist (action zoro-dashboard--actions)
+  (keymap-set zoro-dashboard-mode-map (car action) (nth 3 action)))
 
 (define-derived-mode zoro-dashboard-mode special-mode "Scriptorium"
   "Major mode for the Scriptorium startup page."

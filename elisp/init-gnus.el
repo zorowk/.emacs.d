@@ -13,6 +13,11 @@
 
 (declare-function gnus-article-add-buttons "gnus-art" ())
 
+;; Topic mode lives in its own library, rather than gnus.el.
+(use-package gnus-topic
+  :ensure nil
+  :hook (gnus-group-mode . gnus-topic-mode))
+
 (use-package gnus
   :ensure nil
   :defer t
@@ -21,12 +26,10 @@
   ;; (info "(gnus) Don't Panic")
   :bind (("C-z g" . gnus))
   :hook
-  (;; Enable topic mode in the group buffer, for classifying groups.
-   (gnus-group-mode-hook . #'gnus-topic-mode)
-   ;; Display a `fill-column' indicator in Message mode.
-   (message-mode-hook . #'display-fill-column-indicator-mode)
+  (;; Display a `fill-column' indicator in Message mode.
+   (message-mode . display-fill-column-indicator-mode)
    ;; Enable Flyspell for on-the-fly spell checking.
-   (message-mode-hook . #'flyspell-mode))
+   (message-mode . flyspell-mode))
   :init
   (use-package auth-source-xoauth2-plugin
     :ensure t

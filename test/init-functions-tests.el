@@ -267,5 +267,68 @@
         (should (eq first second))
       (kill-buffer first))))
 
+(ert-deftest zoro-dashboard-buttons-and-shortcuts-run-the-same-command ()
+  (dolist (action zoro-dashboard--actions)
+    (pcase-let ((`(,key ,_icon ,_label ,command) action))
+      (should (commandp command))
+      (should (eq (keymap-lookup zoro-dashboard-mode-map key) command))
+      (with-temp-buffer
+        (let (invoked)
+          (apply #'zoro-dashboard--insert-action action)
+          (cl-letf (((symbol-function 'call-interactively)
+                     (lambda (function &rest _) (setq invoked function))))
+            (button-activate (next-button (point-min))))
+          (should (eq invoked command)))))))
+
+(ert-deftest zoro-gnus-and-message-hooks-run-their-configured-functions ()
+  ;; Verify that topic mode can actually be loaded from its declared library.
+  (when (autoloadp (symbol-function 'gnus-topic-mode))
+    (autoload-do-load (symbol-function 'gnus-topic-mode) 'gnus-topic-mode))
+  ;; Exercise hook dispatch without connecting to news servers or starting
+  ;; an external spelling process.
+  (let (called)
+    (cl-letf (((symbol-function 'gnus-topic-mode)
+               (lambda (&rest _) (push 'topics called)))
+              ((symbol-function 'display-fill-column-indicator-mode)
+               (lambda (&rest _) (push 'column called)))
+              ((symbol-function 'flyspell-mode)
+               (lambda (&rest _) (push 'spelling called))))
+      (run-hooks 'gnus-group-mode-hook 'message-mode-hook))
+    (dolist (feature '(topics column spelling))
+      (should (memq feature called)))))
+
+(ert-deftest zoro-org-pdf-compilation-preserves-source-logs-and-auto-directory ()
+  (require 'ox-latex)
+  (let* ((directory (make-temp-file "zoro-latex audit-" t))
+         (default-directory (file-name-as-directory directory))
+         (tools (expand-file-name "tools/" directory))
+         (process-environment (copy-sequence process-environment))
+         (preserved '("paper draft.tex" "paper draft.log" "paper draft.blg"
+                      "paper draft.bbl" "paper draft.ind" "auto/keep.el")))
+    (unwind-protect
+        (progn
+          (make-directory tools)
+          (make-directory "auto")
+          (dolist (file (append preserved '("paper draft.aux" "paper draft.out")))
+            (with-temp-file file (insert "fixture\n")))
+          ;; Run the configured shell pipeline with stand-ins for the TeX
+          ;; tools.  Only the PDF creation is simulated; cleanup runs normally.
+          (dolist (tool '("xelatex" "bibtex" "makeindex"))
+            (let ((file (expand-file-name tool tools)))
+              (with-temp-file file
+                (insert "#!/bin/sh\n")
+                (if (equal tool "xelatex")
+                    (insert "for argument do source=$argument; done\n"
+                            ": > \"${source%.tex}.pdf\"\n")
+                  (insert "exit 0\n")))
+              (set-file-modes file #o700)))
+          (setenv "PATH" (concat tools path-separator (getenv "PATH")))
+          (should (file-exists-p (org-latex-compile "paper draft.tex")))
+          (should-not (file-exists-p "paper draft.aux"))
+          (should-not (file-exists-p "paper draft.out"))
+          (dolist (file preserved)
+            (should (file-exists-p file))))
+      (delete-directory directory t))))
+
 (provide 'init-functions-tests)
 ;;; init-functions-tests.el ends here

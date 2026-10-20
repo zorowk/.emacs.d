@@ -114,8 +114,12 @@ by Org before the current buffer is saved."
         "cd %o; if test -r %b.idx; then makeindex %b.idx; fi"
         "cd %o; bibtex %b"
         cmd
-        cmd
-        "rm -rf %b.out %b.log %b.tex %b.bbl %b.ind auto")))
+        cmd)))
+  ;; Let Org remove only compilation artifacts, retaining source and logs.
+  (org-latex-remove-logfiles t)
+  (org-latex-logfiles-extensions
+   '("aux" "bcf" "fdb_latexmk" "fls" "figlist" "idx" "nav" "out"
+     "ptc" "run.xml" "snm" "toc" "vrb" "xdv"))
   (org-latex-compiler "xelatex")
   (org-preview-latex-default-process 'xelatex)
   :custom-face
