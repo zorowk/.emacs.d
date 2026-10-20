@@ -73,6 +73,13 @@
               (nconc forms (zoro-test-collect-use-package-forms form)))))
     forms))
 
+(defun zoro-test-skill-file-readable-p (relative)
+  "Return non-nil when optional skill resource RELATIVE is installed."
+  (file-readable-p
+   (expand-file-name relative
+                     (expand-file-name "skills/"
+                                       (or (getenv "CODEX_HOME") "~/.codex")))))
+
 (defmacro zoro-test-with-temp-file (contents variable &rest body)
   "Create a file containing CONTENTS, bind its name to VARIABLE, run BODY."
   (declare (indent 2) (debug (form symbolp body)))

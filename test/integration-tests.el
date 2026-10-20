@@ -115,6 +115,8 @@
   (should-not (lookup-key global-map (kbd "C-z h"))))
 
 (ert-deftest zoro-integration-org-agent-task-entry-points ()
+  (skip-unless (zoro-test-skill-file-readable-p
+                "emacs-gtd-assistant/scripts/agent-shell-org-tasks.el"))
   (require 'org-agenda)
   (should (eq (lookup-key org-mode-map (kbd "C-z a")) #'emacs-gtd-agent-open))
   (should (eq (lookup-key org-agenda-mode-map (kbd "C-z a")) #'emacs-gtd-agent-open))
@@ -122,10 +124,17 @@
   (should (equal (emacs-gtd--files) (org-agenda-files))))
 
 (ert-deftest zoro-integration-agent-storage-and-existing-code-context ()
+  (skip-unless (zoro-test-skill-file-readable-p
+                "emacs-gtd-assistant/scripts/agent-shell-org-tasks.el"))
   (require 'agent-shell)
   (should (eq agent-shell-dot-subdir-function #'emacs-gtd-agent-dot-subdir))
   (should (equal emacs-gtd-agent-storage-directory
-                 (expand-file-name ".agent-shell/" zoro-dropbox-directory)))
+                 (expand-file-name ".agent-shell/" zoro-dropbox-directory))))
+
+(ert-deftest zoro-integration-agent-code-context ()
+  (skip-unless (zoro-test-skill-file-readable-p
+                "emacs-code-navigator/scripts/agent-shell-code-context.el"))
+  (require 'agent-shell)
   (should (memq #'emacs-code-navigator-agent-shell-context agent-shell-context-sources)))
 
 (provide 'integration-tests)
