@@ -138,5 +138,19 @@
                        zoro-denote-directory
                        zoro-hywiki-directory))))
 
+(ert-deftest zoro-integration-org-agent-task-entry-points ()
+  (require 'org-agenda)
+  (should (eq (lookup-key org-mode-map (kbd "C-z a")) #'emacs-gtd-agent-open))
+  (should (eq (lookup-key org-agenda-mode-map (kbd "C-z a")) #'emacs-gtd-agent-open))
+  (should (eq (lookup-key org-agenda-mode-map (kbd "C-c C-x w")) #'emacs-gtd-agent-wrap-up))
+  (should (equal (emacs-gtd--files) (org-agenda-files))))
+
+(ert-deftest zoro-integration-agent-storage-and-existing-code-context ()
+  (require 'agent-shell)
+  (should (eq agent-shell-dot-subdir-function #'emacs-gtd-agent-dot-subdir))
+  (should (equal emacs-gtd-agent-storage-directory
+                 (expand-file-name ".agent-shell/" zoro-dropbox-directory)))
+  (should (memq #'emacs-code-navigator-agent-shell-context agent-shell-context-sources)))
+
 (provide 'integration-tests)
 ;;; integration-tests.el ends here
