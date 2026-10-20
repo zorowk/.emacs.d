@@ -260,14 +260,6 @@ by Org before the current buffer is saved."
   :config
   (consult-denote-mode 1))
 
-(use-package org-bullets
-  :ensure t
-  :after org
-  :init
-  (setq org-bullets-bullet-list '("✾" "❃" "❁" "❇" "❊" "᪥" "❉" "⚘"))
-  :config
-  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
-
 ;; Keep Org tables monospaced, especially when prose uses a variable-pitch face.
 (with-eval-after-load 'org
   (set-face-attribute 'org-table nil :inherit 'fixed-pitch))
