@@ -11,10 +11,14 @@
 
 ;;; Code:
 
-(use-package markdown-ts-mode
-  :ensure nil
-  :mode (("\\.\\(?:md\\|markdown\\|mkd\\|mdown\\|mkdn\\|mdwn\\)\\'"
-          . markdown-ts-mode)))
+;; Emacs 32 owns the standard Markdown associations and grammar fallback.
+;; Extend that same dispatch to less common suffixes; Emacs 31 uses text-mode.
+(dolist (suffix '("mkd" "mdown" "mkdn" "mdwn" "Rmd"))
+  (add-to-list 'auto-mode-alist
+               (cons (concat "\\." suffix "\\'")
+                     (if (fboundp 'markdown-ts-mode-maybe)
+                         #'markdown-ts-mode-maybe
+                       #'text-mode))))
 
 (use-package recentf
   :ensure nil
@@ -57,8 +61,7 @@
                  ("\\.out\\'" . text-mode)
                  ("\\.args\\'" . text-mode)
                  ("\\.bb\\'" . shell-script-mode)
-                 ("\\.bbclass\\'" . shell-script-mode)
-                 ("\\.Rmd\\'" . markdown-ts-mode)))
+                 ("\\.bbclass\\'" . shell-script-mode)))
   (add-to-list 'auto-mode-alist entry))
 
 (add-hook 'after-save-hook

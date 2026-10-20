@@ -64,6 +64,10 @@
 (setopt isearch-lazy-count t
         eldoc-help-at-pt t
         split-window-preferred-direction 'horizontal)
+
+;; Emacs 32 can preview both sides of a query replacement while typing.
+(when (boundp 'query-replace-show-preview)
+  (setopt query-replace-show-preview 'both))
 (delete-selection-mode 1)
 (repeat-mode 1)
 (require 'server)

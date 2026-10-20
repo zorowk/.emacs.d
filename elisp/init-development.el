@@ -11,6 +11,11 @@
 
 ;;; Code:
 
+(use-package outline
+  :ensure nil
+  ;; Emacs Lisp already recognizes conventional `;;; Heading' sections.
+  :hook (emacs-lisp-mode . outline-minor-mode))
+
 (use-package project
   :ensure nil
   :bind (:map project-prefix-map

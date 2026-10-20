@@ -13,18 +13,17 @@
 
 (add-to-list 'load-path (expand-file-name "elisp" user-emacs-directory))
 
-;; Shared constants and named functions.
+;;; Shared constants and named functions
 (require 'init-const)
 
-;; Packages
-
-;; Package Management
+;;; Package management
 (require 'init-package)
 
+;;; Appearance
 ;; Apply the selected theme before loading nonessential startup modules.
 (require 'init-ui)
 
-;; Core behavior, persistent files, and side-effect-free helpers.
+;;; Core behavior and editing
 (require 'init-core)
 
 (require 'init-files)
@@ -49,24 +48,25 @@
 
 (require 'init-templates)
 
-;; Programming
+;;; Programming
 (require 'init-gnuplot)
 
 (require 'init-latex)
 
-;; Office
+;;; Org and reading
 (require 'init-org)
 
 
 (require 'init-reader)
 
-;; Internet
+;;; Internet
 (require 'init-erc)
 
 (require 'init-llm)
 
 (require 'init-gnus)
 
+;;; Interactive startup
 (unless noninteractive
   (when (display-graphic-p)
     (zoro-import-shell-environment))
