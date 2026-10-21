@@ -24,68 +24,67 @@
 (use-package elfeed
   :ensure t
   :defer t
-  :bind (("C-z e" . elfeed))
+  :bind ("C-z e" . elfeed)
   :custom
   (elfeed-feeds
-   '(("https://planet.emacslife.com/atom.xml"
-      emacs planet)
-
-     ("https://hnrss.org/frontpage"
-      hacker-news)
-
-     ("https://lobste.rs/rss"
-      lobsters)
-
-     ("https://tympanus.net/codrops/feed/"
-      design codrops)
-
-     ("https://www.awwwards.com/blog/feed/"
-      design awwwards)
-
-     ("https://sidebar.io/feed.xml"
-      design frontend architecture)
-
-     ("http://feeds2.feedburner.com/itsnicethat/SlXC"
-      design photography typography)
-
-     ("https://www.foreignaffairs.com/rss.xml"
-      politics geopolitics usa)
-
-     ("https://marginalrevolution.com/feed"
-      economics markets ideas)
-
-     ("https://noahpinion.substack.com/feed"
-      economics china usa industry tech)
-
-     ;; Linux kernel / systems / graphics stack
+   '(;; Engineering
+     ("https://planet.emacslife.com/atom.xml"
+      engineering)
      ("https://lwn.net/headlines/rss"
-      linux kernel systems graphics)
-
-     ;; Vulkan / OpenGL / WebGL / glTF / OpenXR
+      engineering upstream)
      ("https://www.khronos.org/feeds/blog_feed"
-      graphics vulkan opengl webgl khronos)
+      engineering upstream)
+     ("https://www.phoronix.com/rss.php"
+      engineering upstream)
+     ("https://planet.kde.org/global/rss20.xml"
+      engineering upstream)
+     ("https://planet.gnome.org/rss20.xml"
+      engineering upstream)
+     ("https://lobste.rs/rss"
+      engineering)
+     ("https://hnrss.org/frontpage"
+      engineering)
+     ("https://github.blog/feed/"
+      engineering)
 
-     ;; Browser engine / rendering / CSS / WebGPU
-     ("https://webkit.org/blog/feed"
-      webkit browser rendering frontend)
+     ;; Opportunities
+     ("https://hnrss.org/whoishiring/jobs"
+      opportunity jobs)
+     ("https://hnrss.org/whoishiring/freelance"
+      opportunity consulting)
 
-     ;; UX / typography / CSS / design systems
-     ("https://www.smashingmagazine.com/feed/"
-      design frontend ux typography)
-
-     ;; Technology / infrastructure / institutions / progress
-     ("https://worksinprogress.co/rss.xml"
-      economics technology society infrastructure ideas)
-
-     ;; Finance / technology / companies / macro
+     ;; Business
      ("https://www.thediff.co/rss/"
-      economics finance tech business ideas)))
+      business opinion)
+     ("https://steveblank.com/feed/"
+      business)
+
+     ;; Economy: analysis and opinion, not primary data.
+     ("https://marginalrevolution.com/feed"
+      economy opinion)
+     ("https://noahpinion.substack.com/feed"
+      economy opinion)
+     ("https://worksinprogress.co/rss.xml"
+      economy analysis)
+
+     ;; Society and philosophy
+     ("https://www.foreignaffairs.com/rss.xml"
+      society opinion)
+     ("https://aeon.co/feed.rss"
+      philosophy)))
 
   (elfeed-db-directory (expand-file-name "elfeed" user-emacs-directory))
   (elfeed-save-multiple-enclosures-without-asking t)
-  (elfeed-search-clipboard-type 'CLIPBOARD)
   (elfeed-search-date-format '("%Y-%m-%d" 10 :left))
-  (elfeed-search-title-min-width 45))
+  (elfeed-search-title-min-width 45)
+  :config
+  (defun my/elfeed-hide-unread-tag (column)
+    "Hide the unread label in the formatted tag COLUMN."
+    (when column
+      (let ((tags (delete "unread" (split-string (substring column 2 -1) ","))))
+        (when tags
+          (concat " (" (string-join tags ",") ")")))))
+  (advice-add 'elfeed-search--column-tags :filter-return #'my/elfeed-hide-unread-tag))
 
 (use-package elpher
   :ensure t
