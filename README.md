@@ -56,6 +56,9 @@ Org/Agent Shell 任务和代码上下文集成是可选功能，脚本来自
 `${CODEX_HOME:-~/.codex}/skills/` 下的 `emacs-gtd-assistant` 和
 `emacs-code-navigator` 技能目录。未安装技能时跳过相应集成，基础配置仍可启动。
 
+普通代码项目会话的日志、截图保存到该项目的 `.agent-shell/`；绑定 Org 项目 ID 的会话
+沿用 `~/Dropbox/.agent-shell/projects/` 下的集中存储。已有会话的日志不自动搬迁。
+
 ## 更新所有包
 
 1. 运行 `M-x package-refresh-contents` 刷新软件源。

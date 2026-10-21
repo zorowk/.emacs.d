@@ -28,7 +28,17 @@
 (defvar emacs-gtd-directory)
 (defvar emacs-gtd-extra-files)
 (defvar emacs-gtd-agent-storage-directory)
+(defvar emacs-gtd-agent-project-id)
+(defvar emacs-gtd-agent--starting-project-id)
 (declare-function emacs-gtd-agent-enable "agent-shell-org-tasks" ())
+(declare-function agent-shell--dot-subdir-in-repo "agent-shell" (subdir))
+
+(defun zoro-agent-task-data-directory (original subdir)
+  "Use ORIGINAL for Org-bound sessions, or keep SUBDIR in the code project."
+  (if (or (bound-and-true-p emacs-gtd-agent-project-id)
+          (bound-and-true-p emacs-gtd-agent--starting-project-id))
+      (funcall original subdir)
+    (agent-shell--dot-subdir-in-repo subdir)))
 
 (defvar zoro-agent-task-integration-loading nil
   "Non-nil while loading the optional Org/Agent Shell integration.")
@@ -49,7 +59,12 @@
               emacs-gtd-extra-files (org-agenda-files)
               emacs-gtd-agent-storage-directory
               (expand-file-name ".agent-shell/" zoro-dropbox-directory))
-        (emacs-gtd-agent-enable)))))
+        (emacs-gtd-agent-enable))))
+  (when (and (featurep 'agent-shell-org-tasks)
+             (not (advice-member-p #'zoro-agent-task-data-directory
+                                   'emacs-gtd-agent-dot-subdir)))
+    (advice-add 'emacs-gtd-agent-dot-subdir :around
+                #'zoro-agent-task-data-directory)))
 
 ;; Org is the task record; load its integration only when a relevant UI is used.
 (add-hook 'org-mode-hook #'zoro-enable-agent-task-integration)

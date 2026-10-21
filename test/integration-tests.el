@@ -137,5 +137,27 @@
   (require 'agent-shell)
   (should (memq #'emacs-code-navigator-agent-shell-context agent-shell-context-sources)))
 
+(ert-deftest zoro-integration-agent-storage-follows-session-origin ()
+  (skip-unless (zoro-test-skill-file-readable-p
+                "emacs-gtd-assistant/scripts/agent-shell-org-tasks.el"))
+  (require 'agent-shell)
+  (let ((emacs-gtd-agent-storage-directory "/tmp/zoro-central-storage/")
+        (cwd (file-name-as-directory zoro-test-root)))
+    (cl-letf (((symbol-function 'agent-shell-cwd) (lambda () cwd)))
+      (dolist (subdir '("transcripts" "screenshots"))
+        (let ((emacs-gtd-agent-project-id nil)
+              (emacs-gtd-agent--starting-project-id nil))
+          (should (equal (funcall agent-shell-dot-subdir-function subdir)
+                         (expand-file-name (concat ".agent-shell/" subdir) cwd))))
+        ;; Cover both an existing Org session and a project being started.
+        (dolist (starting '(nil t))
+          (let ((emacs-gtd-agent-project-id (unless starting "org-project"))
+                (emacs-gtd-agent--starting-project-id (when starting "org-project")))
+            (should
+             (equal (funcall agent-shell-dot-subdir-function subdir)
+                    (expand-file-name
+                     (concat "projects/" (secure-hash 'sha256 "org-project") "/" subdir)
+                     emacs-gtd-agent-storage-directory)))))))))
+
 (provide 'integration-tests)
 ;;; integration-tests.el ends here
