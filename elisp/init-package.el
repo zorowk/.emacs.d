@@ -44,11 +44,8 @@
 
 (require 'use-package)
 
-(setopt use-package-always-ensure nil
-        use-package-compute-statistics nil
-        use-package-enable-imenu-support t
-        use-package-expand-minimally t
-        use-package-verbose nil)
+(setopt use-package-enable-imenu-support t
+        use-package-expand-minimally t)
 
 (provide 'init-package)
 ;;; init-package.el ends here

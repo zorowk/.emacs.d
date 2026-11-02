@@ -25,8 +25,7 @@
   ;; Offer to create missing destination directories when copying or moving.
   (dired-create-destination-dirs 'ask)
   (dired-create-destination-dirs-on-trailing-dirsep t)
-  ;; Always delete and copy recursively
-  (dired-recursive-deletes 'top)
+  ;; Copy directories recursively.
   (dired-recursive-copies 'always)
   ;; Allow dragging files from Dired to other graphical applications.
   (dired-mouse-drag-files t)

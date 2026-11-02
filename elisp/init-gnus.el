@@ -47,13 +47,8 @@
   (setq gnus-home-directory (expand-file-name "gnus/" user-emacs-directory))
   (setq gnus-directory (expand-file-name "gnus/news/" user-emacs-directory))
   ;; Cache NNTP articles as they are read, without bulk downloading groups.
-  (setq gnus-agent t
-        gnus-agent-auto-agentize-methods '(nntp)
-        gnus-agent-cache t
-        gnus-agent-eagerly-store-articles t
+  (setq gnus-agent-auto-agentize-methods '(nntp)
         gnus-agent-expire-days 180
-        gnus-agent-expire-all nil
-        gnus-agent-enable-expiration 'ENABLE
         gnus-agent-expire-unagentized-dirs nil)
   ;; Expire ordinary read copies on exit; keep unread and marked articles.
   (add-hook 'gnus-exit-gnus-hook #'gnus-agent-expire)
@@ -74,7 +69,6 @@
   (setq gnus-sum-thread-tree-false-root "○ ")
   (setq gnus-sum-thread-tree-single-indent "  ")
   (setq gnus-sum-thread-tree-vertical "│ ")
-  (setq gnus-sum-thread-tree-indent "  ")
   (setq gnus-sum-thread-tree-leaf-with-other "├─ ")
   (setq gnus-sum-thread-tree-single-leaf "└─ ")
   (setq gnus-summary-line-format "%U%R%O%z │ %-12&user-date; │ %-24,24f │ %B%S\n")
@@ -83,7 +77,6 @@
      ((+ 86400 (gnus-seconds-today)) . "Yday  %H:%M")
      ((gnus-seconds-year) . "%m-%d %H:%M")
      (t . "%Y-%m-%d")))
-  (setq gnus-summary-selected-face 'gnus-summary-selected)
 
   ;; Configure mail and news sources.
   (setq gnus-secondary-select-methods

@@ -57,8 +57,6 @@
   :ensure nil
   :hook (prog-mode . electric-pair-local-mode)
   :custom
-  (electric-pair-preserve-balance t)
-  (electric-pair-delete-adjacent-pairs t)
   (electric-pair-skip-self t))
 
 (use-package paren

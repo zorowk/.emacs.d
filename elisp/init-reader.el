@@ -82,7 +82,6 @@
 
   (elfeed-db-directory (expand-file-name "elfeed" user-emacs-directory))
   (elfeed-save-multiple-enclosures-without-asking t)
-  (elfeed-search-date-format '("%Y-%m-%d" 10 :left))
   (elfeed-search-title-min-width 45)
   :config
   (advice-add 'elfeed-search--column-tags :filter-return #'my/elfeed-hide-unread-tag))

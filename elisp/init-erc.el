@@ -45,13 +45,10 @@
         erc-fill-static-center 18
         erc-fill-wrap-merge t
         erc-fill-wrap-merge-indicator '(?│ . shadow)
-        erc-timestamp-format "[%H:%M]"
-        erc-insert-timestamp-function 'erc-insert-timestamp-left-and-right
         erc-timestamp-format-left "\n[%Y-%m-%d %a]\n"
         erc-lurker-threshold-time 43200
         erc-prompt-for-password nil
         erc-prompt-for-nickserv-password nil
-        erc-save-buffer-on-part t
         erc-nick-uniquifier "_"
         erc-log-channels-directory
         (expand-file-name ".erc-logs" user-emacs-directory)
@@ -62,7 +59,6 @@
         erc-log-insert-log-on-open #'erc-log-new-target-buffer-p
   ;; Protect me from accidentally sending excess lines.
         erc-inhibit-multiline-input t
-        erc-send-whitespace-lines nil
         erc-ask-about-multiline-input t
   ;; Scroll all windows to prompt when submitting input.
         erc-scrolltobottom-all t
@@ -76,7 +72,6 @@
         erc-desktop-notifications-ignored-when-focused '(query mention)
         ;; Show ordinary conversation in the mode line too; desktop
         ;; notifications remain limited to private messages and mentions.
-        erc-track-priority-faces-only nil
         erc-track-exclude-server-buffer t
         erc-track-showcount t)
   ;; Insert a newline when I hit <RET> at the prompt, and prefer

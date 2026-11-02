@@ -92,12 +92,10 @@ by Org before the current buffer is saved."
   (calendar-longitude 114.3052)
   (org-export-backends (quote (ascii html icalendar latex md odt)))
   (org-use-speed-commands t)
-  (org-confirm-babel-evaluate t)
   (org-latex-listings-options '(("breaklines" "true")))
   (org-latex-src-block-backend 'listings)
   (org-hide-leading-stars t)
   (org-fontify-whole-heading-line t)
-  (org-fontify-done-headline t)
   (org-deadline-warning-days 7)
   (org-agenda-window-setup 'other-window)
   (org-habit-graph-column 80)
@@ -219,14 +217,7 @@ by Org before the current buffer is saved."
   :config
   ;; Remember to check the doc string of each of those variables.
   (setq denote-directory zoro-denote-directory)
-  (setq denote-save-buffers nil)
   (setq denote-known-keywords '("deepin" "book" "math" "blog"))
-  (setq denote-infer-keywords t)
-  (setq denote-sort-keywords t)
-  (setq denote-prompts '(title keywords))
-  (setq denote-excluded-directories-regexp nil)
-  (setq denote-keywords-to-not-infer-regexp nil)
-  (setq denote-rename-confirmations '(rewrite-front-matter modify-file-name))
 
   ;; Pick dates, where relevant, with Org's advanced interface:
   (setq denote-date-prompt-use-org-read-date t)
@@ -249,9 +240,6 @@ by Org before the current buffer is saved."
   ;; to nil to use the `denote-directory' instead.
   (setq denote-journal-directory
         (expand-file-name "journal" denote-directory))
-  ;; Default keyword for new journal entries. It can also be a list of
-  ;; strings.
-  (setq denote-journal-keyword "journal")
   ;; Read the doc string of `denote-journal-title-format'.
   (setq denote-journal-title-format
         'day-date-month-year))

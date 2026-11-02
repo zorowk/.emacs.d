@@ -74,7 +74,6 @@
 
 (setq x-alt-keysym 'meta
       confirm-kill-emacs 'y-or-n-p
-      confirm-kill-processes t
       ring-bell-function 'ignore
       shr-use-fonts nil
       read-file-name-completion-ignore-case t
@@ -89,7 +88,6 @@
       epg-pinentry-mode 'loopback
       bidi-inhibit-bpa t
       read-process-output-max (* 4 1024 1024)
-      highlight-nonselected-windows nil
       save-interprogram-paste-before-kill t
       kill-do-not-save-duplicates t
       reb-re-syntax 'string

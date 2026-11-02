@@ -50,7 +50,6 @@
 (setq backup-directory-alist `((".*" . ,temporary-file-directory))
       auto-save-file-name-transforms `((".*" ,temporary-file-directory t))
       backup-by-copying t)
-(setq-default create-lockfiles t)
 (setopt remote-file-name-inhibit-locks t
         remote-file-name-inhibit-auto-save-visited t)
 
