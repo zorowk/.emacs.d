@@ -105,6 +105,10 @@
       ediff-window-setup-function 'ediff-setup-windows-plain
       ediff-split-window-function 'split-window-horizontally)
 
+;; Reuse symmetric file and OAuth2 store passphrases within this Emacs session.
+(setq epa-file-cache-passphrase-for-symmetric-encryption t
+      plstore-cache-passphrase-for-symmetric-encryption t)
+
 (setq-default history-length 500
               bidi-paragraph-direction 'left-to-right
               cursor-in-non-selected-windows nil)
