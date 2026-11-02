@@ -16,6 +16,8 @@
 (declare-function erc-services-mode "erc-services" (&optional arg))
 (declare-function erc-send-current-line "erc" ())
 (declare-function erc-server-delayed-check-reconnect "erc-backend" (buffer))
+(declare-function erc-auth-source-search "erc" (&rest args))
+(declare-function erc-log-new-target-buffer-p "erc-log" ())
 
 (use-package erc
   :ensure nil
@@ -46,7 +48,6 @@
         erc-timestamp-format "[%H:%M]"
         erc-insert-timestamp-function 'erc-insert-timestamp-left-and-right
         erc-timestamp-format-left "\n[%Y-%m-%d %a]\n"
-        erc-timestamp-format-right "[%H:%M]"
         erc-lurker-threshold-time 43200
         erc-prompt-for-password nil
         erc-prompt-for-nickserv-password nil

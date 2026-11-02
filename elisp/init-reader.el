@@ -21,6 +21,13 @@
   :init
   (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode)))
 
+(defun my/elfeed-hide-unread-tag (column)
+  "Hide the unread label in the formatted tag COLUMN."
+  (when column
+    (let ((tags (delete "unread" (split-string (substring column 2 -1) ","))))
+      (when tags
+        (concat " (" (string-join tags ",") ")")))))
+
 (use-package elfeed
   :ensure t
   :defer t
@@ -78,12 +85,6 @@
   (elfeed-search-date-format '("%Y-%m-%d" 10 :left))
   (elfeed-search-title-min-width 45)
   :config
-  (defun my/elfeed-hide-unread-tag (column)
-    "Hide the unread label in the formatted tag COLUMN."
-    (when column
-      (let ((tags (delete "unread" (split-string (substring column 2 -1) ","))))
-        (when tags
-          (concat " (" (string-join tags ",") ")")))))
   (advice-add 'elfeed-search--column-tags :filter-return #'my/elfeed-hide-unread-tag))
 
 (use-package elpher

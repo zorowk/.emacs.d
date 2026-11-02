@@ -24,6 +24,8 @@
      :documentHighlightProvider
      :foldingRangeProvider))
   :config
+  (keymap-set eglot-mode-map "C-c l a"
+              (if (fboundp 'refactor) #'refactor 'eglot-code-actions))
   (add-to-list 'eglot-server-programs
                '((c-mode c-ts-mode c++-mode c++-ts-mode) .
                  ("clangd"
@@ -47,7 +49,6 @@
               ("C-M-." . xref-find-apropos)
               ("C-c f" . xref-find-apropos)
               ("C-c l r" . xref-find-references)
-              ("C-c l a" . eglot-code-actions)
               ("C-c l f" . eglot-format-buffer))
   :hook ((c-mode c-ts-mode c++-mode c++-ts-mode
                  python-mode python-ts-mode
