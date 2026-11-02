@@ -62,6 +62,7 @@
             python-ts-mode
             rust-ts-mode
             typescript-ts-mode
+            tsx-ts-mode
             yaml-ts-mode))
   (setopt treesit-auto-install-grammar 'ask)
   (setopt treesit-extra-load-path

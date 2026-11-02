@@ -39,7 +39,7 @@
   (add-to-list 'eglot-server-programs
                '((latex-mode LaTeX-mode) . ("texlab")))
   (add-to-list 'eglot-server-programs
-               '((js-mode js-ts-mode typescript-mode typescript-ts-mode tsx-mode) .
+               '((js-mode js-ts-mode typescript-mode typescript-ts-mode tsx-mode tsx-ts-mode) .
                  ("typescript-language-server" "--stdio")))
   :bind (:map eglot-mode-map
               ("M-." . xref-find-definitions)
@@ -55,7 +55,7 @@
                  rust-mode rust-ts-mode
                  latex-mode LaTeX-mode
                  js-mode js-ts-mode
-                 typescript-mode typescript-ts-mode tsx-mode)
+                 typescript-mode typescript-ts-mode tsx-mode tsx-ts-mode)
          . eglot-ensure))
 
 ;; Keep diagnostics available without filling every line with annotations.

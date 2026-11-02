@@ -169,6 +169,15 @@
       (zoro-treesit-show-parser-used-at-point)
       (should (equal reported "treesit is not available")))))
 
+(ert-deftest zoro-eglot-autostart-covers-tsx ()
+  (let (started)
+    (cl-letf (((symbol-function 'eglot-ensure)
+               (lambda () (setq started t))))
+      (run-hooks 'tsx-ts-mode-hook))
+    (should started))
+  (when (treesit-available-p)
+    (should (memq 'tsx-ts-mode treesit-enabled-modes))))
+
 (ert-deftest zoro-shell-environment-import-applies-selected-values ()
   (let ((output (generate-new-buffer " *zoro-shell-output-test*"))
         (errors (generate-new-buffer " *zoro-shell-errors-test*"))

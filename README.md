@@ -52,6 +52,11 @@ package.el 用软件源版本替换 Emacs 自带库。
 Org 的 PDF 导出使用 XeLaTeX。编译后由 Org 清理辅助文件，保留 `.tex`、`.log`、
 `.blg` 等排错材料及 `auto/` 目录。
 
+语言服务器需要另外安装：C/C++ 使用 `clangd`，Python 使用 `pyright-langserver`，
+Rust 使用 `rust-analyzer`，LaTeX 使用 `texlab`，JavaScript/TypeScript/TSX 使用
+`typescript-language-server`。对应编程模式直接调用 `eglot-ensure` 自动连接，
+也可以手动运行 `M-x eglot`。
+
 Org/Agent Shell 任务和代码上下文集成是可选功能，脚本来自
 `${CODEX_HOME:-~/.codex}/skills/` 下的 `emacs-gtd-assistant` 和
 `emacs-code-navigator` 技能目录。未安装技能时跳过相应集成，基础配置仍可启动。
