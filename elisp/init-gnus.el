@@ -119,8 +119,8 @@
        (("from" ".*" "nnimap+Gmail:Archive.%Y"))))))
   ;; `init-file-debug' corresponds to launching emacs with --debug-init
   (setq nnimap-record-commands init-file-debug)
-  ;; The "Sent" folder
-  (setq gnus-message-archive-group "nnimap+Gmail:INBOX")
+  ;; Gmail saves SMTP submissions in Sent Mail; do not append another copy.
+  (setq gnus-message-archive-group nil)
   ;; Display the following message headers in Article buffers,
   ;; in the given order.
   (setq gnus-sorted-header-list
@@ -164,14 +164,11 @@
 
   ;; Automatically mark Gcc (sent) messages as read.
   (setq gnus-gcc-mark-as-read t)
-  ;; Configure posting styles for per-account Gcc groups, and SMTP
-  ;; server for sending mail.  See: (info "(gnus) Posting Styles")
-  ;; Also see sample .authinfo file provided below.
+  ;; Select the Gmail identity and SMTP server.  See: (info "(gnus) Posting Styles")
   (setq gnus-posting-styles
    `(("nnimap\\+Gmail:.*"
       (address ,user-mail-address)
-      ("X-Message-SMTP-Method" "smtp smtp.gmail.com 465")
-      (gcc "nnimap+Gmail:INBOX"))))
+      ("X-Message-SMTP-Method" "smtp smtp.gmail.com 465"))))
 
   ;; Ask for confirmation when sending a message.
   (setq message-confirm-send t)

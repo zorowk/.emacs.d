@@ -57,6 +57,9 @@ Rust 使用 `rust-analyzer`，LaTeX 使用 `texlab`，JavaScript/TypeScript/TSX 
 `typescript-language-server`。对应编程模式直接调用 `eglot-ensure` 自动连接，
 也可以手动运行 `M-x eglot`。
 
+Gnus 通过 Gmail 的 465/TLS 和 XOAUTH2 发信。Gmail 自动保存 Sent Mail 副本，配置
+不额外使用 Gcc 向收件箱归档；如需保存 NNTP 发帖副本，可另外设置对应组的归档规则。
+
 Org/Agent Shell 任务和代码上下文集成是可选功能，脚本来自
 `${CODEX_HOME:-~/.codex}/skills/` 下的 `emacs-gtd-assistant` 和
 `emacs-code-navigator` 技能目录。未安装技能时跳过相应集成，基础配置仍可启动。
