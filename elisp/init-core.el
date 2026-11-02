@@ -18,12 +18,6 @@
 
 (add-function :after after-focus-change-function #'zoro-gc-when-unfocused)
 
-(defun zoro-abort-minibuffer-using-mouse ()
-  "Abort an active minibuffer when the mouse leaves its buffer."
-  (when (and (>= (recursion-depth) 1)
-             (active-minibuffer-window))
-    (abort-recursive-edit)))
-
 (defun zoro-where-am-i ()
   "Show and copy `buffer-file-name' or `buffer-name'."
   (interactive)
@@ -120,8 +114,6 @@
 
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
-
-(add-hook 'mouse-leave-buffer-hook #'zoro-abort-minibuffer-using-mouse)
 
 (put 'erase-buffer 'disabled nil)
 (put 'set-goal-column 'disabled nil)
