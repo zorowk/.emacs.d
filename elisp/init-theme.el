@@ -94,23 +94,15 @@
 
 (use-package olivetti
   :ensure t
-  :defer t)
-(add-hook 'eww-after-render-hook
-          (lambda ()
-            (olivetti-mode 1)
-            (setq-local olivetti-body-width 120)))
-(add-hook 'nov-mode-hook
-          (lambda ()
-            (olivetti-mode 1)
-            (setq-local olivetti-body-width 120)))
-(add-hook 'Info-mode-hook
-          (lambda ()
-            (olivetti-mode 1)
-            (setq-local olivetti-body-width 72)))
-(add-hook 'elpher-mode-hook
-          (lambda ()
-            (olivetti-mode 1)
-            (setq-local olivetti-body-width 72)))
+  :hook
+  (((eww-after-render nov-mode)
+    . (lambda ()
+        (setq-local olivetti-body-width 120)
+        (olivetti-mode 1)))
+   ((Info-mode elpher-mode)
+    . (lambda ()
+        (setq-local olivetti-body-width 72)
+        (olivetti-mode 1)))))
 
 (provide 'init-theme)
 ;;; init-theme.el ends here
