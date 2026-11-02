@@ -41,13 +41,11 @@
 (ert-deftest zoro-restore-startup-state-restores-bounded-values ()
   (let ((gc-cons-threshold most-positive-fixnum)
         (gc-cons-percentage 0.9)
-        (file-name-handler-alist nil)
-        (file-name-handler-alist-original '(("example" . ignore))))
+        (file-name-handler-alist '(("example" . ignore))))
     (zoro-restore-startup-state)
     (should (= gc-cons-threshold (* 16 1024 1024)))
     (should (= gc-cons-percentage 0.1))
-    (should (equal file-name-handler-alist '(("example" . ignore))))
-    (should-not (boundp 'file-name-handler-alist-original))))
+    (should (equal file-name-handler-alist '(("example" . ignore))))))
 
 (ert-deftest zoro-org-line-range-excludes-delimiters ()
   (zoro-test-with-temp-file "zero\nBEGIN\none\ntwo\nEND\nlast\n" file

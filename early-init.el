@@ -44,16 +44,10 @@ Defer loading when the theme package is not available yet."
 (setq gc-cons-threshold (* 64 1024 1024)
       gc-cons-percentage 0.6)
 
-(defvar file-name-handler-alist-original file-name-handler-alist)
-(setq file-name-handler-alist nil)
-
 (defun zoro-restore-startup-state ()
-  "Restore GC and file handling after loading the init file."
+  "Restore regular GC settings after loading the init file."
   (setq gc-cons-threshold (* 16 1024 1024)
-        gc-cons-percentage 0.1)
-  (when (boundp 'file-name-handler-alist-original)
-    (setq file-name-handler-alist file-name-handler-alist-original)
-    (makunbound 'file-name-handler-alist-original)))
+        gc-cons-percentage 0.1))
 
 (add-hook 'after-init-hook #'zoro-restore-startup-state)
 

@@ -29,8 +29,7 @@
 (require 'reftex)
 
 ;; Reproduce the real startup dependency: init-ui uses a theme function
-;; defined by early-init.el.  Restore temporary startup state immediately so
-;; compilation retains normal file handling and garbage collection settings.
+;; defined by early-init.el.  Restore regular GC settings immediately.
 (load (expand-file-name "early-init.el" zoro-compile-root) nil 'nomessage)
 (zoro-restore-startup-state)
 
