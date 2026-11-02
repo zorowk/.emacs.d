@@ -12,6 +12,7 @@
 (require 'init-const)
 
 (declare-function gnus-article-add-buttons "gnus-art" ())
+(declare-function gnus-agent-expire "gnus-agent" (&optional articles group force))
 
 ;; Topic mode lives in its own library, rather than gnus.el.
 (use-package gnus-topic
@@ -45,6 +46,17 @@
   ;; `user-emacs-directory'.
   (setq gnus-home-directory (expand-file-name "gnus/" user-emacs-directory))
   (setq gnus-directory (expand-file-name "gnus/news/" user-emacs-directory))
+  ;; Cache NNTP articles as they are read, without bulk downloading groups.
+  (setq gnus-agent t
+        gnus-agent-auto-agentize-methods '(nntp)
+        gnus-agent-cache t
+        gnus-agent-eagerly-store-articles t
+        gnus-agent-expire-days 180
+        gnus-agent-expire-all nil
+        gnus-agent-enable-expiration 'ENABLE
+        gnus-agent-expire-unagentized-dirs nil)
+  ;; Expire ordinary read copies on exit; keep unread and marked articles.
+  (add-hook 'gnus-exit-gnus-hook #'gnus-agent-expire)
   ;; don't bother with .newsrc, use .newsrc.eld instead
   (setq gnus-save-newsrc-file nil)
   (setq gnus-read-newsrc-file nil)
