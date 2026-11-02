@@ -78,11 +78,6 @@ the template available globally."
     (tempo-use-tag-list 'zoro-tempo-org-tags))
   (setq-local tempo-match-finder #'zoro-tempo--match-tag))
 
-(defun zoro-tempo-complete-tag ()
-  "Expand the Tempo tag immediately before point."
-  (interactive)
-  (call-interactively #'tempo-complete-tag))
-
 (defun zoro-tempo-insert (template)
   "Select and insert a Tempo TEMPLATE."
   (interactive
@@ -102,7 +97,7 @@ the template available globally."
 (defvar zoro-tempo-c-tags nil)
 (defvar zoro-tempo-org-tags nil)
 
-(global-set-key (kbd "M-+") #'zoro-tempo-complete-tag)
+(global-set-key (kbd "M-+") #'tempo-complete-tag)
 (global-set-key (kbd "M-*") #'zoro-tempo-insert)
 (global-set-key (kbd "C-c t n") #'tempo-forward-mark)
 (add-hook 'after-change-major-mode-hook #'zoro-tempo-setup)
