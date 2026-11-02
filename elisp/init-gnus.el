@@ -158,7 +158,7 @@
   (setq gnus-posting-styles
    `(("nnimap\\+Gmail:.*"
       (address ,user-mail-address)
-      ("X-Message-SMTP-Method" "smtp smtp.gmail.com 587")
+      ("X-Message-SMTP-Method" "smtp smtp.gmail.com 465")
       (gcc "nnimap+Gmail:INBOX"))))
 
   ;; Ask for confirmation when sending a message.
@@ -169,7 +169,11 @@
   ;; Forward messages (C-c C-f) as a proper MIME part.
   (setq message-forward-as-mime t)
   ;; Send mail using Emacs's built-in smtpmail library.
-  (setq message-send-mail-function #'smtpmail-send-it)
+  (setq message-send-mail-function #'smtpmail-send-it
+        smtpmail-smtp-server "smtp.gmail.com"
+        smtpmail-smtp-service 465
+        smtpmail-smtp-user user-mail-address
+        smtpmail-stream-type 'tls)
   :config
   (custom-set-faces
    '(gnus-summary-selected ((t (:inherit highlight :extend t))))
