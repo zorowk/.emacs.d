@@ -179,7 +179,8 @@
     (unwind-protect
         (progn
           (with-current-buffer output
-            (insert "PATH=/one:/two\0LANG=en_US.UTF-8\0IGNORED=value\0"))
+            (insert "Shell welcome message\n" zoro-shell-environment-marker
+                    "PATH=/one:/two\0LANG=en_US.UTF-8\0IGNORED=value\0"))
           (cl-letf (((symbol-function 'process-status) (lambda (_) 'exit))
                     ((symbol-function 'process-exit-status) (lambda (_) 0))
                     ((symbol-function 'process-buffer) (lambda (_) output))
@@ -201,6 +202,34 @@
       (when (buffer-live-p errors)
         (kill-buffer errors))
       (set-default 'eshell-path-env previous-eshell-path-env))))
+
+(ert-deftest zoro-shell-environment-import-preserves-values-on-invalid-output ()
+  (dolist (contents (list "unframed output\nPATH=/wrong\0"
+                        (concat zoro-shell-environment-marker "LANG=C\0")
+                        (concat zoro-shell-environment-marker "PATH=\0LANG=C\0")))
+    (let ((output (generate-new-buffer " *zoro-invalid-shell-output*"))
+          (errors (generate-new-buffer " *zoro-invalid-shell-errors*"))
+          (process-environment (copy-sequence process-environment))
+          (exec-path '("/existing/tools"))
+          reported)
+      (setenv "PATH" "/existing/tools")
+      (setenv "LANG" "en_US.UTF-8")
+      (with-current-buffer output (insert contents))
+      (cl-letf (((symbol-function 'process-status) (lambda (_) 'exit))
+                ((symbol-function 'process-exit-status) (lambda (_) 0))
+                ((symbol-function 'process-buffer) (lambda (_) output))
+                ((symbol-function 'process-get)
+                 (lambda (_ property) (and (eq property 'stderr-buffer) errors)))
+                ((symbol-function 'message)
+                 (lambda (format-string &rest arguments)
+                   (setq reported (apply #'format format-string arguments)))))
+        (zoro--finish-shell-environment-import 'process "finished\n"))
+      (should (equal (getenv "PATH") "/existing/tools"))
+      (should (equal (getenv "LANG") "en_US.UTF-8"))
+      (should (equal exec-path '("/existing/tools")))
+      (should (string-match-p "keeping current environment" reported))
+      (should-not (buffer-live-p output))
+      (should-not (buffer-live-p errors)))))
 
 (ert-deftest zoro-shell-environment-import-reports-process-failure ()
   (let ((output (generate-new-buffer " *zoro-shell-output-test*"))
@@ -242,7 +271,7 @@
           (kill-buffer buffer))))
     (should (equal (plist-get process-arguments :command)
                    '("/bin/test-shell" "-l" "-i" "-c"
-                     "exec /usr/bin/env -0")))
+                     "printf '\\000ZORO-ENV-BEGIN\\000'; exec /usr/bin/env -0")))
     (should (eq (plist-get process-arguments :sentinel)
                 #'zoro--finish-shell-environment-import))
     (should (eq (car process-property) 'stderr-buffer))))
