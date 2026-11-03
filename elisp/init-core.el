@@ -11,13 +11,6 @@
 
 ;;; Code:
 
-(defun zoro-gc-when-unfocused ()
-  "Collect garbage after the last frame loses focus."
-  (unless (frame-focus-state)
-    (garbage-collect)))
-
-(add-function :after after-focus-change-function #'zoro-gc-when-unfocused)
-
 (defun zoro-where-am-i ()
   "Show and copy `buffer-file-name' or `buffer-name'."
   (interactive)
