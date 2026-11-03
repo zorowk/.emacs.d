@@ -11,6 +11,7 @@
 /mu4e/
 /places
 /places.eld
+/nov-places
 /projectile-bookmarks.eld
 /projects.eld
 /recentf
@@ -29,6 +30,7 @@
 /eshell/
 /%backup%~
 /.emacs.desktop
+/.emacs.desktop.lock
 /.org-id-locations
 /eln-cache/
 /url/
@@ -49,3 +51,10 @@
 /elfeed/
 /bookmarks.eld
 /network-security.eld
+
+# Emacs-generated compilation, backup, auto-save and lock files.
+*.elc
+*.eln
+*~
+\#*#
+.#*
