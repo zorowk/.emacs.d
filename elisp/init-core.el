@@ -79,7 +79,6 @@
       ad-redefinition-action 'accept
       warning-minimum-level :warning
       epg-pinentry-mode 'loopback
-      bidi-inhibit-bpa t
       read-process-output-max (* 4 1024 1024)
       save-interprogram-paste-before-kill t
       kill-do-not-save-duplicates t
@@ -95,7 +94,6 @@
       plstore-cache-passphrase-for-symmetric-encryption t)
 
 (setq-default history-length 500
-              bidi-paragraph-direction 'left-to-right
               cursor-in-non-selected-windows nil)
 
 (when (boundp 'xterm-update-cursor)
