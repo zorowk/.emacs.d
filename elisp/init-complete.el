@@ -44,7 +44,7 @@
   :bind (:map eglot-mode-map
               ("M-." . xref-find-definitions)
               ("M-," . xref-go-back)
-              ("M-/" . eglot-find-implementation)
+              ("C-c l i" . eglot-find-implementation)
               ("M-i" . eglot-find-declaration)
               ("C-M-." . xref-find-apropos)
               ("C-c f" . xref-find-apropos)

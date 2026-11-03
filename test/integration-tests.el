@@ -74,10 +74,11 @@
   (should-not (bound-and-true-p fido-vertical-mode))
   (should-not (bound-and-true-p icomplete-mode)))
 
-(ert-deftest zoro-integration-contextual-m-slash-ownership ()
+(ert-deftest zoro-integration-eglot-preserves-global-dabbrev-binding ()
   (require 'eglot)
   (should (eq (lookup-key global-map (kbd "M-/")) #'dabbrev-completion))
-  (should (eq (lookup-key eglot-mode-map (kbd "M-/"))
+  (should-not (lookup-key eglot-mode-map (kbd "M-/")))
+  (should (eq (lookup-key eglot-mode-map (kbd "C-c l i"))
               #'eglot-find-implementation)))
 
 (ert-deftest zoro-integration-denote-search-key-has-single-declaration ()
