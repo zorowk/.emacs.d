@@ -46,10 +46,14 @@
 (setopt save-place-autosave-interval 300)
 (save-place-mode 1)
 
-;; Keep recovery files out of source directories while retaining local locks.
-(setq backup-directory-alist `((".*" . ,temporary-file-directory))
-      auto-save-file-name-transforms `((".*" ,temporary-file-directory t))
-      backup-by-copying t)
+;; Keep recovery files across reboots without cluttering source directories.
+(let ((backup-directory (expand-file-name ".backup/" user-emacs-directory))
+      (auto-save-directory (expand-file-name ".auto-save/" user-emacs-directory)))
+  (make-directory backup-directory t)
+  (make-directory auto-save-directory t)
+  (setq backup-directory-alist `((".*" . ,backup-directory))
+        auto-save-file-name-transforms `((".*" ,auto-save-directory t))
+        backup-by-copying t))
 (setopt remote-file-name-inhibit-locks t
         remote-file-name-inhibit-auto-save-visited t)
 

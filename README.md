@@ -137,3 +137,8 @@ GitHub Actions 同时验证最低基线 `release-snapshot`（不低于 31.0.90�
 
 运行时产生的 `agent/`、`elpa/`、`projects` 和其他历史/缓存文件均被 Git 忽略；仓库只
 保存手写配置，不提交下载后的包或构建产物。
+
+备份和自动保存文件分别集中在 `~/.emacs.d/.backup/` 与
+`~/.emacs.d/.auto-save/`，不依赖重启后可能清空的临时目录。自动保存仍写入独立的
+恢复文件，不直接覆盖正在编辑的原文件；需要时使用内置 `recover-file` 或
+`recover-session` 恢复。路径变更在重启 Emacs 后生效，已有临时恢复文件不自动迁移。
