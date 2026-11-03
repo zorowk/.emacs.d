@@ -12,6 +12,10 @@
 
 ;;; Code:
 
+;; Use built-in commands for simple buffer operations.
+(global-set-key (kbd "C-c b") #'mode-line-other-buffer)
+(global-set-key (kbd "C-c E") #'erase-buffer)
+
 (use-package expreg
   :ensure t
   :bind (("C-=" . expreg-expand)
@@ -26,9 +30,7 @@
    ("C-c o" . crux-open-with)
    ("C-c d" . crux-delete-file-and-buffer)
    ("C-x C-r" . crux-sudo-edit)
-   ("C-c b" . crux-switch-to-previous-buffer)
    ("C-c r" . crux-rename-file-and-buffer)
-   ("C-c E" . erase-buffer)
    ("C-^" . crux-top-join-line)
    ("C-c RET" . crux-smart-open-line)
    ("C-c S-RET" . crux-smart-open-line-above)
