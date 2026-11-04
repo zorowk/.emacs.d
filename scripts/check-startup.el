@@ -14,12 +14,12 @@
 (dolist (feature '(init-const init-package init-ui init-core init-files
                    init-development init-search init-edit init-shell init-dired
                    init-buffer init-theme init-dashboard init-complete
-                   init-templates init-gnuplot init-latex init-org
+                   init-templates init-gnuplot init-latex init-org init-hyperbole
                    init-reader init-erc init-llm init-gnus))
   (unless (featurep feature)
     (error "Startup did not provide %S" feature)))
 
-(let* ((deferred '(org org-agenda agent-shell-org-tasks emacs-gtd-assistant
+(let* ((deferred '(hyperbole org org-agenda agent-shell-org-tasks emacs-gtd-assistant
                       agent-shell-code-context denote agent-shell gnus erc))
        (loaded (seq-filter #'featurep deferred)))
   (when loaded

@@ -86,6 +86,8 @@ by Org before the current buffer is saved."
          ("C-c a" . org-agenda)
          ("C-c c" . org-capture))
   :hook (org-mode . zoro-org-enable-include-range-updates)
+  :init
+  (setq org-directory zoro-org-directory)
   :custom
   (org-log-done 'time)
   (calendar-latitude 30.5928) ;; Used by `sunrise-sunset' and `org-agenda'.
@@ -214,9 +216,10 @@ by Org before the current buffer is saved."
     ("C-c C-d C-k" . denote-dired-rename-marked-files-with-keywords)
     ("C-c C-d C-R" . denote-dired-rename-marked-files-using-front-matter))
 
-  :config
-  ;; Remember to check the doc string of each of those variables.
+  :init
+  ;; Set the directory before other integrations can load Denote.
   (setq denote-directory zoro-denote-directory)
+  :config
   (setq denote-known-keywords '("deepin" "book" "math" "blog"))
 
   ;; Pick dates, where relevant, with Org's advanced interface:

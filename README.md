@@ -12,6 +12,7 @@
 - 开发：Eglot、内置 Tree-sitter、AUCTeX、Magit
 - 编辑：内置 Electric Pair、Tempo 与 Outline、Expreg、Avy、Vundo
 - 笔记：Org、Denote、Consult Denote；标题使用原生星号并隐藏前导星号
+- 隐式链接：Hyperbole（空闲 2 秒后启用，按钮数据保存在 `~/.emacs.d/hyperbole/`）
 - 阅读与网络：EWW、Elfeed、Nov、Elpher、ERC、Gnus
 - 界面：Ef Themes、Spacious Padding、Pulsar、Popper、Olivetti、Dashboard，以及紧凑的 mode-line
 - AI：Agent Shell
@@ -86,7 +87,7 @@ emacs --batch -Q -l early-init.el --eval '(package-activate-all)' -l init.el
 
 `--batch -Q` 不会自动激活第三方包，因此命令在 `early-init.el` 和 `init.el` 之间显式模拟
 正常 GUI/daemon 启动的 package 激活阶段。启动不应产生 Elisp 错误或过时警告。ERC、Gnus、
-Org 随任务入口加载；Denote 等其余较重模块按需加载，不应仅因启动配置而提前进入
+Org 随任务入口加载；Denote、Hyperbole 等其余较重模块按需加载，不应仅因启动配置而提前进入
 `features`。
 
 需要检查同步启动关键路径时，运行模块计时报告：

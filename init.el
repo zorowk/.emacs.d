@@ -56,6 +56,7 @@
 ;;; Org and reading
 (require 'init-org)
 
+(require 'init-hyperbole)
 
 (require 'init-reader)
 

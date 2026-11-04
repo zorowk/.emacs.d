@@ -12,7 +12,7 @@
   (dolist (feature '(init-const init-package init-ui init-core init-files
                      init-development init-search init-edit init-shell
                      init-dired init-buffer init-theme init-dashboard
-                     init-complete init-templates init-gnuplot init-latex init-org
+                     init-complete init-templates init-gnuplot init-latex init-org init-hyperbole
                      init-reader init-erc init-llm init-gnus))
     (should (featurep feature))))
 
@@ -109,11 +109,27 @@
     (should (eq (plist-get (cddr form) :ensure) t))
     (should-not (memq :vc (cddr form)))))
 
-(ert-deftest zoro-integration-removed-hyperbole-stays-disabled ()
-  (should-not (featurep 'hyperbole))
-  (should-not (featurep 'hywiki))
-  (should-not (memq 'hyperbole package-selected-packages))
-  (should-not (lookup-key global-map (kbd "C-z h"))))
+(ert-deftest zoro-integration-hyperbole-preserves-org-editing ()
+  (require 'hyperbole)
+  (should (eq hsys-org-enable-smart-keys 'buttons))
+  (should hyperbole-mode)
+  (should-not hywiki-mode)
+  (with-temp-buffer
+    (org-mode)
+    (insert "* Existing heading")
+    (let (org-fallback-called)
+      (cl-letf (((symbol-function 'org-meta-return)
+                 (lambda (&rest _args)
+                   (interactive)
+                   (setq org-fallback-called t))))
+        (call-interactively (key-binding (kbd "M-RET"))))
+      (should org-fallback-called))))
+
+(ert-deftest zoro-integration-hyperbole-data-stays-in-emacs-directory ()
+  (should (equal hbmap:dir-user
+                 (expand-file-name "hyperbole/" user-emacs-directory)))
+  (should (equal hbmap:dir-filename
+                 (expand-file-name "HBMAP" hbmap:dir-user))))
 
 (ert-deftest zoro-integration-org-agent-task-entry-points ()
   (skip-unless (zoro-test-skill-file-readable-p
