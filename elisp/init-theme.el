@@ -52,45 +52,58 @@
          ("C-M-`" . popper-toggle-type))
   :init
   (setq popper-reference-buffers
-    '(("^\\*Warnings\\*$" . hide)
+    '(;; Background diagnostics and output: show without selecting.
+      ("^\\*Warnings\\*$" . hide)
       ("^\\*Compile-Log\\*$" . hide)
       ("^\\*Async-native-compile-log\\*$" . hide)
       ("^\\*Messages\\*$" . hide)
-      ;; "^\\*Matlab Help.*\\*$"
-      "^\\*Backtrace\\*"
+      ("\\*Detached Shell Command\\*" . hide)
       "^\\*evil-registers\\*"
+      "^\\*eldoc\\*"
+      "^\\*TeX errors\\*"
+      "\\*Shell Command Output\\*"
+      "\\*Async Shell Command\\*"
+      "[Oo]utput\\*"
+      TeX-special-mode
+      messages-buffer-mode
+      compilation-mode
+      ;; Interactive results, help, debuggers and REPLs: select on display.
+      "^\\*Backtrace\\*"
       "^\\*Apropos"
       "^\\*Occur\\*"
       "^\\*xref\\*"
       "^\\*Flymake diagnostics"
       "^\\*Embark Collect \\(Live\\|Completions\\)\\*"
       "^Calc:"
-      "^\\*eldoc\\*"
-      "^\\*TeX errors\\*"
       "^\\*ielm\\*"
       "^\\*TeX Help\\*"
       "^\\*gptel-ask\\*"
       "\\*Dictionary\\*"
-      "\\*Shell Command Output\\*"
-      "\\*Async Shell Command\\*"
-      ("\\*Detached Shell Command\\*" . hide)
       "\\*Completions\\*"
       "^\\*Org QL View:notmuch-links\\*$"
-      "[Oo]utput\\*"
       helpful-mode
       help-mode
       pydoc-mode
       inferior-python-mode
-      TeX-special-mode
-      messages-buffer-mode
-      dictionary-mode
-      compilation-mode))
+      dictionary-mode))
   (setq popper-group-function #'popper-group-by-directory)
   (setq popper-window-height 0.33)
   :config
   (unless noninteractive
     (popper-mode 1)
-    (popper-echo-mode 1)))
+    (popper-echo-mode 1))
+  ;; Keep background output from taking focus or redirecting process filters.
+  ;; Interactive popups retain Popper's default selecting display action.
+  (add-to-list 'display-buffer-alist
+               '((or . ("\\`\\*\\(Warnings\\|Compile-Log\\|Async-native-compile-log\\|Messages\\)\\*\\'"
+                        "\\*\\(Detached Shell Command\\|Shell Command Output\\|Async Shell Command\\)\\*"
+                        "\\`\\*\\(evil-registers\\|eldoc\\|TeX errors\\)\\*"
+                        "[Oo]utput\\*"
+                        (derived-mode . TeX-special-mode)
+                        (derived-mode . messages-buffer-mode)
+                        (derived-mode . compilation-mode)))
+                 (popper-display-popup-at-bottom))))
+
 
 (use-package olivetti
   :ensure t
