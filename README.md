@@ -61,12 +61,15 @@ Rust 使用 `rust-analyzer`，LaTeX 使用 `texlab`，JavaScript/TypeScript/TSX 
 Gnus 通过 Gmail 的 465/TLS 和 XOAUTH2 发信。Gmail 自动保存 Sent Mail 副本，配置
 不额外使用 Gcc 向收件箱归档；如需保存 NNTP 发帖副本，可另外设置对应组的归档规则。
 
-Org/Agent Shell 任务和代码上下文集成是可选功能，脚本来自
-`${CODEX_HOME:-~/.codex}/skills/` 下的 `emacs-gtd-assistant` 和
-`emacs-code-navigator` 技能目录。未安装技能时跳过相应集成，基础配置仍可启动。
+Agent Shell 不自动加载 `emacs-gtd-assistant`，Org 和 Agenda 中的 `C-z a` 也直接
+使用普通 Agent Shell。日志和截图采用 Agent Shell 默认的项目内 `.agent-shell/`
+存储方式，已有会话文件不自动搬迁。
 
-普通代码项目会话的日志、截图保存到该项目的 `.agent-shell/`；绑定 Org 项目 ID 的会话
-沿用 `~/Dropbox/.agent-shell/projects/` 下的集中存储。已有会话的日志不自动搬迁。
+代码上下文集成仍是可选功能，脚本来自
+`${CODEX_HOME:-~/.codex}/skills/emacs-code-navigator/`。未安装时跳过该集成。
+
+Hyperbole 保留隐式链接和 Org 智能键；HyWiki 模式及其初始化已禁用。
+Hyperbole 仍会加载其内置的 `hywiki.el` 定义，但不会初始化或扫描 wiki 目录。
 
 ## 更新所有包
 
@@ -102,8 +105,8 @@ emacs --batch -Q -l early-init.el -l elisp/benchmark-startup.el \
 批处理检查不绘制 Dashboard，也不导入图形会话的登录 shell 环境，因此不代表 GUI 首屏时间。
 
 交互启动时同步绘制 Dashboard；图形会话在 Linux 和 macOS 上异步导入登录 shell 环境。
-任务技能集成在首次进入 Org、加载 Agenda 或 Agent Shell 时加载；代码上下文集成在
-Agent Shell 加载后启用。普通启动不加载 Org、Agenda 或技能运行库。
+代码上下文集成在 Agent Shell 加载后启用；Org、Agenda 和 Agent Shell 均不自动加载
+GTD 技能运行库。
 
 ### 自动测试
 

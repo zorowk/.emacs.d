@@ -110,10 +110,18 @@
     (should-not (memq :vc (cddr form)))))
 
 (ert-deftest zoro-integration-hyperbole-preserves-org-editing ()
-  (require 'hyperbole)
+  ;; HyWiki initialization used to open an Org buffer and run every Org hook,
+  ;; including the retired GTD integration's lazy loader.
+  (let* ((org-mode-calls 0)
+         (org-mode-hook (cons (lambda () (cl-incf org-mode-calls))
+                              org-mode-hook)))
+    (require 'hyperbole)
+    (should (zerop org-mode-calls)))
   (should (eq hsys-org-enable-smart-keys 'buttons))
   (should hyperbole-mode)
   (should-not hywiki-mode)
+  (should-not hywiki--org-heading-regexp)
+  (should-not (memq #'hywiki-kill-buffer-hook kill-buffer-hook))
   (with-temp-buffer
     (org-mode)
     (insert "* Existing heading")
@@ -131,50 +139,25 @@
   (should (equal hbmap:dir-filename
                  (expand-file-name "HBMAP" hbmap:dir-user))))
 
-(ert-deftest zoro-integration-org-agent-task-entry-points ()
-  (skip-unless (zoro-test-skill-file-readable-p
-                "emacs-gtd-assistant/scripts/agent-shell-org-tasks.el"))
+(ert-deftest zoro-integration-org-and-agent-shell-without-gtd-runtime ()
+  (require 'hyperbole)
   (require 'org-agenda)
-  (should (eq (lookup-key org-mode-map (kbd "C-z a")) #'emacs-gtd-agent-open))
-  (should (eq (lookup-key org-agenda-mode-map (kbd "C-z a")) #'emacs-gtd-agent-open))
-  (should (eq (lookup-key org-agenda-mode-map (kbd "C-c C-x w")) #'emacs-gtd-agent-wrap-up))
-  (should (equal (emacs-gtd--files) (org-agenda-files))))
-
-(ert-deftest zoro-integration-agent-storage-and-existing-code-context ()
-  (skip-unless (zoro-test-skill-file-readable-p
-                "emacs-gtd-assistant/scripts/agent-shell-org-tasks.el"))
   (require 'agent-shell)
-  (should (eq agent-shell-dot-subdir-function #'emacs-gtd-agent-dot-subdir))
-  (should (equal emacs-gtd-agent-storage-directory
-                 (expand-file-name ".agent-shell/" zoro-dropbox-directory))))
+  (with-temp-buffer
+    (org-mode)
+    (should (eq (key-binding (kbd "C-z a")) #'agent-shell)))
+  (with-temp-buffer
+    (org-agenda-mode)
+    (should (eq (key-binding (kbd "C-z a")) #'agent-shell)))
+  (should (eq agent-shell-dot-subdir-function #'agent-shell--dot-subdir-in-repo))
+  (dolist (feature '(agent-shell-org-tasks emacs-gtd-assistant emacs-gtd-project))
+    (should-not (featurep feature))))
 
 (ert-deftest zoro-integration-agent-code-context ()
   (skip-unless (zoro-test-skill-file-readable-p
                 "emacs-code-navigator/scripts/agent-shell-code-context.el"))
   (require 'agent-shell)
   (should (memq #'emacs-code-navigator-agent-shell-context agent-shell-context-sources)))
-
-(ert-deftest zoro-integration-agent-storage-follows-session-origin ()
-  (skip-unless (zoro-test-skill-file-readable-p
-                "emacs-gtd-assistant/scripts/agent-shell-org-tasks.el"))
-  (require 'agent-shell)
-  (let ((emacs-gtd-agent-storage-directory "/tmp/zoro-central-storage/")
-        (cwd (file-name-as-directory zoro-test-root)))
-    (cl-letf (((symbol-function 'agent-shell-cwd) (lambda () cwd)))
-      (dolist (subdir '("transcripts" "screenshots"))
-        (let ((emacs-gtd-agent-project-id nil)
-              (emacs-gtd-agent--starting-project-id nil))
-          (should (equal (funcall agent-shell-dot-subdir-function subdir)
-                         (expand-file-name (concat ".agent-shell/" subdir) cwd))))
-        ;; Cover both an existing Org session and a project being started.
-        (dolist (starting '(nil t))
-          (let ((emacs-gtd-agent-project-id (unless starting "org-project"))
-                (emacs-gtd-agent--starting-project-id (when starting "org-project")))
-            (should
-             (equal (funcall agent-shell-dot-subdir-function subdir)
-                    (expand-file-name
-                     (concat "projects/" (secure-hash 'sha256 "org-project") "/" subdir)
-                     emacs-gtd-agent-storage-directory)))))))))
 
 (provide 'integration-tests)
 ;;; integration-tests.el ends here

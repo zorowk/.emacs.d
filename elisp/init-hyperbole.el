@@ -9,16 +9,24 @@
 
 ;;; Code:
 
+(declare-function hywiki-init "hywiki" ())
+
 (use-package hyperbole
   :ensure t
   :defer 2
   :bind (("C-z h" . hyperbole))
   :init
+  ;; Hyperbole requires hywiki.el even when its mode is disabled.  Suppress
+  ;; its separate initialization, which opens a temporary Org buffer and
+  ;; scans the wiki directory, while retaining Hyperbole's other features.
+  (advice-add 'hywiki-init :override #'ignore)
   (setq hsys-org-enable-smart-keys 'buttons
         hywiki-default-mode nil
         hbmap:dir-user (expand-file-name "hyperbole/" user-emacs-directory)
         hbmap:dir-filename (expand-file-name "HBMAP" hbmap:dir-user))
   :config
+  (remove-hook 'after-init-hook #'hywiki-init)
+  (hywiki-mode 0)
   (hyperbole-mode 1))
 
 (provide 'init-hyperbole)

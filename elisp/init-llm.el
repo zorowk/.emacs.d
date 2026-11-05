@@ -25,54 +25,7 @@
   (agent-shell-busy-indicator-frames "")
   (agent-shell-inhibit-system-sleep nil))
 
-(defvar emacs-gtd-directory)
-(defvar emacs-gtd-extra-files)
-(defvar emacs-gtd-agent-storage-directory)
-(defvar emacs-gtd-agent-project-id)
-(defvar emacs-gtd-agent--starting-project-id)
-(declare-function emacs-gtd-agent-enable "agent-shell-org-tasks" ())
-(declare-function agent-shell--dot-subdir-in-repo "agent-shell" (subdir))
-
-(defun zoro-agent-task-data-directory (original subdir)
-  "Use ORIGINAL for Org-bound sessions, or keep SUBDIR in the code project."
-  (if (or (bound-and-true-p emacs-gtd-agent-project-id)
-          (bound-and-true-p emacs-gtd-agent--starting-project-id))
-      (funcall original subdir)
-    (agent-shell--dot-subdir-in-repo subdir)))
-
-(defvar zoro-agent-task-integration-loading nil
-  "Non-nil while loading the optional Org/Agent Shell integration.")
-
-(defun zoro-enable-agent-task-integration ()
-  "Load task integration on first use of Org, Agenda or Agent Shell."
-  (unless (or zoro-agent-task-integration-loading
-              (featurep 'agent-shell-org-tasks))
-    (let* ((zoro-agent-task-integration-loading t)
-           (skills-root
-            (expand-file-name "skills/" (or (getenv "CODEX_HOME") "~/.codex")))
-           (integration
-            (expand-file-name
-             "emacs-gtd-assistant/scripts/agent-shell-org-tasks.el" skills-root)))
-      (when (file-readable-p integration)
-        (load integration nil t)
-        (setq emacs-gtd-directory zoro-org-directory
-              emacs-gtd-extra-files (org-agenda-files)
-              emacs-gtd-agent-storage-directory
-              (expand-file-name ".agent-shell/" zoro-dropbox-directory))
-        (emacs-gtd-agent-enable))))
-  (when (and (featurep 'agent-shell-org-tasks)
-             (not (advice-member-p #'zoro-agent-task-data-directory
-                                   'emacs-gtd-agent-dot-subdir)))
-    (advice-add 'emacs-gtd-agent-dot-subdir :around
-                #'zoro-agent-task-data-directory)))
-
-;; Org is the task record; load its integration only when a relevant UI is used.
-(add-hook 'org-mode-hook #'zoro-enable-agent-task-integration)
-(with-eval-after-load 'org-agenda
-  (zoro-enable-agent-task-integration))
-
 (with-eval-after-load 'agent-shell
-  (zoro-enable-agent-task-integration)
   (let ((skills-root
          (expand-file-name "skills/"
                            (or (getenv "CODEX_HOME") "~/.codex"))))
