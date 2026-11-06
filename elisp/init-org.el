@@ -78,8 +78,14 @@ by Org before the current buffer is saved."
   (interactive)
   (insert "#+attr_latex: :align |c|c|c|"))
 
+;; Org's Git checkout needs generated version and autoload files.
+(with-eval-after-load 'package-vc
+  (add-to-list 'package-vc-allow-build-commands 'org))
+
 (use-package org
-  :ensure nil
+  ;; The upstream GitHub mirror carries main's new LaTeX preview system.
+  :vc (:url "https://github.com/bzg/org-mode.git"
+       :branch "main" :rev :newest :lisp-dir "lisp" :make "autoloads")
   :defer t
   :bind (("C-c C-l" . org-store-link)
          ("C-c C-i" . org-insert-link)
@@ -121,7 +127,7 @@ by Org before the current buffer is saved."
    '("aux" "bcf" "fdb_latexmk" "fls" "figlist" "idx" "nav" "out"
      "ptc" "run.xml" "snm" "toc" "vrb" "xdv"))
   (org-latex-compiler "xelatex")
-  (org-preview-latex-default-process 'xelatex)
+  (org-latex-preview-process-default 'dvisvgm)
   :custom-face
   (org-agenda-current-time ((t (:foreground "spring green"))))
   :config
