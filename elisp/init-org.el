@@ -78,14 +78,8 @@ by Org before the current buffer is saved."
   (interactive)
   (insert "#+attr_latex: :align |c|c|c|"))
 
-;; Org's Git checkout needs generated version and autoload files.
-(with-eval-after-load 'package-vc
-  (add-to-list 'package-vc-allow-build-commands 'org))
-
 (use-package org
-  ;; The upstream GitHub mirror carries main's new LaTeX preview system.
-  :vc (:url "https://github.com/bzg/org-mode.git"
-       :branch "main" :rev :newest :lisp-dir "lisp" :make "autoloads")
+  :ensure nil
   :defer t
   :bind (("C-c C-l" . org-store-link)
          ("C-c C-i" . org-insert-link)
@@ -127,7 +121,7 @@ by Org before the current buffer is saved."
    '("aux" "bcf" "fdb_latexmk" "fls" "figlist" "idx" "nav" "out"
      "ptc" "run.xml" "snm" "toc" "vrb" "xdv"))
   (org-latex-compiler "xelatex")
-  (org-latex-preview-process-default 'dvisvgm)
+  (org-preview-latex-default-process 'xelatex)
   :custom-face
   (org-agenda-current-time ((t (:foreground "spring green"))))
   :config
@@ -181,6 +175,17 @@ by Org before the current buffer is saved."
           ("w" "Work" entry (file+headline org-agenda-file-gtd "Deepin")
            "* TODO [#A] %?\n:PROPERTIES:\n:CREATED: %U\n:END:\n  %i\n"
            :empty-lines 1))))
+
+(use-package org-remark
+  :ensure t
+  :bind (("C-c n m" . org-remark-mark)
+         :map org-remark-mode-map
+         ("C-c n o" . org-remark-open)
+         ("C-c n <backspace>" . org-remark-delete)))
+
+(use-package org-remark-global-tracking
+  :ensure org-remark
+  :hook (after-init . org-remark-global-tracking-mode))
 
 (use-package denote
   :ensure t
