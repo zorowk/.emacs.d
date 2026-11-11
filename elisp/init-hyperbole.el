@@ -20,6 +20,13 @@
   ;; its separate initialization, which opens a temporary Org buffer and
   ;; scans the wiki directory, while retaining Hyperbole's other features.
   (advice-add 'hywiki-init :override #'ignore)
+  ;; Link recognition also probes HyWiki while its mode is off.  These
+  ;; page helpers create `hywiki-directory' even for a failed lookup.
+  ;; Disable them before Hyperbole loads since HyWiki is unused here.
+  (dolist (function '(hywiki-get-existing-page-file
+                      hywiki-get-page-file
+                      hywiki-get-page-files))
+    (advice-add function :override #'ignore))
   (setq hsys-org-enable-smart-keys 'buttons
         hywiki-default-mode nil
         hbmap:dir-user (expand-file-name "hyperbole/" user-emacs-directory)
