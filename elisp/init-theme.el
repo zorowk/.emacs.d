@@ -16,11 +16,11 @@
   :ensure t
   :config
   (setopt spacious-padding-widths
-          '( :internal-border-width 16
-             :header-line-width 1
+          '( :internal-border-width 12
+             :header-line-width 3
              :mode-line-width 3
              :tab-width 4
-             :right-divider-width 8
+             :right-divider-width 6
              :scroll-bar-width 0))
 
   ;; Read the doc string of `spacious-padding-subtle-mode-line' as it
