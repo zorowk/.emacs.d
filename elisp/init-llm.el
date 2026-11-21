@@ -7,7 +7,7 @@
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
 ;;; Commentary:
-;; Configure Agent Shell for Codex sessions.
+;; Configure Agent Shell and its preferred agent.
 
 ;;; Code:
 
@@ -20,8 +20,11 @@
   (agent-shell-agent-configs
    (append '(agent-shell-openai-make-codex-config)
            (when (executable-find "omp")
-             '(agent-shell-omp-make-agent-config))))
-  (agent-shell-session-restore-verbosity 'full)
+             '(agent-shell-omp-make-agent-config))
+           (when (executable-find "agy")
+             '(agent-shell-antigravity-make-agent-config))))
+  (agent-shell-preferred-agent-config '(preselect . antigravity))
+  (agent-shell-session-restore-verbosity 'first-last)
   (agent-shell-busy-indicator-frames "")
   (agent-shell-inhibit-system-sleep nil))
 
