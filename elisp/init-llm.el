@@ -26,7 +26,12 @@
   (agent-shell-preferred-agent-config '(preselect . antigravity))
   (agent-shell-session-restore-verbosity 'first-last)
   (agent-shell-busy-indicator-frames "")
-  (agent-shell-inhibit-system-sleep nil))
+  (agent-shell-inhibit-system-sleep nil)
+  (agent-shell-file-display-action
+   '((display-buffer-reuse-window
+      display-buffer-use-some-window
+      display-buffer-pop-up-window)
+     (inhibit-same-window . t))))
 
 (with-eval-after-load 'agent-shell
   (let ((skills-root
