@@ -69,6 +69,7 @@
       confirm-kill-emacs 'y-or-n-p
       ring-bell-function 'ignore
       shr-use-fonts nil
+      shr-max-image-proportion 0.7
       read-file-name-completion-ignore-case t
       read-buffer-completion-ignore-case t
       completion-ignore-case t

@@ -16,31 +16,32 @@
   :ensure t
   :config
   (setopt spacious-padding-widths
-          '( :internal-border-width 12
-             :header-line-width 3
-             :mode-line-width 3
+          '( :internal-border-width 15
+             :header-line-width 4
+             :mode-line-width 4
              :tab-width 4
-             :right-divider-width 6
+             :right-divider-width 12
              :scroll-bar-width 0))
 
-  ;; Read the doc string of `spacious-padding-subtle-mode-line' as it
-  ;; is very flexible and provides several examples.
+  ;; Keep frame hairlines quiet and neutral instead of using alert colors.
   (setopt spacious-padding-subtle-frame-lines
-          `( :mode-line-active error
-             :mode-line-inactive shadow))
+          '( :mode-line-active spacious-padding-line-active
+             :mode-line-inactive spacious-padding-line-inactive
+             :header-line-active spacious-padding-line-active
+             :header-line-inactive spacious-padding-line-inactive))
   (spacious-padding-mode))
 
-(setq-default line-spacing '(0.05 . 0.10))
+(setq-default line-spacing '(0.10 . 0.15))
 
 ;; Pulsar
 (use-package pulsar
   :ensure t
   :config
   (setq pulsar-delay 0.055)
-  (setq pulsar-iterations 5)
-  (setq pulsar-face 'pulsar-green)
-  (setq pulsar-region-face 'pulsar-yellow)
-  (setq pulsar-highlight-face 'pulsar-magenta)
+  (setq pulsar-iterations 4)
+  (setq pulsar-face 'pulsar-generic)
+  (setq pulsar-region-face 'pulsar-generic)
+  (setq pulsar-highlight-face 'pulsar-generic)
   (unless noninteractive
     (pulsar-global-mode 1)))
 

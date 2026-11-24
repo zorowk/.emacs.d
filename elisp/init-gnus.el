@@ -71,7 +71,7 @@
   (setq gnus-sum-thread-tree-vertical "│ ")
   (setq gnus-sum-thread-tree-leaf-with-other "├─ ")
   (setq gnus-sum-thread-tree-single-leaf "└─ ")
-  (setq gnus-summary-line-format "%U%R%O%z │ %-12&user-date; │ %-24,24f │ %B%S\n")
+  (setq gnus-summary-line-format "%U%R%O%z  %-12&user-date;  %-24,24f  %B%S\n")
   (setq gnus-user-date-format-alist
    '(((gnus-seconds-today) . "Today %H:%M")
      ((+ 86400 (gnus-seconds-today)) . "Yday  %H:%M")

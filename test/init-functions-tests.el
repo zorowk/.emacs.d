@@ -25,18 +25,19 @@
     (should-not loaded-theme)))
 
 (ert-deftest zoro-system-theme-loads-when-package-is-available ()
-  (let ((custom-enabled-themes '(existing-theme))
+  (let ((expected-theme (alist-get 'light zoro-system-themes))
+        (custom-enabled-themes '(existing-theme))
         disabled-themes
         loaded-theme)
     (cl-letf (((symbol-function 'custom-available-themes)
-               (lambda () '(ef-frost)))
+               (lambda () (list expected-theme)))
               ((symbol-function 'disable-theme)
                (lambda (theme) (push theme disabled-themes)))
               ((symbol-function 'load-theme)
                (lambda (theme &rest _) (setq loaded-theme theme))))
       (zoro-apply-system-theme 'light))
     (should (equal disabled-themes '(existing-theme)))
-    (should (eq loaded-theme 'ef-frost))))
+    (should (eq loaded-theme expected-theme))))
 
 (ert-deftest zoro-restore-startup-state-restores-bounded-values ()
   (let ((gc-cons-threshold most-positive-fixnum)

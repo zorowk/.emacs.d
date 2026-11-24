@@ -122,8 +122,6 @@ by Org before the current buffer is saved."
      "ptc" "run.xml" "snm" "toc" "vrb" "xdv"))
   (org-latex-compiler "xelatex")
   (org-preview-latex-default-process 'xelatex)
-  :custom-face
-  (org-agenda-current-time ((t (:foreground "spring green"))))
   :config
   (add-to-list 'org-latex-packages-alist '("" "listings"))
   (require 'org-tempo)

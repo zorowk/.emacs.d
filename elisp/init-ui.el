@@ -18,11 +18,21 @@
 
 (use-package ef-themes
   :ensure t
-  :init
-  (ef-themes-take-over-modus-themes-mode 1)
   :config
+  (modus-themes-include-derivatives-mode 1)
   (setq modus-themes-mixed-fonts t
-        modus-themes-italic-constructs t)
+        modus-themes-italic-constructs t
+        modus-themes-bold-constructs nil
+        modus-themes-common-palette-overrides
+        modus-themes-preset-overrides-faint
+        modus-themes-headings
+        '((0 . (variable-pitch regular 1.45))
+          (1 . (variable-pitch semibold 1.25))
+          (2 . (variable-pitch semibold 1.15))
+          (3 . (variable-pitch medium 1.08))
+          (agenda-structure . (variable-pitch semibold 1.2))
+          (agenda-date . (variable-pitch regular 1.05))
+          (t . (variable-pitch semibold 1.0))))
   (add-hook 'ns-system-appearance-change-functions
             #'zoro-apply-system-theme)
   (zoro-apply-system-theme))
@@ -41,7 +51,7 @@
                           :family (if (eq system-type 'darwin)
                                       "Georgia"
                                     "Gelasio")
-                          :height 1.0)
+                          :height 1.08)
       (dolist (entry
                (if (eq system-type 'darwin)
                    '((emoji . "Apple Color Emoji")
@@ -61,19 +71,20 @@
         (set-fontset-font t (car entry)
                           (font-spec :family (cdr entry)))))))
 
-(defun zoro-setup-frame-alpha (&optional frame)
-  "Apply transparency and blur to FRAME."
-  (with-selected-frame (or frame (selected-frame))
-    (when (display-graphic-p)
-      (set-frame-parameter nil 'ns-alpha-elements
-                           '(ns-alpha-default ns-alpha-fringe ns-alpha-glyphs))
-      (set-frame-parameter nil 'alpha-background 0.95)
-      (set-frame-parameter nil 'ns-background-blur 25))))
-
 (zoro-apply-font)
 (add-hook 'after-make-frame-functions #'zoro-apply-font)
 
-(global-hl-line-mode 1)
+;; Limit row highlighting to code, tabular, and list buffers rather than prose.
+(dolist (hook '(prog-mode-hook
+                dired-mode-hook
+                elfeed-search-mode-hook
+                gnus-group-mode-hook
+                gnus-summary-mode-hook
+                org-agenda-mode-hook
+                tabulated-list-mode-hook
+                Buffer-menu-mode-hook))
+  (add-hook hook #'hl-line-mode))
+
 (setq-default frame-title-format
               '("M-EMACS - " user-login-name "@" system-name " - %b"))
 (setopt use-short-answers t)
@@ -82,15 +93,11 @@
       initial-major-mode 'text-mode
       initial-scratch-message "Present Day, Present Time...\n")
 
-(add-hook 'text-mode-hook #'display-line-numbers-mode)
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 (column-number-mode 1)
 (unless noninteractive
   (display-time-mode 1)
   (pixel-scroll-precision-mode 1))
-
-(zoro-setup-frame-alpha)
-(add-hook 'after-make-frame-functions #'zoro-setup-frame-alpha)
 
 (setopt project-mode-line 'non-remote)
 

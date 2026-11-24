@@ -15,35 +15,45 @@
 (require 'button)
 
 (defface zoro-dashboard-title
-  '((t (:inherit variable-pitch :height 4.2 :weight light)))
+  '((t (:inherit variable-pitch :height 2.8 :weight light)))
   "Face for the dashboard title."
   :group 'faces)
 
 (defface zoro-dashboard-subtitle
-  '((t (:inherit variable-pitch :height 1.35 :weight light)))
+  '((t (:inherit (shadow variable-pitch) :height 0.95 :weight regular)))
   "Face for the dashboard subtitle."
   :group 'faces)
 
+(defface zoro-dashboard-motto
+  '((t (:inherit (shadow variable-pitch) :height 0.88)))
+  "Face for the dashboard motto."
+  :group 'faces)
+
 (defface zoro-dashboard-tagline
-  '((t (:inherit shadow :height 1.05)))
+  '((t (:inherit (shadow variable-pitch) :height 0.98 :slant italic)))
   "Face for the dashboard tagline."
   :group 'faces)
 
+(defface zoro-dashboard-attribution
+  '((t (:inherit (shadow variable-pitch) :height 0.88)))
+  "Face for the dashboard quote attribution."
+  :group 'faces)
+
 (defface zoro-dashboard-action
-  '((t (:inherit default :height 1.12)))
+  '((t (:inherit variable-pitch :height 1.08)))
   "Face for dashboard actions."
   :group 'faces)
 
 (defface zoro-dashboard-icon
-  `((t (:inherit default
+  `((t (:inherit shadow
         :family ,(cond ((eq system-type 'gnu/linux) "Symbola")
                        ((eq system-type 'darwin) "Apple Symbols"))
-        :height 1.25)))
+        :height 1.15)))
   "Face for dashboard action icons."
   :group 'faces)
 
 (defface zoro-dashboard-key
-  '((t (:inherit shadow :weight bold)))
+  '((t (:inherit (shadow fixed-pitch) :weight medium)))
   "Face for dashboard shortcut keys."
   :group 'faces)
 
@@ -72,17 +82,20 @@
     (insert rendered)
     (insert "\n")))
 
-(defun zoro-dashboard--insert-rule (ornament)
-  "Insert a centered divider decorated with ORNAMENT."
-  (let* ((ornament-text (concat " " ornament " "))
-         (remaining-width (max 2 (- 40 (string-width ornament-text))))
-         (left-width (/ remaining-width 2))
-         (right-width (- remaining-width left-width))
-         (left-rule (propertize (make-string left-width ?─) 'face 'shadow))
-         (center (propertize ornament-text
-                             'face '(:inherit zoro-dashboard-icon :height 1.0)))
-         (right-rule (propertize (make-string right-width ?─) 'face 'shadow)))
-    (zoro-dashboard--insert-centered (concat left-rule center right-rule))))
+(defun zoro-dashboard--insert-rule (&optional ornament)
+  "Insert a quiet centered hairline rule, optionally with ORNAMENT."
+  (if ornament
+      (let* ((ornament-text (concat " " ornament " "))
+             (remaining-width (max 2 (- 34 (string-width ornament-text))))
+             (left-width (/ remaining-width 2))
+             (right-width (- remaining-width left-width))
+             (left-rule (propertize (make-string left-width ?─) 'face 'shadow))
+             (center (propertize ornament-text
+                                 'face '(:inherit zoro-dashboard-icon :height 0.95)))
+             (right-rule (propertize (make-string right-width ?─) 'face 'shadow)))
+        (zoro-dashboard--insert-centered (concat left-rule center right-rule)))
+    (zoro-dashboard--insert-centered
+     (propertize (make-string 34 ?─) 'face 'shadow))))
 
 (defun zoro-dashboard--insert-action (key symbol label command)
   "Insert an action row described by KEY, SYMBOL, LABEL, and COMMAND."
