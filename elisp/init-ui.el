@@ -16,26 +16,23 @@
 (declare-function zoro-apply-system-theme "early-init"
                   (&optional appearance))
 
-(use-package ef-themes
-  :ensure t
-  :config
-  (modus-themes-include-derivatives-mode 1)
-  (setq modus-themes-mixed-fonts t
-        modus-themes-italic-constructs t
-        modus-themes-bold-constructs nil
-        modus-themes-common-palette-overrides
-        modus-themes-preset-overrides-faint
-        modus-themes-headings
-        '((0 . (variable-pitch regular 1.45))
-          (1 . (variable-pitch semibold 1.25))
-          (2 . (variable-pitch semibold 1.15))
-          (3 . (variable-pitch medium 1.08))
-          (agenda-structure . (variable-pitch semibold 1.2))
-          (agenda-date . (variable-pitch regular 1.05))
-          (t . (variable-pitch semibold 1.0))))
-  (add-hook 'ns-system-appearance-change-functions
-            #'zoro-apply-system-theme)
-  (zoro-apply-system-theme))
+(require-theme 'modus-themes)
+(setq modus-themes-mixed-fonts t
+      modus-themes-italic-constructs t
+      modus-themes-bold-constructs nil
+      modus-themes-common-palette-overrides
+      modus-themes-preset-overrides-faint
+      modus-themes-headings
+      '((0 . (variable-pitch regular 1.45))
+        (1 . (variable-pitch semibold 1.25))
+        (2 . (variable-pitch semibold 1.15))
+        (3 . (variable-pitch medium 1.08))
+        (agenda-structure . (variable-pitch semibold 1.2))
+        (agenda-date . (variable-pitch regular 1.05))
+        (t . (variable-pitch semibold 1.0))))
+(add-hook 'ns-system-appearance-change-functions
+          #'zoro-apply-system-theme)
+(zoro-apply-system-theme)
 
 (defun zoro-apply-font (&optional frame)
   "Apply configured fonts to graphical FRAME or the selected frame."

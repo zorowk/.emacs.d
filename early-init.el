@@ -15,8 +15,8 @@
   (error "This configuration requires Emacs 31.0.90 or newer"))
 
 (defvar zoro-system-themes
-  '((light . ef-frost)
-    (dark . ef-autumn))
+  '((light . modus-operandi-tinted)
+    (dark . modus-vivendi-tinted))
   "Themes selected for light and dark system appearances.")
 
 (defun zoro-apply-system-theme (&optional appearance)
