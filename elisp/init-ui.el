@@ -23,13 +23,8 @@
       modus-themes-common-palette-overrides
       modus-themes-preset-overrides-faint
       modus-themes-headings
-      '((0 . (variable-pitch regular 1.45))
-        (1 . (variable-pitch semibold 1.25))
-        (2 . (variable-pitch semibold 1.15))
-        (3 . (variable-pitch medium 1.08))
-        (agenda-structure . (variable-pitch semibold 1.2))
-        (agenda-date . (variable-pitch regular 1.05))
-        (t . (variable-pitch semibold 1.0))))
+      '((agenda-date . (variable-pitch regular))
+        (t . (variable-pitch semibold))))
 (add-hook 'ns-system-appearance-change-functions
           #'zoro-apply-system-theme)
 (zoro-apply-system-theme)
@@ -48,7 +43,7 @@
                           :family (if (eq system-type 'darwin)
                                       "Georgia"
                                     "Gelasio")
-                          :height 1.08)
+                          :height 1.0)
       (dolist (entry
                (if (eq system-type 'darwin)
                    '((emoji . "Apple Color Emoji")

@@ -18,11 +18,11 @@
   :custom
   (agent-shell-header-style 'text)
   (agent-shell-agent-configs
-   (append '(agent-shell-openai-make-codex-config)
+   (append '(agent-shell-antigravity-make-agent-config)
            (when (executable-find "omp")
              '(agent-shell-omp-make-agent-config))
-           (when (executable-find "agy")
-             '(agent-shell-antigravity-make-agent-config))))
+           (when (executable-find "codex")
+             '(agent-shell-openai-make-codex-config))))
   (agent-shell-preferred-agent-config '(preselect . antigravity))
   (agent-shell-session-restore-verbosity 'first-last)
   (agent-shell-busy-indicator-frames "")
